@@ -7,5 +7,7 @@ require_once BASE_DIR . '/framework/starter.php';
 
 $app = new Justify;
 $app->run();
-$result = fill_arithmetic_progression(12, 4);
-dump($result);
+
+$qe = new QE(1, -8, 12);
+echo $qe->getDiscriminant() . '<br>';
+dump($qe->getRoot());
