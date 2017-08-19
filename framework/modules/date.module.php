@@ -1,6 +1,6 @@
 <?php
 
-function return_russian_month(int: $mounth)
+function russian_month(int $mounth)
 {
 	if ($mounth == 1) {
 		return 'января';
