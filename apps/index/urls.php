@@ -1,5 +1,5 @@
 <?php
 return array(
-    'page' => render_url('page', array()),
+    'page/([0-9]+)' => 'viewPageItem',
     '' => 'viewMainPage',
 );

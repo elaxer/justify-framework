@@ -9,7 +9,7 @@ class Justify
         return trim($_SERVER['REQUEST_URI'], '/');
     }
 
-    private function settingsHandle()
+    private function settingsHandler()
     {
         $this->settings = require_once BASE_DIR . '/settings.php';
         date_default_timezone_set($this->settings['timezone']);
@@ -24,7 +24,7 @@ class Justify
 
     public function __construct()
     {
-        $this->settingsHandle();
+        $this->settingsHandler();
     }
 
 
@@ -34,7 +34,7 @@ class Justify
         foreach ($this->settings['apps'] as $app) {
             $urls = require_once BASE_DIR . '/apps/' . $app . '/urls.php';
             foreach ($urls as $pattern => $action) {
-                if (preg_match("~$pattern~", $uri)) {
+                if (preg_match("~$pattern~", $uri, $matches)) {
                     define('ACTIVE_APP', $app);
                     if (is_array($action)) {
                         if (file_exists(BASE_DIR . '/apps/' . $app . '/controller.php')) {
@@ -52,10 +52,8 @@ class Justify
                         $actionName = 'action' . ucfirst($action);
 
                         $controller = new $controllerName;
-                        $result = $controller->$actionName();
-                        if ($result !== null) {
-                            break(2);
-                        }
+                        $result = $controller->$actionName($matches);
+                        break(2);
                     }
 
                 }

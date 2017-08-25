@@ -1,11 +1,11 @@
 <?php
 
-function dump($variable, $exit = false) {
+function dump($variable, $exit = false, $text = false) {
 	echo '<pre>';
-	print_r($variable);
+	var_dump($variable);
 	echo '</pre>';
 
 	if ($exit) {
-		exit;
+		die($text);
 	}
 }
