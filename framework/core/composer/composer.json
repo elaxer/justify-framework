@@ -1,6 +1,5 @@
 {
   "require": {
-    "gabordemooij/redbean": "dev-master",
-    "twig/twig": "^2.4"
+    "gabordemooij/redbean": "dev-master"
   }
 }

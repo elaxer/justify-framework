@@ -1,13 +1,8 @@
 <?php
 function render($view, $vars = array())
 {
-    $loader = new Twig_Loader_Filesystem(BASE_DIR . '/templates/' . ACTIVE_APP);
-    $twig = new Twig_Environment($loader, array(
-        #'cache' => TWIG_CACHE_DIR,
-    ));
-    $template = $twig->load($view . '.html');
-    $template->display($vars);
-
+    extract($vars);
+    require_once BASE_DIR . '/templates/layouts/main.php'; 
 }
 
 function render_url($view, $vars = array())
