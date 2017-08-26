@@ -1,43 +1,43 @@
 <?php
 
-function russian_month(int $mounth)
+function russian_month($month)
 {
-	if ($mounth == 1) {
-		return 'января';
-	}
-	if ($mounth == 2) {
-		return 'февраля';
-	}
-	if ($mounth == 3) {
-		return 'марта';
-	}
-	if ($mounth == 4) {
-		return 'апреля';
-	}
-	if ($mounth == 5) {
-		return 'мая';
-	}
-	if ($mounth == 6) {
-		return 'июня';
-	}
-	if ($mounth == 7) {
-		return 'июля';
-	}
-	if ($mounth == 8) {
-		return 'августа';
-	}
-	if ($mounth == 9) {
-		return 'сентября';
-	}
-	if ($mounth == 10) {
-		return 'октября';
-	}
-	if ($mounth == 11) {
-		return 'ноября';
-	}
-	if ($mounth == 12) {
-		return 'декабря';
-	}
+    if ($month == 1) {
+        return 'января';
+    }
+    if ($month == 2) {
+        return 'февраля';
+    }
+    if ($month == 3) {
+        return 'марта';
+    }
+    if ($month == 4) {
+        return 'апреля';
+    }
+    if ($month == 5) {
+        return 'мая';
+    }
+    if ($month == 6) {
+        return 'июня';
+    }
+    if ($month == 7) {
+        return 'июля';
+    }
+    if ($month == 8) {
+        return 'августа';
+    }
+    if ($month == 9) {
+        return 'сентября';
+    }
+    if ($month == 10) {
+        return 'октября';
+    }
+    if ($month == 11) {
+        return 'ноября';
+    }
+    if ($month == 12) {
+        return 'декабря';
+    }
 
-	return false;
+    return false;
 }
