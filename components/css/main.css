@@ -1,0 +1,57 @@
+body {
+    background: #fff;
+}
+#open-panel {
+    height: 52px;
+    display: block;
+    position: fixed;
+    font-size: 30px;
+    background: #fff;
+    right: 0;
+    bottom: 0;
+    padding: 4px;
+    padding-left: 16px;
+    padding-right: 16px;
+    border: 1px solid silver;
+    z-index: 10;
+}
+
+#close-panel {
+    height: 52px;
+    display: none;
+    position: fixed;
+    font-size: 30px;
+    background: #fff;
+    left: 0;
+    bottom: 0;
+    padding: 4px;
+    padding-left: 16px;
+    padding-right: 16px;
+    border: 1px solid silver;
+    z-index: 10;
+}
+#panel {
+    height: 52px;
+    width: 100%;
+    display: none;
+    position: fixed;
+    font-size: 1em;
+    background: #fff;
+    left: 40px;
+    bottom: 0;
+    /*padding: 4px;*/
+    padding-top: 15px;
+    padding-left: 20px;
+    padding-right: 16px;
+    border: 1px solid silver;
+}
+
+#phpversion {
+    margin-right: 7%;
+}
+#time {
+    margin-right: 7%;
+}
+#app {
+    margin-right: 7%;
+}

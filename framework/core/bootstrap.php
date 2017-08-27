@@ -4,24 +4,6 @@ class Justify
 {
     public $settings;
 
-    private function getURI()
-    {
-        return trim($_SERVER['REQUEST_URI'], '/');
-    }
-
-    private function settingsHandler()
-    {
-        $this->settings = require_once BASE_DIR . '/settings.php';
-        date_default_timezone_set($this->settings['timezone']);
-        if ($this->settings['debug']) {
-            ini_set('display_errors', 1);
-            error_reporting(E_ALL);
-        } else {
-            ini_set('display_errors', 0);
-            error_reporting(0);
-        }
-    }
-
     public function __construct()
     {
         $this->settingsHandler();
@@ -41,8 +23,8 @@ class Justify
                             require_once BASE_DIR . '/apps/' . $app . '/controller.php';
                             $controllerName = ucfirst($app) . 'Controller';
                             $controller = new $controllerName;
+                            define('ACTION_NAME', 'Using url rendering');
                         }
-
 
                         render($action['view'], $action['vars']);
                         break(2);
@@ -50,6 +32,7 @@ class Justify
                         require_once BASE_DIR . '/apps/' . $app . '/controller.php';
                         $controllerName = ucfirst($app) . 'Controller';
                         $actionName = 'action' . ucfirst($action);
+                        define('ACTION_NAME', $action);
 
                         $controller = new $controllerName;
                         $result = $controller->$actionName($matches);
@@ -59,7 +42,28 @@ class Justify
                 }
             }
 
+
         }
 
     }
+
+    private function getURI()
+    {
+        return trim($_SERVER['REQUEST_URI'], '/');
+    }
+
+    private function settingsHandler()
+    {
+        $this->settings = require_once BASE_DIR . '/settings.php';
+        date_default_timezone_set($this->settings['timezone']);
+        if ($this->settings['debug']) {
+            ini_set('display_errors', 1);
+            error_reporting(E_ALL);
+        } else {
+            ini_set('display_errors', 0);
+            error_reporting(0);
+        }
+    }
+
+
 }

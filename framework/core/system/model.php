@@ -4,21 +4,20 @@ class Model
 {
     protected static function connect($die = false)
     {
-        $settings = require_once BASE_DIR . '/settings.php';
-        $connection = mysqli_connect($settings['db']['host'], $settings['db']['user'], $settings['db']['password'], $settings['db']['name']);
+        $settings = require BASE_DIR . '/settings.php';
+        $host = $settings['db']['host'];
+        $dbname = $settings['db']['name'];
+        $user = $settings['db']['user'];
+        $password = $settings['db']['password'];
+        $charset = $settings['db']['charset'];
+
+        $dsn = "mysql:host=$host;dbname=$dbname;charset=$charset";
+        $connection = new PDO($dsn, $user, $password);
         if ($connection) {
-            if ($settings['db']['charset']) {
-                mysqli_set_charset($connection, $settings['db']['charset']);
-            }
             return $connection;
         } else if ($die) {
             die($die);
         }
-    }
-
-    protected static function disconnect()
-    {
-        mysqli_close(self::connect());
     }
 
 }

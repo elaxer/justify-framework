@@ -2,7 +2,7 @@
 function render($view, $vars = array())
 {
     extract($vars);
-    $settings = require_once BASE_DIR . '/settings.php';
+    $settings = require BASE_DIR . '/settings.php';
 
     $charset = $settings['html']['charset'];
     $lang = $settings['html']['lang'];

@@ -1,4 +1,5 @@
 <?php
+$start = microtime(true);
 if (file_exists(BASE_DIR . '/framework/core/composer/vendor/autoload.php')) {
     require_once BASE_DIR . '/framework/core/composer/vendor/autoload.php';
 }
@@ -10,6 +11,5 @@ foreach ($modules as $module) {
 
 require_once BASE_DIR . '/framework/core/bootstrap.php';
 
-require_once BASE_DIR . '/framework/core/system/controller.php';
 require_once BASE_DIR . '/framework/core/system/model.php';
-require_once BASE_DIR . '/framework/core/system/view.php';
+require_once BASE_DIR . '/framework/core/system/controller.php';
