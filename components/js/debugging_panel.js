@@ -3,15 +3,33 @@ window.onload = function () {
     var close = document.getElementById('close-panel');
     var panel = document.getElementById('panel');
 
-    open.onclick = function () {
+    if (localStorage.getItem('panel-status') === 'opened') {
         open.style.display = 'none';
         close.style.display = 'block';
         panel.style.display = 'block';
-    };
+    }
 
-    close.onclick = function () {
+    function openPanel()
+    {
+        open.style.display = 'none';
+        close.style.display = 'block';
+        panel.style.display = 'block';
+        localStorage.setItem('panel-status', 'opened');
+    }
+
+    function closePanel()
+    {
         open.style.display = 'block';
         close.style.display = 'none';
         panel.style.display = 'none';
+        localStorage.setItem('panel-status', 'closeds');
+    }
+
+    open.onclick = function () {
+        openPanel();
+    };
+
+    close.onclick = function () {
+        closePanel();
     };
 };

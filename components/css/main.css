@@ -1,11 +1,11 @@
-body {
-    background: #fff;
-}
+/*Debugging panel*/
 #open-panel {
-    height: 52px;
+    cursor: pointer;
+    height: 42px;
+    color: gray;
     display: block;
     position: fixed;
-    font-size: 30px;
+    font-size: 22px;
     background: #fff;
     right: 0;
     bottom: 0;
@@ -14,33 +14,41 @@ body {
     padding-right: 16px;
     border: 1px solid silver;
     z-index: 10;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
 #close-panel {
-    height: 52px;
+    cursor: pointer;
+    height: 42px;
+    color: gray;
     display: none;
     position: fixed;
-    font-size: 30px;
+    font-size: 22px;
     background: #fff;
-    left: 0;
+    right: 0;
     bottom: 0;
     padding: 4px;
     padding-left: 16px;
     padding-right: 16px;
     border: 1px solid silver;
     z-index: 10;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 #panel {
-    height: 52px;
+    height: 42px;
     width: 100%;
     display: none;
     position: fixed;
     font-size: 1em;
     background: #fff;
-    left: 40px;
     bottom: 0;
-    /*padding: 4px;*/
-    padding-top: 15px;
+    padding-top: 12px;
     padding-left: 20px;
     padding-right: 16px;
     border: 1px solid silver;
@@ -55,3 +63,4 @@ body {
 #app {
     margin-right: 7%;
 }
+/* ^^^ Debugging panel ^^^ */

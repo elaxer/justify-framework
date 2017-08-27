@@ -8,10 +8,10 @@ function debugging_panel()
         define('EXEC_TIME', round($execTime, 5));
         ?>
         <div id="open-panel">
-            <
+            &laquo;
         </div>
         <div id="close-panel">
-            >
+            &raquo;
         </div>
         <div id="panel">
             <span id="phpversion">PHP version: <?= phpversion() ?></span>

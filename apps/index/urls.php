@@ -1,5 +1,5 @@
 <?php
 return array(
-    'page/([1-9]+)' => 'viewPageItem',
+    'page/([0-9]+)' => 'viewPageItem',
     '' => 'viewMainPage',
 );
