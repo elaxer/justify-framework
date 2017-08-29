@@ -1,6 +1,5 @@
 <?php
-
-class IndexModel extends Model
+class IndexModel extends Base\Model
 {
 
 }

@@ -1,7 +1,7 @@
 <?php
 require_once 'model.php';
 
-class IndexController extends Controller
+class IndexController extends Base\Controller
 {
     public function actionViewMainPage($args = array())
     {
@@ -14,10 +14,10 @@ class IndexController extends Controller
 
     public function actionViewPageItem($args = array())
     {
-    	render('page', [
-    		'title' => 'Page',
-    		'page' => $args[1],
-    	]);
+        render('page', [
+            'title' => 'Page',
+            'page' => $args[1],
+        ]);
     }
 
 }

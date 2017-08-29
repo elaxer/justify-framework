@@ -39,12 +39,10 @@ function form_validate(array $segments)
 
 		if (isset($parametrs['ltrim']) && $parametrs['ltrim'] === true) {
 			$var = ltrim($var);
-			echo '+';
 		}
 
 		if (isset($parametrs['rtrim']) && $parametrs['rtrim'] === true) {
 			$var = rtrim($var);
-			echo '+';
 		}
 
 		if (isset($parametrs['trim']) && $parametrs['trim'] === true) {
@@ -64,15 +62,15 @@ function form_validate(array $segments)
 		}
 
 
-		if ($parametrs['type'] == 'email' && !is_email($var)) {
+		if (isset($parametrs['type']) && $parametrs['type'] == 'email' && !is_email($var)) {
 			$errors[] = 'Неверный email!';
 		}
 
-		if ($parametrs['type'] == 'date' && !is_date($var)) {
-			return 'Неверная дата!';
+		if (isset($parametrs['type']) && $parametrs['type'] == 'date' && !is_date($var)) {
+			$errors[] = 'Неверная дата!';
 		}
 
-		if (isset($parametrs['equals_to']) && $var !== $parametrs['equals_to']) {
+		if (isset($parametrs['equals_to']) && $var != $parametrs['equals_to']) {
 			$errors[] = 'Строки не совпадают!';
 		}
 

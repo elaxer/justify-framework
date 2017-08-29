@@ -1,6 +1,6 @@
 <?php
-
-class Controller
+namespace Base;
+abstract class Controller
 {
     protected function getURI($trim = true)
     {

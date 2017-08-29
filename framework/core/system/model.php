@@ -1,8 +1,8 @@
 <?php
-
-class Model
+namespace Base;
+abstract class Model
 {
-    protected static function connect($die = false)
+    protected static function connect()
     {
         $settings = require BASE_DIR . '/settings.php';
         $host = $settings['db']['host'];
@@ -13,11 +13,11 @@ class Model
 
         $dsn = "mysql:host=$host;dbname=$dbname;charset=$charset";
         $connection = new PDO($dsn, $user, $password);
+
         if ($connection) {
             return $connection;
-        } else if ($die) {
-            die($die);
         }
+        return false;
     }
 
 }

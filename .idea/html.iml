@@ -7,12 +7,12 @@
     <orderEntry type="module-library">
       <library name="PHARS">
         <CLASSES>
-          <root url="phar://$MODULE_DIR$/framework/core/system/composer/vendor/twig/twig/test/Twig/Tests/Loader/Fixtures/phar/phar-sample.phar/" />
-          <root url="phar://$MODULE_DIR$/framework/core/system/composer/composer.phar/" />
+          <root url="phar://$MODULE_DIR$/framework/core/composer/vendor/twig/twig/test/Twig/Tests/Loader/Fixtures/phar/phar-sample.phar/" />
+          <root url="phar://$MODULE_DIR$/framework/core/composer/composer.phar/" />
         </CLASSES>
         <SOURCES>
-          <root url="phar://$MODULE_DIR$/framework/core/system/composer/vendor/twig/twig/test/Twig/Tests/Loader/Fixtures/phar/phar-sample.phar/" />
-          <root url="phar://$MODULE_DIR$/framework/core/system/composer/composer.phar/" />
+          <root url="phar://$MODULE_DIR$/framework/core/composer/vendor/twig/twig/test/Twig/Tests/Loader/Fixtures/phar/phar-sample.phar/" />
+          <root url="phar://$MODULE_DIR$/framework/core/composer/composer.phar/" />
         </SOURCES>
       </library>
     </orderEntry>

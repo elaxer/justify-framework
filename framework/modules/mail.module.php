@@ -1,7 +1,7 @@
 <?php
 function send_mail($from, $subject, $message, $to = false, $contentType = 'text/plain', $charset = 'utf-8')
 {
-    $settings = require_once BASE_DIR . '/settings.php';
+    $settings = require BASE_DIR . '/settings.php';
     if ($to === false) {
         $to = $settings['admin_email'];
     }
