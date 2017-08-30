@@ -1,5 +1,7 @@
 <?php
-namespace Base;
+
+namespace framework\core\system;
+
 abstract class Controller
 {
     protected function getURI($trim = true)

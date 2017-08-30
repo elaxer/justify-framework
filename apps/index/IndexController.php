@@ -1,7 +1,11 @@
 <?php
-require_once 'model.php';
 
-class IndexController extends Base\Controller
+namespace apps\index;
+
+use framework\core\system\Controller;
+use apps\index\IndexModel;
+
+class IndexController extends Controller
 {
     public function actionViewMainPage($args = array())
     {
