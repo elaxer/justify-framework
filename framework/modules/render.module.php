@@ -2,7 +2,7 @@
 function render($view, $vars = array())
 {
     extract($vars);
-    $settings = require BASE_DIR . '/settings.php';
+    $settings = require BASE_DIR . '/config/settings.php';
 
     $charset = $settings['html']['charset'];
     $lang = $settings['html']['lang'];
@@ -14,15 +14,14 @@ function render($view, $vars = array())
         if (!isset($keywords)) $keywords = $settings['html']['keywords'];
     }
 
-    
-    require_once BASE_DIR . '/templates/layouts/main.php'; 
+
+    require_once BASE_DIR . '/templates/layouts/main.php';
 }
 
 function render_url($view, $vars = array())
 {
     return array(
-      'view' => $view,
-      'vars' => $vars
+        'view' => $view,
+        'vars' => $vars
     );
 }
-

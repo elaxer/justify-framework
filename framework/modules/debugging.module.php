@@ -1,5 +1,6 @@
 <?php
-function dump($variable, $exit = false, $text = false) {
+function dump($variable, $exit = false, $text = false)
+{
     echo '<pre>';
     var_dump($variable);
     echo '</pre>';
@@ -11,7 +12,7 @@ function dump($variable, $exit = false, $text = false) {
 
 function debugging_panel()
 {
-    $settings = require BASE_DIR . '/settings.php';
+    $settings = require BASE_DIR . '/config/settings.php';
     if ($settings['debug'] === true):
         $startTime = $GLOBALS['start'];
         $execTime = (microtime(true) - $startTime);

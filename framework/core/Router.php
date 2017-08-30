@@ -59,7 +59,7 @@ class Router
 
     private function settingsHandler()
     {
-        $this->settings = require_once BASE_DIR . '/settings.php';
+        $this->settings = require_once BASE_DIR . '/config/settings.php';
         date_default_timezone_set($this->settings['timezone']);
         if ($this->settings['debug']) {
             ini_set('display_errors', 1);

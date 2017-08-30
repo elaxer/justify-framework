@@ -1,5 +1,6 @@
 <?php
 $start = microtime(true);
+
 if (file_exists(BASE_DIR . '/framework/core/composer/vendor/autoload.php')) {
     require_once BASE_DIR . '/framework/core/composer/vendor/autoload.php';
 }
