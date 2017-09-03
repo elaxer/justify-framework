@@ -9,5 +9,4 @@ define('BASE_DIR', getcwd());
 
 require_once BASE_DIR . '/framework/starter.php';
 
-$app = new Router;
-$app->run();
+Router::run();

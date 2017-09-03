@@ -3,11 +3,16 @@
 namespace apps\index;
 
 use framework\core\system\Model;
+use Debug;
+use PDO;
+use QE;
 
 class IndexModel extends Model
 {
-    public static function hello()
+    public static function version()
     {
-        echo 'hello';
+        Model::connect();
+
+        Model::disconnect();
     }
 }

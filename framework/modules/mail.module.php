@@ -7,5 +7,6 @@ function send_mail($from, $subject, $message, $to = false, $contentType = 'text/
     }
     $subject = '=?utf-8?B?' . base64_encode($subject) . '?=';
     $headers = "From: $from\r\nReply-to: $from\r\nContent-type: $contentType; charset=$charset\r\n";
+
     mail($to, $subject, $message, $headers);
 }

@@ -2,42 +2,52 @@
 
 function russian_month($month)
 {
-    if ($month == 1) {
-        return 'января';
-    }
-    if ($month == 2) {
-        return 'февраля';
-    }
-    if ($month == 3) {
-        return 'марта';
-    }
-    if ($month == 4) {
-        return 'апреля';
-    }
-    if ($month == 5) {
-        return 'мая';
-    }
-    if ($month == 6) {
-        return 'июня';
-    }
-    if ($month == 7) {
-        return 'июля';
-    }
-    if ($month == 8) {
-        return 'августа';
-    }
-    if ($month == 9) {
-        return 'сентября';
-    }
-    if ($month == 10) {
-        return 'октября';
-    }
-    if ($month == 11) {
-        return 'ноября';
-    }
-    if ($month == 12) {
-        return 'декабря';
-    }
+	switch ($month) {
+		case 1:
+			return 'января';
 
-    return false;
+		case 2:
+			return 'февраля';
+
+		case 3:
+			return 'марта';
+
+		case 4:
+			return 'апреля';
+
+		case 5:
+			return 'мая';
+
+		case 6:
+			return 'июня';
+
+		case 7:
+			return 'июля';
+
+		case 8:
+			return 'августа';
+
+		case 9:
+			return 'сентября';
+
+		case 10:
+			return 'октября';
+
+		case 11:
+			return 'ноября';
+
+		case 12:
+			return 'декабря';
+
+		default:
+			return false;
+			
+	}
 }
+
+function date_to_beautiful($date //DD-MM-YYYY)
+{
+
+}
+
+

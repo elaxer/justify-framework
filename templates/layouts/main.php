@@ -9,9 +9,13 @@
 
     <title><?= $title ?></title>
 
-    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"
+            integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+            crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <script src="/components/js/debugging_panel.js"></script>
     <link rel="stylesheet" href="/components/css/main.css">
     <link rel="stylesheet" href="/components/css/adaptive.css">
@@ -20,6 +24,7 @@
 
 <body>
 <div id="content">
+
     <div class="navbar navbar-inverse" style="border-radius: 0">
         <div class="container">
             <div class="navbar-header">
@@ -27,8 +32,12 @@
             </div>
         </div>
     </div>
-    <!-- Require content -->
-    <?php require_once BASE_DIR . '/templates/sites/' . ACTIVE_APP . '/' . $view . '.php'; ?>
+
+    <div class="container">
+        <!-- Require content -->
+        <?php require_once BASE_DIR . '/templates/sites/' . ACTIVE_APP . '/' . $view . '.php'; ?>
+
+    </div>
 
     <hr>
     <div class="container">
@@ -36,9 +45,10 @@
             <p>&copy; Justify Framework <?= date('Y'); ?></p>
         </footer>
     </div> <!-- /container -->
+
 </div>
 
-<?php debugging_panel() ?>
+<?php Debug::debugging_panel() ?>
 
 </body>
 </html>

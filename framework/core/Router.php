@@ -4,33 +4,24 @@ namespace framework\core;
 
 class Router
 {
-    public $settings;
+    private static $settings;
 
-    public function __construct()
+    public static function run()
     {
-        $this->settingsHandler();
-    }
-
-
-    public function run()
-    {
-        $uri = $this->getURI();
-        foreach ($this->settings['apps'] as $app) {
+        self::settingsHandler();
+        $uri = self::getURI();
+        foreach (self::$settings['apps'] as $app) {
             $urls = require_once BASE_DIR . '/apps/' . $app . '/urls.php';
             foreach ($urls as $pattern => $action) {
                 if (preg_match("~$pattern~", $uri, $matches)) {
                     define('ACTIVE_APP', $app);
                     if (is_array($action)) {
-                        if (file_exists(BASE_DIR . '/apps/' . $app . '/controller.php')) {
-                            $controllerName = 'apps\\' . $app . '\\' . ucfirst($app) . 'Controller';
+                        define('ACTION_NAME', 'URL rendering');
 
-                            define('ACTION_NAME', 'URL rendering');
+                        $controllerName = 'apps\\' . $app . '\\' . ucfirst($app) . 'Controller';
+                        $controller = new $controllerName;
+                        $result = $controller->render($action['view'], $action['vars']);
 
-                            $controller = new $controllerName;
-
-                        }
-
-                        render($action['view'], $action['vars']);
                         break(2);
                     } else {
                         $controllerName = 'apps\\' . $app . '\\' . ucfirst($app) . 'Controller';
@@ -40,8 +31,9 @@ class Router
 
                         $controller = new $controllerName;
                         $controller->$actionName($matches);
-
+                      
                         break(2);
+
                     }
 
                 }
@@ -52,26 +44,22 @@ class Router
 
     }
 
-    private function getURI()
+    private static function getURI()
     {
         return trim($_SERVER['REQUEST_URI'], '/');
     }
 
-    private function settingsHandler()
+    private static function settingsHandler()
     {
-        $this->settings = require_once BASE_DIR . '/config/settings.php';
-        date_default_timezone_set($this->settings['timezone']);
-        if ($this->settings['debug']) {
-            ini_set('display_errors', 1);
-
+        self::$settings = require BASE_DIR . '/config/settings.php';
+        date_default_timezone_set(self::$settings['timezone']);
+        if (self::$settings['debug'] === true) {
+            ini_set('display_errors', 'on');
             error_reporting(E_ALL);
         } else {
-            ini_set('display_errors', 0);
-            ini_set('log_errors', true);
-
-            error_reporting(0);
+            //ini_set('display_errors', 'off');
+            error_reporting(-1);
         }
     }
-
 
 }

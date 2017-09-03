@@ -7,28 +7,28 @@
 
     <div class="row">
         <div class="col-md-4">
-            <h2>Page 1</h2>
+            <h2>Page</h2>
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A beatae delectus deserunt distinctio eius
                 enim, facere fugit in inventore ipsam laborum molestiae neque non quo soluta voluptate voluptates!
                 Doloremque ducimus ipsa minima, nam sequi similique!
             </p>
-            <a href="/page/1" class="btn btn-success">Page 1 &raquo;</a>
+            <a href="/page/1" class="btn btn-success">Page &raquo;</a>
         </div>
         <div class="col-md-4">
-            <h2>Page 2</h2>
+            <h2>About</h2>
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A beatae delectus deserunt distinctio eius
                 enim, facere fugit in inventore ipsam laborum molestiae neque non quo soluta voluptate voluptates!
                 Doloremque ducimus ipsa minima, nam sequi similique!
             </p>
-            <a href="/page/2" class="btn btn-success">Page 2 &raquo;</a>
+            <a href="/about" class="btn btn-success">About &raquo;</a>
         </div>
         <div class="col-md-4">
-            <h2>Page 3</h2>
+            <h2>Contacts</h2>
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A beatae delectus deserunt distinctio eius
                 enim, facere fugit in inventore ipsam laborum molestiae neque non quo soluta voluptate voluptates!
                 Doloremque ducimus ipsa minima, nam sequi similique!
             </p>
-            <a href="/page/3" class="btn btn-success">Page 3 &raquo;</a>
+            <a href="/contacts" class="btn btn-success">Contacts &raquo;</a>
         </div>
     </div>
 

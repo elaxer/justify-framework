@@ -1,6 +1,6 @@
 <?php
-$db = require_once BASE_DIR . '/config/db.php';
-$html = require_once BASE_DIR . '/config/html.php';
+$db = require BASE_DIR . '/config/db.php';
+$html = require BASE_DIR . '/config/html.php';
 
 $settings = array(
     'timezone' => '', //Choose your timezone, more information you can find in http://php.net/manual/en/timezones.php
