@@ -14,7 +14,7 @@ class QE
 
     public function getDiscriminant()
     {
-        return $this->b ** 2 - 4 * $this->a * $this->c;
+        return $this->b * $this->b - 4 * $this->a * $this->c;
     }
 
     public function getRoot()
