@@ -52,14 +52,15 @@ class Router
     private static function settingsHandler()
     {
         self::$settings = require BASE_DIR . '/config/settings.php';
-        date_default_timezone_set(self::$settings['timezone']);
+        
         if (self::$settings['debug'] === true) {
-            ini_set('display_errors', 'on');
+            ini_set('display_errors', 'On');
             error_reporting(E_ALL);
         } else {
-            //ini_set('display_errors', 'off');
-            error_reporting(-1);
+            ini_set('display_errors', 'Off');
+            error_reporting(0);
         }
+        date_default_timezone_set(self::$settings['timezone']);
     }
 
 }

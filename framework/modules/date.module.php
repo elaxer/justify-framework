@@ -44,10 +44,3 @@ function russian_month($month)
 			
 	}
 }
-
-function date_to_beautiful($date //DD-MM-YYYY)
-{
-
-}
-
-

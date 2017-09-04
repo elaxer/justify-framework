@@ -48,7 +48,7 @@
 
 </div>
 
-<?php Debug::debugging_panel() ?>
+<?php debugging_panel() ?>
 
 </body>
 </html>
