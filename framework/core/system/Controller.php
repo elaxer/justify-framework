@@ -2,8 +2,6 @@
 
 namespace framework\core\system;
 
-use QE;
-
 abstract class Controller
 {
     protected function getURI($trim = true)

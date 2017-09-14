@@ -25,3 +25,17 @@ function sum_of_terms_of_IDGP($b1, $q)
     return $b1 / (1 - $q);
 }
 
+function average($numbers, $round = false)
+{
+    
+    $sumOfNumbers = 0;
+    foreach ($numbers as $number) {
+        $sumOfNumbers += $number;
+    }
+
+    if ($round === true) {
+        return round($sumOfNumbers / count($numbers));
+    } else {
+        return $sumOfNumbers / count($numbers);
+    } 
+}

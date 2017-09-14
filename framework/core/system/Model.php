@@ -3,7 +3,6 @@
 namespace framework\core\system;
 
 use PDO;
-use Debug;
 
 abstract class Model
 {
@@ -54,7 +53,13 @@ abstract class Model
     {
         $settings = require BASE_DIR . '/config/settings.php';
 
-        $connection = new PDO("mysql:host={$settings['db']['host']};dbname={$settings['db']['name']};charset={$settings['db']['charset']}", $settings['db']['user'], $settings['db']['password']);
+        $connection = new PDO(
+            "mysql:host={$settings['db']['host']};
+            dbname={$settings['db']['name']};
+            charset={$settings['db']['charset']}",
+            $settings['db']['user'],
+            $settings['db']['password']
+        );
 
         if ($connection) {
             self::$db = $connection;

@@ -35,14 +35,14 @@
 
     <div class="container">
         <!-- Require content -->
-        <?php require_once BASE_DIR . '/templates/sites/' . ACTIVE_APP . '/' . $view . '.php'; ?>
+        <?php require_once BASE_DIR . '/templates/sites/' . ACTIVE_APP . '/' . $view . '.php' ?>
 
     </div>
 
     <hr>
     <div class="container">
         <footer>
-            <p>&copy; Justify Framework <?= date('Y'); ?></p>
+            <p>&copy; Justify Framework <?= date('Y') ?></p>
         </footer>
     </div> <!-- /container -->
 

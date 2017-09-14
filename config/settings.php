@@ -11,7 +11,7 @@ $settings = array(
     ),
 
     'db' => $db, //Data base options
-    'html' => $html
+    'html' => $html //HTML page options
 );
 
 return $settings;
