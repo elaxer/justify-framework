@@ -1,4 +1,9 @@
 <?php
+/**
+ * Class for procedures with quadratic equations
+ */
+
+namespace justify\framework\modules;
 
 class QE
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace framework\core;
+namespace justify\framework\core;
 
 class Router
 {
@@ -18,13 +18,13 @@ class Router
                     if (is_array($action)) {
                         define('ACTION_NAME', 'URL rendering');
 
-                        $controllerName = 'apps\\' . $app . '\\' . ucfirst($app) . 'Controller';
+                        $controllerName = 'justify\\apps\\' . $app . '\\' . ucfirst($app) . 'Controller';
                         $controller = new $controllerName;
                         $result = $controller->render($action['view'], $action['vars']);
 
                         break(2);
                     } else {
-                        $controllerName = 'apps\\' . $app . '\\' . ucfirst($app) . 'Controller';
+                        $controllerName = 'justify\\apps\\' . $app . '\\' . ucfirst($app) . 'Controller';
                         $actionName = 'action' . ucfirst($action);
 
                         define('ACTION_NAME', $action);

@@ -1,12 +1,29 @@
 <?php
-
-namespace framework\core\system;
+/**
+ * System abstract class Model consists of simple methods for work with DB
+ * @abstract
+ */
+namespace justify\framework\core\system;
 
 use PDO;
 
 abstract class Model
 {
+    /**
+     * This property stores db connect
+     * @access private
+     * @static
+     */
     private static $db;
+
+    /**
+     * Method returns all data in table
+     * Method can return big array which can load server work
+     * @param string $table
+     * @static
+     * @access protected
+     * @return array
+     */
     protected static function getAll($table)
     {
         $result = self::$db->query("SELECT * FROM $table");
@@ -19,28 +36,67 @@ abstract class Model
         return $result->execute($variables);
     }
 
+    /**
+     * Method execs your query
+     * @param string $query
+     * @access protected
+     * @static
+     * @return bool
+     */
     protected static function exec($query)
     {
         $result = self::$db->exec($query);
         return $result;
     }
 
+    /**
+     * Method delets data base
+     * WARNING!
+     * Be careful when using this method!
+     * @static
+     * @access protected
+     * @return void
+     */
     protected static function dropDB()
     {
         $settings = require BASE_DIR . '/config/settings.php';
         self::exec("DROP DATABASE {$settings['db']['name']}");
     }
 
+    /**
+     * Method delets choosed table
+     * WARNING!
+     * Be careful when using this method!
+     * @static
+     * @access protected
+     * @param string $table
+     * @return void
+     */
     protected static function dropTable($table)
     {
         self::exec("DROP TABLE $table");
     }
 
+    /**
+     * Method purifies choosed table
+     * WARNING!
+     * Be careful when using this method!
+     * @static
+     * @access protected
+     * @param string $table
+     * @return void
+     */
     protected static function clearTable($table)
     {
         self::exec("TRUNCATE TABLE $table");
     }
 
+    /**
+     * Method returns DSM version
+     * @access protected
+     * @static
+     * @return string
+     */
     protected static function version()
     {
         $query = self::$db->query("SELECT VERSION() AS version");
@@ -48,15 +104,20 @@ abstract class Model
         return $version['version'];
     }
 
-
+    /**
+     * Method provides connection this DB
+     * Choose DB properties in config/settings.php
+     * Don't forget to disconnect with DB using disconnect() method 
+     * @static
+     * @access protected
+     * @return bool
+     */
     protected static function connect()
     {
         $settings = require BASE_DIR . '/config/settings.php';
 
         $connection = new PDO(
-            "mysql:host={$settings['db']['host']};
-            dbname={$settings['db']['name']};
-            charset={$settings['db']['charset']}",
+            "mysql:host={$settings['db']['host']};dbname={$settings['db']['name']};charset={$settings['db']['charset']}",
             $settings['db']['user'],
             $settings['db']['password']
         );
@@ -68,11 +129,23 @@ abstract class Model
         return false;
     }
 
+    /**
+     * Method returns errors status
+     * @access protected
+     * @static
+     * @return string
+     */
     protected static function error()
     {
         return self::$db->errorInfo();
     }
 
+    /**
+     * Method diconnect DB
+     * @access protected
+     * @static
+     * @return void
+     */
     protected static function disconnect()
     {
         self::$db = null;

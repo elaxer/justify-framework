@@ -1,5 +1,10 @@
 <?php
-function is_ip($ip)
+/**
+ * Functions for validate types of variables
+ * @return bool
+ */
+
+function isIp($ip)
 {
 	if (filter_var($ip, FILTER_VALIDATE_IP))
    		return true;
@@ -7,7 +12,7 @@ function is_ip($ip)
 	return false;
 }
 
-function is_ipv4($ip)
+function isIpv4($ip)
 {
 	if (filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_IPV4))
    		return true;
@@ -15,7 +20,7 @@ function is_ipv4($ip)
 	return false;
 }
 
-function is_ipv6($ip)
+function isIpv6($ip)
 {
 	if (filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_IPV6))
    		return true;
@@ -23,7 +28,10 @@ function is_ipv6($ip)
 	return false;
 }
 
-function is_date($date /*DD-MM-YYYY*/)
+/**
+ * Use date format DD-MM-YYYY
+ */
+function isDate($date)
 {
 	$result = explode('-', $date);
 		if (checkdate($result[1], $result[0], $result[2]))
@@ -32,7 +40,7 @@ function is_date($date /*DD-MM-YYYY*/)
 		return false;
 }
 
-function is_email($email)
+function isEmail($email)
 {
 	if (filter_var($email, FILTER_VALIDATE_EMAIL))
     	return true;
@@ -40,7 +48,7 @@ function is_email($email)
 	return false;
 }
 
-function is_url($url)
+function isUrl($url)
 {
 	if (filter_var($url, FILTER_VALIDATE_URL))
 		return true;

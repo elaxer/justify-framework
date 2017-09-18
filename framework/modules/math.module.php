@@ -1,6 +1,13 @@
 <?php
+/**
+ * Functions for mathematical operations
+ */
 
-function fill_arithmetic_progression($length, $d, $start = 0)
+/**
+ * Field array arithmetic progression
+ * @return array
+ */
+function fillArithmeticProgression($length, $d, $start = 0)
 {
     $array = array();
     $array[0] = $start;
@@ -10,7 +17,11 @@ function fill_arithmetic_progression($length, $d, $start = 0)
     return $array;
 }
 
-function fill_geometric_progression($length, $q, $start = 1)
+/**
+ * Field array geometric progression
+ * @return array
+ */
+function fillGeometricProgression($length, $q, $start = 1)
 {
     $array = array();
     $array[0] = $start;
@@ -20,11 +31,19 @@ function fill_geometric_progression($length, $q, $start = 1)
     return $array;
 }
 
-function sum_of_terms_of_IDGP($b1, $q)
+/**
+ * Returns sum of terms of infinitely decreasing geometric progression
+ * @return int
+ */
+function sumOfTermsOfIDGP($b1, $q)
 {
     return $b1 / (1 - $q);
 }
 
+/**
+ * Returns arifmetic average of array of numbers
+ * @return int|float
+ */
 function average($numbers, $round = false)
 {
     

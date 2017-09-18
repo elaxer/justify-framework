@@ -1,9 +1,12 @@
 <?php
+
+use justify\framework\modules\Render;
+
 return array(
-    'about' => url_render('about', [
+    'about' => Render::urlRender('about', [
         'title' => 'About'
     ]),
-    'contacts' => url_render('contacts', [
+    'contacts' => Render::urlRender('contacts', [
         'title' => 'Contacts'
     ]),
     'page/([0-9]+)' => 'viewPageItem',

@@ -1,4 +1,9 @@
 <?php
+/**
+ * Function return translited russian string to english string
+ * @return string
+ */
+
 function translite($string)
 {
     $converter = [
@@ -29,7 +34,12 @@ function translite($string)
     return strtr($string, $converter);
 }
 
-function leet_translite($string)
+
+/**
+ * Function return translited russian string to leet language
+ * @return string
+ */
+function leetTranslite($string)
 {
     $string = mb_strtoupper($string);
     $converter = [

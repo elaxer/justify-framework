@@ -1,10 +1,10 @@
 <?php
 
-namespace apps\index;
+namespace justify\apps\index;
 
-use framework\core\system\Controller;
-use apps\index\IndexModel;
-use QE;
+use justify\framework\core\system\Controller;
+use justify\apps\index\IndexModel;
+use justify\framework\modules\QE;
 
 class IndexController extends Controller
 {
@@ -13,7 +13,7 @@ class IndexController extends Controller
          $this->render('index', [ //variables
             'frameworkName' => 'Justify Framework',
             'frameworkVersion' => 'v0.1g',
-            'title' => 'Justify Framework v0.1g', // HTML title
+            'title' => 'Justify Framework v0.1g', //HTML title
         ]);
     }
 

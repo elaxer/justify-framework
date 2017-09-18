@@ -1,5 +1,9 @@
 <?php
-function password_generate($length, $specialSymbols = false, $littleChars = true, $bigChars = true, $numbers = true)
+/**
+ * Function returns generated password
+ * @return string|bool
+ */
+function passwordGenerate($length, $specialSymbols = false, $littleChars = true, $bigChars = true, $numbers = true)
 {
     $chars = "";
     if ($littleChars) {

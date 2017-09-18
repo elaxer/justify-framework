@@ -1,3 +1,4 @@
+<?php use justify\framework\modules\Debug; ?>
 <!DOCTYPE html>
 <html lang="<?= $lang ?>">
 <head>
@@ -48,7 +49,7 @@
 
 </div>
 
-<?php debugging_panel() ?>
+<?php Debug::debuggingPanel() ?>
 
 </body>
 </html>

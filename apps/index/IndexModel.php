@@ -1,11 +1,10 @@
 <?php
 
-namespace apps\index;
+namespace justify\apps\index;
 
-use framework\core\system\Model;
-use PDO;
-use QE;
+use justify\framework\core\system\Model;
+use justify\framework\modules\QE;
 
 class IndexModel extends Model
-{
+{	
 }
