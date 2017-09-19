@@ -3,7 +3,6 @@
  * Functions for validate types of variables
  * @return bool
  */
-
 function isIp($ip)
 {
 	if (filter_var($ip, FILTER_VALIDATE_IP))

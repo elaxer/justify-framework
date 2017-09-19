@@ -1,10 +1,10 @@
 <?php
-/**
- * Class for procedures with quadratic equations
- */
 
 namespace justify\framework\modules;
 
+/**
+ * Class for procedures with quadratic equations
+ */
 class QE
 {
     private

@@ -1,12 +1,13 @@
 <?php
-/**
- * System abstract class Model consists of simple methods for work with DB
- * @abstract
- */
+
 namespace justify\framework\core\system;
 
 use PDO;
 
+/**
+ * System abstract class Model consists of simple methods for work with DB
+ * @abstract
+ */
 abstract class Model
 {
     /**

@@ -3,7 +3,6 @@
  * Function return translited russian string to english string
  * @return string
  */
-
 function translite($string)
 {
     $converter = [
