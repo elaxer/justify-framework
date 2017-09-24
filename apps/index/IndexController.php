@@ -12,8 +12,8 @@ class IndexController extends Controller
     {
          $this->render('index', [ //Variables
             'frameworkName' => 'Justify Framework',
-            'frameworkVersion' => 'v0.1g',
-            'title' => 'Justify Framework v0.1g', //HTML title
+            'frameworkVersion' => 'v1.0',
+            'title' => 'Justify Framework v1.0', //HTML title
         ]);
     }
 

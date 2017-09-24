@@ -1,7 +1,7 @@
 <?php
 /**
  * Justify Framework
- * @version 0.1g
+ * @version 1.0
  * @author Justify <justifydev@gmail.com>
  */
 use justify\framework\core\Router;
