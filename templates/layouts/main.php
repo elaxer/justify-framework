@@ -35,7 +35,7 @@
     </div>
 
     <div class="container">
-        <!-- Require content -->
+        <!-- Requires content -->
         <?php require_once BASE_DIR . '/templates/sites/' . ACTIVE_APP . '/' . $view . '.php' ?>
 
     </div>

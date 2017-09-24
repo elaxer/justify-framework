@@ -1,5 +1,6 @@
 {
   "require": {
-    "gabordemooij/redbean": "dev-master"
+    "gabordemooij/redbean": "dev-master",
+    "swiftmailer/swiftmailer": "^6.0"
   }
 }

@@ -1,7 +1,8 @@
 <?php
 /**
  * Send mail
- * Convenient function to send mail with requires headers and transformed to UTF-8 charset string 
+ * Convenient function to send mail with requires headers and transformed to UTF-8 charset string
+ * @deprecated
  * @return void
  */
 function sendMail($from, $subject, $message, $to = false, $contentType = 'text/plain', $charset = 'utf-8')
