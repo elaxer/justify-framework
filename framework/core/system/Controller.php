@@ -47,7 +47,7 @@ abstract class Controller
             if (!isset($keywords)) $keywords = $settings['html']['keywords'];
         }
 
-        require_once BASE_DIR . '/templates/layouts/main.php';
+        require_once BASE_DIR . '/views/layouts/main.php';
         return true;
     }
 
