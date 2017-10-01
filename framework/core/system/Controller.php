@@ -10,7 +10,7 @@ abstract class Controller
 {
     /**
      * Method returns current URI address
-     * @param bool $trim if trime true then remove unnecessary characters "/" 
+     * @param bool $trim if trim true then remove unnecessary characters "/"
      * @access protected
      * @return string
      */

@@ -82,7 +82,7 @@ abstract class Model
     }
 
     /**
-     * Method delets data base
+     * Method removes data base
      * WARNING!
      * Be careful when using this method!
      * @static
@@ -96,7 +96,7 @@ abstract class Model
     }
 
     /**
-     * Method delets choosed table
+     * Method removes selected table
      * WARNING!
      * Be careful when using this method!
      * @static
@@ -110,7 +110,7 @@ abstract class Model
     }
 
     /**
-     * Method purifies choosed table
+     * Method purifies selected table
      * WARNING!
      * Be careful when using this method!
      * @static
@@ -173,7 +173,7 @@ abstract class Model
     }
 
     /**
-     * Method diconnects DB
+     * Method disconnects DB
      * @access protected
      * @static
      * @return void
