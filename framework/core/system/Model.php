@@ -173,7 +173,7 @@ abstract class Model
     }
 
     /**
-     * Method diconnect DB
+     * Method diconnects DB
      * @access protected
      * @static
      * @return void
