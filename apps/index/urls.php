@@ -3,7 +3,7 @@
 use justify\framework\modules\Render;
 
 return array(
-    '^about$g' => Render::urlRender('about', [
+    '^about$' => Render::urlRender('about', [
         'title' => 'About'
     ]),
 
