@@ -3,7 +3,7 @@
  * Function return translited russian string to english string
  * @return string
  */
-function translite($string)
+function translit($string)
 {
     $converter = [
         'а' => 'a', 'б' => 'b', 'в' => 'v',
@@ -38,7 +38,7 @@ function translite($string)
  * Function return translited russian string to leet language
  * @return string
  */
-function leetTranslite($string)
+function leetTranslit($string)
 {
     $string = mb_strtoupper($string);
     $converter = [

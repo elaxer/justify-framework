@@ -41,7 +41,7 @@ function sumOfTermsOfIDGP($b1, $q)
 }
 
 /**
- * Returns arifmetic average of array of numbers
+ * Returns arithmetic average of array of numbers
  * @return int|float
  */
 function average($numbers, $round = false)

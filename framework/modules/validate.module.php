@@ -3,6 +3,7 @@
  * Functions for validate types of variables
  * @return bool
  */
+
 function isIp($ip)
 {
 	if (filter_var($ip, FILTER_VALIDATE_IP))
@@ -27,9 +28,8 @@ function isIpv6($ip)
 	return false;
 }
 
-/**
- * Use date format DD-MM-YYYY
- */
+
+//Use date format DD-MM-YYYY
 function isDate($date)
 {
 	$result = explode('-', $date);

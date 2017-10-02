@@ -10,7 +10,7 @@ class IndexController extends Controller
 {
     public function actionViewMainPage($args = array())
     {
-         $this->render('index', [ //Variables
+        $this->render('index', [ //Variables
             'frameworkName' => 'Justify Framework',
             'frameworkVersion' => 'v1.0',
             'title' => 'Justify Framework v1.0', //HTML title

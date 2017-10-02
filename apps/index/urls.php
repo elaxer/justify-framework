@@ -3,15 +3,15 @@
 use justify\framework\modules\Render;
 
 return array(
-    'about' => Render::urlRender('about', [
+    '^about$g' => Render::urlRender('about', [
         'title' => 'About'
     ]),
 
-    'contacts' => Render::urlRender('contacts', [
+    '^contacts$' => Render::urlRender('contacts', [
         'title' => 'Contacts'
     ]),
 
-    'page/([0-9]+)' => 'viewPageItem',
+    '^page/([0-9]+)$' => 'viewPageItem',
     
-    '' => 'viewMainPage',
+    '^/*$' => 'viewMainPage',
 );

@@ -1,9 +1,9 @@
 <?php
 /**
- * Function converts mounth number to russian string in genitive case
+ * Function converts month number to russian string in genitive case
  * @return string
  */
-function russianMounth($month)
+function russianMonth($month)
 {
 	switch ($month) {
 		case 1:
