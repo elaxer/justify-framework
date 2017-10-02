@@ -4,4 +4,3 @@
         <p>&copy; Justify Framework <?= date('Y') ?></p>
     </footer>
 </div> <!-- /container -->
-

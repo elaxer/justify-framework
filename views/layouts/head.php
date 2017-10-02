@@ -17,5 +17,4 @@
     <script src="/components/js/debugging_panel.js"></script>
     <link rel="stylesheet" href="/components/css/main.css">
     <link rel="stylesheet" href="/components/css/adaptive.css">
-
 </head>
