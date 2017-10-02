@@ -2,15 +2,18 @@
 <!DOCTYPE html>
 <html lang="<?= $lang ?>">
 <!-- Requires head -->
-<?php require_once BASE_DIR . '/views/layouts/head.php'; ?>
+<?php
+$title = 'Page not found!';
+require_once BASE_DIR . '/views/layouts/head.php';
+?>
 <body>
 <div id="content">
     <!-- Requires header -->
     <?php require_once BASE_DIR . '/views/layouts/header.php'; ?>
 
     <div class="container">
-        <!-- Requires content -->
-        <?php require_once BASE_DIR . '/views/sites/' . ACTIVE_APP . '/' . $view . '.php' ?>
+        <h1 style="color: red;">ERROR 404!</h1>
+        <h3>The search page was not found!</h3>
     </div>
 
     <!-- Requires footer -->
