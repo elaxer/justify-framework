@@ -1,6 +1,6 @@
-<hr>
-<div class="container">
-    <footer>
+<footer>
+    <hr>
+    <div class="container">
         <p>&copy; Justify Framework <?= date('Y') ?></p>
-    </footer>
-</div> <!-- /container -->
+    </div> <!-- /container -->
+</footer>
