@@ -36,7 +36,7 @@ abstract class Controller
     {
         extract($vars);
 
-        $settings = require CONFIG_DIR . '/settings.php';
+        global $settings;
 
         $charset = $settings['html']['charset'];
         $lang = $settings['html']['lang'];
@@ -48,7 +48,7 @@ abstract class Controller
 
         require_once VIEWS_DIR . '/layouts/main.php';
 
-        return true;
+        exit;
     }
 
 }

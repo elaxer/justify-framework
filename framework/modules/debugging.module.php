@@ -12,7 +12,7 @@ class Debug
      */
     public static function debuggingPanel()
     {
-        $settings = require CONFIG_DIR . '/settings.php';
+        global $settings;
         if ($settings['debug'] === true):
             $startTime = $GLOBALS['start'];
             $execTime = (microtime(true) - $startTime);

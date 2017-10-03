@@ -4,16 +4,16 @@ namespace justify\framework\core;
 
 class Router
 {
-    private static $settings;
     private static $uri, $uriExists;
 
     public static function run()
     {
+        global $settings;
         self::settingsHandler();
 
         self::$uri = self::getURI();
 
-        foreach (self::$settings['apps'] as $app) {
+        foreach ($settings['apps'] as $app) {
             $urls = require_once APPS_DIR . '/' . $app . '/urls.php';
             self::$uriExists = false;
 
@@ -57,8 +57,8 @@ class Router
 
     private static function settingsHandler()
     {
-        self::$settings = require_once CONFIG_DIR . '/settings.php';
-        if (self::$settings['debug'] === true) {
+        global $settings;
+        if ($settings['debug'] === true) {
             ini_set('display_errors', 'On');
             error_reporting(E_ALL);
         } else {
@@ -67,7 +67,7 @@ class Router
             error_reporting(0);
 
         }
-        date_default_timezone_set(self::$settings['timezone']);
+        date_default_timezone_set($settings['timezone']);
     }
 
     private static function getURI()
@@ -77,6 +77,7 @@ class Router
 
     private static function error404()
     {
-        require_once VIEWS_DIR . '/' . self::$settings['404page'];
+        global $settings;
+        require_once VIEWS_DIR . '/' . $settings['404page'];
     }
 }
