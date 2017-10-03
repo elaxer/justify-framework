@@ -35,7 +35,8 @@ abstract class Controller
     public function render($view, $vars = array())
     {
         extract($vars);
-        $settings = require BASE_DIR . '/config/settings.php';
+
+        $settings = require CONFIG_DIR . '/settings.php';
 
         $charset = $settings['html']['charset'];
         $lang = $settings['html']['lang'];
@@ -45,7 +46,7 @@ abstract class Controller
         if (!isset($author)) $author = $settings['html']['author'];
         if (!isset($keywords)) $keywords = $settings['html']['keywords'];
 
-        require_once BASE_DIR . '/views/layouts/main.php';
+        require_once VIEWS_DIR . '/layouts/main.php';
 
         return true;
     }

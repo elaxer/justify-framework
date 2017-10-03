@@ -15,12 +15,11 @@ class IndexController extends Controller
             'frameworkVersion' => 'v1.0',
             'title' => 'Justify Framework v1.0', //HTML title
         ]);
-
     }
 
     public function actionViewPageItem($args = array())
     {
-        return $this->render('page', [
+        $this->render('page', [
             'title' => 'Page ' . $args[1],
             'page' => $args[1],
         ]);
