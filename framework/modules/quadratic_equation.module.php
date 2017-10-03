@@ -7,8 +7,7 @@ namespace justify\framework\modules;
  */
 class QE
 {
-    private
-        $a, $b, $c;
+    private $a, $b, $c;
 
     public function __construct($a, $b, $c)
     {
