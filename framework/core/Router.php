@@ -30,9 +30,8 @@ class Router
                         $controllerName = 'justify\\apps\\' . $app . '\\' . ucfirst($app) . 'Controller';
 
                         $controller = new $controllerName;
+                        $controller->template = $settings['template'];
                         $controller->render($action['view'], $action['vars']);
-
-                        break(2);
                     } else {
                         define('ACTION_NAME', $action);
 
@@ -40,6 +39,9 @@ class Router
                         $actionName = 'action' . ucfirst($action);
 
                         $controller = new $controllerName;
+                        if (!isset($controller->template)) {
+                            $controller->template = $settings['template'];
+                        }
                         $controller->$actionName($matches);
 
                         break(2);

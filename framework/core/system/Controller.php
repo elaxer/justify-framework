@@ -9,6 +9,8 @@ namespace justify\framework\core\system;
  */
 abstract class Controller
 {
+    public $template;
+
     /**
      * Method returns current URI address
      *
@@ -50,7 +52,12 @@ abstract class Controller
         if (!isset($author)) $author = $settings['html']['author'];
         if (!isset($keywords)) $keywords = $settings['html']['keywords'];
 
-        require_once VIEWS_DIR . '/layouts/main.php';
+        define('HEAD', LAYOUTS_DIR . '/head.php');
+        define('HEADER', LAYOUTS_DIR . '/header.php');
+        define('CONTENT', VIEWS_DIR . '/' . ACTIVE_APP . '/' . $view . '.php');
+        define('FOOTER', LAYOUTS_DIR . '/footer.php');
+
+        require_once TEMPLATES_DIR . '/' . $this->template . '.php';
 
         return true;
     }
