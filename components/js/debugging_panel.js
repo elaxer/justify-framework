@@ -9,20 +9,18 @@ window.onload = function () {
         panel.style.display = 'block';
     }
 
-    function openPanel()
-    {
+    function openPanel() {
         open.style.display = 'none';
         close.style.display = 'block';
         panel.style.display = 'block';
         localStorage.setItem('panel-status', 'opened');
     }
 
-    function closePanel()
-    {
+    function closePanel() {
         open.style.display = 'block';
         close.style.display = 'none';
         panel.style.display = 'none';
-        localStorage.setItem('panel-status', 'closeds');
+        localStorage.setItem('panel-status', 'closed');
     }
 
     open.onclick = function () {
