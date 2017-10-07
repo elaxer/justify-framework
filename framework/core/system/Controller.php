@@ -27,8 +27,8 @@ abstract class Controller
     /**
      * Method renders the html file
      * Check HTML params in config/html.php
-     * @param string $view name of html file. Point name of html without expansion.
-     * @param array $vars stores the passed arguments in an associative array
+     * @param string $view name of html file. Point name of html without expansion
+     * @param array $vars stores the passed arguments in an associative array. Default current action name
      * @access public
      * @return bool
      */

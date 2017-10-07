@@ -9,7 +9,7 @@ class Render
 	 * Choose this function instead controller action in apps/<App Name>/urls.php
 	 * @static
 	 * @access public
-     * @param string $view connects template with file $view
+     * @param string $view connects template with file $view. Default current action name
      * @param array $vars passed arguments
 	 * @return array
 	 */
