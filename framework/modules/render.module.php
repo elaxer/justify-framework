@@ -9,9 +9,11 @@ class Render
 	 * Choose this function instead controller action in apps/<App Name>/urls.php
 	 * @static
 	 * @access public
+     * @param string $view connects template with file $view
+     * @param array $vars passed arguments
 	 * @return array
 	 */
-	public static function urlRender($view, $vars = array())
+	public static function urlRender($view = ACTION, $vars = array())
 	{
 	    return array(
 	        'view' => $view,

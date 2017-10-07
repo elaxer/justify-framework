@@ -91,7 +91,7 @@ abstract class Model
      */
     protected static function dropDB()
     {
-        $settings = require BASE_DIR . '/config/settings.php';
+        global $settings;
         self::exec("DROP DATABASE {$settings['db']['name']}");
     }
 
@@ -138,7 +138,7 @@ abstract class Model
 
     /**
      * Method provides connection this DB
-     * Choose DB properties in config/settings.php
+     * Choose DB properties in config/db.php
      * Don't forget to disconnect with DB using disconnect() method
      * @static
      * @access protected
@@ -146,7 +146,7 @@ abstract class Model
      */
     protected static function connect()
     {
-        $settings = require BASE_DIR . '/config/settings.php';
+        global $settings;
 
         $connection = new PDO(
             "mysql:host={$settings['db']['host']};dbname={$settings['db']['name']};charset={$settings['db']['charset']}",

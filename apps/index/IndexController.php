@@ -25,4 +25,9 @@ class IndexController extends Controller
         ]);
     }
 
+    public function actionAbout()
+    {
+        $this->render();
+    }
+
 }

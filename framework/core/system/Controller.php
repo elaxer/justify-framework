@@ -32,7 +32,7 @@ abstract class Controller
      * @access public
      * @return bool
      */
-    public function render($view, $vars = array())
+    public function render($view = ACTION, $vars = array())
     {
         extract($vars);
 

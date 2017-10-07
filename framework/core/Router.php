@@ -20,6 +20,7 @@ class Router
             foreach ($urls as $pattern => $action) {
                 if (preg_match("~$pattern~", self::$uri, $matches)) {
                     define('ACTIVE_APP', $app);
+                    define('ACTION', $action);
                     self::$uriExists = true;
 
                     if (is_array($action)) {

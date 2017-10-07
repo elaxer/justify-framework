@@ -1,7 +1,7 @@
 <?php
-$db = require BASE_DIR . '/config/db.php';
-$html = require BASE_DIR . '/config/html.php';
-$apps = require BASE_DIR . '/config/apps.php';
+$apps = require_once BASE_DIR . '/config/apps.php';
+$db = require_once BASE_DIR . '/config/db.php';
+$html = require_once BASE_DIR . '/config/html.php';
 
 $settings = array(
     'timezone' => 'America/Los_Angeles', //Choose your timezone, more information you can find in http://php.net/manual/en/timezones.php
