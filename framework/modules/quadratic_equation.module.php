@@ -16,11 +16,27 @@ class QE
         $this->c = $c;
     }
 
+    /**
+     * Method returns discriminant
+     *
+     * @access public
+     * @return integer
+     */
     public function getDiscriminant()
     {
         return $this->b * $this->b - 4 * $this->a * $this->c;
     }
 
+    /**
+     * Method returns roots/root/false
+     *
+     * If discriminant > 0 then method returns array of roots
+     * If discriminant = 0 then method returns one root
+     * If discriminant < 0 then method returns false
+     *
+     * @access public
+     * @return array|integer|bool
+     */
     public function getRoot()
     {
         if ($this->getDiscriminant() > 0) {

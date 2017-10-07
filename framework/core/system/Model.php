@@ -6,12 +6,14 @@ use PDO;
 
 /**
  * System abstract class Model consists of simple methods for work with DB
+ *
  * @abstract
  */
 abstract class Model
 {
     /**
      * This property stores db connect
+     *
      * @access private
      * @static
      */
@@ -19,7 +21,9 @@ abstract class Model
 
     /**
      * Method returns all data in table
+     *
      * Method can return big array which can load server work
+     *
      * @param string $table
      * @static
      * @access protected
@@ -33,6 +37,7 @@ abstract class Model
 
     /**
      * Method returns number of records
+     *
      * @param string $table table name
      * @param string $condition condition of query
      * @param array $variables array of variables in query
@@ -50,6 +55,7 @@ abstract class Model
 
     /**
      * Method returns number of records all table
+     *
      * @param string $table table name
      * @static
      * @access protected
@@ -70,6 +76,7 @@ abstract class Model
 
     /**
      * Method execs your query
+     *
      * @param string $query
      * @access protected
      * @static
@@ -83,8 +90,10 @@ abstract class Model
 
     /**
      * Method removes data base
+     *
      * WARNING!
      * Be careful when using this method!
+     *
      * @static
      * @access protected
      * @return void
@@ -97,8 +106,10 @@ abstract class Model
 
     /**
      * Method removes selected table
+     *
      * WARNING!
      * Be careful when using this method!
+     *
      * @static
      * @access protected
      * @param string $table
@@ -111,8 +122,10 @@ abstract class Model
 
     /**
      * Method purifies selected table
+     *
      * WARNING!
      * Be careful when using this method!
+     *
      * @static
      * @access protected
      * @param string $table
@@ -125,6 +138,7 @@ abstract class Model
 
     /**
      * Method returns DSM version
+     *
      * @access protected
      * @static
      * @return string
@@ -138,8 +152,10 @@ abstract class Model
 
     /**
      * Method provides connection this DB
+     *
      * Choose DB properties in config/db.php
      * Don't forget to disconnect with DB using disconnect() method
+     *
      * @static
      * @access protected
      * @return bool
@@ -163,6 +179,7 @@ abstract class Model
 
     /**
      * Method returns errors status
+     *
      * @access protected
      * @static
      * @return string
@@ -174,6 +191,7 @@ abstract class Model
 
     /**
      * Method disconnects DB
+     *
      * @access protected
      * @static
      * @return void

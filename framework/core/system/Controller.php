@@ -4,12 +4,14 @@ namespace justify\framework\core\system;
 
 /**
  * System abstract class Controller consists of methods for work with app controller
+ *
  * @abstract
  */
 abstract class Controller
 {
     /**
      * Method returns current URI address
+     *
      * @param bool $trim if trim true then remove unnecessary characters "/"
      * @access protected
      * @return string
@@ -26,7 +28,9 @@ abstract class Controller
 
     /**
      * Method renders the html file
+     *
      * Check HTML params in config/html.php
+     *
      * @param string $view name of html file. Point name of html without expansion
      * @param array $vars stores the passed arguments in an associative array. Default current action name
      * @access public
@@ -48,7 +52,7 @@ abstract class Controller
 
         require_once VIEWS_DIR . '/layouts/main.php';
 
-        exit;
+        return true;
     }
 
 }

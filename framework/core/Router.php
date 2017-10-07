@@ -21,10 +21,12 @@ class Router
                 if (preg_match("~$pattern~", self::$uri, $matches)) {
                     define('ACTIVE_APP', $app);
                     define('ACTION', $action);
+
                     self::$uriExists = true;
 
                     if (is_array($action)) {
                         define('ACTION_NAME', 'URL rendering');
+
                         $controllerName = 'justify\\apps\\' . $app . '\\' . ucfirst($app) . 'Controller';
 
                         $controller = new $controllerName;
@@ -32,10 +34,10 @@ class Router
 
                         break(2);
                     } else {
+                        define('ACTION_NAME', $action);
+
                         $controllerName = 'justify\\apps\\' . $app . '\\' . ucfirst($app) . 'Controller';
                         $actionName = 'action' . ucfirst($action);
-
-                        define('ACTION_NAME', $action);
 
                         $controller = new $controllerName;
                         $controller->$actionName($matches);
@@ -49,6 +51,7 @@ class Router
             if (self::$uriExists === false) {
                 define('ACTION_NAME', 'Null');
                 define('ACTIVE_APP', 'Null');
+
                 self::error404();
             }
 

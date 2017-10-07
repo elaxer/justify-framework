@@ -1,6 +1,8 @@
 <?php
 /**
  * Function return translited russian string to english string
+ *
+ * @param string $string string to translate to translit
  * @return string
  */
 function translit($string)
@@ -30,15 +32,19 @@ function translit($string)
         'Ь' => '\'', 'Ы' => 'Y', 'Ъ' => '\'',
         'Э' => 'E', 'Ю' => 'Yu', 'Я' => 'Ya',
     ];
-    return strtr($string, $converter);
+    $translited =  strtr($string, $converter);
+    unset($converter);
+    return $translited;
 }
 
 
 /**
- * Function return translited russian string to leet language
+ * Function return translated russian string to leet(1337) language
+ *
+ * @param string $string string to translate to leet language
  * @return string
  */
-function leetTranslit($string)
+function leetTranslation($string)
 {
     $string = mb_strtoupper($string);
     $converter = [
@@ -54,5 +60,7 @@ function leetTranslit($string)
         'Ь' => 'b', 'Ы' => 'bl', 'Ъ' => '`b',
         'Э' => '-)', 'Ю' => '|-0', 'Я' => '9|',
     ];
-    return strtr($string, $converter);
+    $leet =  strtr($string, $converter);
+    unset($converter);
+    return $leet;
 }

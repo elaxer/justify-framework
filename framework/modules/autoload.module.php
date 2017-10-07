@@ -1,4 +1,5 @@
 <?php
+//Autoload function
 function autoload($className)
 {
 	$className = preg_replace('#justify#', '', $className);

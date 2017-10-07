@@ -1,8 +1,10 @@
 <?php
-$apps = require_once BASE_DIR . '/config/apps.php';
-$db = require_once BASE_DIR . '/config/db.php';
-$html = require_once BASE_DIR . '/config/html.php';
+//Include other settings
+$apps = require_once CONFIG_DIR . '/apps.php';
+$db = require_once CONFIG_DIR . '/db.php';
+$html = require_once CONFIG_DIR . '/html.php';
 
+//Main array with all settings
 $settings = array(
     'timezone' => 'America/Los_Angeles', //Choose your timezone, more information you can find in http://php.net/manual/en/timezones.php
     'debug' => true, //Debug mode; Recommend to set false value in production

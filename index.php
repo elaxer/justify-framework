@@ -1,6 +1,7 @@
 <?php
 /**
  * Justify Framework
+ *
  * @version 1.0
  * @author Justify <justifydev@gmail.com>
  */

@@ -1,6 +1,12 @@
 <?php
 /**
  * Function returns generated password
+ *
+ * @param integer $length length of password
+ * @param bool $specialSymbols includes special symbols or not
+ * @param bool $littleChars includes little chars or not
+ * @param bool $bigChars includes big chars or not
+ * @param bool $numbers includes numbers or not
  * @return string|bool
  */
 function passwordGenerate($length, $specialSymbols = false, $littleChars = true, $bigChars = true, $numbers = true)

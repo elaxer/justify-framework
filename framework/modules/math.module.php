@@ -5,6 +5,10 @@
 
 /**
  * Field array arithmetic progression
+ *
+ * @param integer $length length of array
+ * @param integer $d arithmetic progression difference
+ * @param integer $start the number from which the array begins to fill
  * @return array
  */
 function fillArithmeticProgression($length, $d, $start = 0)
@@ -19,6 +23,10 @@ function fillArithmeticProgression($length, $d, $start = 0)
 
 /**
  * Field array geometric progression
+ *
+ * @param integer $length length of array
+ * @param integer $q denominator of geometric progression
+ * @param integer $start the number from which the array begins to fill
  * @return array
  */
 function fillGeometricProgression($length, $q, $start = 1)
@@ -33,15 +41,30 @@ function fillGeometricProgression($length, $q, $start = 1)
 
 /**
  * Returns sum of terms of infinitely decreasing geometric progression
+ *
+ * @param integer $b1 the first term of a geometric progression
+ * @param integer $q denominator of geometric progression
  * @return int
  */
 function sumOfTermsOfIDGP($b1, $q)
 {
-    return $b1 / (1 - $q);
+    try {
+        if ($q > 0 && $q < 1) {
+            return $b1 / (1 - $q);
+        }
+        throw new Exception('<strong>Warning: </strong> Denominator of geometric progression can\'t be less than 0 and can\' be more than 1');
+    } catch (Exception $e) {
+        echo $e->getMessage() . ' in <b>' . $e->getFile() . '</b> on line <b>' . $e->getLine() . '</b>';
+        exit;
+    }
+
 }
 
 /**
  * Returns arithmetic average of array of numbers
+ *
+ * @param array $numbers array of numbers
+ * @param bool $round determines be rounded average or not
  * @return int|float
  */
 function average($numbers, $round = false)

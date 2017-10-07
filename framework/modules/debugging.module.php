@@ -6,7 +6,9 @@ class Debug
 {
     /**
      * Method displays debugging panel in html file
+     *
      * To deactivate panel change property "debug" to false in file config/settings.php
+     *
      * @return void
      * @static
      */

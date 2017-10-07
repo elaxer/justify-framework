@@ -1,6 +1,8 @@
 <?php
 /**
  * Function converts month number to russian string in genitive case
+ *
+ * @param integer $month month number
  * @return string
  */
 function russianMonth($month)
