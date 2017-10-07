@@ -27,7 +27,7 @@ class IndexController extends Controller
 
     public function actionAbout()
     {
-        $this->render();
+        $this->render(); //Renders file "about.php"
     }
 
 }
