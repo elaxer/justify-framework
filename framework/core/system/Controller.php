@@ -52,12 +52,12 @@ abstract class Controller
         if (!isset($author)) $author = $settings['html']['author'];
         if (!isset($keywords)) $keywords = $settings['html']['keywords'];
 
-        define('HEAD', LAYOUTS_DIR . '/head.php');
-        define('HEADER', LAYOUTS_DIR . '/header.php');
+        define('HEAD', TEMPLATES_DIR . '/' . $this->template . '/head.php');
+        define('HEADER', TEMPLATES_DIR . '/' . $this->template . '/header.php');
         define('CONTENT', VIEWS_DIR . '/' . ACTIVE_APP . '/' . $view . '.php');
-        define('FOOTER', LAYOUTS_DIR . '/footer.php');
+        define('FOOTER', TEMPLATES_DIR . '/' . $this->template . '/footer.php');
 
-        require_once TEMPLATES_DIR . '/' . $this->template . '.php';
+        require_once TEMPLATES_DIR . '/' . $this->template . '/' . $this->template . '.php';
 
         return true;
     }

@@ -7,7 +7,6 @@ define('CONFIG_DIR', BASE_DIR . '/config');
 define('APPS_DIR', BASE_DIR . '/apps');
 define('VIEWS_DIR', BASE_DIR . '/views');
 define('TEMPLATES_DIR', VIEWS_DIR . '/templates');
-define('LAYOUTS_DIR', TEMPLATES_DIR . '/layouts');
 
 $settings = require_once BASE_DIR . '/config/settings.php';
 

@@ -30,7 +30,9 @@ class Router
                         $controllerName = 'justify\\apps\\' . $app . '\\' . ucfirst($app) . 'Controller';
 
                         $controller = new $controllerName;
-                        $controller->template = $settings['template'];
+                        if (!isset($controller->template)) {
+                            $controller->template = $settings['template'];
+                        }
                         $controller->render($action['view'], $action['vars']);
                     } else {
                         define('ACTION_NAME', $action);
@@ -84,6 +86,9 @@ class Router
     private static function error404()
     {
         global $settings;
+        define('HEAD', TEMPLATES_DIR . '/' . $settings['template'] . '/head.php');
+        define('HEADER', TEMPLATES_DIR . '/' . $settings['template'] . '/header.php');
+        define('FOOTER', TEMPLATES_DIR . '/' . $settings['template'] . '/footer.php');
         require_once VIEWS_DIR . '/' . $settings['404page'];
     }
 }
