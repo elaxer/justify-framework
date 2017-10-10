@@ -12,10 +12,10 @@ class Router
         self::settingsHandler();
 
         self::$uri = self::getURI();
+        self::$uriExists = false;
 
         foreach ($settings['apps'] as $app) {
             $urls = require_once APPS_DIR . '/' . $app . '/urls.php';
-            self::$uriExists = false;
 
             foreach ($urls as $pattern => $action) {
                 if (preg_match("~$pattern~", self::$uri, $matches)) {
@@ -51,16 +51,14 @@ class Router
 
                 }
             }
-
-            if (self::$uriExists === false) {
-                define('ACTION_NAME', 'Null');
-                define('ACTIVE_APP', 'Null');
-
-                self::error404();
-            }
-
         }
 
+        if (self::$uriExists === false) {
+            define('ACTION_NAME', 'Null');
+            define('ACTIVE_APP', 'Null');
+
+            self::error404();
+        }
     }
 
     private static function settingsHandler()
