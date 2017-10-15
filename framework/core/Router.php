@@ -4,25 +4,24 @@ namespace justify\framework\core;
 
 class Router
 {
-    private static $uri, $uriExists;
+    private $uriExists;
 
-    public static function run()
+    public function run()
     {
         global $settings;
-        self::settingsHandler();
 
-        self::$uri = self::getURI();
-        self::$uriExists = false;
+        $this->settingsHandler();
+        $this->uriExists = false;
 
         foreach ($settings['apps'] as $app) {
             $urls = require_once APPS_DIR . '/' . $app . '/urls.php';
 
             foreach ($urls as $pattern => $action) {
-                if (preg_match("~$pattern~", self::$uri, $matches)) {
+                if (preg_match("~$pattern~", $this->getURI(), $matches)) {
                     define('ACTIVE_APP', $app);
                     define('ACTION', $action);
 
-                    self::$uriExists = true;
+                    $this->uriExists = true;
 
                     if (is_array($action)) {
                         define('ACTION_NAME', 'URL rendering');
@@ -53,15 +52,14 @@ class Router
             }
         }
 
-        if (self::$uriExists === false) {
+        if ($this->uriExists === false) {
             define('ACTION_NAME', 'Null');
             define('ACTIVE_APP', 'Null');
-
-            self::error404();
+            $this->error404();
         }
     }
 
-    private static function settingsHandler()
+    private function settingsHandler()
     {
         global $settings;
         if ($settings['debug'] === true) {
@@ -76,12 +74,12 @@ class Router
         date_default_timezone_set($settings['timezone']);
     }
 
-    private static function getURI()
+    private function getURI()
     {
         return trim($_SERVER['REQUEST_URI'], '/');
     }
 
-    private static function error404()
+    private function error404()
     {
         global $settings;
         define('HEAD', TEMPLATES_DIR . '/' . $settings['template'] . '/head.php');

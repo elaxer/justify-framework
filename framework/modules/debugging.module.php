@@ -15,10 +15,11 @@ class Debug
     public static function debuggingPanel()
     {
         global $settings;
+        global $start;
+        $execTime = (microtime(true) - $start);
+        define('EXEC_TIME', round($execTime, 5));
+
         if ($settings['debug'] === true):
-            $startTime = $GLOBALS['start'];
-            $execTime = (microtime(true) - $startTime);
-            define('EXEC_TIME', round($execTime, 5));
             ?>
             <div id="open-panel">
                 &laquo;
