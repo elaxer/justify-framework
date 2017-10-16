@@ -8,7 +8,7 @@ use justify\framework\modules\QE;
 
 class IndexController extends Controller
 {
-    public function actionViewMainPage($args = array())
+    public function actionViewMainPage($args = [])
     {
         $this->render('index', [ //Variables
             'frameworkName' => 'Justify Framework',
@@ -17,7 +17,7 @@ class IndexController extends Controller
         ]);
     }
 
-    public function actionViewPageItem($args = array())
+    public function actionViewPageItem($args = [])
     {
         $this->render('page', [
             'title' => 'Page ' . $args[1],
