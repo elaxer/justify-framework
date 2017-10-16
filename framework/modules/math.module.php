@@ -13,7 +13,7 @@
  */
 function fillArithmeticProgression($length, $d, $start = 0)
 {
-    $array = array();
+    $array = [];
     $array[0] = $start;
     for ($i = 1; $i < $length; $i++) {
         $array[$i] = $array[$i - 1] + $d;
@@ -31,7 +31,7 @@ function fillArithmeticProgression($length, $d, $start = 0)
  */
 function fillGeometricProgression($length, $q, $start = 1)
 {
-    $array = array();
+    $array = [];
     $array[0] = $start;
     for ($i = 1; $i < $length; $i++) {
         $array[$i] = $array[$i - 1] * $q;
@@ -48,15 +48,10 @@ function fillGeometricProgression($length, $q, $start = 1)
  */
 function sumOfTermsOfIDGP($b1, $q)
 {
-    try {
-        if ($q > 0 && $q < 1) {
-            return $b1 / (1 - $q);
-        }
-        throw new Exception('<strong>Warning: </strong> Denominator of geometric progression can\'t be less than 0 and can\' be more than 1');
-    } catch (Exception $e) {
-        echo $e->getMessage() . ' in <b>' . $e->getFile() . '</b> on line <b>' . $e->getLine() . '</b>';
-        exit;
+    if ($q > 0 && $q < 1) {
+        return $b1 / (1 - $q);
     }
+    return false;
 
 }
 

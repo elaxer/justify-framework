@@ -40,7 +40,7 @@ class QE
     public function getRoot()
     {
         if ($this->getDiscriminant() > 0) {
-            $roots = array();
+            $roots = [];
 
             $roots['thirst'] = (-($this->b) + sqrt($this->getDiscriminant())) / (2 * $this->a);
             $roots['second'] = (-($this->b) - sqrt($this->getDiscriminant())) / (2 * $this->a);

@@ -7,7 +7,7 @@
  * @param bool $exit if $exit true then after use this function the script will stop working
  * @param bool|string $text if $text string then after use this function the script will stop working with the message
  */
-function dump($variable, $exit = false, $text = false)
+function dump($variable, $exit = false, $text = '')
 {
     echo '<pre>';
     var_dump($variable);

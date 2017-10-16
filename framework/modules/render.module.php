@@ -15,7 +15,7 @@ class Render
      * @param array $vars passed arguments
 	 * @return array
 	 */
-	public static function urlRender($view = ACTION, $vars = array())
+	public static function urlRender($view = ACTION, $vars = [])
 	{
 	    return array(
 	        'view' => $view,

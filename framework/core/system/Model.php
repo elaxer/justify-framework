@@ -45,7 +45,7 @@ abstract class Model
      * @access protected
      * @return integer
      */
-    protected static function count($table, $condition, $variables = array())
+    protected static function count($table, $condition, $variables = [])
     {
         $query = self::$db->prepare("SELECT COUNT(*) as `count` FROM $table WHERE $condition");
         $query->execute($variables);
@@ -68,7 +68,7 @@ abstract class Model
         return intval($result['count']);
     }
 
-    protected static function get($table, $condition, $variables = array())
+    protected static function get($table, $condition, $variables = [])
     {
         $result = self::$db->prepare("SELECT * FROM $table WHERE $condition");
         return $result->execute($variables);

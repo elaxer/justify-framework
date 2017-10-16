@@ -5,7 +5,7 @@ $db = require_once CONFIG_DIR . '/db.php';
 $html = require_once CONFIG_DIR . '/html.php';
 
 //Main array with all settings
-$settings = array(
+$settings = [
     'timezone' => 'America/Los_Angeles', //Choose your timezone, more information you can find in http://php.net/manual/en/timezones.php
     'debug' => true, //Debug mode; Recommend to set false value in production
     'template' => 'main', //Base template for HTML page
@@ -13,6 +13,6 @@ $settings = array(
     'apps' => $apps, //Active apps
     'db' => $db, //Data base options
     'html' => $html //HTML page options
-);
+];
 
 return $settings;
