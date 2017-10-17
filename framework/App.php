@@ -2,10 +2,19 @@
 
 namespace justify\framework;
 
+/**
+ * The Core of framework
+ * Launches the application
+ */
 class App
 {
     private $uriExists, $settings;
 
+    /**
+     * Method launches the application
+     *
+     * @access public
+     */
     public function run()
     {
         $this->settingsHandler();
@@ -43,11 +52,23 @@ class App
         }
     }
 
+    /**
+     * App constructor.
+     *
+     * Loads array of settings to next application work
+     *
+     * @param array $settings stores array with settings
+     */
     public function __construct($settings)
     {
         $this->settings = $settings;
     }
 
+    /**
+     * The method sets the required settings for the application
+     *
+     * @access private
+     */
     private function settingsHandler()
     {
         if ($this->settings['debug'] === true) {
@@ -62,11 +83,22 @@ class App
         date_default_timezone_set($this->settings['timezone']);
     }
 
+    /**
+     * Method return current URI address
+     *
+     * @access private
+     * @return string
+     */
     private function getURI()
     {
         return trim($_SERVER['REQUEST_URI'], '/');
     }
 
+    /**
+     * Method includes 404 page if URI doesn't match with route
+     *
+     * @access private
+     */
     private function error404()
     {
         define('HEAD', TEMPLATES_DIR . '/' . $this->settings['template'] . '/head.php');

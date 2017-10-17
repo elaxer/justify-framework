@@ -201,11 +201,34 @@ abstract class Model
         self::$db = null;
     }
 
+    /**
+     * Method return encoded variable
+     *
+     * Returns variable safe
+     * Use this method when you work with data
+     *
+     * @access protected
+     * @static
+     * @param mixed $var variable to encode
+     * @return string
+     */
     protected static function encode($var)
     {
         return htmlspecialchars(trim($var));
     }
 
+    /**
+     * Method return decoded variable
+     *
+     * Warning!
+     * Decoded variable is unsafe
+     * Don't use this method when you upload data in data base
+     *
+     * @access protected
+     * @static
+     * @param mixed $var variable to decode
+     * @return string
+     */
     protected static function decode($var)
     {
         return htmlspecialchars_decode($var);

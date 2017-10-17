@@ -17,11 +17,13 @@ class IndexController extends Controller
         ]);
     }
 
-    public function actionViewPageItem($args = [])
+    //Array $matches stores matches which returns function
+    //preg_match in file /framework/App.php
+    public function actionViewPageItem($matches = [])
     {
         $this->render('page', [
-            'title' => 'Page ' . $args[1],
-            'page' => $args[1],
+            'title' => 'Page ' . $matches[1],
+            'page' => $matches[1],
         ]);
     }
 

@@ -1,10 +1,10 @@
 <?php
-return array(
+return [
+    '^/*$' => 'viewMainPage',
+
+    '^page/([0-9]+)$' => 'viewPageItem',
+
     '^about$' => 'about',
 
     '^contacts$' => 'contacts',
-
-    '^page/([0-9]+)$' => 'viewPageItem',
-    
-    '^/*$' => 'viewMainPage'
-);
+];
