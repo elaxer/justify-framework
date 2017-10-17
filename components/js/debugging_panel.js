@@ -3,12 +3,6 @@ window.onload = function () {
     var close = document.getElementById('close-panel');
     var panel = document.getElementById('panel');
 
-    if (localStorage.getItem('panel-status') === 'opened') {
-        open.style.display = 'none';
-        close.style.display = 'block';
-        panel.style.display = 'block';
-    }
-
     function openPanel() {
         open.style.display = 'none';
         close.style.display = 'block';
@@ -21,6 +15,10 @@ window.onload = function () {
         close.style.display = 'none';
         panel.style.display = 'none';
         localStorage.setItem('panel-status', 'closed');
+    }
+
+    if (localStorage.getItem('panel-status') === 'opened') {
+        openPanel();
     }
 
     open.onclick = function () {
