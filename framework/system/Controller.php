@@ -1,6 +1,6 @@
 <?php
 
-namespace justify\framework\core\system;
+namespace justify\framework\system;
 
 /**
  * System abstract class Controller consists of methods for work with app controller
@@ -61,5 +61,4 @@ abstract class Controller
 
         return true;
     }
-
 }

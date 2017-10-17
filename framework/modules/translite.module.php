@@ -60,7 +60,7 @@ function leetTranslation($string)
         'Ь' => 'b', 'Ы' => 'bl', 'Ъ' => '`b',
         'Э' => '-)', 'Ю' => '|-0', 'Я' => '9|',
     ];
-    $leet =  strtr($string, $converter);
+    $leet = strtr($string, $converter);
     unset($converter);
     return $leet;
 }

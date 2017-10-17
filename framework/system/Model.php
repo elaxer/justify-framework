@@ -1,6 +1,6 @@
 <?php
 
-namespace justify\framework\core\system;
+namespace justify\framework\system;
 
 use PDO;
 
@@ -199,6 +199,16 @@ abstract class Model
     protected static function disconnect()
     {
         self::$db = null;
+    }
+
+    protected static function encode($var)
+    {
+        return htmlspecialchars(trim($var));
+    }
+
+    protected static function decode($var)
+    {
+        return htmlspecialchars_decode($var);
     }
 
 }
