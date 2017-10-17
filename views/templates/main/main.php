@@ -1,4 +1,4 @@
-<?php use justify\framework\modules\Debug; ?>
+<?php use justify\framework\system\Html; ?>
 <!DOCTYPE html>
 <html lang="<?= $lang ?>">
 <!-- Requires head -->
@@ -17,7 +17,7 @@
     <?php require_once FOOTER; ?>
 </div>
 
-<?php Debug::debuggingPanel() ?>
+<?php Html::debuggingPanel() ?>
 
 </body>
 </html>
