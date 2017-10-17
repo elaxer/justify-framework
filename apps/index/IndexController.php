@@ -2,18 +2,18 @@
 
 namespace justify\apps\index;
 
-use justify\framework\core\system\Controller;
+use Justify;
+use justify\framework\system\Controller;
 use justify\apps\index\IndexModel;
-use justify\framework\modules\QE;
 
 class IndexController extends Controller
 {
-    public function actionViewMainPage($args = [])
+    public function actionViewMainPage()
     {
         $this->render('index', [ //Variables
             'frameworkName' => 'Justify Framework',
-            'frameworkVersion' => 'v1.0',
-            'title' => 'Justify Framework v1.0', //HTML title
+            'frameworkVersion' => 'v' . Justify::getVersion(),
+            'title' => 'Justify Framework v' . Justify::getVersion(), //HTML title
         ]);
     }
 
@@ -28,7 +28,16 @@ class IndexController extends Controller
     public function actionAbout()
     {
         //Renders file "about.php"
-        $this->render();
+        $this->render(ACTION, [
+            'title' => 'about'
+        ]);
+    }
+
+    public function actionContacts()
+    {
+        $this->render('contacts', [
+            'title' => 'Contacts'
+        ]);
     }
 
 }
