@@ -31,7 +31,7 @@ class IndexController extends Controller
     {
         //Renders file "about.php"
         $this->render(ACTION, [
-            'title' => 'about'
+            'title' => 'About'
         ]);
     }
 
