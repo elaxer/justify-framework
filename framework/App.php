@@ -17,9 +17,6 @@ class App
      */
     public function run()
     {
-        $this->settingsHandler();
-        $this->uriExists = false;
-
         foreach ($this->settings['apps'] as $app) {
             $urls = require_once APPS_DIR . '/' . $app . '/urls.php';
 
@@ -44,16 +41,13 @@ class App
                 }
             }
         }
-
-        if ($this->uriExists === false) {
-            define('ACTION_NAME', 'Null');
-            define('ACTIVE_APP', 'Null');
+        if (!$this->uriExists) {
             $this->error404();
         }
     }
 
     /**
-     * App constructor.
+     * Application constructor.
      *
      * Loads array of settings to next application work
      *
@@ -62,6 +56,8 @@ class App
     public function __construct($settings)
     {
         $this->settings = $settings;
+        $this->settingsHandler();
+        $this->uriExists = false;
     }
 
     /**
@@ -101,9 +97,13 @@ class App
      */
     private function error404()
     {
+        define('ACTION_NAME', 'Null');
+        define('ACTIVE_APP', 'Null');
+
         define('HEAD', TEMPLATES_DIR . '/' . $this->settings['template'] . '/head.php');
         define('HEADER', TEMPLATES_DIR . '/' . $this->settings['template'] . '/header.php');
         define('FOOTER', TEMPLATES_DIR . '/' . $this->settings['template'] . '/footer.php');
+
         require_once VIEWS_DIR . '/' . $this->settings['404page'];
     }
 
