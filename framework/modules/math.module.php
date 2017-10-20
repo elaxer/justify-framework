@@ -1,9 +1,5 @@
 <?php
 /**
- * Functions for mathematical operations
- */
-
-/**
  * Field array arithmetic progression
  *
  * @param integer $length length of array
