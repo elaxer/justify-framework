@@ -13,6 +13,6 @@ function dump($variable, $exit = false)
     echo '</pre>';
 
     if ($exit) {
-        die($text);
+        exit;
     }
 }
