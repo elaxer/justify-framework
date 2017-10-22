@@ -1,8 +1,8 @@
 <?php
 return [
-    '/*' => 'viewMainPage',
+    '/*' => 'index',
 
-    'page/([0-9]+)' => 'viewPageItem',
+    'page/([0-9]+)' => 'pageItem',
 
     'about' => 'about',
 

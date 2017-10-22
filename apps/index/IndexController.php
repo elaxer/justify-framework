@@ -8,7 +8,7 @@ use justify\apps\index\IndexModel;
 
 class IndexController extends Controller
 {
-    public function actionViewMainPage()
+    public function actionIndex()
     {
         $this->render('index', [ //Variables
             'frameworkName' => 'Justify Framework',
@@ -19,7 +19,7 @@ class IndexController extends Controller
 
     //Array $matches stores matches which returns function
     //preg_match in file /framework/App.php
-    public function actionViewPageItem($matches = [])
+    public function actionPageItem($matches = [])
     {
         $this->render('page', [
             'title' => 'Page ' . $matches[1],
