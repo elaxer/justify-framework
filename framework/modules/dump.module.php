@@ -9,7 +9,7 @@
 function dump($variable, $exit = false)
 {
     echo '<pre>';
-    var_dump($variable);
+    print_r($variable);
     echo '</pre>';
 
     if ($exit) {
