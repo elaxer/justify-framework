@@ -1,10 +1,10 @@
 <?php
 return [
-    '^/*$' => 'viewMainPage',
+    '/*' => 'viewMainPage',
 
-    '^page/([0-9]+)$' => 'viewPageItem',
+    'page/([0-9]+)' => 'viewPageItem',
 
-    '^about$' => 'about',
+    'about' => 'about',
 
-    '^contacts$' => 'contacts',
+    'contacts' => 'contacts',
 ];

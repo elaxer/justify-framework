@@ -21,7 +21,7 @@ class App
             $urls = require_once APPS_DIR . '/' . $app . '/urls.php';
 
             foreach ($urls as $pattern => $action) {
-                if (preg_match("~$pattern~", $this->getURI(), $matches)) {
+                if (preg_match("#^$pattern$#", $this->getURI(), $matches)) {
                     define('ACTIVE_APP', $app);
                     define('ACTION', $action);
                     define('ACTION_NAME', $action);
