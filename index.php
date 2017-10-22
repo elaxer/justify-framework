@@ -14,5 +14,8 @@ require_once BASE_DIR . '/framework/composer/vendor/autoload.php';
 require_once BASE_DIR . '/framework/justify/Justify.php';
 $settings = require_once CONFIG_DIR . '/settings.php';
 
-$app = new justify\framework\App($settings);
-$app->run();
+(new justify\framework\App($settings))->run();
+
+$email = 'pokazanov14@gmail.com';
+//echo preg_match('/^\S+@\S+\.\S+$/i', $email) ? 'ОК!' : 'Введите корректный E-mail!';
+echo preg_match('/jpe?g$/i', 'file.jpeg');

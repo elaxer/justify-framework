@@ -19,7 +19,7 @@ class BaseJustify
      */
     public static function autoload($className)
     {
-        $className = preg_replace('#justify#', '', $className);
+        $className = preg_replace('/justify\\\\/', '', $className);
         $path = BASE_DIR . '/' . $className . '.php';
         $path = str_replace('\\', '/', $path);
 

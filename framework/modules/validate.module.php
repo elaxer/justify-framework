@@ -41,24 +41,6 @@ function isIpv6($ip)
 	return false;
 }
 
-
-/**
- * Function checks date for validity
- *
- * Please, use date format DD-MM-YYYY
- *
- * @param string $date date
- * @return bool
- */
-function isDate($date)
-{
-	$result = explode('-', $date);
-		if (checkdate($result[1], $result[0], $result[2]))
-			return true;
-
-		return false;
-}
-
 /**
  * Function checks E-mail for validity
  *
