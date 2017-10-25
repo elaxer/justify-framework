@@ -10,7 +10,7 @@ class IndexController extends Controller
 {
     public function actionIndex()
     {
-        $this->render('index', [ //Variables
+        return $this->render('index', [ //Variables
             'frameworkName' => 'Justify Framework',
             'frameworkVersion' => 'v' . Justify::getVersion(),
             'title' => 'Justify Framework v' . Justify::getVersion(), //HTML title
@@ -21,7 +21,7 @@ class IndexController extends Controller
     //preg_match in file /framework/App.php
     public function actionPageItem($matches = [])
     {
-        $this->render('page', [
+        return $this->render('page', [
             'title' => 'Page ' . $matches[1],
             'page' => $matches[1],
         ]);
@@ -30,14 +30,14 @@ class IndexController extends Controller
     public function actionAbout()
     {
         //Renders file "about.php"
-        $this->render(ACTION, [
+        return $this->render(ACTION, [
             'title' => 'About'
         ]);
     }
 
     public function actionContacts()
     {
-        $this->render('contacts', [
+        return $this->render('contacts', [
             'title' => 'Contacts'
         ]);
     }

@@ -35,11 +35,13 @@ abstract class Controller
      *
      * @param string $view name of html file. Point name of html without expansion
      * @param array $vars stores the passed arguments in an associative array. Default current action name
-     * @access public
-     * @return bool
+     * @access protected
+     * @return string
      */
-    public function render($view = ACTION, $vars = [])
+    protected function render($view = ACTION, $vars = [])
     {
+        ob_start();
+
         extract($vars);
 
         global $settings;
@@ -59,6 +61,18 @@ abstract class Controller
 
         require_once TEMPLATES_DIR . '/' . $this->template . '/' . $this->template . '.php';
 
-        return true;
+        $content = ob_get_contents();
+        ob_end_clean();
+        
+        return $content;
     }
+
+    public function __construct()
+    {
+        if (!isset($this->template)) {
+            global $settings;
+            $this->template = $settings['template'];
+        }
+    }
+
 }

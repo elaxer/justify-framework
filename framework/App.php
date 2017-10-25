@@ -8,7 +8,22 @@ namespace justify\framework;
  */
 class App
 {
-    private $uriExists, $settings;
+    /**
+     * Need to check URI for exsitsion in array
+     * in file urls.php
+     * 
+     * @access private
+     * @var bool
+     */
+    private $uriExists;
+
+    /**
+     * Stores returns settings in the file urls.php 
+     * 
+     * @access private
+     * @var array
+     */
+    private $settings;
 
     /**
      * Method launches the application
@@ -24,18 +39,14 @@ class App
                 if (preg_match("#^$pattern$#", $this->getURI(), $matches)) {
                     define('ACTIVE_APP', $app);
                     define('ACTION', $action);
-                    define('ACTION_NAME', $action);
 
                     $this->uriExists = true;
 
                     $controllerName = 'justify\\apps\\' . $app . '\\' . ucfirst($app) . 'Controller';
-                    $actionName = 'action' . ucfirst($action);
+                    $action = 'action' . ucfirst($action);
 
                     $controller = new $controllerName;
-                    if (!isset($controller->template)) {
-                        $controller->template = $this->settings['template'];
-                    }
-                    $controller->$actionName($matches);
+                    echo $controller->$action($matches);
 
                     break(2);
                 }

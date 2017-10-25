@@ -20,11 +20,13 @@ class Html
     {
         global $settings;
         global $start;
+
         $execTime = (microtime(true) - $start);
+
         define('EXEC_TIME', round($execTime, 5));
 
         if ($settings['debug'] === true):
-            ?>
+?>
             <div id="open-panel">
                 &laquo;
             </div>
@@ -35,9 +37,9 @@ class Html
                 <span id="phpversion">PHP version: <?= phpversion() ?></span>
                 <span id="time">Time: <?= EXEC_TIME ?>s</span>
                 <span id="app">App: <?= ACTIVE_APP ?></span>
-                <span id="action">Action: <?= ACTION_NAME ?></span>
+                <span id="action">Action: <?= ACTION ?></span>
             </div>
-            <?php
+<?php
         endif;
     }
 
