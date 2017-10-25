@@ -9,7 +9,13 @@ namespace justify\framework\system;
  */
 abstract class Controller
 {
-    public $template;
+    /**
+     * Stores name of renders template
+     * 
+     * @access protected
+     * @var string
+     */
+    protected $template;
 
     /**
      * Method returns current URI address
@@ -34,6 +40,11 @@ abstract class Controller
      *
      * Check HTML params in config/html.php
      *
+     * $title HTML title. Default in config/html.php
+     * $description HTML meta tag with name description. Default in config/html.php
+     * $author HTML meta tag with name author. Default in config/html.php
+     * $keywords HTML meta tag with name keywords. Default in config/html.php
+     * 
      * @param string $view name of html file. Point name of html without expansion
      * @param array $vars stores the passed arguments in an associative array. Default current action name
      * @access protected

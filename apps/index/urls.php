@@ -2,7 +2,7 @@
 return [
     '/*' => 'index',
 
-    'page/([0-9]+)' => 'pageItem',
+    'page/([1-9]\d*)' => 'pageItem',
 
     'about' => 'about',
 

@@ -34,9 +34,8 @@ class App
     {
         foreach ($this->settings['apps'] as $app) {
             $urls = require_once APPS_DIR . '/' . $app . '/urls.php';
-
             foreach ($urls as $pattern => $action) {
-                if (preg_match("#^$pattern$#", $this->getURI(), $matches)) {
+                if (preg_match("#^$pattern$#iu", $this->getURI(), $matches)) {
                     define('ACTIVE_APP', $app);
                     define('ACTION', $action);
 
@@ -102,7 +101,7 @@ class App
         if (!isset($_SERVER['REDIRECT_URL'])) {
             $_SERVER['REDIRECT_URL'] = '';
         }
-        
+
         return trim($_SERVER['REDIRECT_URL'], '/');
     }
 
