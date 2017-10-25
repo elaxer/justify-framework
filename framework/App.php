@@ -92,13 +92,18 @@ class App
 
     /**
      * Method return current URI address
+     * without GET query
      *
      * @access private
      * @return string
      */
     private function getURI()
     {
-        return trim($_SERVER['REQUEST_URI'], '/');
+        if (!isset($_SERVER['REDIRECT_URL'])) {
+            $_SERVER['REDIRECT_URL'] = '';
+        }
+        
+        return trim($_SERVER['REDIRECT_URL'], '/');
     }
 
     /**

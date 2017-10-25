@@ -13,18 +13,19 @@ abstract class Controller
 
     /**
      * Method returns current URI address
+     * without GET query
      *
      * @param bool $trim if trim true then remove unnecessary characters "/"
      * @access protected
      * @return string
      */
-    protected function getURI($trim = true)
+    protected function getURI()
     {
-        if ($trim === true) {
-            return trim($_SERVER['REQUEST_URI'], '/');
-        } else {
-            return $_SERVER['REQUEST_URI'];
+        if (!isset($_SERVER['REDIRECT_URL'])) {
+            $_SERVER['REDIRECT_URL'] = '';
         }
+        
+        return trim($_SERVER['REDIRECT_URL'], '/');
 
     }
 
@@ -63,7 +64,7 @@ abstract class Controller
 
         $content = ob_get_contents();
         ob_end_clean();
-        
+
         return $content;
     }
 
