@@ -18,6 +18,15 @@ abstract class Controller
     protected $template;
 
     /**
+     * Stores files extension
+     * 
+     * Default value in config/settings.php
+     * 
+     * @var string
+     */
+    protected $fileExtension;
+
+    /**
      * Method returns current URI address
      * without GET query
      *
@@ -32,7 +41,6 @@ abstract class Controller
         }
         
         return trim($_SERVER['REDIRECT_URL'], '/');
-
     }
 
     /**
@@ -71,7 +79,7 @@ abstract class Controller
         define('CONTENT', VIEWS_DIR . '/' . ACTIVE_APP . '/' . $view . '.php');
         define('FOOTER', TEMPLATES_DIR . '/' . $this->template . '/footer.php');
 
-        require_once TEMPLATES_DIR . '/' . $this->template . '/' . $this->template . '.php';
+        require_once TEMPLATES_DIR . '/' . $this->template . '/' . $this->template . $this->fileExtension;
 
         $content = ob_get_contents();
         ob_end_clean();
@@ -81,9 +89,12 @@ abstract class Controller
 
     public function __construct()
     {
-        if (!isset($this->template)) {
-            global $settings;
+        global $settings;
+        if (!isset($this->template)) { 
             $this->template = $settings['template'];
+        }
+        if (!isset($this->fileExtension)) {
+            $this->fileExtension = $settings['fileExtension'];
         }
     }
 

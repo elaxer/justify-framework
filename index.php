@@ -5,9 +5,6 @@
  * @version 1.1
  * @author Justify <justifydev@gmail.com>
  */
-ob_start();
-session_start();
-
 define('BASE_DIR', getcwd());
 
 require_once BASE_DIR . '/framework/composer/vendor/autoload.php';
