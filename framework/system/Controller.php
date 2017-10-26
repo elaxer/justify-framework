@@ -87,12 +87,25 @@ abstract class Controller
         return $content;
     }
 
+    /**
+     * Controller constructor
+     * 
+     * Sets default name of template if template equals false
+     * Sets default name of file extension if file extension equals false
+     * 
+     * Default value of file extension and temaplate you can fidn
+     * in config/settings.php
+     * 
+     * @access public
+     */
     public function __construct()
     {
         global $settings;
+
         if (!isset($this->template)) { 
             $this->template = $settings['template'];
         }
+
         if (!isset($this->fileExtension)) {
             $this->fileExtension = $settings['fileExtension'];
         }
