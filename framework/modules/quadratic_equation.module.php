@@ -9,20 +9,24 @@ class QE
 {
     private $a, $b, $c;
 
+    public $discriminant;
+
     public function __construct($a, $b, $c)
     {
         $this->a = $a;
         $this->b = $b;
         $this->c = $c;
+
+        $this->discriminant = $this->getDiscriminant();
     }
 
     /**
      * Method returns discriminant
      *
-     * @access public
+     * @access private
      * @return integer
      */
-    public function getDiscriminant()
+    private function getDiscriminant()
     {
         return $this->b * $this->b - 4 * $this->a * $this->c;
     }
@@ -39,16 +43,16 @@ class QE
      */
     public function getRoot()
     {
-        if ($this->getDiscriminant() > 0) {
+        if ($this->discriminant > 0) {
             $roots = [];
 
-            $roots['thirst'] = (-($this->b) + sqrt($this->getDiscriminant())) / (2 * $this->a);
-            $roots['second'] = (-($this->b) - sqrt($this->getDiscriminant())) / (2 * $this->a);
+            $roots['thirst'] = (-($this->b) + sqrt($this->discriminant)) / (2 * $this->a);
+            $roots['second'] = (-($this->b) - sqrt($this->discriminant)) / (2 * $this->a);
 
             return $roots;
         }
 
-        if ($this->getDiscriminant() === 0) {
+        if ($this->discriminant === 0) {
             return -($this->b) / (2 * $this->a);
         }
 
