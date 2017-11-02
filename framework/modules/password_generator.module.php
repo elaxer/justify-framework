@@ -35,7 +35,7 @@ function passwordGenerate($length, $specialSymbols = false, $littleChars = true,
     $password = "";
     $lenOfChars = mb_strlen($chars);
     for ($i = 0; $i < $length; $i++) {
-        $password .= $chars[rand(0, $lenOfChars - 1)];
+        $password .= $chars[mt_rand(0, $lenOfChars - 1)];
     }
 
     unset($chars);

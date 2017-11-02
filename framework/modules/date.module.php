@@ -7,45 +7,14 @@
  */
 function russianMonth($month)
 {
-	switch ($month) {
-		case 1:
-			return 'января';
-
-		case 2:
-			return 'февраля';
-
-		case 3:
-			return 'марта';
-
-		case 4:
-			return 'апреля';
-
-		case 5:
-			return 'мая';
-
-		case 6:
-			return 'июня';
-
-		case 7:
-			return 'июля';
-
-		case 8:
-			return 'августа';
-
-		case 9:
-			return 'сентября';
-
-		case 10:
-			return 'октября';
-
-		case 11:
-			return 'ноября';
-
-		case 12:
-			return 'декабря';
-
-		default:
-			return false;
-			
+	$months = [
+		1 => 'января', 2 => 'февраля', 3 => 'марта',
+		4 => 'апреля', 5 => 'мая', 6 => 'июня',
+		7 => 'июля', 8 => 'августа', 9 => 'сентября',
+		10 => 'октября', 11 => 'ноября', 12 => 'декабря'
+	];
+	if (array_key_exists($month, $months)) {
+		return $months[$month];
 	}
+	return false;
 }
