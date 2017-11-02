@@ -62,7 +62,7 @@ class BaseJustify
      */
     public static function loadModules()
     {
-        self::$loadedModules = glob(BASE_DIR . '/framework/modules/*.module.php');
+        self::$loadedModules = array_filter(glob(BASE_DIR . '/framework/modules/*.module.php'), 'is_file');
         foreach (self::$loadedModules as $module) {
             require_once $module;
         }
