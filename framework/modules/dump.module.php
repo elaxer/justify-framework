@@ -86,3 +86,13 @@ function session()
 {
 	dump($_SESSION);
 }
+
+/**
+ * Function displays $_FILES variable
+ * 
+ * @return void
+ */
+function files()
+{
+	dump($_FILES);
+}
