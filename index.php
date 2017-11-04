@@ -2,8 +2,8 @@
 /**
  * Justify Framework
  *
- * @version 1.1
  * @author Justify <justifydev@gmail.com>
+ * @version 1.1
  */
 define('BASE_DIR', getcwd());
 

@@ -1,4 +1,7 @@
 <?php
+
+namespace justify\modules;
+
 /**
  * Function converts month number to russian string in genitive case
  *

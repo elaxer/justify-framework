@@ -17,7 +17,7 @@ abstract class Model
      * @access private
      * @static
      */
-    private static $db;
+    private static $_db;
 
     /**
      * Method returns all data in table
@@ -31,7 +31,7 @@ abstract class Model
      */
     protected static function getAll($table)
     {
-        $result = self::$db->query("SELECT * FROM $table");
+        $result = self::$_db->query("SELECT * FROM $table");
         return $result->fetchAll();
     }
 
@@ -47,7 +47,7 @@ abstract class Model
      */
     protected static function count($table, $condition, $variables = [])
     {
-        $query = self::$db->prepare("SELECT COUNT(*) as `count` FROM $table WHERE $condition");
+        $query = self::$_db->prepare("SELECT COUNT(*) as `count` FROM $table WHERE $condition");
         $query->execute($variables);
         $res = $query->fetch();
         return intval($res['count']);
@@ -63,14 +63,14 @@ abstract class Model
      */
     protected static function countTable($table)
     {
-        $query = self::$db->query("SELECT COUNT(*) as `count` FROM $table");
+        $query = self::$_db->query("SELECT COUNT(*) as `count` FROM $table");
         $result = $query->fetch();
         return intval($result['count']);
     }
 
     protected static function get($table, $condition, $variables = [])
     {
-        $result = self::$db->prepare("SELECT * FROM $table WHERE $condition");
+        $result = self::$_db->prepare("SELECT * FROM $table WHERE $condition");
         return $result->execute($variables);
     }
 
@@ -84,7 +84,7 @@ abstract class Model
      */
     protected static function exec($query)
     {
-        $result = self::$db->exec($query);
+        $result = self::$_db->exec($query);
         return $result;
     }
 
@@ -145,7 +145,7 @@ abstract class Model
      */
     protected static function version()
     {
-        $query = self::$db->query("SELECT VERSION() AS version");
+        $query = self::$_db->query("SELECT VERSION() AS version");
         $version = $query->fetch();
         return $version['version'];
     }
@@ -171,7 +171,7 @@ abstract class Model
         );
 
         if ($connection) {
-            self::$db = $connection;
+            self::$_db = $connection;
             return true;
         }
         return false;
@@ -186,7 +186,7 @@ abstract class Model
      */
     protected static function error()
     {
-        return self::$db->errorInfo();
+        return self::$_db->errorInfo();
     }
 
     /**
@@ -198,7 +198,7 @@ abstract class Model
      */
     protected static function disconnect()
     {
-        self::$db = null;
+        self::$_db = null;
     }
 
     /**

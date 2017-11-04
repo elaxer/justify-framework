@@ -30,9 +30,9 @@ class QuickExport
 
 	/**
 	 * Constructor.
-	 * The Quick Export requires a Finder.
+	 * The Quick Export requires a toolbox.
 	 *
-	 * @param Finder $finder
+	 * @param ToolBox $toolbox
 	 */
 	public function __construct( ToolBox $toolbox )
 	{
@@ -41,6 +41,22 @@ class QuickExport
 
 	/**
 	 * Exposes the result of the specified SQL query as a CSV file.
+	 * Usage:
+	 *
+	 * R::csv( 'SELECT
+	 *                 `name`,
+	 *                  population
+	 *          FROM city
+	 *          WHERE region = :region ',
+	 *          array( ':region' => 'Denmark' ),
+	 *          array( 'city', 'population' ),
+	 *          '/tmp/cities.csv'
+	 * );
+	 *
+	 * The command above will select all cities in Denmark
+	 * and create a CSV with columns 'city' and 'population' and
+	 * populate the cells under these column headers with the
+	 * names of the cities and the population numbers respectively.
 	 *
 	 * @param string  $sql      SQL query to expose result of
 	 * @param array   $bindings parameter bindings

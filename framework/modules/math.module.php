@@ -1,4 +1,7 @@
 <?php
+
+namespace justify\modules;
+
 /**
  * Field array arithmetic progression
  *

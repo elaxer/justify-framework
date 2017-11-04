@@ -24,7 +24,7 @@ class Html
         $execTime = (microtime(true) - $start);
 
         define('EXEC_TIME', round($execTime, 5));
-
+        
         if ($settings['debug'] === true):
 ?>
             <div id="open-panel">

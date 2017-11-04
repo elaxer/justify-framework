@@ -1,23 +1,23 @@
 <?php
 
-namespace justify\framework\modules;
+namespace justify\modules;
 
 /**
  * Class for procedures with quadratic equations
  */
 class QE
 {
-    private $a, $b, $c;
+    private $_a, $_b, $_c;
 
     public $discriminant;
 
     public function __construct($a, $b, $c)
     {
-        $this->a = $a;
-        $this->b = $b;
-        $this->c = $c;
+        $this->_a = $a;
+        $this->_b = $b;
+        $this->_c = $c;
 
-        $this->discriminant = $this->getDiscriminant();
+        $this->discriminant = $this->_getDiscriminant();
     }
 
     /**
@@ -26,9 +26,9 @@ class QE
      * @access private
      * @return integer
      */
-    private function getDiscriminant()
+    private function _getDiscriminant()
     {
-        return $this->b * $this->b - 4 * $this->a * $this->c;
+        return $this->_b * $this->_b - 4 * $this->_a * $this->_c;
     }
 
     /**
@@ -46,14 +46,14 @@ class QE
         if ($this->discriminant > 0) {
             $roots = [];
 
-            $roots['thirst'] = (-($this->b) + sqrt($this->discriminant)) / (2 * $this->a);
-            $roots['second'] = (-($this->b) - sqrt($this->discriminant)) / (2 * $this->a);
+            $roots['thirst'] = (-($this->_b) + sqrt($this->discriminant)) / (2 * $this->_a);
+            $roots['second'] = (-($this->_b) - sqrt($this->discriminant)) / (2 * $this->_a);
 
             return $roots;
         }
 
         if ($this->discriminant === 0) {
-            return -($this->b) / (2 * $this->a);
+            return -($this->_b) / (2 * $this->_a);
         }
 
         return false;

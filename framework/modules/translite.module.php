@@ -1,4 +1,7 @@
 <?php
+
+namespace justify\modules;
+
 /**
  * Function return translited russian string to english string
  *

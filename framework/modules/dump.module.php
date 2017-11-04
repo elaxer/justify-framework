@@ -1,4 +1,7 @@
 <?php
+
+namespace justify\modules;
+
 /**
  * Function displays variable in beautiful and understandable view
  *

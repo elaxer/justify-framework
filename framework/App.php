@@ -11,19 +11,19 @@ class App
     /**
      * Need to check URI for exsitsion in array
      * in file urls.php
-     * 
+     *
      * @access private
      * @var bool
      */
-    private $uriExists;
+    private $_uriExists;
 
     /**
-     * Stores returns settings in the file urls.php 
-     * 
+     * Stores returns settings in the file urls.php
+     *
      * @access private
      * @var array
      */
-    private $settings;
+    private $_settings;
 
     /**
      * Method launches the application
@@ -32,14 +32,14 @@ class App
      */
     public function run()
     {
-        foreach ($this->settings['apps'] as $app) {
+        foreach ($this->_settings['apps'] as $app) {
             $urls = require_once APPS_DIR . '/' . $app . '/urls.php';
             foreach ($urls as $pattern => $action) {
-                if (preg_match("#^$pattern$#iu", $this->getURI(), $matches)) {
+                if (preg_match("#^$pattern$#iu", $this->_getURI(), $matches)) {
                     define('ACTIVE_APP', $app);
                     define('ACTION', $action);
 
-                    $this->uriExists = true;
+                    $this->_uriExists = true;
 
                     $controllerName = 'justify\\apps\\' . $app . '\\' . ucfirst($app) . 'Controller';
                     $action = 'action' . ucfirst($action);
@@ -51,8 +51,8 @@ class App
                 }
             }
         }
-        if (!$this->uriExists) {
-            $this->error404();
+        if (!$this->_uriExists) {
+            $this->_error404();
         }
     }
 
@@ -65,28 +65,28 @@ class App
      */
     public function __construct($settings)
     {
-        $this->settings = $settings;
-        $this->settingsHandler();
-        $this->uriExists = false;
+        $this->_settings = $settings;
+        $this->_settingsHandler();
+        $this->_uriExists = false;
     }
 
     /**
      * The method sets the required settings for the application
      *
      * @access private
+     * @return void
      */
-    private function settingsHandler()
+    private function _settingsHandler()
     {
-        if ($this->settings['debug'] === true) {
+        if ($this->_settings['debug'] === true) {
             ini_set('display_errors', 'On');
             error_reporting(E_ALL);
         } else {
             ini_set('display_errors', 'Off');
-            ini_set('error_log', 'On');
             error_reporting(0);
 
         }
-        date_default_timezone_set($this->settings['timezone']);
+        date_default_timezone_set($this->_settings['timezone']);
     }
 
     /**
@@ -96,7 +96,7 @@ class App
      * @access private
      * @return string
      */
-    private function getURI()
+    private function _getURI()
     {
         if (!isset($_SERVER['REDIRECT_URL'])) {
             $_SERVER['REDIRECT_URL'] = '';
@@ -109,17 +109,18 @@ class App
      * Method includes 404 page if URI doesn't match with route
      *
      * @access private
+     * @return void
      */
-    private function error404()
+    private function _error404()
     {
         define('ACTION_NAME', 'Null');
         define('ACTIVE_APP', 'Null');
 
-        define('HEAD', TEMPLATES_DIR . '/' . $this->settings['template'] . '/head.php');
-        define('HEADER', TEMPLATES_DIR . '/' . $this->settings['template'] . '/header.php');
-        define('FOOTER', TEMPLATES_DIR . '/' . $this->settings['template'] . '/footer.php');
+        define('HEAD', TEMPLATES_DIR . '/' . $this->_settings['template'] . '/head.php');
+        define('HEADER', TEMPLATES_DIR . '/' . $this->_settings['template'] . '/header.php');
+        define('FOOTER', TEMPLATES_DIR . '/' . $this->_settings['template'] . '/footer.php');
 
-        require_once VIEWS_DIR . '/' . $this->settings['404page'];
+        require_once VIEWS_DIR . '/' . $this->_settings['404page'];
     }
 
 }

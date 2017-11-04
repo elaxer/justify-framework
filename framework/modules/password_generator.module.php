@@ -1,4 +1,7 @@
 <?php
+
+namespace justify\modules;
+
 /**
  * Function returns generated password
  *

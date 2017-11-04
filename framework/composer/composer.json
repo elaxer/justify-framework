@@ -1,6 +1,8 @@
 {
-  "require": {
-    "gabordemooij/redbean": "dev-master",
-    "swiftmailer/swiftmailer": "^6.0"
-  }
+    "require": {
+        "gabordemooij/redbean": "dev-master",
+        "swiftmailer/swiftmailer": "^6.0",
+        "psy/psysh": "*",
+        "phpdocumentor/phpdocumentor": "2.*"
+    }
 }
