@@ -20,25 +20,20 @@ class App
     private $_uriExists;
 
     /**
-     * Stores returns settings in the file urls.php
-     *
-     * @access private
-     * @var array
-     */
-    private $_settings;
-
-    /**
      * Method launches the application
      *
      * @access public
      */
     public function run()
     {
-        foreach ($this->_settings['apps'] as $app) {
+        foreach (Justify::$settings['apps'] as $app) {
             $urls = require_once APPS_DIR . '/' . $app . '/urls.php';
             foreach ($urls as $pattern => $action) {
                 if (preg_match("#^$pattern$#iu", $this->_getURI(), $matches)) {
                     Justify::$app = $app;
+                    Justify::$aliases = array_merge(Justify::$aliases, [
+                        'App\\' . ucfirst(Justify::$app) => 'apps/' . Justify::$app
+                    ]);
                     Justify::$action = $action;
 
                     $this->_uriExists = true;
@@ -54,7 +49,7 @@ class App
             }
         }
         if (!$this->_uriExists) {
-            $this->_error404();
+            echo $this->_error404();
         }
     }
 
@@ -67,11 +62,8 @@ class App
      */
     public function __construct($settings)
     {
-        $this->_settings = $settings;
-
-        Justify::$settings = $settings;
         Justify::$startTime = microtime(true);
-        Justify::$aliases = array_merge(Justify::$aliases, Justify::$settings['aliases']);
+        Justify::$settings = $settings;
 
         $this->_settingsHandler();
         $this->_uriExists = false;
@@ -85,7 +77,7 @@ class App
      */
     private function _settingsHandler()
     {
-        if ($this->_settings['debug'] === true) {
+        if (Justify::$settings['debug'] === true) {
             ini_set('display_errors', 'On');
             error_reporting(E_ALL);
         } else {
@@ -93,7 +85,7 @@ class App
             error_reporting(0);
 
         }
-        date_default_timezone_set($this->_settings['timezone']);
+        date_default_timezone_set(Justify::$settings['timezone']);
     }
 
     /**
@@ -120,14 +112,15 @@ class App
      */
     private function _error404()
     {
-        define('ACTION_NAME', 'Null');
-        define('ACTIVE_APP', 'Null');
+        ob_start();
 
-        define('HEAD', TEMPLATES_DIR . '/' . $this->_settings['template'] . '/head.php');
-        define('HEADER', TEMPLATES_DIR . '/' . $this->_settings['template'] . '/header.php');
-        define('FOOTER', TEMPLATES_DIR . '/' . $this->_settings['template'] . '/footer.php');
+        $content = VIEWS_DIR . '/' . Justify::$settings['404page'];
+        $title = 'Error 404';
 
-        require_once VIEWS_DIR . '/' . $this->_settings['404page'];
+        require_once TEMPLATES_DIR . '/' . Justify::$settings['template'] . '/' . Justify::$settings['template'] . '.php';
+
+        $page = ob_get_contents();
+        ob_end_clean();
+        return $page;
     }
-
 }

@@ -20,9 +20,26 @@ class Html
      */
     public static function debuggingPanel()
     {
-        Justify::$execTime = round(microtime(true) - Justify::$startTime, 5);
+        Justify::$execTime = microtime(true) - Justify::$startTime;
         if (Justify::$settings['debug'] === true){
-            require_once BASE_DIR . '/framework/system/templates/debuggin_panel.php';
+            ob_start();
+
+            require_once BASE_DIR . '/framework/system/templates/debug_panel.php';
+
+            $panel = ob_get_contents();
+            ob_end_clean();
+
+            return $panel;
+        }
+    }
+
+    public static function components()
+    {
+        foreach (Justify::$settings['components']['js'] as $js) {
+            echo "<script src=\"$js\"></script>\n";
+        }
+        foreach (Justify::$settings['components']['css'] as $css) {
+            echo "<link rel=\"stylesheet\" href=\"$css\">\n";
         }
     }
 

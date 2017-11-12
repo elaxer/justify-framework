@@ -3,6 +3,11 @@
 class Justify
 {
     /**
+     * Count of characters after comma in $execTime
+     */
+    const EXEC_TIME_PRECISION = 5;
+
+    /**
      * Property stores array of settings in file config/settings.php
      *
      * @var array
@@ -11,6 +16,13 @@ class Justify
      */
     public static $settings;
 
+    /**
+     * Stores aliases of namespaces
+     *
+     * @access public
+     * @static
+     * @var array
+     */
     public static $aliases = [
         'Justify\Modules' => 'framework/modules',
         'Justify\System' => 'framework/system',
@@ -61,7 +73,13 @@ class Justify
         $namespace = implode('\\', $segments);
 
         if (array_key_exists($namespace, Justify::$aliases)) {
-            $path = BASE_DIR . DIRECTORY_SEPARATOR . Justify::$aliases[$namespace] . DIRECTORY_SEPARATOR . $class . '.php';
+            $path = BASE_DIR
+                . DIRECTORY_SEPARATOR
+                . Justify::$aliases[$namespace]
+                . DIRECTORY_SEPARATOR
+                . $class
+                . '.php';
+
             require_once $path;
         }
     }

@@ -30,7 +30,6 @@ class Controller
      * Method returns current URI address
      * without GET query
      *
-     * @param bool $trim if trim true then remove unnecessary characters "/"
      * @access protected
      * @return string
      */
@@ -47,11 +46,6 @@ class Controller
      * Method renders the html file
      *
      * Check HTML params in config/html.php
-     *
-     * $title HTML title. Default in config/html.php
-     * $description HTML meta tag with name description. Default in config/html.php
-     * $author HTML meta tag with name author. Default in config/html.php
-     * $keywords HTML meta tag with name keywords. Default in config/html.php
      * 
      * @param string $view name of html file. Point name of html without expansion
      * @param array $vars stores the passed arguments in an associative array. Default current action name
@@ -64,7 +58,7 @@ class Controller
 
         extract($vars);
 
-        $content = VIEWS_DIR . '/' . Justify::$app . '/' . $view . '.php';
+        $content = VIEWS_DIR . '/' . Justify::$app . '/' . $view . $this->fileExtension;
 
         require_once TEMPLATES_DIR . '/' . $this->template . '/' . $this->template . $this->fileExtension;
 
@@ -80,7 +74,7 @@ class Controller
      * Sets default name of template if template equals false
      * Sets default name of file extension if file extension equals false
      * 
-     * Default value of file extension and temaplate you can fidn
+     * Default value of file extension and template you can find
      * in config/settings.php
      * 
      * @access public

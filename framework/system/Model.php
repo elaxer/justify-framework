@@ -25,10 +25,10 @@ abstract class Model
      *
      * @param string $table
      * @static
-     * @access protected
+     * @access public
      * @return array
      */
-    protected static function getAll($table)
+    public static function getAll($table)
     {
         $result = self::$_db->query("SELECT * FROM $table");
         return $result->fetchAll();
@@ -41,10 +41,10 @@ abstract class Model
      * @param string $condition condition of query
      * @param array $variables array of variables in query
      * @static
-     * @access protected
+     * @access public
      * @return integer
      */
-    protected static function count($table, $condition, $variables = [])
+    public static function count($table, $condition, $variables = [])
     {
         $query = self::$_db->prepare("SELECT COUNT(*) as `count` FROM $table WHERE $condition");
         $query->execute($variables);
@@ -57,17 +57,17 @@ abstract class Model
      *
      * @param string $table table name
      * @static
-     * @access protected
+     * @access public
      * @return integer
      */
-    protected static function countTable($table)
+    public static function countTable($table)
     {
         $query = self::$_db->query("SELECT COUNT(*) as `count` FROM $table");
         $result = $query->fetch();
         return intval($result['count']);
     }
 
-    protected static function get($table, $condition, $variables = [])
+    public static function get($table, $condition, $variables = [])
     {
         $result = self::$_db->prepare("SELECT * FROM $table WHERE $condition");
         return $result->execute($variables);
@@ -77,11 +77,11 @@ abstract class Model
      * Method execs your query
      *
      * @param string $query
-     * @access protected
+     * @access public
      * @static
      * @return bool
      */
-    protected static function exec($query)
+    public static function exec($query)
     {
         $result = self::$_db->exec($query);
         return $result;
@@ -94,10 +94,10 @@ abstract class Model
      * Be careful when using this method!
      *
      * @static
-     * @access protected
+     * @access public
      * @return void
      */
-    protected static function dropDB()
+    public static function dropDB()
     {
         self::exec("DROP DATABASE " . Justify::$settings['db']['name']);
     }
@@ -109,11 +109,11 @@ abstract class Model
      * Be careful when using this method!
      *
      * @static
-     * @access protected
+     * @access public
      * @param string $table
      * @return void
      */
-    protected static function dropTable($table)
+    public static function dropTable($table)
     {
         self::exec("DROP TABLE $table");
     }
@@ -125,11 +125,11 @@ abstract class Model
      * Be careful when using this method!
      *
      * @static
-     * @access protected
+     * @access public
      * @param string $table
      * @return void
      */
-    protected static function clearTable($table)
+    public static function clearTable($table)
     {
         self::exec("TRUNCATE TABLE $table");
     }
@@ -137,11 +137,11 @@ abstract class Model
     /**
      * Method returns DSM version
      *
-     * @access protected
+     * @access public
      * @static
      * @return string
      */
-    protected static function version()
+    public static function version()
     {
         $query = self::$_db->query("SELECT VERSION() AS version");
         $version = $query->fetch();
@@ -155,10 +155,10 @@ abstract class Model
      * Don't forget to disconnect with DB using disconnect() method
      *
      * @static
-     * @access protected
+     * @access public
      * @return bool
      */
-    protected static function connect()
+    public static function connect()
     {
         $settings = Justify::$settings;
 
@@ -178,11 +178,11 @@ abstract class Model
     /**
      * Method returns errors status
      *
-     * @access protected
+     * @access public
      * @static
      * @return string
      */
-    protected static function error()
+    public static function error()
     {
         return self::$_db->errorInfo();
     }
@@ -190,11 +190,11 @@ abstract class Model
     /**
      * Method disconnects DB
      *
-     * @access protected
+     * @access public
      * @static
      * @return void
      */
-    protected static function disconnect()
+    public static function disconnect()
     {
         self::$_db = null;
     }
@@ -205,12 +205,12 @@ abstract class Model
      * Returns variable safe
      * Use this method when you work with data
      *
-     * @access protected
+     * @access public
      * @static
      * @param mixed $var variable to encode
      * @return string
      */
-    protected static function encode($var)
+    public static function encode($var)
     {
         return htmlspecialchars(trim($var));
     }
@@ -222,12 +222,12 @@ abstract class Model
      * Decoded variable is unsafe
      * Don't use this method when you upload data in data base
      *
-     * @access protected
+     * @access public
      * @static
      * @param mixed $var variable to decode
      * @return string
      */
-    protected static function decode($var)
+    public static function decode($var)
     {
         return htmlspecialchars_decode($var);
     }

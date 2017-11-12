@@ -43,8 +43,6 @@ class IndexController extends Controller
     /**
      * Renders file views/index/about.php
      * 
-     * Constant ACTION stores current action name
-     * 
      * @return string
      */
     public function actionAbout()
