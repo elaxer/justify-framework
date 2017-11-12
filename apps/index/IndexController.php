@@ -49,7 +49,7 @@ class IndexController extends Controller
      */
     public function actionAbout()
     {
-        return $this->render(ACTION, [
+        return $this->render('about', [
             'title' => 'About'
         ]);
     }

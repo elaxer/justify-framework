@@ -38,15 +38,15 @@ class App
             $urls = require_once APPS_DIR . '/' . $app . '/urls.php';
             foreach ($urls as $pattern => $action) {
                 if (preg_match("#^$pattern$#iu", $this->_getURI(), $matches)) {
-                    define('ACTIVE_APP', $app);
-                    define('ACTION', $action);
+                    Justify::$app = $app;
+                    Justify::$action = $action;
 
                     $this->_uriExists = true;
 
                     $controllerName = 'App\\' . ucfirst($app) . '\\' . ucfirst($app) . 'Controller';
                     $action = 'action' . ucfirst($action);
 
-                    $controller = new $controllerName;
+                    $controller = new $controllerName();
                     echo $controller->$action($matches);
 
                     break(2);
@@ -68,7 +68,10 @@ class App
     public function __construct($settings)
     {
         $this->_settings = $settings;
+
         Justify::$settings = $settings;
+        Justify::$startTime = microtime(true);
+        Justify::$aliases = array_merge(Justify::$aliases, Justify::$settings['aliases']);
 
         $this->_settingsHandler();
         $this->_uriExists = false;

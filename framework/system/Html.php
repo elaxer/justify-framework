@@ -20,28 +20,10 @@ class Html
      */
     public static function debuggingPanel()
     {
-        global $start;
-
-        $execTime = (microtime(true) - $start);
-
-        define('EXEC_TIME', round($execTime, 5));
-        
-        if (Justify::$settings['debug'] === true):
-?>
-            <div id="open-panel">
-                &laquo;
-            </div>
-            <div id="close-panel">
-                &raquo;
-            </div>
-            <div id="panel">
-                <span id="phpversion">PHP version: <?= phpversion() ?></span>
-                <span id="time">Time: <?= EXEC_TIME ?>s</span>
-                <span id="app">App: <?= ACTIVE_APP ?></span>
-                <span id="action">Action: <?= ACTION ?></span>
-            </div>
-<?php
-        endif;
+        Justify::$execTime = round(microtime(true) - Justify::$startTime, 5);
+        if (Justify::$settings['debug'] === true){
+            require_once BASE_DIR . '/framework/system/templates/debuggin_panel.php';
+        }
     }
 
     /**

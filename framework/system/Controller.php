@@ -6,10 +6,8 @@ use Justify;
 
 /**
  * System abstract class Controller consists of methods for work with app controller
- *
- * @abstract
  */
-abstract class Controller
+class Controller
 {
     /**
      * Stores name of renders template
@@ -60,31 +58,20 @@ abstract class Controller
      * @access protected
      * @return string
      */
-    protected function render($view = ACTION, $vars = [])
+    protected function render($view, $vars = [])
     {
         ob_start();
 
         extract($vars);
 
-        $charset = Justify::$settings['html']['charset'];
-        $lang = Justify::$settings['html']['lang'];
-
-        if (!isset($title)) $title = Justify::$settings['html']['title'];
-        if (!isset($description)) $description = Justify::$settings['html']['description'];
-        if (!isset($author)) $author = Justify::$settings['html']['author'];
-        if (!isset($keywords)) $keywords = Justify::$settings['html']['keywords'];
-
-        define('HEAD', TEMPLATES_DIR . '/' . $this->template . '/head.php');
-        define('HEADER', TEMPLATES_DIR . '/' . $this->template . '/header.php');
-        define('CONTENT', VIEWS_DIR . '/' . ACTIVE_APP . '/' . $view . '.php');
-        define('FOOTER', TEMPLATES_DIR . '/' . $this->template . '/footer.php');
+        $content = VIEWS_DIR . '/' . Justify::$app . '/' . $view . '.php';
 
         require_once TEMPLATES_DIR . '/' . $this->template . '/' . $this->template . $this->fileExtension;
 
-        $content = ob_get_contents();
+        $page = ob_get_contents();
         ob_end_clean();
 
-        return $content;
+        return $page;
     }
 
     /**

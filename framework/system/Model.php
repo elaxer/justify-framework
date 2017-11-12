@@ -7,8 +7,6 @@ use Justify;
 
 /**
  * System abstract class Model consists of simple methods for work with DB
- *
- * @abstract
  */
 abstract class Model
 {

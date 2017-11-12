@@ -14,4 +14,6 @@ define('TEMPLATES_DIR', VIEWS_DIR . '/templates');
 require_once BASE_DIR . '/framework/justify/Justify.php';
 $settings = require_once CONFIG_DIR . '/settings.php';
 
+spl_autoload_register(['Justify', 'autoload']);
+
 (new Justify\Core\App($settings))->run();
