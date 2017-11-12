@@ -1,4 +1,4 @@
-<?php use justify\framework\system\Html; ?>
+<?php use Justify\System\Html; ?>
 <div class="container">
 
     <div class="starter-template" style="text-align: center;">

@@ -1,8 +1,9 @@
 <?php
 
-namespace justify\framework\system;
+namespace Justify\System;
 
 use PDO;
+use Justify;
 
 /**
  * System abstract class Model consists of simple methods for work with DB
@@ -100,8 +101,7 @@ abstract class Model
      */
     protected static function dropDB()
     {
-        global $settings;
-        self::exec("DROP DATABASE {$settings['db']['name']}");
+        self::exec("DROP DATABASE " . Justify::$settings['db']['name']);
     }
 
     /**
@@ -162,7 +162,7 @@ abstract class Model
      */
     protected static function connect()
     {
-        global $settings;
+        $settings = Justify::$settings;
 
         $connection = new PDO(
             "mysql:host={$settings['db']['host']};dbname={$settings['db']['name']};charset={$settings['db']['charset']}",

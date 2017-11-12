@@ -11,6 +11,14 @@ class BaseJustify
      */
     public static $loadedModules;
 
+    /**
+     * Property stores array of settings in file config/settings.php
+     *
+     * @var array
+     * @access public
+     * @static
+     */
+    public static $settings;
 
     /**
      * Autoload method
@@ -19,11 +27,16 @@ class BaseJustify
      */
     public static function autoload($className)
     {
-        $className = preg_replace('/justify\\\\/', '', $className);
-        $path = BASE_DIR . '/' . $className . '.php';
-        $path = str_replace('\\', '/', $path);
+        global $settings;
 
-        require_once $path;
+        $segments = explode('\\', $className);
+        $class = array_pop($segments);
+        $namespace = implode('\\', $segments);
+
+        if (array_key_exists($namespace, $settings['aliases'])) {
+            $path = BASE_DIR . DIRECTORY_SEPARATOR . $settings['aliases'][$namespace] . DIRECTORY_SEPARATOR . $class . '.php';
+            require_once $path;
+        }
     }
 
     /**
@@ -37,35 +50,4 @@ class BaseJustify
     {
         return '1.1';
     }
-
-    /**
-     * Method define necessary constants
-     *
-     * @access public
-     * @static
-     * @return void
-     */
-    public static function defineConstants()
-    {
-        define('CONFIG_DIR', BASE_DIR . '/config');
-        define('APPS_DIR', BASE_DIR . '/apps');
-        define('VIEWS_DIR', BASE_DIR . '/views');
-        define('TEMPLATES_DIR', VIEWS_DIR . '/templates');
-    }
-
-    /**
-     * Method load necessary modules for framework
-     *
-     * @access public
-     * @static
-     * @return void
-     */
-    public static function loadModules()
-    {
-        self::$loadedModules = array_filter(glob(BASE_DIR . '/framework/modules/*.module.php'), 'is_file');
-        foreach (self::$loadedModules as $module) {
-            require_once $module;
-        }
-    }
-
 }

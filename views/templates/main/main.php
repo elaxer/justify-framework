@@ -1,4 +1,7 @@
-<?php use justify\framework\system\Html; ?>
+<?php
+/* @var $lang */
+use Justify\System\Html;
+?>
 <!DOCTYPE html>
 <html lang="<?= $lang ?>">
 <!-- Requires head -->

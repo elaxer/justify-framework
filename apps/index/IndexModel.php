@@ -1,6 +1,6 @@
 <?php
 
-namespace justify\apps\index;
+namespace apps\index;
 
 use justify\framework\system\Model;
 

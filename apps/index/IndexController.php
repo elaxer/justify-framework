@@ -1,10 +1,10 @@
 <?php
 
-namespace justify\apps\index;
+namespace App\Index;
 
 use Justify;
-use justify\framework\system\Controller;
-use justify\apps\index\IndexModel;
+use Justify\System\Controller;
+use Justify\Modules\Dump;
 
 class IndexController extends Controller
 {
@@ -25,14 +25,14 @@ class IndexController extends Controller
     /**
      * Renders file views/index/page.php
      * 
-     * @param array $matches Unneccecary. Stores matches which returns function
+     * @param array $matches is optional. Stores matches which returns function
      * preg_match in file framework/App.php
      * @access public
      * @return string
      */
     public function actionPageItem($matches = [])
     {
-        //dump($matches)
+        //Dump::dump($matches)
 
         return $this->render('page', [
             'title' => 'Page ' . $matches[1],

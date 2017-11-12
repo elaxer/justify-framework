@@ -1,6 +1,8 @@
 <?php
 
-namespace justify\framework\system;
+namespace Justify\System;
+
+use Justify;
 
 /**
  * System abstract class Controller consists of methods for work with app controller
@@ -64,15 +66,13 @@ abstract class Controller
 
         extract($vars);
 
-        global $settings;
+        $charset = Justify::$settings['html']['charset'];
+        $lang = Justify::$settings['html']['lang'];
 
-        $charset = $settings['html']['charset'];
-        $lang = $settings['html']['lang'];
-
-        if (!isset($title)) $title = $settings['html']['title'];
-        if (!isset($description)) $description = $settings['html']['description'];
-        if (!isset($author)) $author = $settings['html']['author'];
-        if (!isset($keywords)) $keywords = $settings['html']['keywords'];
+        if (!isset($title)) $title = Justify::$settings['html']['title'];
+        if (!isset($description)) $description = Justify::$settings['html']['description'];
+        if (!isset($author)) $author = Justify::$settings['html']['author'];
+        if (!isset($keywords)) $keywords = Justify::$settings['html']['keywords'];
 
         define('HEAD', TEMPLATES_DIR . '/' . $this->template . '/head.php');
         define('HEADER', TEMPLATES_DIR . '/' . $this->template . '/header.php');
@@ -100,14 +100,12 @@ abstract class Controller
      */
     public function __construct()
     {
-        global $settings;
-
         if (!isset($this->template)) { 
-            $this->template = $settings['template'];
+            $this->template = Justify::$settings['template'];
         }
 
         if (!isset($this->fileExtension)) {
-            $this->fileExtension = $settings['fileExtension'];
+            $this->fileExtension = Justify::$settings['fileExtension'];
         }
     }
 

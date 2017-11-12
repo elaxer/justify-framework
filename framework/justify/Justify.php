@@ -7,7 +7,4 @@ class Justify extends BaseJustify
 {
 }
 
-Justify::defineConstants();
-Justify::loadModules();
-
 spl_autoload_register(['Justify', 'autoload']);

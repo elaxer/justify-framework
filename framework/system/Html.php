@@ -1,6 +1,8 @@
 <?php
 
-namespace justify\framework\system;
+namespace Justify\System;
+
+use Justify;
 
 /**
  * Class stores necessary methods for HTML files
@@ -18,14 +20,13 @@ class Html
      */
     public static function debuggingPanel()
     {
-        global $settings;
         global $start;
 
         $execTime = (microtime(true) - $start);
 
         define('EXEC_TIME', round($execTime, 5));
         
-        if ($settings['debug'] === true):
+        if (Justify::$settings['debug'] === true):
 ?>
             <div id="open-panel">
                 &laquo;

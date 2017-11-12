@@ -1,6 +1,8 @@
 <?php
 
-namespace justify\framework;
+namespace Justify\Core;
+
+use Justify;
 
 /**
  * The Core of framework
@@ -9,7 +11,7 @@ namespace justify\framework;
 class App
 {
     /**
-     * Need to check URI for exsitsion in array
+     * Need to check URI for existence in array
      * in file urls.php
      *
      * @access private
@@ -41,7 +43,7 @@ class App
 
                     $this->_uriExists = true;
 
-                    $controllerName = 'justify\\apps\\' . $app . '\\' . ucfirst($app) . 'Controller';
+                    $controllerName = 'App\\' . ucfirst($app) . '\\' . ucfirst($app) . 'Controller';
                     $action = 'action' . ucfirst($action);
 
                     $controller = new $controllerName;
@@ -66,6 +68,8 @@ class App
     public function __construct($settings)
     {
         $this->_settings = $settings;
+        Justify::$settings = $settings;
+
         $this->_settingsHandler();
         $this->_uriExists = false;
     }

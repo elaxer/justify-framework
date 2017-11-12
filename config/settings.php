@@ -6,6 +6,12 @@ $html = require_once CONFIG_DIR . '/html.php';
 
 //Main array with all settings
 $settings = [
+    'aliases' => [
+        'Justify\Modules' => 'framework/modules',
+        'Justify\System' => 'framework/system',
+        'Justify\Core' => 'framework',
+        'App\Index' => 'apps/index',
+    ],
     'timezone' => 'America/Los_Angeles', //Choose your timezone, more information you can find in http://php.net/manual/en/timezones.php
     'debug' => true, //Debug mode; Recommend to set false value in production
     'template' => 'main', //Base template for HTML page
