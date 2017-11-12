@@ -1,8 +1,8 @@
 <?php
 
-namespace apps\index;
+namespace App\Index;
 
-use justify\framework\system\Model;
+use Justify\System\Model;
 
 class IndexModel extends Model
 {
