@@ -1,0 +1,96 @@
+/*Config*/
+* {
+    outline: none;
+}
+
+/*Debugging panel*/
+#open-panel {
+    cursor: pointer;
+    height: 42px;
+    color: gray;
+    display: block;
+    position: fixed;
+    font-size: 22px;
+    background: #fff;
+    right: 0;
+    bottom: 0;
+    padding: 4px 16px 4px 16px;
+    border: 1px solid silver;
+    z-index: 10;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+#close-panel {
+    cursor: pointer;
+    height: 42px;
+    color: gray;
+    display: none;
+    position: fixed;
+    font-size: 22px;
+    background: #fff;
+    right: 0;
+    bottom: 0;
+    padding: 4px 16px 4px 16px;
+    border: 1px solid silver;
+    z-index: 10;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+#panel {
+    height: 42px;
+    width: 100%;
+    display: none;
+    position: fixed;
+    font-size: 1em;
+    background: #fff;
+    bottom: 0;
+    padding-top: 12px;
+    padding-left: 20px;
+    padding-right: 16px;
+    border: 1px solid silver;
+}
+
+#phpversion {
+    margin-right: 7%;
+}
+
+#time {
+    margin-right: 7%;
+}
+
+#app {
+    margin-right: 7%;
+}
+
+/* ^^^ Debugging panel ^^^ */
+
+/*Admin panel*/
+#admin-form {
+    text-align: center;
+}
+
+#admin-form > h2 {
+    text-align: center;
+}
+
+#admin-form input[type = "text"] {
+    border: 1px solid silver;
+    padding: 7px;
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    border-radius: 6px;
+}
+
+#admin-form input[type = "password"] {
+    border: 1px solid silver;
+    padding: 7px;
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    border-radius: 6px;
+}

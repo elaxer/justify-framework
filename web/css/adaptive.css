@@ -1,0 +1,13 @@
+@media (max-width: 800px) {
+    #panel {
+        padding-top: 14px;
+        font-size: 0.7em;
+    }
+}
+
+@media (max-width: 570px) {
+    #panel {
+        padding-top: 18px;
+        font-size: 0.5em;
+    }
+}
