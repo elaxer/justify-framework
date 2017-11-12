@@ -15,6 +15,8 @@ class IndexController extends Controller
      */
     public function actionIndex()
     {
+        $model = new IndexModel();
+        $model->version();
         return $this->render('index', [ //Variables
             'frameworkName' => 'Justify Framework',
             'frameworkVersion' => 'v' . Justify::getVersion(),

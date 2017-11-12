@@ -8,15 +8,15 @@ use Justify;
 /**
  * System abstract class Model consists of simple methods for work with DB
  */
-abstract class Model
+class Model
 {
     /**
      * This property stores db connect
      *
      * @access private
-     * @static
+     *
      */
-    private static $_db;
+    private $_db;
 
     /**
      * Method returns all data in table
@@ -24,13 +24,13 @@ abstract class Model
      * Method can return big array which can load server work
      *
      * @param string $table
-     * @static
+     *
      * @access public
      * @return array
      */
-    public static function getAll($table)
+    public function getAll($table)
     {
-        $result = self::$_db->query("SELECT * FROM $table");
+        $result = $this->_db->query("SELECT * FROM $table");
         return $result->fetchAll();
     }
 
@@ -40,13 +40,13 @@ abstract class Model
      * @param string $table table name
      * @param string $condition condition of query
      * @param array $variables array of variables in query
-     * @static
+     *
      * @access public
      * @return integer
      */
-    public static function count($table, $condition, $variables = [])
+    public function count($table, $condition, $variables = [])
     {
-        $query = self::$_db->prepare("SELECT COUNT(*) as `count` FROM $table WHERE $condition");
+        $query = $this->_db->prepare("SELECT COUNT(*) as `count` FROM $table WHERE $condition");
         $query->execute($variables);
         $res = $query->fetch();
         return intval($res['count']);
@@ -56,20 +56,20 @@ abstract class Model
      * Method returns number of records all table
      *
      * @param string $table table name
-     * @static
+     *
      * @access public
      * @return integer
      */
-    public static function countTable($table)
+    public function countTable($table)
     {
-        $query = self::$_db->query("SELECT COUNT(*) as `count` FROM $table");
+        $query = $this->_db->query("SELECT COUNT(*) as `count` FROM $table");
         $result = $query->fetch();
         return intval($result['count']);
     }
 
-    public static function get($table, $condition, $variables = [])
+    public function get($table, $condition, $variables = [])
     {
-        $result = self::$_db->prepare("SELECT * FROM $table WHERE $condition");
+        $result = $this->_db->prepare("SELECT * FROM $table WHERE $condition");
         return $result->execute($variables);
     }
 
@@ -78,12 +78,12 @@ abstract class Model
      *
      * @param string $query
      * @access public
-     * @static
+     *
      * @return bool
      */
-    public static function exec($query)
+    public function exec($query)
     {
-        $result = self::$_db->exec($query);
+        $result = $this->_db->exec($query);
         return $result;
     }
 
@@ -93,13 +93,13 @@ abstract class Model
      * WARNING!
      * Be careful when using this method!
      *
-     * @static
+     *
      * @access public
      * @return void
      */
-    public static function dropDB()
+    public function dropDB()
     {
-        self::exec("DROP DATABASE " . Justify::$settings['db']['name']);
+        $this->exec("DROP DATABASE " . Justify::$settings['db']['name']);
     }
 
     /**
@@ -108,14 +108,14 @@ abstract class Model
      * WARNING!
      * Be careful when using this method!
      *
-     * @static
+     *
      * @access public
      * @param string $table
      * @return void
      */
-    public static function dropTable($table)
+    public function dropTable($table)
     {
-        self::exec("DROP TABLE $table");
+        $this->exec("DROP TABLE $table");
     }
 
     /**
@@ -124,26 +124,26 @@ abstract class Model
      * WARNING!
      * Be careful when using this method!
      *
-     * @static
+     *
      * @access public
      * @param string $table
      * @return void
      */
-    public static function clearTable($table)
+    public function clearTable($table)
     {
-        self::exec("TRUNCATE TABLE $table");
+        $this->exec("TRUNCATE TABLE $table");
     }
 
     /**
      * Method returns DSM version
      *
      * @access public
-     * @static
+     *
      * @return string
      */
-    public static function version()
+    public function version()
     {
-        $query = self::$_db->query("SELECT VERSION() AS version");
+        $query = $this->_db->query("SELECT VERSION() AS version");
         $version = $query->fetch();
         return $version['version'];
     }
@@ -154,49 +154,37 @@ abstract class Model
      * Choose DB properties in config/db.php
      * Don't forget to disconnect with DB using disconnect() method
      *
-     * @static
+     *
      * @access public
-     * @return bool
      */
-    public static function connect()
+    public function __construct()
     {
         $settings = Justify::$settings;
-
         $connection = new PDO(
             "mysql:host={$settings['db']['host']};dbname={$settings['db']['name']};charset={$settings['db']['charset']}",
             $settings['db']['user'],
             $settings['db']['password']
         );
-
         if ($connection) {
-            self::$_db = $connection;
-            return true;
+            $this->_db = $connection;
         }
-        return false;
+    }
+
+    public function __destruct()
+    {
+        $this->_db = null;
     }
 
     /**
      * Method returns errors status
      *
      * @access public
-     * @static
+     *
      * @return string
      */
-    public static function error()
+    public function error()
     {
-        return self::$_db->errorInfo();
-    }
-
-    /**
-     * Method disconnects DB
-     *
-     * @access public
-     * @static
-     * @return void
-     */
-    public static function disconnect()
-    {
-        self::$_db = null;
+        return $this->_db->errorInfo();
     }
 
     /**
@@ -206,11 +194,11 @@ abstract class Model
      * Use this method when you work with data
      *
      * @access public
-     * @static
+     *
      * @param mixed $var variable to encode
      * @return string
      */
-    public static function encode($var)
+    public function encode($var)
     {
         return htmlspecialchars(trim($var));
     }
@@ -223,11 +211,11 @@ abstract class Model
      * Don't use this method when you upload data in data base
      *
      * @access public
-     * @static
+     *
      * @param mixed $var variable to decode
      * @return string
      */
-    public static function decode($var)
+    public function decode($var)
     {
         return htmlspecialchars_decode($var);
     }
