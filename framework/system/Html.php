@@ -22,7 +22,7 @@ class Html
     {
         Justify::$execTime = microtime(true) - Justify::$startTime;
 
-        if (Justify::$settings['debug']){
+        if (Justify::$settings['debug']) {
             ob_start();
 
             require_once BASE_DIR . '/framework/system/templates/debug_panel.php';

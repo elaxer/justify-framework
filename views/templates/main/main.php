@@ -15,19 +15,21 @@ use Justify\System\Html;
 
 <body>
 
-<div id="content">
+<div class="wrapper">
 
-    <div class="navbar navbar-inverse" style="border-radius: 0">
-        <div class="container">
-            <div class="navbar-header">
-                <a href="/" class="navbar-brand">Juftify</a>
+    <div class="content">
+        <div class="navbar navbar-inverse" style="border-radius: 0">
+            <div class="container">
+                <div class="navbar-header">
+                    <a href="/" class="navbar-brand">Juftify</a>
+                </div>
             </div>
         </div>
-    </div>
 
-    <div class="container">
-        <!-- Requires content -->
-        <?php require_once $content ?>
+        <div class="container">
+            <!-- Requires content -->
+            <?php require_once $content ?>
+        </div>
     </div>
 
     <footer>
