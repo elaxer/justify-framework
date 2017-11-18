@@ -60,7 +60,7 @@ class Controller
 
         $content = VIEWS_DIR . '/' . Justify::$app . '/' . $view . $this->fileExtension;
 
-        require_once TEMPLATES_DIR . '/' . $this->template . '/' . $this->template . $this->fileExtension;
+        require_once TEMPLATES_DIR . '/' . $this->template . '/' . $this->template . '.php';
 
         $page = ob_get_contents();
         ob_end_clean();

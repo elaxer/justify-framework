@@ -41,24 +41,28 @@ class IndexController extends Controller
     }
 
     /**
-     * Renders file views/index/about.php
+     * Renders file views/index/about.html
      * 
      * @return string
      */
     public function actionAbout()
     {
+        $this->fileExtension = '.html';
+
         return $this->render('about', [
             'title' => 'About'
         ]);
     }
 
     /**
-     * Renders file views/index/contacts
+     * Renders file views/index/contacts.html
      * 
      * @return string
      */
     public function actionContacts()
     {
+        $this->fileExtension = '.html';
+
         return $this->render('contacts', [
             'title' => 'Contacts'
         ]);
