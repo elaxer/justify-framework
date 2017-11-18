@@ -115,6 +115,9 @@ class App
      */
     private function _error404()
     {
+        Justify::$app = 'No';
+        Justify::$action = 'No';
+
         ob_start();
 
         $content = VIEWS_DIR . '/' . Justify::$settings['404page'];
