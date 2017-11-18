@@ -1,3 +1,6 @@
+<?php
+/* @var $page */
+?>
 <div class="col-md-6">
     <h2>Page number <?= $page ?></h2>
     <p>
@@ -10,7 +13,7 @@
     <?php if ($page <= 1): ?>
         <a href="/page/<?= $page + 1 ?>">Next page</a>
     <?php else: ?>
-        <a href="/page/<?= $page - 1 ?>" style="margin-right: 7px;">Previous page </a> 
+        <a href="/page/<?= $page - 1 ?>" class="prev_page">Previous page </a>
         <a href="/page/<?= $page + 1 ?>">Next page</a>
     <?php endif; ?>
 </div>

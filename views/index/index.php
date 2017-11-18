@@ -1,7 +1,11 @@
-<?php use Justify\System\Html; ?>
+<?php
+/* @var $frameworkName */
+/* @var $frameworkVersion */
+use Justify\System\Html;
+?>
 <div class="container">
 
-    <div class="starter-template" style="text-align: center;">
+    <div class="starter-template">
         <h1>Congratulations!</h1>
         <p class="lead">
             Welcome to <?= Html::encode($frameworkName) ?> <?= Html::encode($frameworkVersion) ?>!

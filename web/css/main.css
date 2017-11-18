@@ -25,6 +25,18 @@ footer {
     height: 80px;
 }
 
+.starter-template {
+    text-align: center;
+}
+
+.prev_page {
+    margin-right: 7px;
+}
+
+.navbar, .navbar-inverse {
+    border-radius: 0;
+}
+
 /*Debugging panel*/
 #open-panel {
     cursor: pointer;
@@ -89,5 +101,4 @@ footer {
 #app {
     margin-right: 7%;
 }
-
 /* ^^^ Debugging panel ^^^ */

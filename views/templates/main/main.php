@@ -18,10 +18,10 @@ use Justify\System\Html;
 <div class="wrapper">
 
     <div class="content">
-        <div class="navbar navbar-inverse" style="border-radius: 0">
+        <div class="navbar navbar-inverse">
             <div class="container">
                 <div class="navbar-header">
-                    <a href="/" class="navbar-brand">Juftify</a>
+                    <a href="<?= Justify::$settings['homeURL'] ?>" class="navbar-brand">Justify</a>
                 </div>
             </div>
         </div>

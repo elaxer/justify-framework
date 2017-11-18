@@ -16,7 +16,7 @@ class Html
      *
      * @access public
      * @static
-     * @return void
+     * @return string|bool
      */
     public static function debuggingPanel()
     {
@@ -32,6 +32,8 @@ class Html
 
             return $panel;
         }
+
+        return false;
     }
 
     public static function components()
