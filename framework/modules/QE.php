@@ -7,10 +7,29 @@ namespace Justify\Modules;
  */
 class QE
 {
+    /**
+     * Coefficients of quadratic equation
+     * 
+     * @var int|float
+     */
     private $_a, $_b, $_c;
 
+    /**
+     * Discriminant of quadratic equation
+     * 
+     * @var int|float
+     */
     public $discriminant;
 
+    /**
+     * Constructor of class
+     * 
+     * Initialize coefficients and discriminant
+     * 
+     * @param int|float $a
+     * @param int|float $b
+     * @param int|float $c
+     */
     public function __construct($a, $b, $c)
     {
         $this->_a = $a;
@@ -41,7 +60,7 @@ class QE
      * @access public
      * @return array|integer|bool
      */
-    public function getRoot()
+    public function getRoots()
     {
         if ($this->discriminant > 0) {
             $roots = [];

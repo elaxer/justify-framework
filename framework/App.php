@@ -17,7 +17,7 @@ class App
      * @access private
      * @var bool
      */
-    private $_uriExists;
+    private $_uriExists = false;
 
     /**
      * Method launches the application
@@ -38,16 +38,20 @@ class App
 
                     $this->_uriExists = true;
 
-                    $controllerName = 'App\\' . ucfirst($app) . '\\' . ucfirst($app) . 'Controller';
+                    $controller = 'App\\' . ucfirst($app) . '\\' . ucfirst($app) . 'Controller';
                     $action = 'action' . ucfirst($action);
 
-                    $controller = new $controllerName();
-                    echo $controller->$action($matches);
+                    echo (new $controller())->$action($matches);
+
+                    if (!Justify::$execTime) {
+                        Justify::$execTime = microtime(true) - Justify::$startTime;
+                    }
 
                     break(2);
                 }
             }
         }
+
         if (!$this->_uriExists) {
             echo $this->_error404();
         }
@@ -66,7 +70,6 @@ class App
         Justify::$settings = $settings;
 
         $this->_settingsHandler();
-        $this->_uriExists = false;
     }
 
     /**
@@ -77,14 +80,14 @@ class App
      */
     private function _settingsHandler()
     {
-        if (Justify::$settings['debug'] === true) {
+        if (Justify::$settings['debug']) {
             ini_set('display_errors', 'On');
             error_reporting(E_ALL);
         } else {
             ini_set('display_errors', 'Off');
             error_reporting(0);
-
         }
+
         date_default_timezone_set(Justify::$settings['timezone']);
     }
 
@@ -121,6 +124,7 @@ class App
 
         $page = ob_get_contents();
         ob_end_clean();
+
         return $page;
     }
 }

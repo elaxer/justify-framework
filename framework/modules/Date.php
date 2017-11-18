@@ -18,9 +18,11 @@ class Date
             7 => 'июля', 8 => 'августа', 9 => 'сентября',
             10 => 'октября', 11 => 'ноября', 12 => 'декабря'
         ];
+
         if (array_key_exists($month, $months)) {
             return $months[$month];
         }
+        
         return false;
     }
 }

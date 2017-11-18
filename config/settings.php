@@ -9,19 +9,18 @@ $settings = [
     'debug' => true, //Debug mode; Recommend to set false value in production
     'template' => 'main', //Base template for HTML page
     'webPath' => '/web/', //Base URL to web components
-    'fileExtension' => '.php', //Base file extension
-    '404page' => '404/404.php', //Path to page on which the redirect will be sent on error 404
+    '404page' => '404/404.html', //Path to page on which the redirect will be sent on error 404
     'html' => [ //HTML page options
         'lang' => 'en', //HTML language
         'charset' => 'UTF-8', //HTML charset
     ],
-    'components' => [
-        'css' => [
+    'components' => [ //Components for HTML page
+        'css' => [ //Links to CSS files
             'libs/bootstrap/bootstrap.min.css',
             'css/main.css',
             'css/adaptive.css'
         ],
-        'js' => [
+        'js' => [ //Links to JS files
             'libs/jquery/jquery-3.2.1.min.js',
             'libs/bootstrap/bootstrap.min.js',
             'js/debugging_panel.js'

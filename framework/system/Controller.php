@@ -24,7 +24,7 @@ class Controller
      * 
      * @var string
      */
-    protected $fileExtension;
+    protected $fileExtension = '.php';
 
     /**
      * Method returns current URI address
@@ -72,7 +72,6 @@ class Controller
      * Controller constructor
      * 
      * Sets default name of template if template equals false
-     * Sets default name of file extension if file extension equals false
      * 
      * Default value of file extension and template you can find
      * in config/settings.php
@@ -83,10 +82,6 @@ class Controller
     {
         if (!isset($this->template)) { 
             $this->template = Justify::$settings['template'];
-        }
-
-        if (!isset($this->fileExtension)) {
-            $this->fileExtension = Justify::$settings['fileExtension'];
         }
     }
 

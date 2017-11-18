@@ -14,11 +14,12 @@ class Math
      */
     public function fillArithmeticProgression($length, $d, $start = 0)
     {
-        $array = [];
-        $array[0] = $start;
+        $array = [$start];
+        
         for ($i = 1; $i < $length; $i++) {
             $array[$i] = $array[$i - 1] + $d;
         }
+
         return $array;
     }
 
@@ -32,11 +33,12 @@ class Math
      */
     public function fillGeometricProgression($length, $q, $start = 1)
     {
-        $array = [];
-        $array[0] = $start;
+        $array = [$start];
+
         for ($i = 1; $i < $length; $i++) {
             $array[$i] = $array[$i - 1] * $q;
         }
+
         return $array;
     }
 
@@ -52,8 +54,8 @@ class Math
         if ($q > 0 && $q < 1) {
             return $b1 / (1 - $q);
         }
-        return false;
 
+        return false;
     }
 
     /**
@@ -63,18 +65,42 @@ class Math
      * @param bool $round determines be rounded average or not
      * @return int|float
      */
-    public function average($numbers, $round = false)
+    public function average($numbers)
     {
-
         $sumOfNumbers = 0;
+
         foreach ($numbers as $number) {
             $sumOfNumbers += $number;
         }
 
-        if ($round === true) {
-            return round($sumOfNumbers / count($numbers));
-        } else {
-            return $sumOfNumbers / count($numbers);
-        }
+        return $sumOfNumbers / count($numbers);
+    }
+
+    /**
+     * Checks number to even
+     * 
+     * If number even then will be return true
+     * else will be return false
+     * 
+     * @param int $number checks number
+     * @return boolean
+     */
+    public function isEven($number)
+    {
+        return $number % 2 == 0 ? true : false;
+    }
+
+    /**
+     * Checks number to odd
+     * 
+     * If number odd then will be return true
+     * else will be return false
+     * 
+     * @param int $number checks number
+     * @return boolean
+     */
+    public function isOdd($number)
+    {
+        return $number % 2 != 0 ? true : false;
     }
 }

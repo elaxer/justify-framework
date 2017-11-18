@@ -3,13 +3,16 @@
 
     <div class="starter-template" style="text-align: center;">
         <h1>Congratulations!</h1>
-        <p class="lead">Welcome to <?= Html::encode($frameworkName) ?> <?= Html::encode($frameworkVersion) ?>!</p>
+        <p class="lead">
+            Welcome to <?= Html::encode($frameworkName) ?> <?= Html::encode($frameworkVersion) ?>!
+        </p>
     </div>
 
     <div class="row">
         <div class="col-md-4">
             <h2>Page</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A beatae delectus deserunt distinctio eius
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. A beatae delectus deserunt distinctio eius
                 enim, facere fugit in inventore ipsam laborum molestiae neque non quo soluta voluptate voluptates!
                 Doloremque ducimus ipsa minima, nam sequi similique!
             </p>
@@ -17,7 +20,8 @@
         </div>
         <div class="col-md-4">
             <h2>About</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A beatae delectus deserunt distinctio eius
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. A beatae delectus deserunt distinctio eius
                 enim, facere fugit in inventore ipsam laborum molestiae neque non quo soluta voluptate voluptates!
                 Doloremque ducimus ipsa minima, nam sequi similique!
             </p>
@@ -25,7 +29,8 @@
         </div>
         <div class="col-md-4">
             <h2>Contacts</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A beatae delectus deserunt distinctio eius
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. A beatae delectus deserunt distinctio eius
                 enim, facere fugit in inventore ipsam laborum molestiae neque non quo soluta voluptate voluptates!
                 Doloremque ducimus ipsa minima, nam sequi similique!
             </p>

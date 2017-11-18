@@ -12,10 +12,7 @@ class Validate
      */
     public static function isIp($ip)
     {
-        if (filter_var($ip, FILTER_VALIDATE_IP))
-            return true;
-
-        return false;
+        return filter_var($ip, FILTER_VALIDATE_IP) ? true : false;
     }
 
     /**
@@ -26,10 +23,7 @@ class Validate
      */
     public static function isIpv4($ip)
     {
-        if (filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_IPV4))
-            return true;
-
-        return false;
+        return filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_IPV4) ? true : false;
     }
 
     /**
@@ -40,10 +34,7 @@ class Validate
      */
     public static function isIpv6($ip)
     {
-        if (filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_IPV6))
-            return true;
-
-        return false;
+        return filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_IPV6) ? true : false;
     }
 
     /**
@@ -54,10 +45,7 @@ class Validate
      */
     public static function isEmail($email)
     {
-        if (filter_var($email, FILTER_VALIDATE_EMAIL))
-            return true;
-
-        return false;
+        return filter_var($email, FILTER_VALIDATE_EMAIL) ? true : false;
     }
 
     /**
@@ -68,9 +56,6 @@ class Validate
      */
     public static function isUrl($url)
     {
-        if (filter_var($url, FILTER_VALIDATE_URL))
-            return true;
-
-        return false;
+        return filter_var($url, FILTER_VALIDATE_URL) ? true : false;
     }
 }

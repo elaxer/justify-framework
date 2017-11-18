@@ -5,12 +5,12 @@ namespace Justify\Modules;
 class Translate
 {
     /**
-     * Method return translited russian string to english string
+     * Method return translated russian string to english string
      *
      * @param string $string string to translate to translit
      * @return string
      */
-    public static function translit($string)
+    public static function translate($string)
     {
         $converter = [
             'а' => 'a', 'б' => 'b', 'в' => 'v',
@@ -37,8 +37,9 @@ class Translate
             'Ь' => '\'', 'Ы' => 'Y', 'Ъ' => '\'',
             'Э' => 'E', 'Ю' => 'Yu', 'Я' => 'Ya',
         ];
+
         $translited = strtr($string, $converter);
-        unset($converter);
+
         return $translited;
     }
 
@@ -52,6 +53,7 @@ class Translate
     public static function leetTranslation($string)
     {
         $string = mb_strtoupper($string);
+
         $converter = [
             'А' => '4', 'Б' => '6', 'В' => '8',
             'Г' => 'r', 'Д' => '|)', 'Е' => '3',
@@ -65,8 +67,7 @@ class Translate
             'Ь' => 'b', 'Ы' => 'bl', 'Ъ' => '`b',
             'Э' => '-)', 'Ю' => '|-0', 'Я' => '9|',
         ];
-        $leet = strtr($string, $converter);
-        unset($converter);
-        return $leet;
+
+        return strtr($string, $converter);
     }
 }

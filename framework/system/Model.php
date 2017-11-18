@@ -14,7 +14,6 @@ class Model
      * This property stores db connect
      *
      * @access private
-     *
      */
     private $_db;
 
@@ -31,6 +30,7 @@ class Model
     public function getAll($table)
     {
         $result = $this->_db->query("SELECT * FROM $table");
+
         return $result->fetchAll();
     }
 
@@ -49,6 +49,7 @@ class Model
         $query = $this->_db->prepare("SELECT COUNT(*) as `count` FROM $table WHERE $condition");
         $query->execute($variables);
         $res = $query->fetch();
+
         return intval($res['count']);
     }
 
@@ -64,12 +65,14 @@ class Model
     {
         $query = $this->_db->query("SELECT COUNT(*) as `count` FROM $table");
         $result = $query->fetch();
+
         return intval($result['count']);
     }
 
     public function get($table, $condition, $variables = [])
     {
         $result = $this->_db->prepare("SELECT * FROM $table WHERE $condition");
+
         return $result->execute($variables);
     }
 
@@ -84,6 +87,7 @@ class Model
     public function exec($query)
     {
         $result = $this->_db->exec($query);
+
         return $result;
     }
 
@@ -99,7 +103,7 @@ class Model
      */
     public function dropDB()
     {
-        $this->exec("DROP DATABASE " . Justify::$settings['db']['name']);
+        $this->exec('DROP DATABASE ' . Justify::$settings['db']['name']);
     }
 
     /**
@@ -143,36 +147,10 @@ class Model
      */
     public function version()
     {
-        $query = $this->_db->query("SELECT VERSION() AS version");
+        $query = $this->_db->query('SELECT VERSION() AS version');
         $version = $query->fetch();
+
         return $version['version'];
-    }
-
-    /**
-     * Method provides connection this DB
-     *
-     * Choose DB properties in config/db.php
-     * Don't forget to disconnect with DB using disconnect() method
-     *
-     *
-     * @access public
-     */
-    public function __construct()
-    {
-        $settings = Justify::$settings;
-        $connection = new PDO(
-            "mysql:host={$settings['db']['host']};dbname={$settings['db']['name']};charset={$settings['db']['charset']}",
-            $settings['db']['user'],
-            $settings['db']['password']
-        );
-        if ($connection) {
-            $this->_db = $connection;
-        }
-    }
-
-    public function __destruct()
-    {
-        $this->_db = null;
     }
 
     /**
@@ -180,7 +158,7 @@ class Model
      *
      * @access public
      *
-     * @return string
+     * @return array
      */
     public function error()
     {
@@ -220,4 +198,38 @@ class Model
         return htmlspecialchars_decode($var);
     }
 
+    /**
+     * Method provides connection this DB
+     *
+     * Choose DB properties in config/db.php
+     * Don't forget to disconnect with DB using disconnect() method
+     *
+     *
+     * @access public
+     */
+    public function __construct()
+    {
+        $settings = Justify::$settings;
+
+        $connection = new PDO(
+            "mysql:host={$settings['db']['host']};"
+            . "dbname={$settings['db']['name']};" 
+            . "charset={$settings['db']['charset']}",
+            $settings['db']['user'],
+            $settings['db']['password'],
+            Justify::$settings['db']['PDOSettings']
+        );
+
+        $this->_db = $connection;
+    }
+
+    /**
+     * Model destructor
+     * 
+     * Nullifies db connection then db not used
+     */
+    public function __destruct()
+    {
+        $this->_db = null;
+    }
 }

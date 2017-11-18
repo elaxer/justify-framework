@@ -9,47 +9,58 @@ class Password
      *
      * @param integer $length length of password
      * @param bool $specialSymbols includes special symbols or not
-     * @param bool $littleChars includes little chars or not
-     * @param bool $bigChars includes big chars or not
+     * @param bool $littleLetters includes little chars or not
+     * @param bool $bigLetters includes big chars or not
      * @param bool $numbers includes numbers or not
      * @return string|bool
      */
-    public static function passwordGenerate(
+    public static function generatePassword(
         $length,
-        $specialSymbols = false,
-        $littleChars = true,
-        $bigChars = true,
+        $specialChars = false,
+        $littleLetters = true,
+        $bigLetters = true,
         $numbers = true
     )
     {
-        $chars = "";
-        if ($littleChars) {
-            $chars .= "qwertyuiopasdfghjklzxcvbnm";
-        }
-
-        if ($bigChars) {
-            $chars .= "QWERTYUIOPASDFGHJKLZXCVBNM";
-        }
-
-        if ($numbers) {
-            $chars .= "1234567890";
-        }
-
-        if ($specialSymbols) {
-            $chars .= "!@#$%^&*()_+-=`~/*\\\"[]{}?'";
-        }
-
-        if (!$chars || $length < 3) {
+        if ($length < 3) {
             return false;
         }
 
-        $password = "";
-        $lenOfChars = mb_strlen($chars);
-        for ($i = 0; $i < $length; $i++) {
-            $password .= $chars[mt_rand(0, $lenOfChars - 1)];
+        $chars = [
+            'littleLetters' => 'qwertyuiopasdfghjklzxcvbnm',
+            'bigLetters' => 'QWERTYUIOPASDFGHJKLZXCVBNM',
+            'numbers' => '1234567890',
+            'specialChars' => "!@#$%^&*()_+-=`~/*\\\"[]{}?'"
+        ];
+        $charsOfFuturePassword = '';
+
+        if ($littleLetters) {
+            $charsOfFuturePassword .= $chars['littleLetters'];
         }
 
-        unset($chars);
+        if ($bigLetters) {
+            $charsOfFuturePassword .= $chars['bigLetters'];
+        }
+
+        if ($numbers) {
+            $charsOfFuturePassword .= $chars['numbers'];
+        }
+
+        if ($specialChars) {
+            $charsOfFuturePassword .= $chars['specialChars'];
+        }
+
+        if (!$charsOfFuturePassword) {
+            return false;
+        }
+
+        $password = '';
+        $lenOfChars = mb_strlen($charsOfFuturePassword);
+
+        for ($i = 0; $i < $length; $i++) {
+            $password .= $charsOfFuturePassword[mt_rand(0, $lenOfChars - 1)];
+        }
+
         return $password;
     }
 }
