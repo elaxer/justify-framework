@@ -10,8 +10,8 @@ class JustifyException extends Exception
     {
         echo '<b>' . $this->getName() . ': </b>';
         echo $this->getMessage();
-        echo ', <b>file:</b> ' . $this->getFile();
-        echo ' in line ' . '<b>' . $this->getLine() . '</b>';
+        echo ', in file: ' . '<b>' . $this->getFile() . '</b>';
+        echo ' on line ' . '<b>' . $this->getLine() . '</b>';
     }
 
     public function getName()

@@ -10,7 +10,7 @@ class IndexController extends Controller
 {
     /**
      * Renders main page in file views/index/index.php
-     * 
+     *
      * @return string
      */
     public function actionIndex()
