@@ -2,6 +2,8 @@
 
 namespace Justify\Modules;
 
+use Justify\Exceptions\InvalidArgumentException;
+
 class Math
 {
     /**
@@ -62,18 +64,25 @@ class Math
      * Returns arithmetic average of array of numbers
      *
      * @param array $numbers array of numbers
-     * @param bool $round determines be rounded average or not
      * @return int|float
      */
     public function average($numbers)
     {
-        $sumOfNumbers = 0;
+        try {
+            if (!is_array($numbers)) {
+                throw new InvalidArgumentException('array', gettype($numbers));
+            }
 
-        foreach ($numbers as $number) {
-            $sumOfNumbers += $number;
+            $sumOfNumbers = 0;
+
+            foreach ($numbers as $number) {
+                $sumOfNumbers += $number;
+            }
+
+            return $sumOfNumbers / count($numbers);
+        } catch (InvalidArgumentException $e) {
+            $e->printError();
         }
-
-        return $sumOfNumbers / count($numbers);
     }
 
     /**
@@ -82,12 +91,20 @@ class Math
      * If number even then will be return true
      * else will be return false
      * 
-     * @param int $number checks number
+     * @param number $number checks number
      * @return boolean
      */
     public function isEven($number)
     {
-        return $number % 2 == 0 ? true : false;
+        try {
+            if (!is_numeric($number)) {
+                throw new InvalidArgumentException('number', gettype($number));
+            }
+
+            return $number % 2 == 0 ? true : false;
+        } catch (InvalidArgumentException $e) {
+            $e->printError();
+        }
     }
 
     /**
@@ -96,11 +113,19 @@ class Math
      * If number odd then will be return true
      * else will be return false
      * 
-     * @param int $number checks number
+     * @param number $number checks number
      * @return boolean
      */
     public function isOdd($number)
     {
-        return $number % 2 != 0 ? true : false;
+        try {
+            if (!is_numeric($number)) {
+                throw new InvalidArgumentException('number', gettype($number));
+            }
+
+            return $number % 2 != 0 ? true : false;
+        } catch (InvalidArgumentException $e) {
+            $e->printError();
+        }
     }
 }

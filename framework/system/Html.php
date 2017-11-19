@@ -22,7 +22,7 @@ class Html
     {
         Justify::$execTime = microtime(true) - Justify::$startTime;
 
-        if (Justify::$settings['debug']) {
+        if (Justify::$debug) {
             ob_start();
 
             require_once BASE_DIR . '/framework/system/templates/debug_panel.php';
@@ -36,14 +36,21 @@ class Html
         return false;
     }
 
-    public static function components()
+    /**
+     * Method displays head in html file
+     *
+     * @return string
+     */
+    public static function head()
     {
-        foreach (Justify::$settings['components']['js'] as $js) {
-            echo "<script src=\"$js\"></script>\n";
-        }
-        foreach (Justify::$settings['components']['css'] as $css) {
-            echo "<link rel=\"stylesheet\" href=\"$css\">\n";
-        }
+        ob_start();
+
+        require_once BASE_DIR . '/framework/system/templates/head.php';
+
+        $content = ob_get_contents();
+        ob_end_clean();
+
+        return $content;
     }
 
     /**

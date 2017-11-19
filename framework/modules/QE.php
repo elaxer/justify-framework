@@ -2,6 +2,8 @@
 
 namespace Justify\Modules;
 
+use Justify\Exceptions\InvalidArgumentException;
+
 /**
  * Class for procedures with quadratic equations
  */
@@ -32,11 +34,26 @@ class QE
      */
     public function __construct($a, $b, $c)
     {
-        $this->_a = $a;
-        $this->_b = $b;
-        $this->_c = $c;
+        try {
+            if (!is_numeric($a)) {
+                throw new InvalidArgumentException('number', gettype($a));
+            }
+            if (!is_numeric($b)) {
+                throw new InvalidArgumentException('number', gettype($b));
+            }
+            if (!is_numeric($c)) {
+                throw new InvalidArgumentException('number', gettype($c));
+            }
 
-        $this->discriminant = $this->_getDiscriminant();
+            $this->_a = $a;
+            $this->_b = $b;
+            $this->_c = $c;
+
+            $this->discriminant = $this->_getDiscriminant();
+        } catch (InvalidArgumentException $e) {
+            $e->printError();
+        }
+
     }
 
     /**
@@ -51,7 +68,7 @@ class QE
     }
 
     /**
-     * Method returns roots/root/false
+     * Method returns roots or root or false value
      *
      * If discriminant > 0 then method returns array of roots
      * If discriminant = 0 then method returns one root
@@ -63,12 +80,10 @@ class QE
     public function getRoots()
     {
         if ($this->discriminant > 0) {
-            $roots = [];
-
-            $roots['thirst'] = (-($this->_b) + sqrt($this->discriminant)) / (2 * $this->_a);
-            $roots['second'] = (-($this->_b) - sqrt($this->discriminant)) / (2 * $this->_a);
-
-            return $roots;
+            return [
+                'thirst' => (-($this->_b) + sqrt($this->discriminant)) / (2 * $this->_a),
+                'second' => (-($this->_b) - sqrt($this->discriminant)) / (2 * $this->_a)
+            ];
         }
 
         if ($this->discriminant === 0) {

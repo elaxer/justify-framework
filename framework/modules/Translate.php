@@ -38,9 +38,9 @@ class Translate
             'Э' => 'E', 'Ю' => 'Yu', 'Я' => 'Ya',
         ];
 
-        $translited = strtr($string, $converter);
+        $translated = strtr($string, $converter);
 
-        return $translited;
+        return $translated;
     }
 
 

@@ -8,7 +8,7 @@ class Password
      * Method returns generated password
      *
      * @param integer $length length of password
-     * @param bool $specialSymbols includes special symbols or not
+     * @param bool $specialChars includes special symbols or not
      * @param bool $littleLetters includes little chars or not
      * @param bool $bigLetters includes big chars or not
      * @param bool $numbers includes numbers or not

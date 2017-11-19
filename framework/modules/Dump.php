@@ -18,7 +18,7 @@ class Dump
         echo '</pre>';
 
         if ($exit) {
-            exit;
+            exit();
         }
     }
 

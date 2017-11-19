@@ -3,6 +3,7 @@
 namespace Justify\Core;
 
 use Justify;
+use Justify\Exceptions\NotFoundException;
 
 /**
  * The Core of framework
@@ -47,14 +48,11 @@ class App
                         Justify::$execTime = microtime(true) - Justify::$startTime;
                     }
 
-                    break(2);
+                    return;
                 }
             }
         }
-
-        if (!$this->_uriExists) {
-            echo $this->_error404();
-        }
+        throw new NotFoundException('Search page not found!', 'Error 404');
     }
 
     /**
@@ -66,8 +64,7 @@ class App
      */
     public function __construct($settings)
     {
-        Justify::$startTime = microtime(true);
-        Justify::$settings = $settings;
+        new Justify($settings);
 
         $this->_settingsHandler();
     }
@@ -80,7 +77,7 @@ class App
      */
     private function _settingsHandler()
     {
-        if (Justify::$settings['debug']) {
+        if (Justify::$debug) {
             ini_set('display_errors', 'On');
             error_reporting(E_ALL);
         } else {
@@ -105,29 +102,5 @@ class App
         }
 
         return trim($_SERVER['REDIRECT_URL'], '/');
-    }
-
-    /**
-     * Method includes 404 page if URI doesn't match with route
-     *
-     * @access private
-     * @return void
-     */
-    private function _error404()
-    {
-        Justify::$app = 'No';
-        Justify::$action = 'No';
-
-        ob_start();
-
-        $content = VIEWS_DIR . '/' . Justify::$settings['404page'];
-        $title = 'Error 404';
-
-        require_once TEMPLATES_DIR . '/' . Justify::$settings['template'] . '/' . Justify::$settings['template'] . '.php';
-
-        $page = ob_get_contents();
-        ob_end_clean();
-
-        return $page;
     }
 }

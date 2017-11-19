@@ -17,6 +17,53 @@ class Justify
     public static $settings;
 
     /**
+     * Debug mode
+     *
+     * You can change value in file config/settings.php
+     *
+     * @access public
+     * @static
+     * @var bool
+     */
+    public static $debug;
+
+    /**
+     * Stores path to home URl
+     *
+     * You can change value in file config/settings.php in key 'homeURL'
+     *
+     * @var string
+     */
+    public static $home;
+
+    /**
+     * Stores language of HTML page
+     *
+     * You can change value in file config/settings.php in key 'lang'
+     *
+     * @var string
+     */
+    public static $lang;
+
+    /**
+     * Stores charset of HTML page
+     *
+     * You can change value in file config/settings.php in key 'lang'
+     *
+     * @var string
+     */
+    public static $charset;
+
+    /**
+     * Stores path to web directory
+     *
+     * You can change value in file config/settings.php
+     *
+     * @var string
+     */
+    public static $web;
+
+    /**
      * Stores aliases of namespaces
      *
      * @access public
@@ -26,7 +73,8 @@ class Justify
     public static $aliases = [
         'Justify\Modules' => 'framework/modules',
         'Justify\System' => 'framework/system',
-        'Justify\Core' => 'framework'
+        'Justify\Core' => 'framework',
+        'Justify\Exceptions' => 'framework/system/exceptions'
     ];
 
     /**
@@ -93,6 +141,27 @@ class Justify
      */
     public static function getVersion()
     {
-        return '1.2';
+        return '1.3';
+    }
+
+    /**
+     * Justify constructor
+     *
+     * Initialize necessary things
+     *
+     * @access public
+     * @param array $settings
+     */
+    public function __construct($settings)
+    {
+        Justify::$settings = $settings;
+
+        Justify::$startTime = microtime(true);
+
+        Justify::$debug = Justify::$settings['debug'];
+        Justify::$home = Justify::$settings['homeURL'];
+        Justify::$lang = Justify::$settings['html']['lang'];
+        Justify::$charset = Justify::$settings['html']['charset'];
+        Justify::$web = Justify::$settings['webPath'];
     }
 }

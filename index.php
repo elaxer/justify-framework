@@ -3,7 +3,7 @@
  * Justify Framework
  *
  * @author Justify <justifydev@gmail.com>
- * @version 1.2
+ * @version 1.3
  */
 define('BASE_DIR', getcwd());
 define('CONFIG_DIR', BASE_DIR . '/config');

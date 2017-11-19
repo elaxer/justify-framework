@@ -84,5 +84,4 @@ class Controller
             $this->template = Justify::$settings['template'];
         }
     }
-
 }

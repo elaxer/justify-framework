@@ -4,15 +4,12 @@
 use Justify\System\Html;
 ?>
 <!DOCTYPE html>
-<html lang="<?= Justify::$settings['html']['lang'] ?>">
+<html lang="<?= Justify::$lang ?>">
 
 <head>
-    <base href="<?= Justify::$settings['webPath'] ?>">
-    <meta charset="<?= Justify::$settings['html']['charset'] ?>">
+    <?= Html::head()  ?>
     <title><?= $title ?></title>
-    <?php Html::components() ?>
 </head>
-
 <body>
 
 <div class="wrapper">
@@ -21,13 +18,12 @@ use Justify\System\Html;
         <div class="navbar navbar-inverse">
             <div class="container">
                 <div class="navbar-header">
-                    <a href="<?= Justify::$settings['homeURL'] ?>" class="navbar-brand">Justify</a>
+                    <a href="<?= Justify::$home ?>" class="navbar-brand">Justify</a>
                 </div>
             </div>
         </div>
 
         <div class="container">
-            <!-- Requires content -->
             <?php require_once $content ?>
         </div>
     </div>
@@ -36,7 +32,7 @@ use Justify\System\Html;
         <hr>
         <div class="container">
             <p>&copy; Justify Framework <?= date('Y') ?></p>
-        </div> <!-- /container -->
+        </div>
     </footer>
 
 </div>

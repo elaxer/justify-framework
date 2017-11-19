@@ -3,6 +3,7 @@
 namespace Justify\System;
 
 use PDO;
+use PDOException;
 use Justify;
 
 /**
@@ -29,9 +30,16 @@ class Model
      */
     public function getAll($table)
     {
-        $result = $this->_db->query("SELECT * FROM $table");
+        try {
+            $result = $this->_db->query("SELECT * FROM $table");
 
-        return $result->fetchAll();
+            return $result->fetchAll();
+        } catch (PDOException $e) {
+            if (Justify::$debug) {
+                echo '<b>PDO Exception: </b>';
+                echo $e->getMessage();
+            }
+        }
     }
 
     /**
@@ -46,11 +54,18 @@ class Model
      */
     public function count($table, $condition, $variables = [])
     {
-        $query = $this->_db->prepare("SELECT COUNT(*) as `count` FROM $table WHERE $condition");
-        $query->execute($variables);
-        $res = $query->fetch();
+        try {
+            $query = $this->_db->prepare("SELECT COUNT(*) as `count` FROM $table WHERE $condition");
+            $query->execute($variables);
+            $res = $query->fetch();
 
-        return intval($res['count']);
+            return intval($res['count']);
+        } catch (PDOException $e) {
+            if (Justify::$debug) {
+                echo '<b>PDO Exception: </b>';
+                echo $e->getMessage();
+            }
+        }
     }
 
     /**
@@ -63,17 +78,31 @@ class Model
      */
     public function countTable($table)
     {
-        $query = $this->_db->query("SELECT COUNT(*) as `count` FROM $table");
-        $result = $query->fetch();
+        try {
+            $query = $this->_db->query("SELECT COUNT(*) as `count` FROM $table");
+            $result = $query->fetch();
 
-        return intval($result['count']);
+            return intval($result['count']);
+        } catch (PDOException $e) {
+            if (Justify::$debug) {
+                echo '<b>PDO Exception: </b>';
+                echo $e->getMessage();
+            }
+        }
     }
 
     public function get($table, $condition, $variables = [])
     {
-        $result = $this->_db->prepare("SELECT * FROM $table WHERE $condition");
+        try {
+            $result = $this->_db->prepare("SELECT * FROM $table WHERE $condition");
 
-        return $result->execute($variables);
+            return $result->execute($variables);
+        } catch (PDOException $e) {
+            if (Justify::$debug) {
+                echo '<b>PDO Exception: </b>';
+                echo $e->getMessage();
+            }
+        }
     }
 
     /**
@@ -86,9 +115,16 @@ class Model
      */
     public function exec($query)
     {
-        $result = $this->_db->exec($query);
+        try {
+            $result = $this->_db->exec($query);
 
-        return $result;
+            return $result;
+        } catch (PDOException $e) {
+            if (Justify::$debug) {
+                echo '<b>PDO Exception: </b>';
+                echo $e->getMessage();
+            }
+        }
     }
 
     /**
@@ -103,7 +139,14 @@ class Model
      */
     public function dropDB()
     {
-        $this->exec('DROP DATABASE ' . Justify::$settings['db']['name']);
+        try {
+            $this->exec('DROP DATABASE ' . Justify::$settings['db']['name']);
+        } catch (PDOException $e) {
+            if (Justify::$debug) {
+                echo '<b>PDO Exception: </b>';
+                echo $e->getMessage();
+            }
+        }
     }
 
     /**
@@ -119,7 +162,14 @@ class Model
      */
     public function dropTable($table)
     {
-        $this->exec("DROP TABLE $table");
+        try {
+            $this->exec("DROP TABLE $table");
+        } catch (PDOException $e) {
+            if (Justify::$debug) {
+                echo '<b>PDO Exception: </b>';
+                echo $e->getMessage();
+            }
+        }
     }
 
     /**
@@ -135,7 +185,14 @@ class Model
      */
     public function clearTable($table)
     {
-        $this->exec("TRUNCATE TABLE $table");
+        try {
+            $this->exec("TRUNCATE TABLE $table");
+        } catch (PDOException $e) {
+            if (Justify::$debug) {
+                echo '<b>PDO Exception: </b>';
+                echo $e->getMessage();
+            }
+        }
     }
 
     /**
@@ -147,10 +204,17 @@ class Model
      */
     public function version()
     {
-        $query = $this->_db->query('SELECT VERSION() AS version');
-        $version = $query->fetch();
+        try {
+            $query = $this->_db->query('SELECT VERSION() AS version');
+            $version = $query->fetch();
 
-        return $version['version'];
+            return $version['version'];
+        } catch (PDOException $e) {
+            if (Justify::$debug) {
+                echo '<b>PDO Exception: </b>';
+                echo $e->getMessage();
+            }
+        }
     }
 
     /**
@@ -162,7 +226,14 @@ class Model
      */
     public function error()
     {
-        return $this->_db->errorInfo();
+        try {
+            return $this->_db->errorInfo();
+        } catch (PDOException $e) {
+            if (Justify::$debug) {
+                echo '<b>PDO Exception: </b>';
+                echo $e->getMessage();
+            }
+        }
     }
 
     /**
@@ -211,16 +282,27 @@ class Model
     {
         $settings = Justify::$settings;
 
-        $connection = new PDO(
-            "mysql:host={$settings['db']['host']};"
-            . "dbname={$settings['db']['name']};" 
-            . "charset={$settings['db']['charset']}",
-            $settings['db']['user'],
-            $settings['db']['password'],
-            Justify::$settings['db']['PDOSettings']
-        );
+        try {
+            $connection = new PDO(
+                "mysql:host={$settings['db']['host']};"
+                . "dbname={$settings['db']['name']};"
+                . "charset={$settings['db']['charset']}",
+                $settings['db']['user'],
+                $settings['db']['password'],
+                Justify::$settings['db']['PDOSettings']
+            );
 
-        $this->_db = $connection;
+            $this->_db = $connection;
+        } catch (PDOException $e) {
+            if (Justify::$debug) {
+                echo '<b>PDO Exception: </b>';
+                echo $e->getMessage();
+
+                exit();
+            }
+
+            exit();
+        }
     }
 
     /**
