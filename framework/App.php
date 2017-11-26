@@ -80,7 +80,7 @@ class App
     public function __construct(array $settings)
     {
         try {
-            if (!version_compare(PHP_VERSION, '7.0.0', '>=')) {
+            if (!version_compare(PHP_VERSION, Justify::$minimalPHPVersion, '>=')) {
                 throw new OldPHPVersionException('PHP version must be bigger than 7.0.0');
             }
         } catch (OldPHPVersionException $e) {

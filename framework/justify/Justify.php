@@ -110,6 +110,13 @@ class Justify
     public static $execTime;
 
     /**
+     * Stores require minimal version of PHP
+     *
+     * @var string
+     */
+    public static $minimalPHPVersion = '5.6.0';
+
+    /**
      * Autoload method
      *
      * @param string $className class name
