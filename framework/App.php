@@ -4,6 +4,8 @@ namespace Justify\Core;
 
 use Justify;
 use Justify\Exceptions\NotFoundException;
+use Justify\Exceptions\InvalidConfigException;
+use Justify\Exceptions\OldPHPVersionException;
 
 /**
  * The Core of framework
@@ -31,24 +33,37 @@ class App
             $urls = require_once APPS_DIR . '/' . $app . '/urls.php';
             foreach ($urls as $pattern => $action) {
                 if (preg_match("#^$pattern$#iu", $this->_getURI(), $matches)) {
-                    Justify::$app = $app;
-                    Justify::$aliases = array_merge(Justify::$aliases, [
-                        'App\\' . ucfirst(Justify::$app) => 'apps/' . Justify::$app
-                    ]);
-                    Justify::$action = $action;
-
                     $this->_uriExists = true;
 
-                    $controller = 'App\\' . ucfirst($app) . '\\' . ucfirst($app) . 'Controller';
-                    $action = 'action' . ucfirst($action);
+                    Justify::$app = $app;
+                    Justify::$aliases['App\\' . ucfirst(Justify::$app)] = 'apps/' . Justify::$app;
 
-                    echo (new $controller())->$action($matches);
+                    Justify::$action = $action;
 
-                    if (!Justify::$execTime) {
-                        Justify::$execTime = microtime(true) - Justify::$startTime;
+                    try {
+                        $controller = 'App\\' . ucfirst($app) . '\\' . ucfirst($app) . 'Controller';
+                        $action = 'action' . ucfirst($action);
+
+                        $controller = new $controller($matches);
+
+                        if (!is_subclass_of($controller, 'Justify\System\Controller')) {
+                            throw new InvalidConfigException(
+                                'Controller class must extend from Justify\System\Controller'
+                            );
+                        }
+
+                        echo $controller->$action();
+
+                        if (!Justify::$execTime) {
+                            Justify::$execTime = microtime(true) - Justify::$startTime;
+                        }
+
+                        return;
+                    } catch (InvalidConfigException $e) {
+                        $e->printError();
+                        exit();
                     }
 
-                    return;
                 }
             }
         }
@@ -62,8 +77,17 @@ class App
      *
      * @param array $settings stores array with settings
      */
-    public function __construct($settings)
+    public function __construct(array $settings)
     {
+        try {
+            if (!version_compare(PHP_VERSION, '7.0.0', '>=')) {
+                throw new OldPHPVersionException('PHP version must be bigger than 7.0.0');
+            }
+        } catch (OldPHPVersionException $e) {
+            $e->printError();
+            exit();
+        }
+
         new Justify($settings);
 
         $this->_settingsHandler();

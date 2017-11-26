@@ -1,5 +1,6 @@
 {
     "require": {
-        "swiftmailer/swiftmailer": "*"
+        "swiftmailer/swiftmailer": "*",
+	    "justify/vk_api": "dev-master"
     }
 }

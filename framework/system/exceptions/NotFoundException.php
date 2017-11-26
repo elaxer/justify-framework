@@ -6,6 +6,11 @@ use Justify;
 
 class NotFoundException extends JustifyException
 {
+    /**
+     * Returns name of exception
+     *
+     * @return string
+     */
     public function getName()
     {
         return 'Page not found Exception';

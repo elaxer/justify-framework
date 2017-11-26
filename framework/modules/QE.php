@@ -75,7 +75,7 @@ class QE
      * If discriminant < 0 then method returns false
      *
      * @access public
-     * @return array|integer|bool
+     * @return array|number|bool
      */
     public function getRoots()
     {

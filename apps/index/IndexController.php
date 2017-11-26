@@ -4,7 +4,7 @@ namespace App\Index;
 
 use Justify;
 use Justify\System\Controller;
-use Justify\Modules\Dump;
+use Justify\Modules\Math;
 
 class IndexController extends Controller
 {
@@ -24,19 +24,16 @@ class IndexController extends Controller
 
     /**
      * Renders file views/index/page.php
-     * 
-     * @param array $matches is optional. Stores matches which returns function
+     *
      * preg_match in file framework/App.php
      * @access public
      * @return string
      */
-    public function actionPageItem($matches = [])
+    public function actionPageItem()
     {
-        //Dump::dump($matches)
-
         return $this->render('page', [
-            'title' => 'Page ' . $matches[1],
-            'page' => $matches[1],
+            'title' => 'Page ' . $this->matches[1],
+            'page' => $this->matches[1],
         ]);
     }
 
@@ -67,5 +64,4 @@ class IndexController extends Controller
             'title' => 'Contacts'
         ]);
     }
-
 }

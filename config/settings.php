@@ -1,7 +1,7 @@
 <?php
 //Include other settings
-$apps = require_once CONFIG_DIR . '/apps.php';
-$db = require_once CONFIG_DIR . '/db.php';
+$apps = require_once BASE_DIR . '/config/apps.php';
+$db = require_once BASE_DIR . '/config/db.php';
 
 //Main array with all settings
 $settings = [

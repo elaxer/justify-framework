@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "566d94f2b83dbb60f29552a8a8cb3dc9",
+    "content-hash": "9e695518fad1ab3a24a52ab87824be10",
     "packages": [
         {
             "name": "doctrine/lexer",
@@ -62,16 +62,16 @@
         },
         {
             "name": "egulias/email-validator",
-            "version": "2.1.2",
+            "version": "2.1.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/egulias/EmailValidator.git",
-                "reference": "bc31baa11ea2883e017f0a10d9722ef9d50eac1c"
+                "reference": "1bec00a10039b823cc94eef4eddd47dcd3b2ca04"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/egulias/EmailValidator/zipball/bc31baa11ea2883e017f0a10d9722ef9d50eac1c",
-                "reference": "bc31baa11ea2883e017f0a10d9722ef9d50eac1c",
+                "url": "https://api.github.com/repos/egulias/EmailValidator/zipball/1bec00a10039b823cc94eef4eddd47dcd3b2ca04",
+                "reference": "1bec00a10039b823cc94eef4eddd47dcd3b2ca04",
                 "shasum": ""
             },
             "require": {
@@ -80,8 +80,8 @@
             },
             "require-dev": {
                 "dominicsayers/isemail": "dev-master",
-                "phpunit/phpunit": "^4.8.0",
-                "satooshi/php-coveralls": "dev-master"
+                "phpunit/phpunit": "^4.8.35",
+                "satooshi/php-coveralls": "^1.0.1"
             },
             "suggest": {
                 "ext-intl": "PHP Internationalization Libraries are required to use the SpoofChecking validation"
@@ -115,7 +115,50 @@
                 "validation",
                 "validator"
             ],
-            "time": "2017-01-30T22:07:36+00:00"
+            "time": "2017-11-15T23:40:40+00:00"
+        },
+        {
+            "name": "justify/vk_api",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Cannon431/vk-api-class.git",
+                "reference": "f14fdba33618e0cf80c1334764e46c2b3ab13c4e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Cannon431/vk-api-class/zipball/f14fdba33618e0cf80c1334764e46c2b3ab13c4e",
+                "reference": "f14fdba33618e0cf80c1334764e46c2b3ab13c4e",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">= 7.0.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Justify\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Justify",
+                    "email": "justifydev@gmail.com"
+                }
+            ],
+            "description": "Class for a work with VK API",
+            "homepage": "https://github.com/Cannon431/vk-api-class",
+            "keywords": [
+                "VK api",
+                "api",
+                "php",
+                "vk"
+            ],
+            "time": "2017-11-19T11:40:31+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",
@@ -176,7 +219,9 @@
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "justify/vk_api": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": [],

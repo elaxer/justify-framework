@@ -2,10 +2,18 @@
 
 namespace Justify\Exceptions;
 
-use Exception;
-
-class JustifyException extends Exception
+/**
+ * Class JustifyException
+ *
+ * Base class of exceptions
+ *
+ * @package Justify\Exceptions
+ */
+class JustifyException extends \Exception
 {
+    /**
+     * Prints error if threw exception
+     */
     public function printError()
     {
         echo '<b>' . $this->getName() . ': </b>';
@@ -14,6 +22,11 @@ class JustifyException extends Exception
         echo ' on line ' . '<b>' . $this->getLine() . '</b>';
     }
 
+    /**
+     * Returns name of exception
+     *
+     * @return string
+     */
     public function getName()
     {
         return 'Justify Exception';

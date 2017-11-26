@@ -11,6 +11,10 @@ class ComposerStaticInitf15ecfdb5e9568b61d7728407e19c2a3
     );
 
     public static $prefixLengthsPsr4 = array (
+        'J' => 
+        array (
+            'Justify\\' => 8,
+        ),
         'E' => 
         array (
             'Egulias\\EmailValidator\\' => 23,
@@ -18,6 +22,10 @@ class ComposerStaticInitf15ecfdb5e9568b61d7728407e19c2a3
     );
 
     public static $prefixDirsPsr4 = array (
+        'Justify\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/justify/vk_api/src',
+        ),
         'Egulias\\EmailValidator\\' => 
         array (
             0 => __DIR__ . '/..' . '/egulias/email-validator/EmailValidator',

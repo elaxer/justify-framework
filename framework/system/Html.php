@@ -5,7 +5,11 @@ namespace Justify\System;
 use Justify;
 
 /**
+ * Class Html
+ *
  * Class stores necessary methods for HTML files
+ *
+ * @package Justify\System
  */
 class Html
 {

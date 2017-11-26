@@ -47,8 +47,8 @@ class Math
     /**
      * Returns sum of terms of infinitely decreasing geometric progression
      *
-     * @param integer $b1 the first term of a geometric progression
-     * @param integer $q denominator of geometric progression
+     * @param int $b1 the first term of a geometric progression
+     * @param int $q denominator of geometric progression
      * @return int
      */
     public function sumOfTermsOfIDGP($b1, $q)

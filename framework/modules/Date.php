@@ -19,6 +19,7 @@ class Date
             if (!is_integer($month)) {
                 throw new InvalidArgumentException('integer', gettype($month));
             }
+
             $months = [
                 1 => 'января', 2 => 'февраля', 3 => 'марта',
                 4 => 'апреля', 5 => 'мая', 6 => 'июня',

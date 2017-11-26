@@ -7,7 +7,11 @@ use PDOException;
 use Justify;
 
 /**
- * System abstract class Model consists of simple methods for work with DB
+ * Class Model
+ *
+ * System class Model consists of simple methods for work with DB
+ *
+ * @package Justify\System
  */
 class Model
 {
