@@ -24,7 +24,7 @@ $settings = [
         'js' => [ //Links to JS files
             'libs/jquery/jquery-3.2.1.min.js',
             'libs/bootstrap/bootstrap.min.js',
-            'js/debugging_panel.js'
+            'js/debug_panel.js'
         ],
     ],
     'apps' => $apps, //Active apps
