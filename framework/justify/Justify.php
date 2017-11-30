@@ -66,6 +66,9 @@ class Justify
     /**
      * Stores aliases of namespaces
      *
+     * Key - namespace
+     * Value - path to directory
+     *
      * @access public
      * @static
      * @var array
@@ -149,26 +152,5 @@ class Justify
     public static function getVersion()
     {
         return '1.3.1';
-    }
-
-    /**
-     * Justify constructor
-     *
-     * Initialize necessary things
-     *
-     * @access public
-     * @param array $settings
-     */
-    public function __construct($settings)
-    {
-        Justify::$settings = $settings;
-
-        Justify::$startTime = microtime(true);
-
-        Justify::$debug = Justify::$settings['debug'];
-        Justify::$home = Justify::$settings['homeURL'];
-        Justify::$lang = Justify::$settings['html']['lang'];
-        Justify::$charset = Justify::$settings['html']['charset'];
-        Justify::$web = Justify::$settings['webPath'];
     }
 }

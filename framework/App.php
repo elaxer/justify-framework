@@ -62,12 +62,15 @@ class App
                     } catch (InvalidConfigException $e) {
                         $e->printError();
                         exit();
-                    }
+                    } catch (NotFoundException $e) {}
 
                 }
             }
         }
-        throw new NotFoundException('Search page not found!', 'Error 404');
+        try {
+            throw new NotFoundException('Search page not found!', 'Error 404');
+        } catch (NotFoundException $e) {}
+
     }
 
     /**
@@ -79,6 +82,8 @@ class App
      */
     public function __construct(array $settings)
     {
+        Justify::$startTime = microtime(true);
+
         try {
             if (!version_compare(PHP_VERSION, Justify::$minimalPHPVersion, '>=')) {
                 throw new OldPHPVersionException('PHP version must be bigger than 7.0.0');
@@ -88,7 +93,13 @@ class App
             exit();
         }
 
-        new Justify($settings);
+        Justify::$settings = $settings;
+
+        Justify::$debug = Justify::$settings['debug'];
+        Justify::$home = Justify::$settings['homeURL'];
+        Justify::$lang = Justify::$settings['html']['lang'];
+        Justify::$charset = Justify::$settings['html']['charset'];
+        Justify::$web = Justify::$settings['webPath'];
 
         $this->_settingsHandler();
     }
