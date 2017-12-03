@@ -152,6 +152,6 @@ class Justify
      */
     public static function getVersion()
     {
-        return '1.3.1';
+        return '1.5';
     }
 }
