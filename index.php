@@ -6,12 +6,9 @@
  * @version 1.3.1
  */
 define('BASE_DIR', getcwd());
-define('APPS_DIR', BASE_DIR . '/apps');
-define('VIEWS_DIR', BASE_DIR . '/views');
-define('TEMPLATES_DIR', VIEWS_DIR . '/templates');
 
-require_once BASE_DIR . '/framework/composer/vendor/autoload.php';
-require_once BASE_DIR . '/framework/justify/Justify.php';
+require_once BASE_DIR . '/vendor/composer/vendor/autoload.php';
+require_once BASE_DIR . '/vendor/justify/Justify.php';
 $settings = require_once BASE_DIR . '/config/settings.php';
 
 spl_autoload_register(['Justify', 'autoload']);

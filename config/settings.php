@@ -1,6 +1,5 @@
 <?php
-//Include other settings
-$apps = require_once BASE_DIR . '/config/apps.php';
+//Includes db settings
 $db = require_once BASE_DIR . '/config/db.php';
 
 //Main array with all settings
@@ -27,7 +26,6 @@ $settings = [
             'js/debug_panel.js'
         ],
     ],
-    'apps' => $apps, //Active apps
     'db' => $db //Data base options
 ];
 
