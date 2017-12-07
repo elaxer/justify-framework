@@ -14,9 +14,7 @@ use Justify;
 class NotFoundException extends JustifyException
 {
     /**
-     * Returns name of exception
-     *
-     * @return string
+     * @inheritdoc
      */
     public function getName()
     {
@@ -40,8 +38,8 @@ class NotFoundException extends JustifyException
         Justify::$controller = 'No';
         Justify::$action = 'No';
 
-        $content = VIEWS_DIR . '/' . Justify::$settings['404page'];
+        $content = BASE_DIR . '/views/' . Justify::$settings['404page'];
 
-        require_once TEMPLATES_DIR . '/' . Justify::$settings['template'] . '/' . Justify::$settings['template'] . '.php';
+        require_once BASE_DIR . '/views/templates/' . Justify::$settings['template'] . '/' . Justify::$settings['template'] . '.php';
     }
 }

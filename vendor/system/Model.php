@@ -13,7 +13,7 @@ use Justify;
  *
  * @package Justify\System
  */
-class Model
+class Model extends BaseObject
 {
     /**
      * This property stores db connect

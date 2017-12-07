@@ -12,9 +12,7 @@ namespace Justify\Exceptions;
 class OldPHPVersionException extends JustifyException
 {
     /**
-     * Returns name of exception
-     *
-     * @return string
+     * @inheritdoc
      */
     public function getName()
     {

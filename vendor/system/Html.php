@@ -11,7 +11,7 @@ use Justify;
  *
  * @package Justify\System
  */
-class Html
+class Html extends BaseObject
 {
     /**
      * Method displays debugging panel in HTML files

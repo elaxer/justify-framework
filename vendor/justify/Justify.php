@@ -75,6 +75,7 @@ class Justify
      */
     public static $classesMap = [
         'Justify\Components' => 'vendor/components',
+        'Justify\Widgets' => 'vendor/widgets',
         'Justify\System' => 'vendor/system',
         'Justify\Core' => 'vendor',
         'Justify\Exceptions' => 'vendor/system/exceptions',
@@ -152,6 +153,6 @@ class Justify
      */
     public static function getVersion()
     {
-        return '1.5';
+        return '1.6';
     }
 }

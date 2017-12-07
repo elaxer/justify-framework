@@ -2,13 +2,14 @@
 /* @var $content */
 /* @var $title */
 use Justify\System\Html;
+use Justify\Widgets\Session;
 ?>
 <!DOCTYPE html>
 <html lang="<?= Justify::$lang ?>">
 
 <head>
-    <?= Html::head()  ?>
-    <title><?= $title ?></title>
+    <?= Html::head() ?>
+    <title><?= $this->title ?></title>
 </head>
 <body>
 
@@ -24,6 +25,7 @@ use Justify\System\Html;
         </div>
 
         <div class="container">
+            <?= Session::render() ?>
             <?php require_once $content ?>
         </div>
     </div>

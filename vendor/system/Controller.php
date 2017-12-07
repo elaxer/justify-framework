@@ -12,8 +12,15 @@ use Justify\Exceptions\FileNotExistException;
  *
  * @package Justify\System
  */
-class Controller
+class Controller extends BaseObject
 {
+    /**
+     * Title of HTML file
+     *
+     * @var
+     */
+    public $title = '';
+
     /**
      * Stores name of renders template
      *
@@ -31,6 +38,11 @@ class Controller
      */
     protected $fileExtension = '.php';
 
+    /**
+     * Stores matches of preg_match function
+     *
+     * @var array
+     */
     protected $matches;
 
     /**
@@ -42,11 +54,8 @@ class Controller
      */
     protected function getURI()
     {
-        if (!isset($_SERVER['REDIRECT_URL'])) {
-            $_SERVER['REDIRECT_URL'] = '';
-        }
-
-        return trim($_SERVER['REDIRECT_URL'], '/');
+        $uri = parse_url($_SERVER['REQUEST_URI']);
+        return $uri['path'];
     }
 
     /**
@@ -88,14 +97,22 @@ class Controller
         }
     }
 
+    /**
+     * Refresh current page
+     */
     public function refresh()
     {
-        return header('Refresh: 0');
+        header('Refresh: 0');
     }
 
+    /**
+     * Redirect user to pointed address
+     *
+     * @param string $to path to redirect address
+     */
     public function redirect($to)
     {
-        return header("Location: $to");
+        header("Location: $to");
     }
 
     /**

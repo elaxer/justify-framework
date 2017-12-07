@@ -13,9 +13,7 @@ namespace Justify\Exceptions;
 class InvalidArgumentException extends JustifyException
 {
     /**
-     * Returns name of exception
-     *
-     * @return string
+     * @inheritdoc
      */
     public function getName()
     {

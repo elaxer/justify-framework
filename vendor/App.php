@@ -3,6 +3,8 @@
 namespace Justify\Core;
 
 use Justify;
+use Justify\System\BaseObject;
+use Justify\Exceptions\CauseFromConsoleException;
 use Justify\Exceptions\NotFoundException;
 use Justify\Exceptions\InvalidConfigException;
 use Justify\Exceptions\OldPHPVersionException;
@@ -11,7 +13,7 @@ use Justify\Exceptions\OldPHPVersionException;
  * The Core of framework
  * Launches the application
  */
-class App
+class App extends BaseObject
 {
     /**
      * Need to check URI for existence in array
@@ -39,7 +41,7 @@ class App
     public function run()
     {
         foreach ($this->_urls as $pattern => $controllerAndAction) {
-            if (preg_match("#^$pattern$#iu", $this->_getURI(), $matches)) {
+            if (preg_match("#^/$pattern$#iu", $this->_getURI(), $matches)) {
                 $this->_uriExists = true;
 
                 $segments = explode('/', $controllerAndAction);
@@ -73,14 +75,11 @@ class App
                     exit();
                 } catch (NotFoundException $e) {
                 }
-
             }
         }
         try {
             throw new NotFoundException('Search page not found!', 'Error 404');
-        } catch (NotFoundException $e) {
-        }
-
+        } catch (NotFoundException $e) {}
     }
 
     /**
@@ -98,21 +97,34 @@ class App
             if (!version_compare(PHP_VERSION, Justify::$minimalPHPVersion, '>=')) {
                 throw new OldPHPVersionException('PHP version must be bigger than 7.0.0');
             }
+            if (php_sapi_name() == 'cli') {
+                throw new CauseFromConsoleException('Web application caused from console');
+            }
         } catch (OldPHPVersionException $e) {
             $e->printError();
             exit();
+        } catch (CauseFromConsoleException $e) {
+
         }
 
+        $this->_urls = require_once BASE_DIR . '/config/urls.php';
+
         Justify::$settings = $settings;
+
+        foreach (Justify::$settings['components']['css'] as &$css) {
+            $css = Justify::$settings['webPath'] . $css;
+        }
+
+        foreach (Justify::$settings['components']['js'] as &$js) {
+            $js = Justify::$settings['webPath'] . $js;
+        }
 
         Justify::$debug = Justify::$settings['debug'];
         Justify::$home = Justify::$settings['homeURL'];
         Justify::$lang = Justify::$settings['html']['lang'];
-        Justify::$charset = Justify::$settings['html']['charset'];
         Justify::$web = Justify::$settings['webPath'];
 
         $this->_settingsHandler();
-        $this->_urls = require_once BASE_DIR . '/vendor/urls.php';
     }
 
     /**
@@ -132,6 +144,7 @@ class App
         }
 
         date_default_timezone_set(Justify::$settings['timezone']);
+        setlocale(LC_ALL, Justify::$settings['language']);
     }
 
     /**
@@ -143,10 +156,7 @@ class App
      */
     private function _getURI()
     {
-        if (!isset($_SERVER['REDIRECT_URL'])) {
-            $_SERVER['REDIRECT_URL'] = '';
-        }
-
-        return trim($_SERVER['REDIRECT_URL'], '/');
+        $uri = parse_url($_SERVER['REQUEST_URI']);
+        return $uri['path'];
     }
 }

@@ -2,6 +2,9 @@
 
 namespace Justify\Exceptions;
 
+use Justify;
+use Throwable;
+
 /**
  * Class JustifyException
  *
@@ -30,5 +33,14 @@ class JustifyException extends \Exception
     public function getName()
     {
         return 'Justify Exception';
+    }
+
+    public function __construct($message = "", $code = 0, Throwable $previous = null)
+    {
+        if (!Justify::$debug) {
+            exit();
+        }
+
+        parent::__construct($message, $code, $previous);
     }
 }

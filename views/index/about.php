@@ -1,3 +1,10 @@
+<?php
+use Justify\Widgets\Breadcrumbs;
+?>
+<?= Breadcrumbs::render([
+    'Home' => Justify::$home,
+    $this->title => ''
+]) ?>
 <h2>About</h2>
 <p>
     Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam atque eos nesciunt sint vitae. Minima, quidem

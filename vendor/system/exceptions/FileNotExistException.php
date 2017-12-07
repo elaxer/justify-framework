@@ -12,9 +12,7 @@ namespace Justify\Exceptions;
 class FileNotExistException extends JustifyException
 {
     /**
-     * Returns name of exception
-     *
-     * @return string
+     * @inheritdoc
      */
     public function getName()
     {

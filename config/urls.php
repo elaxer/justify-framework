@@ -5,7 +5,7 @@
  */
 return [
     '/*' => 'index/index',
-    'page/([1-9]\d*)' => 'index/pageItem',
+    'example' => 'index/example',
     'about' => 'index/about',
     'contacts' => 'index/contacts'
 ];
