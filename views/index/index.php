@@ -2,7 +2,7 @@
 /* @var $frameworkName */
 /* @var $frameworkVersion */
 use Justify\System\Html;
-$this->title = 'Justify Framework v' . $frameworkVersion;
+$this->title = "Justify Framework $frameworkVersion";
 ?>
 <div class="container">
     <div class="starter-template">

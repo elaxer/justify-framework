@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * Class Justify
+ *
+ * Core class of framework
+ */
 class Justify
 {
     /**
@@ -134,12 +139,7 @@ class Justify
         $namespace = implode('\\', $segments);
 
         if (array_key_exists($namespace, Justify::$classesMap)) {
-            $path = BASE_DIR
-                . DIRECTORY_SEPARATOR
-                . Justify::$classesMap[$namespace]
-                . DIRECTORY_SEPARATOR
-                . $class
-                . '.php';
+            $path = BASE_DIR . '/' . Justify::$classesMap[$namespace] . '/' . $class . '.php';
             require_once $path;
         }
     }
@@ -153,6 +153,6 @@ class Justify
      */
     public static function getVersion()
     {
-        return '1.6';
+        return '1.6.1';
     }
 }

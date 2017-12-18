@@ -7,7 +7,7 @@ class Translate
     /**
      * Method return translated russian string to english string
      *
-     * @param string $string string to translate to translit
+     * @param string $string string to translate
      * @return string
      */
     public static function translate($string)

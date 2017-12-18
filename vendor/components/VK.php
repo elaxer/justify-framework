@@ -4,6 +4,14 @@ namespace Justify\Components;
 
 use Justify\Exceptions\ExtensionNotFoundException;
 
+/**
+ * Class VK
+ *
+ * Simple component for working with VK API
+ *
+ * @since 1.6
+ * @package Justify\Components
+ */
 class VK
 {
     /**
@@ -22,6 +30,7 @@ class VK
 
     /**
      * Stores array of all scopes to init VK application
+     *
      * @var array
      */
     public $scopes = [
@@ -49,8 +58,8 @@ class VK
     /**
      * Main method to work with VK API
      *
-     * Send request to https://api.vk.com/method/
-     * <method.name>?<params>, and return object of data
+     * Send request to https://api.vk.com/method/<method.name>?<params>
+     * ,and return object of data
      *
      * @param string $method VK API method name
      * @param array $params array of params
@@ -74,7 +83,7 @@ class VK
     /**
      * Displays URI to application authorisation
      *
-     * @param  array array of params
+     * @param array array of params
      * @return string link
      */
     public function initApp($params)
@@ -100,8 +109,8 @@ class VK
      * Loads photo to VK server and sends photo to user or group
      * Necessary to have CURL library
      *
-     * @param $file
-     * @param $params
+     * @param string $file path to photo
+     * @param array $params request params
      * @return object|bool
      */
     public function sendPhoto($file, $params)

@@ -1,5 +1,6 @@
 <?php
 use Justify\Widgets\Breadcrumbs;
+$this->title = 'Contacts';
 ?>
 <?= Breadcrumbs::render([
     'Home' => Justify::$home,

@@ -7,6 +7,7 @@ namespace Justify\Components;
  *
  * Class to display pagination widget
  *
+ * @since 1.6
  * @package Justify\Components
  */
 class SimplePagination

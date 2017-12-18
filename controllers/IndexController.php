@@ -16,8 +16,6 @@ class IndexController extends Controller
      */
     public function actionIndex()
     {
-        $this->title = 'Justify Framework v' . Justify::getVersion();
-
         return $this->render('index', [ //Variables
             'frameworkName' => 'Justify Framework',
             'frameworkVersion' => 'v' . Justify::getVersion()
@@ -27,14 +25,11 @@ class IndexController extends Controller
     /**
      * Renders file views/index/example.php
      *
-     * preg_match in file framework/App.php
-     * @access public
      * @return string
      */
     public function actionExample()
     {
         $pagination = new SimplePagination(1, 100);
-        $this->title = 'Page ' . $pagination->currentPage;
 
         return $this->render('example', [
             'pagination' => $pagination
@@ -48,8 +43,6 @@ class IndexController extends Controller
      */
     public function actionAbout()
     {
-        $this->title = 'About';
-
         return $this->render('about');
     }
 
@@ -60,8 +53,6 @@ class IndexController extends Controller
      */
     public function actionContacts()
     {
-        $this->title = 'Contacts';
-
         return $this->render('contacts');
     }
 }

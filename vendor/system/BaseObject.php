@@ -10,6 +10,7 @@ use Justify\Exceptions\InvalidCallException;
  *
  * Init behaviours for class
  *
+ * @since 1.6
  * @package Justify\System
  */
 class BaseObject
@@ -62,7 +63,7 @@ class BaseObject
     }
 
     /**
-     * Returns calls class
+     * Returns calls class name
      *
      * @return string
      */

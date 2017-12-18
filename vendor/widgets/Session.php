@@ -9,6 +9,7 @@ use Justify\Exceptions\InvalidConfigException;
  *
  * Class for work with sessions
  *
+ * @since 1.6
  * @package Justify\Components
  */
 class Session

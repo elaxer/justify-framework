@@ -72,26 +72,28 @@ class Controller extends BaseObject
     {
         try {
             ob_start();
-
             extract($vars);
 
-            $template = BASE_DIR . '/views/templates/' . $this->template . '/' . $this->template . '.php';
-            $content = BASE_DIR . '/views/' . Justify::$controller . '/' . $view . $this->fileExtension;
+            $pathToTemplate = BASE_DIR . '/views/templates/' . $this->template . '/' . $this->template . '.php';
+            $pathToContent = BASE_DIR . '/views/' . Justify::$controller . '/' . $view . $this->fileExtension;
 
-            if (!file_exists($template)) {
-                throw new FileNotExistException('Template', $template);
+            if (!file_exists($pathToTemplate)) {
+                throw new FileNotExistException('Template', $pathToTemplate);
             }
-            if (!file_exists($content)) {
-                throw new FileNotExistException('View file', $content);
+            if (!file_exists($pathToContent)) {
+                throw new FileNotExistException('View', $pathToContent);
             }
 
-            require_once $template;
+            ob_start();
+            require_once $pathToContent;
+            $content = ob_get_contents();
+            ob_end_clean();
 
+            require_once $pathToTemplate;
             $page = ob_get_contents();
             ob_end_clean();
 
             return $page;
-
         } catch (FileNotExistException $e) {
             $e->printError();
         }
@@ -99,10 +101,12 @@ class Controller extends BaseObject
 
     /**
      * Refresh current page
+     *
+     * @param integer|double $seconds seconds to wait
      */
-    public function refresh()
+    public function refresh($seconds = 0)
     {
-        header('Refresh: 0');
+        header("Refresh: $seconds");
     }
 
     /**

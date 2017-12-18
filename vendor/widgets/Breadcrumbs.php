@@ -7,6 +7,7 @@ namespace Justify\Widgets;
  *
  * Use this class to display breadcrumbs widget
  *
+ * @since 1.6
  * @package Justify\Components
  */
 class Breadcrumbs

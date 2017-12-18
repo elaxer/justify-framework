@@ -3,6 +3,7 @@
 /* @var $pagination */
 use Justify\Widgets\Breadcrumbs;
 use Justify\Widgets\SimplePagination;
+$this->title = 'Example | Page ' . $pagination->currentPage;
 ?>
 <?= Breadcrumbs::render([
     'Home' => Justify::$home,

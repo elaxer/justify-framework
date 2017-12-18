@@ -6,7 +6,6 @@ use Justify\Widgets\Session;
 ?>
 <!DOCTYPE html>
 <html lang="<?= Justify::$lang ?>">
-
 <head>
     <?= Html::head() ?>
     <title><?= $this->title ?></title>
@@ -16,6 +15,7 @@ use Justify\Widgets\Session;
 <div class="wrapper">
 
     <div class="content">
+
         <div class="navbar navbar-inverse">
             <div class="container">
                 <div class="navbar-header">
@@ -26,8 +26,9 @@ use Justify\Widgets\Session;
 
         <div class="container">
             <?= Session::render() ?>
-            <?php require_once $content ?>
+            <?= $content ?>
         </div>
+
     </div>
 
     <footer>

@@ -9,6 +9,7 @@ class SimplePagination
     /**
      * Displays pagination widget
      *
+     * @since 1.6
      * @param SimplePag $pagination pagination
      * @return string
      */
