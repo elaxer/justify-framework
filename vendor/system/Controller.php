@@ -17,7 +17,7 @@ class Controller extends BaseObject
     /**
      * Title of HTML file
      *
-     * @var
+     * @var string
      */
     public $title = '';
 
@@ -68,10 +68,9 @@ class Controller extends BaseObject
      * @access protected
      * @return string
      */
-    protected function render($view, array $vars = [])
+    protected function render(string $view, array $vars = [])
     {
-        try {
-            ob_start();
+        try {  
             extract($vars);
 
             $pathToTemplate = BASE_DIR . '/views/templates/' . $this->template . '/' . $this->template . '.php';
@@ -89,6 +88,7 @@ class Controller extends BaseObject
             $content = ob_get_contents();
             ob_end_clean();
 
+            ob_start();
             require_once $pathToTemplate;
             $page = ob_get_contents();
             ob_end_clean();
@@ -104,7 +104,7 @@ class Controller extends BaseObject
      *
      * @param integer|double $seconds seconds to wait
      */
-    public function refresh($seconds = 0)
+    public function refresh(float $seconds = 0)
     {
         header("Refresh: $seconds");
     }
@@ -114,7 +114,7 @@ class Controller extends BaseObject
      *
      * @param string $to path to redirect address
      */
-    public function redirect($to)
+    public function redirect(string $to)
     {
         header("Location: $to");
     }
@@ -130,7 +130,7 @@ class Controller extends BaseObject
      * @param array $matches
      * @access public
      */
-    public function __construct($matches = [])
+    public function __construct(array $matches = [])
     {
         if (!isset($this->template)) {
             $this->template = Justify::$settings['template'];

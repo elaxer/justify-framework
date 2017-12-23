@@ -3,8 +3,9 @@
  * Justify Framework
  *
  * @author Justify <justifydev@gmail.com>
- * @version 1.6.1
+ * @version 1.6.2
  */
+
 define('BASE_DIR', getcwd());
 
 require_once BASE_DIR . '/vendor/composer/vendor/autoload.php';

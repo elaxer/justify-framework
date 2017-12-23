@@ -16,6 +16,7 @@ class IndexController extends Controller
      */
     public function actionIndex()
     {
+        //throw new Justify\Exceptions\InvalidArgumentException('f', 'f');
         return $this->render('index', [ //Variables
             'frameworkName' => 'Justify Framework',
             'frameworkVersion' => 'v' . Justify::getVersion()

@@ -4,6 +4,7 @@ namespace Justify\Core;
 
 use Justify;
 use Justify\System\BaseObject;
+use Justify\Exceptions\JustifyException;
 use Justify\Exceptions\CauseFromConsoleException;
 use Justify\Exceptions\NotFoundException;
 use Justify\Exceptions\InvalidConfigException;
@@ -62,24 +63,26 @@ class App extends BaseObject
                             'Controller class must extend from Justify\System\Controller'
                         );
                     }
-
-                    echo $controller->$action();
+                    try {
+                        echo $controller->$action();
+                    } catch (JustifyException $e) {
+                        $e->printError();
+                        exit();
+                    }
 
                     if (!Justify::$execTime) {
                         Justify::$execTime = microtime(true) - Justify::$startTime;
                     }
-
-                    return;
                 } catch (InvalidConfigException $e) {
                     $e->printError();
                     exit();
-                } catch (NotFoundException $e) {
                 }
             }
         }
         try {
-            throw new NotFoundException('Search page not found!', 'Error 404');
-        } catch (NotFoundException $e) {}
+            throw new NotFoundException('Page not found!');
+        } catch (NotFoundException $e) {
+        }
     }
 
     /**
@@ -95,7 +98,7 @@ class App extends BaseObject
 
         try {
             if (!version_compare(PHP_VERSION, Justify::$minimalPHPVersion, '>=')) {
-                throw new OldPHPVersionException('PHP version must be bigger than 7.0.0');
+                throw new OldPHPVersionException("PHP version must be bigger than " . Justify::$minimalPHPVersion);
             }
             if (php_sapi_name() == 'cli') {
                 throw new CauseFromConsoleException('Web application caused from console');
@@ -104,7 +107,8 @@ class App extends BaseObject
             $e->printError();
             exit();
         } catch (CauseFromConsoleException $e) {
-
+            $e->printError();
+            exit();
         }
 
         $this->_urls = require_once BASE_DIR . '/config/urls.php';

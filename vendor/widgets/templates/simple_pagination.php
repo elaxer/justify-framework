@@ -5,7 +5,7 @@
         <?php if ($pagination->currentPage > 1): ?>
             <a href="<?= $pagination->url . ($pagination->currentPage - 1) ?>">
         <?php endif ?>
-                <span aria-hidden="true">&larr; <?= $pagination->previous ?></span>
+                <span aria-hidden="true">&larr; <?= $previous ?></span>
         <?php if ($pagination->currentPage >= 1): ?>
             </a>
         <?php endif ?>
@@ -14,7 +14,7 @@
         <?php if ($pagination->currentPage != $pagination->countOfPages): ?>
             <a href="<?= $pagination->url . ($pagination->currentPage + 1)  ?>">
         <?php endif ?>
-                 <span aria-hidden="true"><?= $pagination->next ?> &rarr;</span>
+                 <span aria-hidden="true"><?= $next ?> &rarr;</span>
         <?php if ($pagination->currentPage != $pagination->countOfPages): ?>
             </a>
         <?php endif ?>

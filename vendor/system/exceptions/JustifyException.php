@@ -19,10 +19,7 @@ class JustifyException extends \Exception
      */
     public function printError()
     {
-        echo '<b>' . $this->getName() . ': </b>';
-        echo $this->getMessage();
-        echo ', in file: ' . '<b>' . $this->getFile() . '</b>';
-        echo ' on line ' . '<b>' . $this->getLine() . '</b>';
+        require_once BASE_DIR . '/vendor/system/templates/exception.php';
     }
 
     /**
@@ -37,10 +34,6 @@ class JustifyException extends \Exception
 
     public function __construct($message = "", $code = 0, Throwable $previous = null)
     {
-        if (!Justify::$debug) {
-            exit();
-        }
-
         parent::__construct($message, $code, $previous);
     }
 }

@@ -13,7 +13,7 @@ class SimplePagination
      * @param SimplePag $pagination pagination
      * @return string
      */
-    public static function render(SimplePag $pagination)
+    public static function render(SimplePag $pagination, $previous = 'Previous', $next = 'Next')
     {
         ob_start();
 

@@ -2,8 +2,6 @@
 
 namespace Justify\Components;
 
-use Justify\Exceptions\InvalidArgumentException;
-
 class Math
 {
     /**
@@ -14,7 +12,7 @@ class Math
      * @param integer $start the number from which the array begins to fill
      * @return array
      */
-    public function fillArithmeticProgression($length, $d, $start = 0)
+    public static function fillArithmeticProgression($length, $d, $start = 0)
     {
         $array = [$start];
         
@@ -33,7 +31,7 @@ class Math
      * @param integer $start the number from which the array begins to fill
      * @return array
      */
-    public function fillGeometricProgression($length, $q, $start = 1)
+    public static function fillGeometricProgression($length, $q, $start = 1)
     {
         $array = [$start];
 
@@ -51,13 +49,10 @@ class Math
      * @param int $q denominator of geometric progression
      * @return int
      */
-    public function sumOfTermsOfIDGP($b1, $q)
+    public static function sumOfTermsOfIDGP($b1, $q)
     {
-        if ($q > 0 && $q < 1) {
-            return $b1 / (1 - $q);
-        }
 
-        return false;
+        return $q > 0 && $q < 1 ? $b1 / (1 - $q) : false;
     }
 
     /**
@@ -66,23 +61,11 @@ class Math
      * @param array $numbers array of numbers
      * @return int|float
      */
-    public function average($numbers)
+    public static function average(array $numbers)
     {
-        try {
-            if (!is_array($numbers)) {
-                throw new InvalidArgumentException('array', gettype($numbers));
-            }
+        $sumOfNumbers = Math::sum($numbers);
 
-            $sumOfNumbers = 0;
-
-            foreach ($numbers as $number) {
-                $sumOfNumbers += $number;
-            }
-
-            return $sumOfNumbers / count($numbers);
-        } catch (InvalidArgumentException $e) {
-            $e->printError();
-        }
+        return $sumOfNumbers / count($numbers);
     }
 
     /**
@@ -94,17 +77,9 @@ class Math
      * @param number $number checks number
      * @return boolean
      */
-    public function isEven($number)
+    public static function isEven(float $number)
     {
-        try {
-            if (!is_numeric($number)) {
-                throw new InvalidArgumentException('number', gettype($number));
-            }
-
-            return $number % 2 == 0 ? true : false;
-        } catch (InvalidArgumentException $e) {
-            $e->printError();
-        }
+        return $number % 2 == 0 ? true : false;
     }
 
     /**
@@ -116,16 +91,19 @@ class Math
      * @param number $number checks number
      * @return boolean
      */
-    public function isOdd($number)
+    public static function isOdd(float $number)
     {
-        try {
-            if (!is_numeric($number)) {
-                throw new InvalidArgumentException('number', gettype($number));
-            }
 
-            return $number % 2 != 0 ? true : false;
-        } catch (InvalidArgumentException $e) {
-            $e->printError();
+        return $number % 2 != 0 ? true : false;
+    }
+
+    public static function sum(array $numbers) {
+        $sumOfNumbers = 0;
+
+        foreach ($numbers as $number) {
+            $sumOfNumbers += $number;
         }
+
+        return $sumOfNumbers;
     }
 }

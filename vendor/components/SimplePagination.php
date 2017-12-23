@@ -96,11 +96,9 @@ class SimplePagination
      * @param string $previous previous button label
      * @param string $next next button label
      */
-    public function __construct($defaultPageSize, $totalCount, $previous = 'Previous', $next = 'Next')
+    public function __construct($defaultPageSize, $totalCount)
     {
         $this->url = $this->createUrl();
-        $this->previous = $previous;
-        $this->next = $next;
         $this->defaultPageSize = $defaultPageSize;
         $this->totalCount = $totalCount;
         $this->limit = $defaultPageSize;
