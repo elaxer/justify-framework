@@ -32,8 +32,12 @@ class JustifyException extends \Exception
         return 'Justify Exception';
     }
 
-    public function __construct($message = "", $code = 0, Throwable $previous = null)
+    public function __construct($message = '', $code = 0, Throwable $previous = null)
     {
+        if (!Justify::$settings['debug']) {
+            exit();
+        }
+
         parent::__construct($message, $code, $previous);
     }
 }

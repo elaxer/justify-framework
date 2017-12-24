@@ -93,8 +93,6 @@ class SimplePagination
      *
      * @param int $defaultPageSize
      * @param int $totalCount
-     * @param string $previous previous button label
-     * @param string $next next button label
      */
     public function __construct($defaultPageSize, $totalCount)
     {

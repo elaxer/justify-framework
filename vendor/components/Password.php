@@ -22,10 +22,6 @@ class Password
         $numbers = true
     )
     {
-        if ($length < 3) {
-            return false;
-        }
-
         $chars = [
             'littleLetters' => 'qwertyuiopasdfghjklzxcvbnm',
             'bigLetters' => 'QWERTYUIOPASDFGHJKLZXCVBNM',

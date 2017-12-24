@@ -148,7 +148,6 @@ class Pagination
     /**
      * Returns pagination's end
      *
-     * @param count
      * @return float|int
      */
     public function getEnd()

@@ -45,8 +45,8 @@ class Math
     /**
      * Returns sum of terms of infinitely decreasing geometric progression
      *
-     * @param int $b1 the first term of a geometric progression
-     * @param int $q denominator of geometric progression
+     * @param float $b1 the first term of a geometric progression
+     * @param float $q denominator of geometric progression
      * @return int
      */
     public static function sumOfTermsOfIDGP($b1, $q)
@@ -74,7 +74,7 @@ class Math
      * If number even then will be return true
      * else will be return false
      * 
-     * @param number $number checks number
+     * @param float $number checks number
      * @return boolean
      */
     public static function isEven(float $number)
@@ -88,7 +88,7 @@ class Math
      * If number odd then will be return true
      * else will be return false
      * 
-     * @param number $number checks number
+     * @param float $number checks number
      * @return boolean
      */
     public static function isOdd(float $number)

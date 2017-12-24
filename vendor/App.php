@@ -63,20 +63,20 @@ class App extends BaseObject
                             'Controller class must extend from Justify\System\Controller'
                         );
                     }
-                    try {
-                        echo $controller->$action();
-                    } catch (JustifyException $e) {
-                        $e->printError();
-                        exit();
-                    }
+
+                    echo $controller->$action();
 
                     if (!Justify::$execTime) {
                         Justify::$execTime = microtime(true) - Justify::$startTime;
                     }
+                } catch (JustifyException $e) {
+                    $e->printError();
+                    exit();
                 } catch (InvalidConfigException $e) {
                     $e->printError();
                     exit();
                 }
+                return;
             }
         }
         try {
@@ -95,9 +95,11 @@ class App extends BaseObject
     public function __construct(array $settings)
     {
         Justify::$startTime = microtime(true);
+        Justify::$settings = $settings;
+        Justify::$debug = Justify::$settings['debug'];
 
         try {
-            if (!version_compare(PHP_VERSION, Justify::$minimalPHPVersion, '>=')) {
+            if (!version_compare(PHP_VERSION, Justify::$minimalPHPVersion, '<=')) {
                 throw new OldPHPVersionException("PHP version must be bigger than " . Justify::$minimalPHPVersion);
             }
             if (php_sapi_name() == 'cli') {
@@ -113,17 +115,15 @@ class App extends BaseObject
 
         $this->_urls = require_once BASE_DIR . '/config/urls.php';
 
-        Justify::$settings = $settings;
+
 
         foreach (Justify::$settings['components']['css'] as &$css) {
             $css = Justify::$settings['webPath'] . $css;
         }
-
         foreach (Justify::$settings['components']['js'] as &$js) {
             $js = Justify::$settings['webPath'] . $js;
         }
 
-        Justify::$debug = Justify::$settings['debug'];
         Justify::$home = Justify::$settings['homeURL'];
         Justify::$lang = Justify::$settings['html']['lang'];
         Justify::$web = Justify::$settings['webPath'];
