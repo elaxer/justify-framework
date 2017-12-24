@@ -99,7 +99,7 @@ class App extends BaseObject
         Justify::$debug = Justify::$settings['debug'];
 
         try {
-            if (!version_compare(PHP_VERSION, Justify::$minimalPHPVersion, '<=')) {
+            if (!version_compare(PHP_VERSION, Justify::$minimalPHPVersion, '>=')) {
                 throw new OldPHPVersionException("PHP version must be bigger than " . Justify::$minimalPHPVersion);
             }
             if (php_sapi_name() == 'cli') {
@@ -109,13 +109,11 @@ class App extends BaseObject
             $e->printError();
             exit();
         } catch (CauseFromConsoleException $e) {
-            $e->printError();
+            echo PHP_EOL . $e->getName() . ': ' . $e->getMessage() . PHP_EOL;
             exit();
         }
 
         $this->_urls = require_once BASE_DIR . '/config/urls.php';
-
-
 
         foreach (Justify::$settings['components']['css'] as &$css) {
             $css = Justify::$settings['webPath'] . $css;
