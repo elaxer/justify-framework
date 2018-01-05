@@ -2,6 +2,13 @@
 
 namespace Justify\Components;
 
+/**
+ * Class Math
+ *
+ * Methods for working with math
+ *
+ * @package Justify\Components
+ */
 class Math
 {
     /**
@@ -51,8 +58,53 @@ class Math
      */
     public static function sumOfTermsOfIDGP($b1, $q)
     {
-
         return $q > 0 && $q < 1 ? $b1 / (1 - $q) : false;
+    }
+
+    /**
+     * Returns discriminant
+     *
+     * @param float|int $a a
+     * @param float|int $b b
+     * @param float|int $c c
+     * @return float|int
+     */
+    public static function discriminant($a, $b, $c)
+    {
+        return pow($b, 2) - 4 * $a * $c;
+    }
+
+    /**
+     * Returns factorial of number
+     *
+     * @since 2.0
+     * @param int $x number
+     * @return float|int
+     */
+    public static function factorial($x)
+    {
+        return $x == 1 ? 1 : $x * self::factorial($x - 1);
+    }
+
+    /**
+     * Returns number of Fibonacci
+     *
+     * @since 2.0
+     * @param int $x position
+     * @return int
+     */
+    public static function fibonacci($x)
+    {
+        if (in_array($x, [0, 1])) {
+            return $x;
+        }
+
+        $numbers = [1, 1];
+        for ($i = 2; $i < $x; $i++) {
+            $numbers[] = $numbers[$i - 1] + $numbers[$i - 2];
+        }
+
+        return array_pop($numbers);
     }
 
     /**
@@ -63,9 +115,20 @@ class Math
      */
     public static function average(array $numbers)
     {
-        $sumOfNumbers = Math::sum($numbers);
+        return Math::sum($numbers) / count($numbers);
+    }
 
-        return $sumOfNumbers / count($numbers);
+    /**
+     * Returns percentage of 2 numbers
+     *
+     * @since 2.0
+     * @param float|int $a1
+     * @param float|int $a2
+     * @return float|int
+     */
+    public static function percentage(float $a1, float $a2)
+    {
+        return $a1 / $a2 * 100;
     }
 
     /**
@@ -93,10 +156,16 @@ class Math
      */
     public static function isOdd(float $number)
     {
-
         return $number % 2 != 0 ? true : false;
     }
 
+    /**
+     * Returns sum of numbers
+     *
+     * @since 1.6.3
+     * @param array $numbers array of numbers
+     * @return int|mixed
+     */
     public static function sum(array $numbers) {
         $sumOfNumbers = 0;
 

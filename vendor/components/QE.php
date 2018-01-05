@@ -2,8 +2,6 @@
 
 namespace Justify\Components;
 
-use Justify\Exceptions\InvalidArgumentException;
-
 /**
  * Class for procedures with quadratic equations
  */
@@ -14,14 +12,14 @@ class QE
      * 
      * @var int|float
      */
-    private $_a, $_b, $_c;
+    private $a, $b, $c;
 
     /**
      * Discriminant of quadratic equation
      * 
      * @var int|float
      */
-    public $discriminant;
+    private $discriminant;
 
     /**
      * Constructor of class
@@ -32,39 +30,22 @@ class QE
      * @param int|float $b
      * @param int|float $c
      */
-    public function __construct($a, $b, $c)
+    public function __construct(float $a, float $b, float $c)
     {
-        try {
-            if (!is_numeric($a)) {
-                throw new InvalidArgumentException('number', gettype($a));
-            }
-            if (!is_numeric($b)) {
-                throw new InvalidArgumentException('number', gettype($b));
-            }
-            if (!is_numeric($c)) {
-                throw new InvalidArgumentException('number', gettype($c));
-            }
-
-            $this->_a = $a;
-            $this->_b = $b;
-            $this->_c = $c;
-
-            $this->discriminant = $this->_getDiscriminant();
-        } catch (InvalidArgumentException $e) {
-            $e->printError();
-        }
-
+        $this->a = $a;
+        $this->b = $b;
+        $this->c = $c;
+        $this->discriminant = $this->getDiscriminant();
     }
 
     /**
      * Method returns discriminant
      *
-     * @access private
-     * @return integer
+     * @return integer|float
      */
-    private function _getDiscriminant()
+    private function getDiscriminant()
     {
-        return $this->_b * $this->_b - 4 * $this->_a * $this->_c;
+        return pow($this->b, 2) - 4 * $this->a * $this->c;
     }
 
     /**
@@ -81,15 +62,11 @@ class QE
     {
         if ($this->discriminant > 0) {
             return [
-                'thirst' => (-($this->_b) + sqrt($this->discriminant)) / (2 * $this->_a),
-                'second' => (-($this->_b) - sqrt($this->discriminant)) / (2 * $this->_a)
+                'thirst' => (-$this->b + sqrt($this->discriminant)) / (2 * $this->a),
+                'second' => (-$this->b - sqrt($this->discriminant)) / (2 * $this->a)
             ];
         }
-
-        if ($this->discriminant === 0) {
-            return -($this->_b) / (2 * $this->_a);
-        }
-
-        return false;
+        
+        return $this->discriminant === 0 ? -$this->b / (2 * $this->a) : false;
     }
 }

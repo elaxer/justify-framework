@@ -2,6 +2,13 @@
 
 namespace Justify\Components;
 
+/**
+ * Class Translate
+ *
+ * Class for translate strings
+ *
+ * @package Justify\Components
+ */
 class Translate
 {
     /**
@@ -39,10 +46,8 @@ class Translate
         ];
 
         $translated = strtr($string, $converter);
-
         return $translated;
     }
-
 
     /**
      * Method return translated russian string to leet(1337) language
@@ -58,10 +63,10 @@ class Translate
             'А' => '4', 'Б' => '6', 'В' => '8',
             'Г' => 'r', 'Д' => '|)', 'Е' => '3',
             'Ё' => 'Ё', 'Ж' => '}|{', 'З' => '3',
-            'И' => 'u', 'Й' => 'u*', 'К' => '|<',
+            'И' => 'u', 'Й' => 'u*', 'К' => '|&lt;',
             'Л' => '/I', 'М' => '|\/|', 'Н' => '|-|',
-            'О' => '0', 'П' => 'n', 'Р' => '|>',
-            'С' => '5', 'Т' => '7', 'У' => '`/',
+            'О' => '0', 'П' => 'n', 'Р' => '|&gt;',
+            'С' => 'c', 'Т' => '7', 'У' => '`/',
             'Ф' => 'qp', 'Х' => 'X', 'Ц' => 'L|',
             'Ч' => '\'-|', 'Ш' => 'W', 'Щ' => 'W,',
             'Ь' => 'b', 'Ы' => 'bl', 'Ъ' => '`b',

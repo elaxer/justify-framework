@@ -24,10 +24,9 @@ class Controller extends BaseObject
     /**
      * Stores name of renders template
      *
-     * @access protected
      * @var string
      */
-    protected $template;
+    public $template;
 
     /**
      * Stores files extension
@@ -36,27 +35,24 @@ class Controller extends BaseObject
      *
      * @var string
      */
-    protected $fileExtension = '.php';
+    private $fileExtension = '.php';
 
     /**
      * Stores matches of preg_match function
      *
      * @var array
      */
-    protected $matches;
+    public $matches;
 
     /**
-     * Method returns current URI address
-     * without GET query
+     * Request object
      *
-     * @access protected
-     * @return string
+     * See class vendor/system/Request.php
+     *
+     * @since 2.0
+     * @var object
      */
-    protected function getURI()
-    {
-        $uri = parse_url($_SERVER['REQUEST_URI']);
-        return $uri['path'];
-    }
+    public $request;
 
     /**
      * Method renders the html file
@@ -65,21 +61,20 @@ class Controller extends BaseObject
      *
      * @param string $view name of html file. Point name of html without expansion
      * @param array $vars stores the passed arguments in an associative array. Default current action name
-     * @access protected
      * @return string
      */
-    protected function render(string $view, array $vars = [])
+    public function render(string $view, array $vars = [])
     {
-        try {  
+        try {
             extract($vars);
 
             $pathToTemplate = BASE_DIR . '/views/templates/' . $this->template . '/' . $this->template . '.php';
             $pathToContent = BASE_DIR . '/views/' . Justify::$controller . '/' . $view . $this->fileExtension;
 
-            if (!file_exists($pathToTemplate)) {
+            if (! file_exists($pathToTemplate)) {
                 throw new FileNotExistException('Template', $pathToTemplate);
             }
-            if (!file_exists($pathToContent)) {
+            if (! file_exists($pathToContent)) {
                 throw new FileNotExistException('View', $pathToContent);
             }
 
@@ -97,6 +92,16 @@ class Controller extends BaseObject
         } catch (FileNotExistException $e) {
             $e->printError();
         }
+    }
+
+    /**
+     * Method returns current URI address
+     *
+     * @return string
+     */
+    public function getURI()
+    {
+        return parse_url($_SERVER['REQUEST_URI'])['path'];
     }
 
     /**
@@ -120,6 +125,28 @@ class Controller extends BaseObject
     }
 
     /**
+     * Redirect user on previous page
+     *
+     * @since 2.0
+     */
+    public function goBack()
+    {
+        header("Location: {$_SERVER['HTTP_REFERER']}");
+    }
+
+    /**
+     * Redirects to home page
+     *
+     * Home page value specified in file config/settings.php in directive "homeUrl"
+     *
+     * @since 2.0
+     */
+    public function goHome()
+    {
+        header('Location: ' . Justify::$home);
+    }
+
+    /**
      * Controller constructor
      *
      * Sets default name of template if template equals false
@@ -127,15 +154,15 @@ class Controller extends BaseObject
      * Default value of file extension and template you can find
      * in config/settings.php
      *
-     * @param array $matches
-     * @access public
+     * @param array $matches matches of preg_match function
      */
     public function __construct(array $matches = [])
     {
-        if (!isset($this->template)) {
+        if (! isset($this->template)) {
             $this->template = Justify::$settings['template'];
         }
 
+        $this->request = new Request();
         $this->matches = $matches;
     }
 }

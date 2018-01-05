@@ -41,21 +41,6 @@ class VK
     ];
 
     /**
-     * Init access token and API version
-     *
-     * @param string $accessToken access token of your VK application
-     * @param string $apiVersion VK API version
-     */
-    public function __construct($accessToken = '', $apiVersion = '')
-    {
-        $this->accessToken = $accessToken;
-
-        if ($apiVersion) {
-            $this->apiVersion = $apiVersion;
-        }
-    }
-
-    /**
      * Main method to work with VK API
      *
      * Send request to https://api.vk.com/method/<method.name>?<params>
@@ -67,7 +52,7 @@ class VK
      */
     public function api($method, $params = [])
     {
-        if (!isset($params['access_token']))
+        if (! isset($params['access_token']))
             $params['access_token'] = $this->accessToken;
 
         if ($this->apiVersion)
@@ -78,29 +63,6 @@ class VK
         $file = file_get_contents("https://api.vk.com/method/$method?$params");
 
         return json_decode($file);
-    }
-
-    /**
-     * Displays URI to application authorisation
-     *
-     * @param array array of params
-     * @return string link
-     */
-    public function initApp($params)
-    {
-        if (!isset($params['scope']))
-            $params['scope'] = implode(',', $this->scopes);
-
-        if (!isset($params['redirect_uri']))
-            $params['redirect_uri'] = 'https://oauth.vk.com/blank.html';
-
-        if (!isset($params['response_type']))
-            $params['response_type'] = 'token';
-
-        if (!isset($params['display']))
-            $params['display'] = 'page';
-
-        return urldecode("https://oauth.vk.com/authorize?" . http_build_query($params));
     }
 
     /**
@@ -116,7 +78,7 @@ class VK
     public function sendPhoto($file, $params)
     {
         try {
-            if (!function_exists('curl_init')) {
+            if (! function_exists('curl_init')) {
                 throw new ExtensionNotFoundException('CURL');
             }
 
@@ -151,6 +113,44 @@ class VK
         } catch (ExtensionNotFoundException $e) {
             $e->printError();
             exit();
+        }
+    }
+
+    /**
+     * Displays URI to application authorisation
+     *
+     * @param array array of params
+     * @return string link
+     */
+    public function initApp($params)
+    {
+        if (! isset($params['scope']))
+            $params['scope'] = implode(',', $this->scopes);
+
+        if (! isset($params['redirect_uri']))
+            $params['redirect_uri'] = 'https://oauth.vk.com/blank.html';
+
+        if (! isset($params['response_type']))
+            $params['response_type'] = 'token';
+
+        if (!isset($params['display']))
+            $params['display'] = 'page';
+
+        return urldecode("https://oauth.vk.com/authorize?" . http_build_query($params));
+    }
+
+    /**
+     * Init access token and API version
+     *
+     * @param string $accessToken access token of your VK application
+     * @param string $apiVersion VK API version
+     */
+    public function __construct($accessToken = '', $apiVersion = '')
+    {
+        $this->accessToken = $accessToken;
+
+        if ($apiVersion) {
+            $this->apiVersion = $apiVersion;
         }
     }
 }

@@ -2,7 +2,7 @@
 
 namespace Justify\Widgets;
 
-use Justify\Components\SimplePagination as SimplePag;
+use Justify\Components\SimplePagination as SimplePaginationObject;
 
 class SimplePagination
 {
@@ -10,10 +10,12 @@ class SimplePagination
      * Displays pagination widget
      *
      * @since 1.6
-     * @param SimplePag $pagination pagination
+     * @param SimplePaginationObject $pagination pagination
+     * @param string $previous text of previous button
+     * @param string $next text of next button
      * @return string
      */
-    public static function render(SimplePag $pagination, $previous = 'Previous', $next = 'Next')
+    public static function render(SimplePaginationObject $pagination, $previous = 'Previous', $next = 'Next')
     {
         ob_start();
 

@@ -5,7 +5,7 @@ namespace Justify\Components;
 /**
  * Class Pagination
  *
- * Class to display pagination widget
+ * Class for widget Pagination
  *
  * @since 1.6
  * @package Justify\Components
@@ -87,6 +87,13 @@ class Pagination
     public $start;
 
     /**
+     * Last page number
+     *
+     * @var int
+     */
+    public $lastPage;
+
+    /**
      * Pagination final page
      *
      * @var int
@@ -109,6 +116,7 @@ class Pagination
         $this->totalCount = $totalCount;
         $this->limit = $defaultPageSize;
         $this->countOfPages = ceil($this->totalCount / $this->defaultPageSize);
+        $this->lastPage = $this->countOfPages;
         $this->countOfPaginationPages = $this->getCountOfPaginationPages($countOfPaginationPages);
 
         if (isset($_GET[$this->getName])) {
@@ -181,10 +189,7 @@ class Pagination
      */
     public function createUrl()
     {
-        if (
-            !isset(parse_url($_SERVER['REQUEST_URI'])['query'])
-            || (count($_GET) === 1 && isset($_GET[$this->getName]))
-        ) {
+        if (! isset(parse_url($_SERVER['REQUEST_URI'])['query']) || (count($_GET) === 1 && isset($_GET[$this->getName]))) {
             return '?' . $this->getName . '=';
         }
         $url = '?';

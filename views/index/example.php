@@ -7,7 +7,7 @@ $this->title = 'Example | Page ' . $pagination->currentPage;
 ?>
 <?= Breadcrumbs::render([
     'Home' => Justify::$home,
-    'Example' => ''
+    "Example({$pagination->currentPage} of {$pagination->lastPage})" => ''
 ]) ?>
 <div class="col-md-6">
     <h2>Page number <?= $pagination->currentPage ?></h2>

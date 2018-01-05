@@ -63,7 +63,7 @@ class Session
         self::$close = $close;
 
         try {
-            if (!in_array($type, self::$types)) {
+            if (! in_array($type, self::$types)) {
                 throw new InvalidConfigException('Undefined type ' . $type);
             }
         } catch (InvalidConfigException $e) {
@@ -79,7 +79,7 @@ class Session
      */
     public static function hasFlash()
     {
-        return !is_null(self::$message);
+        return ! is_null(self::$message);
     }
 
     /**

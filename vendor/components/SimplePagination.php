@@ -64,6 +64,13 @@ class SimplePagination
     public $offset;
 
     /**
+     * Last page number
+     *
+     * @var int
+     */
+    public $lastPage;
+
+    /**
      * SQL limit
      *
      * Use this property in SQL query
@@ -101,6 +108,7 @@ class SimplePagination
         $this->totalCount = $totalCount;
         $this->limit = $defaultPageSize;
         $this->countOfPages = ceil($this->totalCount / $this->defaultPageSize);
+        $this->lastPage = $this->countOfPages;
 
         if (isset($_GET[$this->getName])) {
             $this->currentPage = intval($_GET[$this->getName]);
@@ -122,10 +130,7 @@ class SimplePagination
      */
     public function createUrl()
     {
-        if (
-            !isset(parse_url($_SERVER['REQUEST_URI'])['query'])
-            || (count($_GET) === 1 && isset($_GET[$this->getName]))
-        ) {
+        if (! isset(parse_url($_SERVER['REQUEST_URI'])['query']) || (count($_GET) === 1 && isset($_GET[$this->getName]))) {
             return '?' . $this->getName . '=';
         }
         $url = '?';

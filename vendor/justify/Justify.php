@@ -15,8 +15,6 @@ class Justify
     /**
      * Property stores array of settings in file config/settings.php
      *
-     * @var array
-     * @access public
      * @static
      */
     public static $settings;
@@ -26,8 +24,6 @@ class Justify
      *
      * You can change value in file config/settings.php
      *
-     * @access public
-     * @static
      * @var bool
      */
     public static $debug;
@@ -74,8 +70,6 @@ class Justify
      * Key - namespace
      * Value - path to directory
      *
-     * @access public
-     * @static
      * @var array
      */
     public static $classesMap = [
@@ -91,8 +85,6 @@ class Justify
     /**
      * Stores name of current controller
      *
-     * @access public
-     * @static
      * @var string
      */
     public static $controller;
@@ -100,8 +92,6 @@ class Justify
     /**
      * Stores name of current action
      *
-     * @access public
-     * @static
      * @var string
      */
     public static $action;
@@ -132,14 +122,16 @@ class Justify
      *
      * @param string $className class name
      */
-    public static function autoload($className)
+    public static function autoloadFunction($className)
     {
         $segments = explode('\\', $className);
         $class = array_pop($segments);
         $namespace = implode('\\', $segments);
+        $path = BASE_DIR . '/' . Justify::$classesMap[$namespace] . '/' . $class . '.php';
 
         if (array_key_exists($namespace, Justify::$classesMap)) {
-            $path = BASE_DIR . '/' . Justify::$classesMap[$namespace] . '/' . $class . '.php';
+            require_once $path;
+        } else if (file_exists($path)) {
             require_once $path;
         }
     }
@@ -147,12 +139,10 @@ class Justify
     /**
      * Returns current framework version
      *
-     * @access public
-     * @static
      * @return string
      */
     public static function getVersion()
     {
-        return '1.6.3';
+        return '2.0';
     }
 }

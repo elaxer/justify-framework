@@ -23,7 +23,7 @@ class BaseObject
     public function __get($name)
     {
         try {
-            throw new UndefinedPropertyException('Called property ' . self::getClass() . "::$name  not found");
+            throw new UndefinedPropertyException('Called property ' . self::getClassName() . "::$name  not found");
         } catch (UndefinedPropertyException $e) {
             $e->printError();
             exit();
@@ -39,7 +39,7 @@ class BaseObject
     public function __set($name, $value)
     {
         try {
-            throw new UndefinedPropertyException('Called property ' . self::getClass() . "::$name  not found");
+            throw new UndefinedPropertyException('Called property ' . self::getClassName() . "::$name  not found");
         } catch (UndefinedPropertyException $e) {
             $e->printError();
             exit();
@@ -55,7 +55,7 @@ class BaseObject
     public function __call($name, $arguments)
     {
         try {
-            throw new InvalidCallException('Called method ' . self::getClass() . "::$name()  not found");
+            throw new InvalidCallException('Called method ' . self::getClassName() . "::$name()  not found");
         } catch (InvalidCallException $e) {
             $e->printError();
             exit();
@@ -67,8 +67,10 @@ class BaseObject
      *
      * @return string
      */
-    public static function getClass()
+    public static function getClassName()
     {
-        return get_called_class();
+        $class = get_called_class();
+        $segments = explode('\\', $class);
+        return array_pop($segments);
     }
 }

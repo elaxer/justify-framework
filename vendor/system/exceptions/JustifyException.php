@@ -32,12 +32,13 @@ class JustifyException extends \Exception
         return 'Justify Exception';
     }
 
-    public function __construct($message = '', $code = 0, Throwable $previous = null)
+    public function __construct($message = '', $responseCode = 500, $code = 0, Throwable $previous = null)
     {
-        if (!Justify::$settings['debug']) {
+        if (! Justify::$settings['debug']) {
             exit();
         }
 
         parent::__construct($message, $code, $previous);
+        http_response_code($responseCode);
     }
 }

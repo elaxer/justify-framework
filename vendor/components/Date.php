@@ -2,6 +2,13 @@
 
 namespace Justify\Components;
 
+/**
+ * Class Date
+ *
+ * Methods for working with date
+ *
+ * @package Justify\Components
+ */
 class Date
 {
     /**
@@ -10,7 +17,7 @@ class Date
      * @param integer $month month number
      * @return string|bool
      */
-    public static function russianMonth($month)
+    public static function russianMonthInGC($month)
     {
         $months = [
             1 => 'января', 2 => 'февраля', 3 => 'марта',

@@ -5,18 +5,17 @@ namespace App\Controllers;
 use Justify;
 use Justify\System\Controller;
 use Justify\Components\SimplePagination;
-use App\Models\IndexModel;
+use App\Models\Test;
 
 class IndexController extends Controller
 {
     /**
      * Renders main page in file views/index/index.php
-     *
-     * @return string
      */
     public function actionIndex()
     {
-        return $this->render('index', [ //Variables
+        return $this->render('index', [
+            //Variables
             'frameworkName' => 'Justify Framework',
             'frameworkVersion' => 'v' . Justify::getVersion()
         ]);
@@ -24,8 +23,6 @@ class IndexController extends Controller
 
     /**
      * Renders file views/index/example.php
-     *
-     * @return string
      */
     public function actionExample()
     {
@@ -38,8 +35,6 @@ class IndexController extends Controller
 
     /**
      * Renders file views/index/about.php
-     * 
-     * @return string
      */
     public function actionAbout()
     {
@@ -48,8 +43,6 @@ class IndexController extends Controller
 
     /**
      * Renders file views/index/contacts.php
-     * 
-     * @return string
      */
     public function actionContacts()
     {

@@ -1,8 +1,8 @@
 <meta charset="<?= Justify::$settings['html']['charset'] ?>">
-<?php foreach (Justify::$settings['components']['js'] as $js): ?>
+<?php foreach (Justify::$settings['web']['js'] as $js): ?>
     <script src="<?= $js ?>"></script>
 <?php endforeach; ?>
 
-<?php foreach (Justify::$settings['components']['css'] as $css): ?>
+<?php foreach (Justify::$settings['web']['css'] as $css): ?>
     <link rel="stylesheet" href="<?= $css ?>">
 <?php endforeach; ?>

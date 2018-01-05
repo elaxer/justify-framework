@@ -18,8 +18,6 @@ class Html extends BaseObject
      *
      * To deactivate panel change property "debug" to false in file config/settings.php
      *
-     * @access public
-     * @static
      * @return string|bool
      */
     public static function debuggingPanel()
@@ -62,14 +60,16 @@ class Html extends BaseObject
      *
      * Returns variable safe to display in HTML file
      *
-     * @access public
-     * @static
      * @param mixed $var variable to encode
      * @return string
      */
     public static function encode($var)
     {
-        return htmlspecialchars(trim($var));
+        if (is_string($var)) {
+            return htmlspecialchars(trim($var), ENT_QUOTES, 'UTF-8');
+        }
+
+        return $var;
     }
 
     /**
@@ -78,13 +78,11 @@ class Html extends BaseObject
      * Warning!
      * Returns variable unsafe to display in HTML file
      *
-     * @access public
-     * @static
      * @param mixed $var variable to decode
      * @return string
      */
     public static function decode($var)
     {
-        return htmlspecialchars_decode($var);
+        return htmlspecialchars_decode($var, ENT_QUOTES);
     }
 }

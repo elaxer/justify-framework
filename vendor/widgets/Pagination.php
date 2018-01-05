@@ -2,7 +2,7 @@
 
 namespace Justify\Widgets;
 
-use Justify\Components\Pagination as Pag;
+use Justify\Components\Pagination as PaginationObject;
 
 class Pagination
 {
@@ -10,10 +10,10 @@ class Pagination
      * Displays pagination widget
      *
      * @since 1.6
-     * @param Pag $pagination pagination
+     * @param PaginationObject $pagination pagination
      * @return string
      */
-    public static function render(Pag $pagination)
+    public static function render(PaginationObject $pagination)
     {
         ob_start();
 

@@ -19,28 +19,7 @@ class Curl
      *
      * @var resource
      */
-    private $_ch;
-
-    /**
-     * Curl constructor
-     *
-     * Init Curl::$_ch
-     *
-     * @param null|string $url connect to url
-     */
-    public function __construct($url = null)
-    {
-        try {
-            if (!function_exists('curl_init')) {
-                throw new ExtensionNotFoundException('CURL');
-            }
-
-            $this->_ch = curl_init($url);
-        } catch (ExtensionNotFoundException $e) {
-            $e->printError();
-            exit();
-        }
-    }
+    private $ch;
 
     /**
      * Set options for curl
@@ -57,16 +36,8 @@ class Curl
      */
     public function setOpts(array $opts) {
         foreach ($opts as $param => $value) {
-            curl_setopt($this->_ch, $param, $value);
+            curl_setopt($this->ch, $param, $value);
         }
-    }
-
-    /**
-     * Closes curl connection
-     */
-    public function close()
-    {
-        curl_close($this->_ch);
     }
 
     /**
@@ -80,6 +51,16 @@ class Curl
     public function createFile($file, $mime, $baseName)
     {
         return curl_file_create($file, $mime, $baseName);
+    }
+
+    /**
+     * Execs curl query
+     *
+     * @return mixed
+     */
+    public function exec()
+    {
+        return curl_exec($this->ch);
     }
 
     /**
@@ -99,7 +80,7 @@ class Curl
      */
     public function getError()
     {
-        return curl_error($this->_ch);
+        return curl_error($this->ch);
     }
 
     /**
@@ -109,16 +90,46 @@ class Curl
      */
     public function getErrno()
     {
-        return curl_errno($this->_ch);
+        return curl_errno($this->ch);
     }
 
     /**
-     * Execs curl query
-     *
-     * @return mixed
+     * Closes curl connection
      */
-    public function exec()
+    public function close()
     {
-        return curl_exec($this->_ch);
+        curl_close($this->ch);
+        $this->ch = null;
+    }
+
+    /**
+     * Curl constructor
+     *
+     * Init Curl::$ch
+     *
+     * @param null|string $url connect to url
+     */
+    public function __construct($url = null)
+    {
+        try {
+            if (! extension_loaded('curl_init')) {
+                throw new ExtensionNotFoundException('CURL');
+            }
+
+            $this->ch = curl_init($url);
+        } catch (ExtensionNotFoundException $e) {
+            $e->printError();
+            exit();
+        }
+    }
+
+    /**
+     * Closed curl connection if not closed
+     */
+    public function __destruct()
+    {
+        if (! is_null($this->ch)) {
+            $this->close();
+        }
     }
 }

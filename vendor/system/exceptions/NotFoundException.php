@@ -29,7 +29,7 @@ class NotFoundException extends JustifyException
      */
     public function __construct(string $message)
     {
-        parent::__construct($message);
+        parent::__construct($message, 404);
 
         $this->render($message);
     }
@@ -47,7 +47,7 @@ class NotFoundException extends JustifyException
         Justify::$controller = 'No';
         Justify::$action = 'No';
 
-        $pathToContent = BASE_DIR . '/views/' . Justify::$settings['404page'];
+        $pathToContent = BASE_DIR . '/views/errors/' . Justify::$settings['404page'];
         $pathToTemplate = BASE_DIR . '/views/templates/' . Justify::$settings['template'] . '/' . Justify::$settings['template'] . '.php';
 
         ob_start();

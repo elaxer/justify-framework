@@ -1,33 +1,51 @@
 <?php
-//Includes db settings
-$db = require_once BASE_DIR . '/config/db.php';
 
-//Main array with all settings
+// Includes other settings
+$db = require_once BASE_DIR . '/config/db.php';
+$web = require_once BASE_DIR . '/config/web.php';
+$routes = require_once BASE_DIR . '/config/routes.php';
+
+// Main array with all settings
 $settings = [
-    'timezone' => 'America/Los_Angeles', //Choose your timezone, more information you can find in http://php.net/manual/en/timezones.php
-    'language' => 'en_US', //Application language
-    'debug' => true, //Debug mode; Recommend to set false value in production
-    'homeURL' => '/', //Home page
-    'template' => 'main', //Base template for HTML page
-    'webPath' => '/web/', //Base URL to web components
-    '404page' => '404/404.php', //Path to page on which the redirect will be sent on error 404
-    'html' => [ //HTML page options
-        'lang' => 'en', //HTML language
-        'charset' => 'UTF-8', //HTML charset
+    // Choose your timezone, all list of time zones 
+    // you can find in http://php.net/manual/en/timezones.php
+    'timezone' => 'America/Los_Angeles',
+
+    // Application locale
+    'locale' => 'en',
+
+    // Debug mode; Recommend to set false value in production
+    'debug' => true,
+
+    // Home page url
+    'homeURL' => '/',
+
+    // Base template for HTML page
+    'template' => 'main',
+
+    // Base URL to web components
+    'webPath' => '/web/',
+
+    // Path to page on which the redirect will be sent on error 404
+    '404page' => '404/404.php',
+
+    // HTML page options
+    'html' => [
+        // HTML language
+        'lang' => 'en',
+
+        // HTML charset
+        'charset' => 'UTF-8'
     ],
-    'components' => [ //Components for HTML page
-        'css' => [ //Links to CSS files
-            'libs/bootstrap/bootstrap.min.css',
-            'css/main.css',
-            'css/adaptive.css'
-        ],
-        'js' => [ //Links to JS files
-            'libs/jquery/jquery-3.2.1.min.js',
-            'libs/bootstrap/bootstrap.min.js',
-            'js/debug_panel.js'
-        ],
-    ],
-    'db' => $db //Data base options
+
+    // Web components
+    'web' => $web,
+
+    // Data base options
+    'db' => $db,
+
+    // Routes of application
+    'routes' => $routes
 ];
 
 return $settings;
