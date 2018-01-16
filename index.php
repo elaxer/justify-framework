@@ -3,23 +3,23 @@
  * Justify Framework
  *
  * @author Justify <justifydev@gmail.com>
- * @version 2.0
+ * @version 2.1.0
  */
 
 // Absolute path to framework root directory
-define('BASE_DIR', getcwd());
+define('BASE_DIR', dirname(__FILE__));
 
 // Includes composer
-require_once BASE_DIR . '/vendor/composer/vendor/autoload.php';
+require_once BASE_DIR . '/vendor/autoload.php';
 
 // Includes Justify class
-require_once BASE_DIR . '/vendor/justify/Justify.php';
+require_once BASE_DIR . '/core/Justify.php';
 
 // Includes App class
-require_once BASE_DIR . '/vendor/App.php';
+require_once BASE_DIR . '/bootstrap/App.php';
 
 // Includes settings
 $settings = require_once BASE_DIR . '/config/settings.php';
 
-// Initials new Application
-(new Justify\Core\App($settings))->run();
+// Initials new Application and runs
+(new Justify\Bootstrap\App($settings))->run();

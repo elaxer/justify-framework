@@ -1,0 +1,11 @@
+# Rename this file to .gitignore in production
+
+.idea
+nbproject
+vendor/
+composer.phar
+database/migrations
+database/seeds
+phinx
+phinx.bat
+phinx.yml
