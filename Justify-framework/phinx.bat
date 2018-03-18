@@ -1,1 +1,0 @@
-/home/justify/Рабочий стол/Сайты/justifyframe.com/public_html/vendor/robmorgan/phinx/bin/phinx.bat
