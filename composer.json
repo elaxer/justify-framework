@@ -1,27 +1,29 @@
 {
   "name": "justify/justifyframe",
   "description": "Simple, lightweight framework",
-  "keywords": ["framework", "justify"],
+  "keywords": [
+    "framework",
+    "justify"
+  ],
   "homepage": "https://github.com/Cannon431/Justify-framework",
   "license": "MIT",
   "type": "project",
   "authors": [
-  	  {
-  	  	  "name": "Alexey Pokazanov",
-  	  	  "email": "justifydev@gmail.com",
-  	  	  "homepage": "https://vk.com/aleks513"
-  	  }
+    {
+      "name": "Alexey Pokazanov",
+      "email": "justifydev@gmail.com",
+      "homepage": "https://vk.com/aleks513"
+    }
   ],
   "require": {
-  	"php": "5.6 - 7.2",
+    "php": "5.6 - 7.2",
     "gabordemooij/redbean": "^5.0",
     "swiftmailer/swiftmailer": "^6.0",
     "robmorgan/phinx": "^0.9.2"
   },
-
   "require-dev": {
-  	"squizlabs/php_codesniffer": "^3.2",
-  	"symfony/var-dumper": "^3.4",
-  	"psy/psysh": "^0.8.17"
+    "squizlabs/php_codesniffer": "^3.2",
+    "symfony/var-dumper": "^3.4",
+    "psy/psysh": "^0.8.17"
   }
 }
