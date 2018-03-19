@@ -2,7 +2,7 @@
 PHP simple WEB MVC framework
 
 After download do not forget install composer dependencies:
-`composer install`
+`composer install --no-dev`
 
 ## Folders
 * **bootstrap** - Initial Files
