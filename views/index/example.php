@@ -1,21 +1,24 @@
 <?php
 /* @var $page */
 /* @var $pagination */
+
 use Justify\Widgets\Breadcrumbs;
 use Justify\Widgets\SimplePagination;
-$this->title = 'Example | Page ' . $pagination->currentPage;
+use Justify\Components\Lang;
+
+$this->title = Lang::get('example.example')
+    . ' | ' . Lang::get('example.page')
+    .  ' ' . $pagination->currentPage;
 ?>
 <?= Breadcrumbs::render([
-    'Home' => Justify::$home,
-    "Example({$pagination->currentPage} of {$pagination->lastPage})" => ''
+    Lang::get('example.home') => Justify::$home,
+    Lang::get('example.example') . "({$pagination->currentPage} "
+        . Lang::get('example.of') . " {$pagination->lastPage})" => ''
 ]) ?>
 <div class="col-md-6">
-    <h2>Page number <?= $pagination->currentPage ?></h2>
+    <h2><?= Lang::get('example.page_number') ?> <?= $pagination->currentPage ?></h2>
     <p>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium aliquam esse nemo perferendis porro
-        quaerat repudiandae. Fugiat nihil non omnis. A accusamus assumenda blanditiis cum earum, eveniet exercitationem fugiat,
-        fugit minus officia officiis provident, quaerat repellendus tenetur veniam? Ad aperiam autem dignissimos, error
-        inventore ipsa ipsum itaque perferendis veniam voluptates!
+        <?= Lang::get('example.lorem') ?>
     </p>
-    <?= SimplePagination::render($pagination) ?>
+    <?= SimplePagination::render($pagination, Lang::get('example.prev'), Lang::get('example.next')) ?>
 </div>

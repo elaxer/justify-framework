@@ -3,6 +3,9 @@
 namespace Justify\Bootstrap;
 
 use Justify;
+use Justify\System\CSRF;
+use Justify\System\Request;
+use Justify\Exceptions\CSRFProtectionException;
 use Justify\Exceptions\JustifyException;
 use Justify\Exceptions\NotFoundException;
 use Justify\Exceptions\InvalidConfigException;
@@ -36,10 +39,10 @@ class App
     public function run()
     {
         foreach ($this->routes as $pattern => $controllerAndAction) {
-            if (preg_match("#^/$pattern$#iu", $this->getURI(), $matches)) {
+            if (preg_match("#^/?$pattern$#iu", $this->getURI(), $matches)) {
                 $this->uriExists = true;
 
-                $segments = explode('/', $controllerAndAction);
+                $segments = explode('@', $controllerAndAction);
                 list($controller, $action) = $segments;
                 list(Justify::$controller, Justify::$action) = $segments;
 
@@ -49,7 +52,7 @@ class App
 
                     $controller = new $controller($matches);
 
-                    if (! is_subclass_of($controller, 'Justify\System\Controller')) {
+                    if (!$this->isSubclassOfBaseController($controller)) {
                         throw new InvalidConfigException(
                             'Controller class must extend from Justify\System\Controller'
                         );
@@ -95,9 +98,48 @@ class App
         $init = new Init($settings);
         $init->initSettings();
         $init->loadHelpers();
+        $init->loadLang();
         $init->loadWebComponents();
 
+        if (Justify::$settings['CSRFProtection']) {
+            $this->CSRFProtection();
+        }
+
         $this->routes = $init->getRoutes();
+    }
+
+    /**
+     * Init protection from CSRF attacks
+     *
+     * @since 2.2.0
+     */
+    private function CSRFProtection()
+    {
+        CSRF::$token = CSRF::generateToken();
+
+        $request = new Request();
+
+        try {
+            if ($request->isPost()) {
+                CSRF::checkHashesEquals($request->session, $request);
+            } else {
+                CSRF::setSession();
+            }
+        } catch (CSRFProtectionException $e) {
+            $e->printError();
+        }
+    }
+
+    /**
+     * Checks class extended by base controller
+     *
+     * @since 2.2.0
+     * @param string $controller
+     * @return bool
+     */
+    private function isSubclassOfBaseController($controller)
+    {
+        return is_subclass_of($controller, 'Justify\System\Controller');
     }
 
     /**

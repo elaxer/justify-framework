@@ -3,20 +3,17 @@
 /**
  * Function returns generated password
  *
+ * @deprecated use Justify\Components\Password::generate()
  * @param integer $length length of password
- * @param bool $specialChars includes special symbols or not
- * @param bool $littleLetters includes little chars or not
- * @param bool $bigLetters includes big chars or not
- * @param bool $numbers includes numbers or not
- * @return string|bool
+ * @param array $rules chars of future password
+ * @return string
  */
-function generatePassword(
-    $length,
-    $specialChars = false,
-    $littleLetters = true,
-    $bigLetters = true,
-    $numbers = true
-) {
+function generatePassword($length, array $rules = [
+    'littleLetters' => true,
+    'bigLetters' => true,
+    'numbers' => true,
+    'specialChars' => false
+]) {
     $chars = [
         'littleLetters' => 'qwertyuiopasdfghjklzxcvbnm',
         'bigLetters' => 'QWERTYUIOPASDFGHJKLZXCVBNM',
@@ -25,24 +22,24 @@ function generatePassword(
     ];
     $charsOfFuturePassword = '';
 
-    if ($littleLetters) {
+    if (isset($rules['littleLetters']) && $rules['littleLetters']) {
         $charsOfFuturePassword .= $chars['littleLetters'];
     }
 
-    if ($bigLetters) {
+    if (isset($rules['bigLetters']) && $rules['bigLetters']) {
         $charsOfFuturePassword .= $chars['bigLetters'];
     }
 
-    if ($numbers) {
+    if (isset($rules['numbers']) && $rules['numbers']) {
         $charsOfFuturePassword .= $chars['numbers'];
     }
 
-    if ($specialChars) {
+    if (isset($rules['specialChars']) && $rules['specialChars']) {
         $charsOfFuturePassword .= $chars['specialChars'];
     }
 
     if (! $charsOfFuturePassword) {
-        return false;
+        return '';
     }
 
     $password = '';

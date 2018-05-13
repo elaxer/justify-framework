@@ -63,7 +63,7 @@ class Controller extends BaseObject
      * @param array $vars stores the passed arguments in an associative array. Default current action name
      * @return string
      */
-    public function render(string $view, array $vars = [])
+    public function render($view, array $vars = [])
     {
         try {
             extract($vars);
@@ -109,7 +109,7 @@ class Controller extends BaseObject
      *
      * @param integer|double $seconds seconds to wait
      */
-    public function refresh(float $seconds = 0)
+    public function refresh($seconds = 0)
     {
         header("Refresh: $seconds");
     }
@@ -119,7 +119,7 @@ class Controller extends BaseObject
      *
      * @param string $to path to redirect address
      */
-    public function redirect(string $to)
+    public function redirect($to)
     {
         header("Location: $to");
     }

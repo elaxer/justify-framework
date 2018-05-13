@@ -1,5 +1,20 @@
 <?php
 
+if (! function_exists('dump')) {
+    /**
+     * Dumps variable
+     *
+     * @since 2.2
+     * @param mixed $variable dump variable
+     */
+    function dump($variable)
+    {
+        echo '<pre>';
+        print_r($variable);
+        echo '</pre>';
+    }
+}
+
 /**
  * Dumps variable and die
  *

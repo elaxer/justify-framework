@@ -76,10 +76,10 @@ class Justify
         'Justify\Components' => 'core/components',
         'Justify\Widgets' => 'core/widgets',
         'Justify\System' => 'core/system',
-        'Justify\Bootstrap' => 'bootstrap',
+        'Justify\Bootstrap' => 'core/bootstrap',
         'Justify\Exceptions' => 'core/system/exceptions',
-        'App\Controllers' => 'controllers',
-        'App\Models' => 'models'
+        'App\Controllers' => 'app/controllers',
+        'App\Models' => 'app/models'
     ];
 
     /**
@@ -143,6 +143,6 @@ class Justify
      */
     public static function getVersion()
     {
-        return '2.1';
+        return '2.2.0';
     }
 }

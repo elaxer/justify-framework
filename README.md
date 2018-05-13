@@ -23,5 +23,5 @@ Config files located in `config` directory
 
 ## Migrations
 I decided to use Phinx migrations. Checkout <http://docs.phinx.org/en/latest/index.html>
-Your migration files located in `database/migrations`
-Your seeds files located in `database/seeds`
+Your migration files located in `database/migrations`.
+Your seeds files located in `database/seeds`.

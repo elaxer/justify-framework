@@ -54,7 +54,7 @@ class Math
      *
      * @param float $b1 the first term of a geometric progression
      * @param float $q denominator of geometric progression
-     * @return int
+     * @return int|boolean
      */
     public static function sumOfTermsOfIDGP($b1, $q)
     {
@@ -121,7 +121,7 @@ class Math
      */
     public static function average(array $numbers)
     {
-        return Math::sum($numbers) / count($numbers);
+        return array_sum($numbers) / count($numbers);
     }
 
     /**
@@ -132,7 +132,7 @@ class Math
      * @param float|int $a2
      * @return float|int
      */
-    public static function percentage(float $a1, float $a2)
+    public static function percentage($a1, $a2)
     {
         return $a1 / $a2 * 100;
     }
@@ -146,9 +146,9 @@ class Math
      * @param float $number checks number
      * @return boolean
      */
-    public static function isEven(float $number)
+    public static function isEven($number)
     {
-        return $number % 2 == 0 ? true : false;
+        return $number % 2 == 0;
     }
 
     /**
@@ -160,15 +160,16 @@ class Math
      * @param float $number checks number
      * @return boolean
      */
-    public static function isOdd(float $number)
+    public static function isOdd($number)
     {
-        return $number % 2 != 0 ? true : false;
+        return $number % 2 != 0;
     }
 
     /**
      * Returns sum of numbers
      *
      * @since 1.6.3
+     * @deprecated
      * @param array $numbers array of numbers
      * @return int|mixed
      */
@@ -180,5 +181,29 @@ class Math
         }
 
         return $sumOfNumbers;
+    }
+
+    /**
+     * Increments and returns number
+     *
+     * @since 2.2.0
+     * @param int &$number
+     * @return int
+     */
+    public static function inc(&$number)
+    {
+        return ++$number;
+    }
+
+    /**
+     * Decrements and returns number
+     *
+     * @since 2.2.0
+     * @param int &$number
+     * @return int
+     */
+    public static function dec(&$number)
+    {
+        return --$number;
     }
 }

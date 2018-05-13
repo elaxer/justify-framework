@@ -1,13 +1,14 @@
 <?php
 use Justify\Widgets\Breadcrumbs;
-$this->title = 'Contacts';
+use Justify\Components\Lang;
+
+$this->title = Lang::get('contacts.contacts');
 ?>
 <?= Breadcrumbs::render([
-    'Home' => Justify::$home,
+    Lang::get('contacts.home') => Justify::$home,
     $this->title => ''
 ]) ?>
-<h2>Contacts</h2>
+<h2><?= Lang::get('contacts.contacts') ?></h2>
 <p>
-    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi corporis id laudantium mollitia nisi nobis numquam
-    quam quod rem tenetur!
+    <?= Lang::get('contacts.lorem') ?>
 </p>

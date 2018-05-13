@@ -2,7 +2,7 @@
 
 namespace Justify\System;
 
-use Justify\Components\ConvertCase;
+use Justify\Components\Str;
 
 /**
  * Class Model
@@ -47,6 +47,6 @@ class Model extends BaseObject
      */
     public static function tableName()
     {
-        return ConvertCase::camelCaseToSnakeCase(self::getClassName());
+        return Str::camelToSnake(self::getClassName());
     }
 }

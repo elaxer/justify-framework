@@ -214,7 +214,7 @@ class DB extends Model
      * @param array $params array of values
      * @return object
      */
-    public function where($condition, $params = [])
+    public function where($condition, array $params = [])
     {
         $this->query .= " WHERE $condition";
         $this->params = array_merge($this->params, $params);
@@ -231,7 +231,7 @@ class DB extends Model
      * @param array $params array of values
      * @return object
      */
-    public function andWhere($condition, $params = [])
+    public function andWhere($condition, array $params = [])
     {
         $this->query .= " AND WHERE $condition";
         $this->params = array_merge($this->params, $params);
@@ -248,7 +248,7 @@ class DB extends Model
      * @param array $params array of values
      * @return object
      */
-    public function orWhere($condition, $params = [])
+    public function orWhere($condition, array $params = [])
     {
         $this->query .= " OR WHERE $condition";
         $this->params = array_merge($this->params, $params);
@@ -445,7 +445,7 @@ class DB extends Model
     }
 
     /**
-     * Sets conntection for SQLite DBMS
+     * Sets connection for SQLite DBMS
      * 
      * @since 2.1.0
      * @return object

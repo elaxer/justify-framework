@@ -48,7 +48,7 @@ class Session
      */
     public function has($key)
     {
-        return isset($_SESSION[$key]) ? true : false;
+        return isset($_SESSION[$key]);
     }
 
     /**

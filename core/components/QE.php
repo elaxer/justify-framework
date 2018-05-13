@@ -30,7 +30,7 @@ class QE
      * @param int|float $b
      * @param int|float $c
      */
-    public function __construct(float $a, float $b, float $c)
+    public function __construct($a, $b, $c)
     {
         $this->a = $a;
         $this->b = $b;

@@ -4,6 +4,7 @@ namespace Justify\Bootstrap;
 
 use Justify;
 use Justify\System\BaseObject;
+use Justify\Components\Lang;
 use Justify\Exceptions\OldPHPVersionException;
 use Justify\Exceptions\CauseFromConsoleException;
 
@@ -22,7 +23,8 @@ class Init extends BaseObject
      */
     public function loadHelpers()
     {
-        $helpers = glob(BASE_DIR . '/vendor/helpers/*');
+        $helpers = glob(BASE_DIR . '/core/helpers/*');
+
         foreach ($helpers as $helper) {
             require_once $helper;
         }
@@ -45,17 +47,24 @@ class Init extends BaseObject
         setlocale(LC_ALL, Justify::$settings['locale']);
     }
 
+    public function loadLang()
+    {
+        Lang::getLanguages();
+    }
+
     /**
      * Loads JS, CSS components
+     * @deprecated
      */
     public function loadWebComponents()
     {
-        foreach (Justify::$settings['web']['css'] as &$css) {
-            $css = Justify::$settings['webPath'] . $css;
-        }
-        foreach (Justify::$settings['web']['js'] as &$js) {
-            $js = Justify::$settings['webPath'] . $js;
-        }
+        Justify::$settings['web']['css'] = array_map(function ($css) {
+            return Justify::$settings['webPath'] . $css;
+        }, Justify::$settings['web']['css']);
+
+        Justify::$settings['web']['js'] = array_map(function ($js) {
+            return Justify::$settings['webPath'] . $js;
+        }, Justify::$settings['web']['js']);
     }
 
     /**
@@ -84,12 +93,8 @@ class Init extends BaseObject
         session_start();
 
         try {
-            if (! version_compare(PHP_VERSION, Justify::$minimalPHPVersion, '>=')) {
-                throw new OldPHPVersionException("PHP version must be bigger than " . Justify::$minimalPHPVersion);
-            }
-            if (php_sapi_name() == 'cli') {
-                throw new CauseFromConsoleException('Web application caused from console');
-            }
+            $this->isOldVersion(Justify::$minimalPHPVersion);
+            $this->causedFromConsole();
         } catch (OldPHPVersionException $e) {
             $e->printError();
             exit();
@@ -101,5 +106,34 @@ class Init extends BaseObject
         Justify::$home = Justify::$settings['homeURL'];
         Justify::$lang = Justify::$settings['html']['lang'];
         Justify::$web = Justify::$settings['webPath'];
+    }
+
+    /**
+     * Checks is old version
+     *
+     * @since 2.2.0
+     * @param $version
+     * @param string $error
+     * @throws OldPHPVersionException
+     */
+    private function isOldVersion($version, $error = 'PHP version must be bigger than ')
+    {
+        if (! version_compare(PHP_VERSION, $version, '>=')) {
+            throw new OldPHPVersionException($error . $version);
+        }
+    }
+
+    /**
+     * Checks app caused from console
+     *
+     * @since 2.2.0
+     * @param string $error
+     * @throws CauseFromConsoleException
+     */
+    private function causedFromConsole($error = 'Web application caused from console')
+    {
+        if (php_sapi_name() == 'cli') {
+            throw new CauseFromConsoleException($error);
+        }
     }
 }

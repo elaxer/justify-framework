@@ -14,8 +14,14 @@ $settings = [
     // Application locale
     'locale' => 'en',
 
-    // Debug mode; Recommend to set false value in production
+    // Uses then main locale don't working
+    'fallbackLocale' => 'ru',
+
+    // Debug mode; Set false value in production
     'debug' => true,
+
+    // Set true to protect your forms from CSRF attacks
+    'CSRFProtection' => true,
 
     // Home page url
     'homeURL' => '/',
@@ -27,7 +33,7 @@ $settings = [
     'webPath' => '/web/',
 
     // Path to page on which the redirect will be sent on error 404
-    '404page' => '404/404.php',
+    '404page' => '404.php',
 
     // HTML page options
     'html' => [

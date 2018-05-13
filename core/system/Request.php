@@ -60,7 +60,7 @@ class Request
      */
     public function isGet()
     {
-        return $_SERVER['REQUEST_METHOD'] == 'GET' ? true : false;
+        return $_SERVER['REQUEST_METHOD'] == 'GET';
     }
 
     /**
@@ -70,7 +70,7 @@ class Request
      */
     public function isPost()
     {
-        return $_SERVER['REQUEST_METHOD'] == 'POST' ? true : false;
+        return $_SERVER['REQUEST_METHOD'] == 'POST';
     }
 
     /**
@@ -91,13 +91,23 @@ class Request
     }
 
     /**
-     * Returns users IP address
+     * Returns user's IP address
      *
      * @return string
      */
     public function getUserIp()
     {
         return $_SERVER['REMOTE_ADDR'];
+    }
+
+    /**
+     * Returns server's IP address
+     *
+     * @return string
+     */
+    public function getServerIp()
+    {
+        return $_SERVER['SERVER_ADDR'];
     }
 
     /**

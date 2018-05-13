@@ -19,7 +19,7 @@ class JustifyException extends \Exception
      */
     public function printError()
     {
-        require_once BASE_DIR . '/vendor/system/templates/exception.php';
+        require_once BASE_DIR . '/core/system/templates/exception.php';
     }
 
     /**

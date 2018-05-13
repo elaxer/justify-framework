@@ -3,7 +3,6 @@
 namespace App\Controllers;
 
 use Justify;
-use Justify\System\Controller;
 use Justify\Components\SimplePagination;
 use App\Models\Test;
 
@@ -14,6 +13,7 @@ class IndexController extends Controller
      */
     public function actionIndex()
     {
+        consoleLogArray(['a', 'b', 'c']);
         return $this->render('index', [
             //Variables
             'frameworkName' => 'Justify Framework',
