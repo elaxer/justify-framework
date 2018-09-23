@@ -5,5 +5,5 @@
  * Value - controller and action
  */
 return [
-    '/*' => 'index@index'
+    '/*' => 'IndexController@index'
 ];

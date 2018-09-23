@@ -2,7 +2,7 @@
 
 namespace App\Controllers;
 
-class Controller extends \Justify\System\Controller
+abstract class Controller extends \Core\System\Controller
 {
 
 }

@@ -1,8 +1,8 @@
 <?php
 
-namespace Justify\Widgets;
+namespace Core\Widgets;
 
-use Justify\Components\SimplePagination as SimplePaginationObject;
+use Core\Components\SimplePagination as SimplePaginationObject;
 
 class SimplePagination
 {

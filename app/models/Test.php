@@ -2,11 +2,11 @@
 
 namespace App\Models;
 
-use Justify\System\DB;
+use Core\System\DB;
 
 class Test extends DB
 {
-    public static function tableName()
+    public static function tableName(): string
     {
         return 'your_table_name';
     }

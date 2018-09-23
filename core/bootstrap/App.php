@@ -1,14 +1,12 @@
 <?php
 
-namespace Justify\Bootstrap;
+namespace Core\Bootstrap;
 
-use Justify;
-use Justify\System\CSRF;
-use Justify\System\Request;
-use Justify\Exceptions\CSRFProtectionException;
-use Justify\Exceptions\JustifyException;
-use Justify\Exceptions\NotFoundException;
-use Justify\Exceptions\InvalidConfigException;
+use Core\Justify;
+use Core\System\ControllerFactory;
+use Core\System\CSRF;
+use Core\System\Request;
+use Core\System\Exceptions\InvalidConfigException;
 
 /**
  * The Core of framework
@@ -17,17 +15,9 @@ use Justify\Exceptions\InvalidConfigException;
 class App
 {
     /**
-     * Need to check URI for existence in array
-     * in file urls.php
-     *
-     * @var bool
-     */
-    private $uriExists = false;
-
-    /**
      * Array of routes
      *
-     * File: vendor/routes.php
+     * File: config/routes.php
      *
      * @var array
      */
@@ -35,50 +25,44 @@ class App
 
     /**
      * Method launches the application
+     *
+     * @throws InvalidConfigException
      */
     public function run()
     {
+        $uri = $this->getURI();
+        $routeExists = false;
+
         foreach ($this->routes as $pattern => $controllerAndAction) {
-            if (preg_match("#^/?$pattern$#iu", $this->getURI(), $matches)) {
-                $this->uriExists = true;
+            $pattern = $this->createPattern($pattern);
 
-                $segments = explode('@', $controllerAndAction);
-                list($controller, $action) = $segments;
-                list(Justify::$controller, Justify::$action) = $segments;
-
-                try {
-                    $controller = 'App\\Controllers\\' . ucfirst($controller) . 'Controller';
-
-                    $controller = new $controller($matches);
-
-                    if (!$this->isSubclassOfBaseController($controller)) {
-                        throw new InvalidConfigException(
-                            'Controller class must extend from Justify\System\Controller'
-                        );
-                    }
-
-                    $response = $controller->$action();
-
-                    if (is_string($response) || is_numeric($response)) {
-                        echo $response;
-                    } else if (is_object($response) || is_array($response) || is_bool($response)) {
-                        dump($response);
-                    }
-
-                    if (!Justify::$execTime) {
-                        Justify::$execTime = microtime(true) - Justify::$startTime;
-                    }
-                } catch (JustifyException $e) {
-                    $e->printError();
-                    exit();
-                }
-
-                return;
+            if (!preg_match($pattern, $uri, $matches)) {
+                continue;
             }
+
+            $routeExists = true;
+
+            $segments = explode('@', $controllerAndAction);
+            list($controller, $action) = $segments;
+
+            $controller = ControllerFactory::create($controller, $matches);
+
+            if (!$this->implementsBaseController($controller)) {
+                throw new InvalidConfigException(
+                    'Controller class must extend from Core\System\Controller'
+                );
+            }
+
+            $response = $controller->$action();
+            $this->displayResponse($response);
+
+            $this->setExecTime();
+
+            break;
         }
-        try {
-            throw new NotFoundException('Page not found!');
-        } catch (NotFoundException $e) {
+
+        if (!$routeExists) {
+            echo $this->render404();
         }
     }
 
@@ -92,7 +76,7 @@ class App
      */
     public function __construct(array $settings)
     {
-        spl_autoload_register(['Justify', 'autoloadFunction']);
+        spl_autoload_register(['Core\Justify', 'autoloadFunction']);
 
         $init = new Init($settings);
         $init->initSettings();
@@ -117,14 +101,10 @@ class App
 
         $request = new Request();
 
-        try {
-            if ($request->isPost()) {
-                CSRF::checkHashesEquals($request->session, $request);
-            } else {
-                CSRF::setSession();
-            }
-        } catch (CSRFProtectionException $e) {
-            $e->printError();
+        if ($request->isPost()) {
+            CSRF::checkHashesEquals($request->session, $request);
+        } else {
+            CSRF::setSession();
         }
     }
 
@@ -135,9 +115,9 @@ class App
      * @param object $controller
      * @return bool
      */
-    private function isSubclassOfBaseController(object $controller): bool
+    private function implementsBaseController(object $controller): bool
     {
-        return is_subclass_of($controller, 'Justify\System\Controller');
+        return is_subclass_of($controller, 'Core\System\Controller');
     }
 
     /**
@@ -148,5 +128,56 @@ class App
     private function getURI(): string
     {
         return parse_url($_SERVER['REQUEST_URI'])['path'];
+    }
+
+    /**
+     * Renders 404 page
+     *
+     * @since 2.3.0
+     * @param string $message
+     * @return string
+     */
+    private function render404(string $message = 'Page not found!'): string
+    {
+        return render('errors/404', ['message' => $message]);
+    }
+
+    /**
+     * Sets execution time of script
+     *
+     * @since 2.3.0
+     */
+    private function setExecTime()
+    {
+        if (!Justify::$execTime) {
+            Justify::$execTime = microtime(true) - Justify::$startTime;
+        }
+    }
+
+    /**
+     * Displays response in correct behaviour
+     *
+     * @since 2.3.0
+     * @param string $response
+     */
+    private function displayResponse(string $response)
+    {
+        if (is_string($response) || is_numeric($response)) {
+            echo $response;
+        } else if (is_object($response) || is_array($response)) {
+            dump($response);
+        }
+    }
+
+    /**
+     * Creates pattern
+     *
+     * @since 2.3.0
+     * @param string $pattern
+     * @return string
+     */
+    private function createPattern(string $pattern): string
+    {
+        return "#^/?$pattern$#iu";
     }
 }

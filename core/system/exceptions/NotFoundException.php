@@ -1,8 +1,8 @@
 <?php
 
-namespace Justify\Exceptions;
+namespace Core\System\Exceptions;
 
-use Justify;
+use Core\Justify;
 
 /**
  * Class NotFoundException
@@ -31,35 +31,7 @@ class NotFoundException extends JustifyException
     {
         parent::__construct($message, 404);
         http_response_code(404);
-        $this->render($message);
-    }
 
-    /**
-     * Renders 404 page
-     *
-     * Method includes 404 page if URI doesn't match with route
-     * or throws exception
-     *
-     * @param string $message message about error
-     */
-    public function render(string $message)
-    {
-        Justify::$controller = 'No';
-        Justify::$action = 'No';
 
-        $pathToContent = BASE_DIR . '/views/errors/' . Justify::$settings['404page'];
-        $pathToTemplate = BASE_DIR . '/views/templates/' . Justify::$settings['template'] . '/' . Justify::$settings['template'] . '.php';
-
-        ob_start();
-        require_once $pathToContent;
-        $content = ob_get_contents();
-        ob_end_clean();
-
-        ob_start();
-        require_once $pathToTemplate;
-        $template = ob_get_contents();
-        ob_end_clean();
-
-        echo $template;
     }
 }

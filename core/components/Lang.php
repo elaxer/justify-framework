@@ -1,8 +1,8 @@
 <?php
 
-namespace Justify\Components;
+namespace Core\Components;
 
-use Justify;
+use Core\Justify;
 
 class Lang
 {

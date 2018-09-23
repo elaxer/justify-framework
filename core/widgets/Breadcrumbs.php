@@ -1,6 +1,6 @@
 <?php
 
-namespace Justify\Widgets;
+namespace Core\Widgets;
 
 /**
  * Class Breadcrumbs

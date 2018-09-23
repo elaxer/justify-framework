@@ -1,9 +1,9 @@
 <?php
 
-namespace Justify\System;
+namespace Core\System;
 
-use Justify\System\TemplateEngines\TemplateEngineFactory;
-use Justify;
+use Core\System\TemplateEngines\TemplateEngineFactory;
+use Core\Justify;
 
 /**
  * Class View

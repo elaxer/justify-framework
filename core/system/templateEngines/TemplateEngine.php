@@ -1,8 +1,8 @@
 <?php
 
-namespace Justify\System\TemplateEngines;
+namespace Core\System\TemplateEngines;
 
-use Justify;
+use Core\Justify;
 
 /**
  * Class TemplateEngine

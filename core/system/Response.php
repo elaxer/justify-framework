@@ -1,6 +1,6 @@
 <?php
 
-namespace Justify\System;
+namespace Core\System;
 
 /**
  * Class Response
@@ -8,7 +8,7 @@ namespace Justify\System;
  * Class for working with HTTP response
  *
  * @since 2.3.0
- * @package Justify\System
+ * @package Core\System
  */
 class Response
 {

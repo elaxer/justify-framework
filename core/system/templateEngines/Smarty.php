@@ -1,6 +1,6 @@
 <?php
 
-namespace Justify\System\TemplateEngines;
+namespace Core\System\TemplateEngines;
 
 /**
  * Class Smarty

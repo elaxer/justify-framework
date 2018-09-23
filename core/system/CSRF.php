@@ -1,8 +1,8 @@
 <?php
 
-namespace Justify\System;
+namespace Core\System;
 
-use Justify\Exceptions\CSRFProtectionException;
+use Core\System\Exceptions\CSRFProtectionException;
 
 /**
  * Class CSRF
@@ -10,7 +10,7 @@ use Justify\Exceptions\CSRFProtectionException;
  * Class for protect your forms from CSRF attacks
  *
  * @since 2.2.0
- * @package Justify\System
+ * @package Core\System
  */
 class CSRF
 {

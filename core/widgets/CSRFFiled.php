@@ -1,12 +1,12 @@
 <?php
 
-namespace Justify\Widgets;
+namespace Core\Widgets;
 
 class CSRFFiled
 {
     public static function render(): string
     {
-        $csrfToken = \Justify\System\CSRF::$token;
+        $csrfToken = \Core\System\CSRF::$token;
 
         ob_start();
 

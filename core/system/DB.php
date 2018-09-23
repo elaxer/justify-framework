@@ -1,11 +1,11 @@
 <?php
 
-namespace Justify\System;
+namespace Core\System;
 
 use PDO;
 use PDOException;
-use Justify;
-use Justify\Exceptions\ExtensionNotFoundException;
+use Core\Justify;
+use Core\System\Exceptions\ExtensionNotFoundException;
 
 /**
  * Class DB

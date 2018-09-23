@@ -1,8 +1,8 @@
 <?php
 
-namespace Justify\Exceptions;
+namespace Core\System\Exceptions;
 
-use Justify;
+use Core\Justify;
 use Throwable;
 
 /**

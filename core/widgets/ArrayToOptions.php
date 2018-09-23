@@ -1,6 +1,6 @@
 <?php
 
-namespace Justify\Widgets;
+namespace Core\Widgets;
 
 /**
  * Class ArrayToOptions
@@ -8,7 +8,7 @@ namespace Justify\Widgets;
  * Render associative array as option tags
  *
  * @since 2.0
- * @package Justify\Widgets
+ * @package Core\Widgets
  */
 class ArrayToOptions
 {

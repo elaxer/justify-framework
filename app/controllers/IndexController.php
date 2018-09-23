@@ -2,7 +2,7 @@
 
 namespace App\Controllers;
 
-use Justify;
+use Core\Justify;
 
 class IndexController extends Controller
 {

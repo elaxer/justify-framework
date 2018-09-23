@@ -1,8 +1,8 @@
 <?php
 
-namespace Justify\Widgets;
+namespace Core\Widgets;
 
-use Justify\Exceptions\InvalidConfigException;
+use Core\System\Exceptions\InvalidConfigException;
 
 /**
  * Class Session

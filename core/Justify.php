@@ -1,5 +1,9 @@
 <?php
 
+namespace Core;
+
+use Core\Components\Str;
+
 /**
  * Class Justify
  *
@@ -66,25 +70,6 @@ class Justify
     public static $web;
 
     /**
-     * Stores aliases of namespaces
-     *
-     * Key - namespace
-     * Value - path to directory
-     *
-     * @var array
-     */
-    public static $classesMap = [
-        'Justify\Components' => 'core/components',
-        'Justify\Widgets' => 'core/widgets',
-        'Justify\System' => 'core/system',
-        'Justify\Bootstrap' => 'core/bootstrap',
-        'Justify\Exceptions' => 'core/system/exceptions',
-        'Justify\System\TemplateEngines' => 'core/system/templateEngines',
-        'App\Controllers' => 'app/controllers',
-        'App\Models' => 'app/models'
-    ];
-
-    /**
      * Stores name of current controller
      *
      * @var string
@@ -126,14 +111,17 @@ class Justify
      */
     public static function autoloadFunction(string $className)
     {
-        $segments = explode('\\', $className);
-        $class = array_pop($segments);
-        $namespace = implode('\\', $segments);
-        $path = BASE_DIR . '/' . Justify::$classesMap[$namespace] . '/' . $class . '.php';
+        $namespaces = explode('\\', $className);
+        $namespaces = array_map(function ($namespace) {
+            return lcfirst($namespace);
+        }, $namespaces);
 
-        if (array_key_exists($namespace, Justify::$classesMap)) {
-            require_once $path;
-        } else if (file_exists($path)) {
+        $class = array_pop($namespaces);
+        array_push($namespaces, ucfirst($class));
+
+        $path = BASE_DIR . '/' . implode('/', $namespaces) . '.php';
+
+        if (file_exists($path)) {
             require_once $path;
         }
     }

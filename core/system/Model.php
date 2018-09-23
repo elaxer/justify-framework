@@ -1,8 +1,8 @@
 <?php
 
-namespace Justify\System;
+namespace Core\System;
 
-use Justify\Components\Str;
+use Core\Components\Str;
 
 /**
  * Class Model

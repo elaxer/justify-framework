@@ -1,6 +1,6 @@
 <?php
 
-namespace Justify\System;
+namespace Core\System;
 
 /**
  * Class Session
@@ -8,7 +8,7 @@ namespace Justify\System;
  * Class for work session
  *
  * @since 2.0
- * @package Justify\System
+ * @package Core\System
  */
 class Session
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Justify\Components;
+namespace Core\Components;
 
 /**
  * Class SimplePagination

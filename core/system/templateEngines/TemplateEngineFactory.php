@@ -1,6 +1,8 @@
 <?php
 
-namespace Justify\System\TemplateEngines;
+namespace Core\System\TemplateEngines;
+
+use Core\FactoryInterface;
 
 /**
  * Class TemplateEngineFactory
@@ -8,12 +10,12 @@ namespace Justify\System\TemplateEngines;
  * @since 2.3.0
  * @package Justify\System\TemplateEngines
  */
-class TemplateEngineFactory
+class TemplateEngineFactory implements FactoryInterface
 {
-	public static function create(string $templateEngineName): object
+	public static function create(string $templateEngineName, array $params = []): object
 	{
-		$className = '\Justify\System\TemplateEngines\\' . $templateEngineName;
+		$className = '\Core\System\TemplateEngines\\' . $templateEngineName;
 		
-		return new $className;
+		return new $className(...$params);
 	}
 }

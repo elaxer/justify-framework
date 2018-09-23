@@ -1,6 +1,6 @@
 <?php
 
-namespace Justify\System;
+namespace Core\System;
 
 /**
  * Class Request

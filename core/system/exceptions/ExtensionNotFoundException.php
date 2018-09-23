@@ -1,6 +1,6 @@
 <?php
 
-namespace Justify\Exceptions;
+namespace Core\System\Exceptions;
 
 /**
  * Class ExtensionNotFoundException

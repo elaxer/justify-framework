@@ -1,6 +1,6 @@
 <?php
 
-use Justify\Components\Dump;
+use Core\Components\Dump;
 
 if (!function_exists('dump')) {
     function dump(...$variables)

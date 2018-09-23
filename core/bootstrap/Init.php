@@ -1,12 +1,12 @@
 <?php
 
-namespace Justify\Bootstrap;
+namespace Core\Bootstrap;
 
-use Justify;
-use Justify\System\BaseObject;
-use Justify\Components\Lang;
-use Justify\Exceptions\OldPHPVersionException;
-use Justify\Exceptions\CauseFromConsoleException;
+use Core\Justify;
+use Core\System\BaseObject;
+use Core\Components\Lang;
+use Core\System\Exceptions\OldPHPVersionException;
+use Core\System\Exceptions\CauseFromConsoleException;
 
 /**
  * Class Init
@@ -47,24 +47,12 @@ class Init extends BaseObject
         setlocale(LC_ALL, Justify::$settings['locale']);
     }
 
+    /**
+     * Loads languages
+     */
     public function loadLang()
     {
         Lang::getLanguages();
-    }
-
-    /**
-     * Loads JS, CSS components
-     * @deprecated
-     */
-    public function loadWebComponents()
-    {
-        Justify::$settings['web']['css'] = array_map(function ($css) {
-            return Justify::$settings['webPath'] . $css;
-        }, Justify::$settings['web']['css']);
-
-        Justify::$settings['web']['js'] = array_map(function ($js) {
-            return Justify::$settings['webPath'] . $js;
-        }, Justify::$settings['web']['js']);
     }
 
     /**

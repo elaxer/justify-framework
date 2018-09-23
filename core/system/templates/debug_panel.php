@@ -1,5 +1,5 @@
 <?php
-use Justify\Components\Lang;
+use Core\Components\Lang;
 ?>
 <div id="open-panel">&laquo;</div>
 <div id="close-panel">&raquo;</div>

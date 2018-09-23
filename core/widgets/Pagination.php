@@ -1,8 +1,8 @@
 <?php
 
-namespace Justify\Widgets;
+namespace Core\Widgets;
 
-use Justify\Components\Pagination as PaginationObject;
+use Core\Components\Pagination as PaginationObject;
 
 class Pagination
 {

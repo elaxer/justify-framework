@@ -1,9 +1,9 @@
 <?php
 
-namespace Justify\System;
+namespace Core\System;
 
-use Justify\Exceptions\UndefinedPropertyException;
-use Justify\Exceptions\InvalidCallException;
+use Core\System\Exceptions\UndefinedPropertyException;
+use Core\System\Exceptions\InvalidCallException;
 
 /**
  * Class Base

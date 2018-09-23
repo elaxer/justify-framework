@@ -1,13 +1,13 @@
 <?php
 
-namespace Justify\System;
+namespace Core\System;
 
 /**
  * Class Controller
  *
  * System class Controller consists of methods for work with app controller
  *
- * @package Justify\System
+ * @package Core\System
  */
 abstract class Controller extends BaseObject
 {

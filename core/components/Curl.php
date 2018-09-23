@@ -1,8 +1,8 @@
 <?php
 
-namespace Justify\Components;
+namespace Core\Components;
 
-use Justify\Exceptions\ExtensionNotFoundException;
+use Core\System\ExtensionNotFoundException;
 
 /**
  * Class Curl for working with network

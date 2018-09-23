@@ -1,8 +1,8 @@
 <?php
 
-namespace Justify\Components;
+namespace Core\Components;
 
-use Justify\Exceptions\ExtensionNotFoundException;
+use Core\System\Exceptions\ExtensionNotFoundException;
 
 /**
  * Class VK

@@ -1,6 +1,6 @@
 <?php
 
-use Justify\Components\Lang;
+use Core\Components\Lang;
 
 if (!function_exists('lang')) {
 	function lang(string $key, $locale = null, string $notFound = 'NOT FOUND'): string
