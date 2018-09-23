@@ -26,7 +26,7 @@ class CSRF
      *
      * @return string
      */
-    public static function generateToken()
+    public static function generateToken(): string
     {
         return bin2hex(openssl_random_pseudo_bytes(32));
     }

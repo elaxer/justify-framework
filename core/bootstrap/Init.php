@@ -70,9 +70,9 @@ class Init extends BaseObject
     /**
      * Returns array of routes
      *
-     * @return string
+     * @return array
      */
-    public function getRoutes()
+    public function getRoutes(): array
     {
         return Justify::$settings['routes'];
     }
@@ -102,10 +102,6 @@ class Init extends BaseObject
             echo PHP_EOL . $e->getName() . ': ' . $e->getMessage() . PHP_EOL;
             exit();
         }
-
-        Justify::$home = Justify::$settings['homeURL'];
-        Justify::$lang = Justify::$settings['html']['lang'];
-        Justify::$web = Justify::$settings['webPath'];
     }
 
     /**
@@ -116,9 +112,9 @@ class Init extends BaseObject
      * @param string $error
      * @throws OldPHPVersionException
      */
-    private function isOldVersion($version, $error = 'PHP version must be bigger than ')
+    private function isOldVersion(string $version, string $error = 'PHP version must be bigger than ')
     {
-        if (! version_compare(PHP_VERSION, $version, '>=')) {
+        if (!version_compare(PHP_VERSION, $version, '>=')) {
             throw new OldPHPVersionException($error . $version);
         }
     }

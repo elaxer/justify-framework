@@ -6,7 +6,7 @@
  * @since 2.2.0
  * @param string $text
  */
-function consoleLog($text)
+function consoleLog(string $text)
 {
     echo "<script>console.log('$text')</script>";
 }
@@ -17,7 +17,7 @@ function consoleLog($text)
  * @since 2.2.0
  * @param array $array
  */
-function consoleLogArray($array)
+function consoleLogArray(array $array)
 {
     echo '<script>';
     foreach ($array as $value) {

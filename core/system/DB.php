@@ -13,6 +13,7 @@ use Justify\Exceptions\ExtensionNotFoundException;
  * System class DB consists of simple methods for work with DB
  *
  * @since 2.0
+ * @deprecated
  * @package Justify\System
  */
 class DB extends Model
@@ -52,7 +53,7 @@ class DB extends Model
      * 
      * @return object
      */
-    public static function find()
+    public static function find(): object
     {
         $object = new static();
         $object->query = "SELECT * FROM {$object->table}";
@@ -67,7 +68,7 @@ class DB extends Model
      * @param string $identifyName name of identifier
      * @return object
      */
-    public static function findOne($identify, $identifyName = 'id')
+    public static function findOne(int $identify, string $identifyName = 'id'): object
     {
         $object = new static();
         $stmt = $object->db->prepare("SELECT * FROM {$object->table} WHERE $identifyName = ?");
@@ -81,7 +82,7 @@ class DB extends Model
      * 
      * @return int
      */
-    public static function totalCount()
+    public static function totalCount(): int
     {
         $object = new static();
         $stmt = $object->db->query("SELECT COUNT(*) as count FROM {$object->table}");
@@ -108,7 +109,7 @@ class DB extends Model
      * @param string $query SQL query
      * @return int
      */
-    public static function exec($query)
+    public static function exec($query): int
     {
         $object = new static();
 
@@ -120,7 +121,7 @@ class DB extends Model
      *
      * @return int
      */
-    public static function clearTable()
+    public static function clearTable(): int
     {
         $object = new static();
 
@@ -132,7 +133,7 @@ class DB extends Model
      *
      * @return int
      */
-    public static function dropTable()
+    public static function dropTable(): int
     {
         $object = new static();
 
@@ -144,7 +145,7 @@ class DB extends Model
      *
      * @return int
      */
-    public static function dropDB()
+    public static function dropDB(): int
     {
         $object = new static();
 
@@ -159,7 +160,7 @@ class DB extends Model
      * @param string|array $select selects items
      * @return object
      */
-    public function select($select)
+    public function select($select): object
     {
         if (is_array($select)) {
             $this->query = "SELECT " . implode(', ', $select);
@@ -179,7 +180,7 @@ class DB extends Model
      * @param string|array $select selects items
      * @return object
      */
-    public function selectCount($select)
+    public function selectCount($select): object
     {
         if (is_array($select)) {
             $this->query = "SELECT COUNT(" . implode(', ', $select) . ')';
@@ -198,7 +199,7 @@ class DB extends Model
      * @param string $from from table name
      * @return object
      */
-    public function from($from)
+    public function from($from): object
     {
         $this->query .= " FROM $from";
 
@@ -214,7 +215,7 @@ class DB extends Model
      * @param array $params array of values
      * @return object
      */
-    public function where($condition, array $params = [])
+    public function where($condition, array $params = []): object
     {
         $this->query .= " WHERE $condition";
         $this->params = array_merge($this->params, $params);
@@ -231,7 +232,7 @@ class DB extends Model
      * @param array $params array of values
      * @return object
      */
-    public function andWhere($condition, array $params = [])
+    public function andWhere($condition, array $params = []): object
     {
         $this->query .= " AND WHERE $condition";
         $this->params = array_merge($this->params, $params);
@@ -248,7 +249,7 @@ class DB extends Model
      * @param array $params array of values
      * @return object
      */
-    public function orWhere($condition, array $params = [])
+    public function orWhere($condition, array $params = []): object
     {
         $this->query .= " OR WHERE $condition";
         $this->params = array_merge($this->params, $params);
@@ -265,7 +266,7 @@ class DB extends Model
      * @param string $sort sort method
      * @return object
      */
-    public function orderBy($column, $sort = 'ASC')
+    public function orderBy($column, $sort = 'ASC'): object
     {
         $this->query .= " ORDER BY $column $sort";
 
@@ -280,7 +281,7 @@ class DB extends Model
      * @param int $limit limit of SQL query
      * @return object
      */
-    public function limit($limit)
+    public function limit($limit): object
     {
         $this->query .= " LIMIT ?";
         $this->params = array_merge($this->params, [$limit]);
@@ -296,7 +297,7 @@ class DB extends Model
      * @param int $offset offset of SQL query
      * @return object
      */
-    public function offset($offset)
+    public function offset($offset): object
     {
         $this->query .= " OFFSET ?";
         $this->params = array_merge($this->params, [$offset]);
@@ -312,7 +313,7 @@ class DB extends Model
      * @param string $column column name
      * @return object
      */
-    public function groupBy($column)
+    public function groupBy($column): object
     {
         $this->query .= " GROUP BY $column";
 
@@ -328,7 +329,7 @@ class DB extends Model
      * @param string $on join condition
      * @return object
      */
-    public function join($table, $on)
+    public function join($table, $on): object
     {
         $this->query .= " INNER JOIN $table ON $on";
 
@@ -344,7 +345,7 @@ class DB extends Model
      * @param string $on join condition
      * @return object
      */
-    public function leftJoin($table, $on)
+    public function leftJoin($table, $on): object
     {
         $this->query .= " LEFT JOIN $table ON $on";
 
@@ -360,7 +361,7 @@ class DB extends Model
      * @param string $on join condition
      * @return object
      */
-    public function rightJoin($table, $on)
+    public function rightJoin($table, $on): object
     {
         $this->query .= " RIGHT JOIN $table ON $on";
 
@@ -385,7 +386,7 @@ class DB extends Model
      * 
      * @return object
      */
-    public function one()
+    public function one(): object
     {
         $stmt = $this->db->prepare($this->query);
         $stmt->execute($this->params);
@@ -400,7 +401,7 @@ class DB extends Model
      * 
      * @return int
      */
-    public function count()
+    public function count(): int
     {
         $stmt = $this->db->prepare($this->query);
         $stmt->execute($this->params);
@@ -412,9 +413,9 @@ class DB extends Model
      * Sets conntection for MySQL DBMS
      * 
      * @since 2.1.0
-     * @return object
+     * @return \PDO
      */
-    private function connectMysql($settings, $pdoOptions)
+    private function connectMysql($settings, $pdoOptions): \PDO
     {
         return new PDO(
             "mysql:host={$settings['host']};"
@@ -430,9 +431,9 @@ class DB extends Model
      * Sets conntection for PostgreSQL DBMS
      * 
      * @since 2.1.0
-     * @return object
+     * @return PDO
      */
-    private function connectPgsql($settings, $pdoOptions)
+    private function connectPgsql($settings, $pdoOptions): \PDO
     {
         return new PDO(
             "pgsql:host={$settings['host']};"
@@ -448,9 +449,9 @@ class DB extends Model
      * Sets connection for SQLite DBMS
      * 
      * @since 2.1.0
-     * @return object
+     * @return \PDO
      */
-    private function connectSqlite($settings, $pdoOptions)
+    private function connectSqlite($settings, $pdoOptions): \PDO
     {
         return new PDO(
             'sqlite:' . $settings['path'],
@@ -474,7 +475,7 @@ class DB extends Model
         ];
 
         try {
-            if (! extension_loaded('PDO')) {
+            if (!extension_loaded('PDO')) {
                 throw new ExtensionNotFoundException('PDO');
             }
 

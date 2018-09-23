@@ -48,7 +48,6 @@ class App
 
                 try {
                     $controller = 'App\\Controllers\\' . ucfirst($controller) . 'Controller';
-                    $action = 'action' . ucfirst($action);
 
                     $controller = new $controller($matches);
 
@@ -66,7 +65,7 @@ class App
                         dump($response);
                     }
 
-                    if (! Justify::$execTime) {
+                    if (!Justify::$execTime) {
                         Justify::$execTime = microtime(true) - Justify::$startTime;
                     }
                 } catch (JustifyException $e) {
@@ -99,7 +98,6 @@ class App
         $init->initSettings();
         $init->loadHelpers();
         $init->loadLang();
-        $init->loadWebComponents();
 
         if (Justify::$settings['CSRFProtection']) {
             $this->CSRFProtection();
@@ -134,10 +132,10 @@ class App
      * Checks class extended by base controller
      *
      * @since 2.2.0
-     * @param string $controller
+     * @param object $controller
      * @return bool
      */
-    private function isSubclassOfBaseController($controller)
+    private function isSubclassOfBaseController(object $controller): bool
     {
         return is_subclass_of($controller, 'Justify\System\Controller');
     }
@@ -147,7 +145,7 @@ class App
      *
      * @return string
      */
-    private function getURI()
+    private function getURI(): string
     {
         return parse_url($_SERVER['REQUEST_URI'])['path'];
     }

@@ -48,7 +48,7 @@ class Curl
      * @param string $baseName base name of file
      * @return \CURLFile
      */
-    public function createFile($file, $mime, $baseName)
+    public function createFile($file, $mime, $baseName): \CURLFile
     {
         return curl_file_create($file, $mime, $baseName);
     }
@@ -56,9 +56,9 @@ class Curl
     /**
      * Execs curl query
      *
-     * @return mixed
+     * @return string
      */
-    public function exec()
+    public function exec(): string
     {
         return curl_exec($this->ch);
     }
@@ -66,9 +66,9 @@ class Curl
     /**
      * Returns version of curl extension
      *
-     * @return mixed
+     * @return string
      */
-    public static function getVersion()
+    public static function getVersion(): string
     {
         return curl_version()['version'];
     }
@@ -78,7 +78,7 @@ class Curl
      *
      * @return string
      */
-    public function getError()
+    public function getError(): string
     {
         return curl_error($this->ch);
     }
@@ -88,7 +88,7 @@ class Curl
      *
      * @return int
      */
-    public function getErrno()
+    public function getErrno(): int
     {
         return curl_errno($this->ch);
     }
@@ -112,7 +112,7 @@ class Curl
     public function __construct($url = null)
     {
         try {
-            if (! extension_loaded('curl_init')) {
+            if (!extension_loaded('curl_init')) {
                 throw new ExtensionNotFoundException('CURL');
             }
 
@@ -128,7 +128,7 @@ class Curl
      */
     public function __destruct()
     {
-        if (! is_null($this->ch)) {
+        if (!is_null($this->ch)) {
             $this->close();
         }
     }

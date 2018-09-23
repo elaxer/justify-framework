@@ -8,12 +8,13 @@
  * @param array $rules chars of future password
  * @return string
  */
-function generatePassword($length, array $rules = [
+function generatePassword(int $length, array $rules = [
     'littleLetters' => true,
     'bigLetters' => true,
     'numbers' => true,
     'specialChars' => false
-]) {
+]): string
+{
     $chars = [
         'littleLetters' => 'qwertyuiopasdfghjklzxcvbnm',
         'bigLetters' => 'QWERTYUIOPASDFGHJKLZXCVBNM',

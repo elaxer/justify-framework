@@ -20,7 +20,7 @@ class Model extends BaseObject
      * @param mixed $var variable to encode
      * @return string
      */
-    public static function encode($var)
+    public static function encode($var): string
     {
         return htmlspecialchars(trim($var), ENT_QUOTES, 'UTF-8');
     }
@@ -35,7 +35,7 @@ class Model extends BaseObject
      * @param mixed $var variable to decode
      * @return string
      */
-    public static function decode($var)
+    public static function decode($var): string
     {
         return htmlspecialchars_decode($var, ENT_QUOTES);
     }
@@ -45,7 +45,7 @@ class Model extends BaseObject
      *
      * @return string
      */
-    public static function tableName()
+    public static function tableName(): string
     {
         return Str::camelToSnake(self::getClassName());
     }

@@ -15,7 +15,11 @@ class SimplePagination
      * @param string $next text of next button
      * @return string
      */
-    public static function render(SimplePaginationObject $pagination, $previous = 'Previous', $next = 'Next')
+    public static function render(
+        SimplePaginationObject $pagination,
+        string $previous = 'Previous',
+        string $next = 'Next'
+    ): string
     {
         ob_start();
 

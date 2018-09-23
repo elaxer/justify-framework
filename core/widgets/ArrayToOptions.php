@@ -12,7 +12,7 @@ namespace Justify\Widgets;
  */
 class ArrayToOptions
 {
-    public static function render($array, $selected = 1)
+    public static function render(array $array, int $selected = 1): string
     {
         ob_start();
 

@@ -58,7 +58,7 @@ class Request
      *
      * @return bool
      */
-    public function isGet()
+    public function isGet(): bool
     {
         return $_SERVER['REQUEST_METHOD'] == 'GET';
     }
@@ -68,7 +68,7 @@ class Request
      *
      * @return bool
      */
-    public function isPost()
+    public function isPost(): bool
     {
         return $_SERVER['REQUEST_METHOD'] == 'POST';
     }
@@ -95,7 +95,7 @@ class Request
      *
      * @return string
      */
-    public function getUserIp()
+    public function getUserIp(): string
     {
         return $_SERVER['REMOTE_ADDR'];
     }
@@ -105,9 +105,19 @@ class Request
      *
      * @return string
      */
-    public function getServerIp()
+    public function getServerIp(): string
     {
         return $_SERVER['SERVER_ADDR'];
+    }
+
+    /**
+     * Method returns current URI address
+     *
+     * @return string
+     */
+    public function getURI(): string
+    {
+        return parse_url($_SERVER['REQUEST_URI'])['path'];
     }
 
     /**

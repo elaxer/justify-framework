@@ -19,7 +19,7 @@ class Math
      * @param integer $start the number from which the array begins to fill
      * @return array
      */
-    public static function fillArithmeticProgression($length, $d, $start = 0)
+    public static function fillArithmeticProgression(int $length, int $d, int $start = 0): array
     {
         $array = [$start];
         
@@ -38,7 +38,7 @@ class Math
      * @param integer $start the number from which the array begins to fill
      * @return array
      */
-    public static function fillGeometricProgression($length, $q, $start = 1)
+    public static function fillGeometricProgression(int $length, int $q, int $start = 1): array
     {
         $array = [$start];
 
@@ -56,7 +56,7 @@ class Math
      * @param float $q denominator of geometric progression
      * @return int|boolean
      */
-    public static function sumOfTermsOfIDGP($b1, $q)
+    public static function sumOfTermsOfIDGP(float $b1, float$q)
     {
         return $q > 0 && $q < 1 ? $b1 / (1 - $q) : false;
     }
@@ -69,7 +69,7 @@ class Math
      * @param float|int $c c
      * @return float|int
      */
-    public static function discriminant($a, $b, $c)
+    public static function discriminant(float $a, float $b, float $c): float
     {
         return pow($b, 2) - 4 * $a * $c;
     }
@@ -79,9 +79,9 @@ class Math
      *
      * @since 2.0
      * @param int $x number
-     * @return float|int
+     * @return int
      */
-    public static function factorial($x)
+    public static function factorial(int $x): int
     {
         $factorial = 1;
 
@@ -99,7 +99,7 @@ class Math
      * @param int $x position
      * @return int
      */
-    public static function fibonacci($x)
+    public static function fibonacci(int $x): int
     {
         if (in_array($x, [0, 1])) {
             return $x;
@@ -119,7 +119,7 @@ class Math
      * @param array $numbers array of numbers
      * @return int|float
      */
-    public static function average(array $numbers)
+    public static function average(array $numbers): float
     {
         return array_sum($numbers) / count($numbers);
     }
@@ -132,7 +132,7 @@ class Math
      * @param float|int $a2
      * @return float|int
      */
-    public static function percentage($a1, $a2)
+    public static function percentage(float $a1, float $a2): float
     {
         return $a1 / $a2 * 100;
     }
@@ -146,7 +146,7 @@ class Math
      * @param float $number checks number
      * @return boolean
      */
-    public static function isEven($number)
+    public static function isEven(float $number): bool
     {
         return $number % 2 == 0;
     }
@@ -160,7 +160,7 @@ class Math
      * @param float $number checks number
      * @return boolean
      */
-    public static function isOdd($number)
+    public static function isOdd(float $number): bool
     {
         return $number % 2 != 0;
     }
@@ -171,9 +171,9 @@ class Math
      * @since 1.6.3
      * @deprecated
      * @param array $numbers array of numbers
-     * @return int|mixed
+     * @return float
      */
-    public static function sum(array $numbers) {
+    public static function sum(array $numbers): float {
         $sumOfNumbers = 0;
 
         foreach ($numbers as $number) {
@@ -190,7 +190,7 @@ class Math
      * @param int &$number
      * @return int
      */
-    public static function inc(&$number)
+    public static function inc(int &$number): int
     {
         return ++$number;
     }
@@ -202,7 +202,7 @@ class Math
      * @param int &$number
      * @return int
      */
-    public static function dec(&$number)
+    public static function dec(int &$number): int
     {
         return --$number;
     }

@@ -13,7 +13,7 @@ class Pagination
      * @param PaginationObject $pagination pagination
      * @return string
      */
-    public static function render(PaginationObject $pagination)
+    public static function render(PaginationObject $pagination): string
     {
         ob_start();
 

@@ -50,7 +50,7 @@ class VK
      * @param array $params array of params
      * @return object
      */
-    public function api($method, $params = [])
+    public function api(string $method, array $params = []): object
     {
         if (! isset($params['access_token']))
             $params['access_token'] = $this->accessToken;
@@ -75,7 +75,7 @@ class VK
      * @param array $params request params
      * @return object|bool
      */
-    public function sendPhoto($file, $params)
+    public function sendPhoto(string $file, array $params)
     {
         try {
             if (! function_exists('curl_init')) {
@@ -122,7 +122,7 @@ class VK
      * @param array array of params
      * @return string link
      */
-    public function initApp($params)
+    public function initApp(array $params): string
     {
         if (! isset($params['scope']))
             $params['scope'] = implode(',', $this->scopes);
@@ -145,7 +145,7 @@ class VK
      * @param string $accessToken access token of your VK application
      * @param string $apiVersion VK API version
      */
-    public function __construct($accessToken = '', $apiVersion = '')
+    public function __construct(string $accessToken = '', string $apiVersion = '')
     {
         $this->accessToken = $accessToken;
 

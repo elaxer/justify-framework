@@ -30,7 +30,7 @@ class NotFoundException extends JustifyException
     public function __construct(string $message)
     {
         parent::__construct($message, 404);
-
+        http_response_code(404);
         $this->render($message);
     }
 

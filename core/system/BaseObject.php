@@ -20,7 +20,7 @@ class BaseObject
      *
      * @param string $name property name
      */
-    public function __get($name)
+    public function __get(string $name)
     {
         try {
             throw new UndefinedPropertyException(
@@ -38,7 +38,7 @@ class BaseObject
      * @param string $name property name
      * @param mixed $value sets value
      */
-    public function __set($name, $value)
+    public function __set(string $name, $value)
     {
         try {
             throw new UndefinedPropertyException(
@@ -54,9 +54,9 @@ class BaseObject
      * Method throws exception when calls undefined method
      *
      * @param string $name name of method
-     * @param mixed $arguments arguments for method
+     * @param array $arguments arguments for method
      */
-    public function __call($name, $arguments)
+    public function __call(string $name, array $arguments)
     {
         try {
             throw new InvalidCallException(
@@ -73,7 +73,7 @@ class BaseObject
      *
      * @return string
      */
-    public static function getClassName()
+    public static function getClassName(): string
     {
         $class = get_called_class();
         $segments = explode('\\', $class);

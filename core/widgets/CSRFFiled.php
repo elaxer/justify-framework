@@ -2,9 +2,9 @@
 
 namespace Justify\Widgets;
 
-class CSRF
+class CSRFFiled
 {
-    public static function field()
+    public static function render(): string
     {
         $csrfToken = \Justify\System\CSRF::$token;
 

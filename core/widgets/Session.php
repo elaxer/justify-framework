@@ -56,7 +56,7 @@ class Session
      * @param string $type type of flash
      * @param bool $close can close flash
      */
-    public static function setFlash($message, $type = 'info', $close = true)
+    public static function setFlash(string $message, string $type = 'info', bool $close = true)
     {
         self::$message = $message;
         self::$type = $type;
@@ -77,9 +77,9 @@ class Session
      *
      * @return bool
      */
-    public static function hasFlash()
+    public static function hasFlash(): bool
     {
-        return ! is_null(self::$message);
+        return !is_null(self::$message);
     }
 
     /**
@@ -87,7 +87,7 @@ class Session
      *
      * @return string
      */
-    public static function render()
+    public static function render(): string
     {
         ob_start();
 

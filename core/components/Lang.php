@@ -9,7 +9,6 @@ class Lang
     const LANG_DIR = BASE_DIR . '/lang/';
 
     public static $languages;
-
     public static $currentLang;
 
     public static function getLanguages()
@@ -35,9 +34,9 @@ class Lang
         }
     }
 
-    public static function get($key, $locale = null, $notFound = 'NOT FOUND')
+    public static function get(string $key, $locale = null, string $notFound = 'NOT FOUND'): string
     {
-        if (! $locale) {
+        if (!$locale) {
             $locale = Justify::$settings['locale'];
         }
 
@@ -56,12 +55,12 @@ class Lang
         return $notFound;
     }
 
-    public static function setLocale($locale)
+    public static function setLocale(string $locale)
     {
         Justify::$settings['locale'] = $locale;
     }
 
-    public static function setFallbackLocale($locale)
+    public static function setFallbackLocale(string $locale)
     {
         Justify::$settings['fallbackLocale'] = $locale;
     }

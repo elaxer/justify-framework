@@ -9,6 +9,7 @@ class Justify
 {
     /**
      * Count of characters after comma in $execTime
+     * @deprecated
      */
     const EXEC_TIME_PRECISION = 5;
 
@@ -78,6 +79,7 @@ class Justify
         'Justify\System' => 'core/system',
         'Justify\Bootstrap' => 'core/bootstrap',
         'Justify\Exceptions' => 'core/system/exceptions',
+        'Justify\System\TemplateEngines' => 'core/system/templateEngines',
         'App\Controllers' => 'app/controllers',
         'App\Models' => 'app/models'
     ];
@@ -115,14 +117,14 @@ class Justify
      *
      * @var string
      */
-    public static $minimalPHPVersion = '5.6.0';
+    public static $minimalPHPVersion = '7.0.0';
 
     /**
      * Autoload method
      *
      * @param string $className class name
      */
-    public static function autoloadFunction($className)
+    public static function autoloadFunction(string $className)
     {
         $segments = explode('\\', $className);
         $class = array_pop($segments);
@@ -141,8 +143,8 @@ class Justify
      *
      * @return string
      */
-    public static function getVersion()
+    public static function getVersion(): string
     {
-        return '2.2.0';
+        return '2.3.0';
     }
 }
