@@ -3,7 +3,7 @@
  * Justify Framework
  *
  * @author Justify <justifydev@gmail.com>
- * @version 2.3.0
+ * @version 2.3.1
  */
 
 // Absolute path to framework root directory
