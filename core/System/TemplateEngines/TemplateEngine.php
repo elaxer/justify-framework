@@ -10,7 +10,7 @@ use Core\Justify;
  * @since 2.3.0
  * @package Justify\System\TemplateEngines
  */
-abstract class TemplateEngine
+abstract class TemplateEngine implements TemplateEngineInterface
 {
 	protected $config;
 	protected $activeTemplateEngine;

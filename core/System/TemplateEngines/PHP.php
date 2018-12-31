@@ -8,7 +8,7 @@ namespace Core\System\TemplateEngines;
  * @since 2.3.0
  * @package Justify\System\TemplateEngines
  */
-class PHP extends TemplateEngine implements TemplateEngineInterface
+class PHP extends TemplateEngine
 {
 	public function render(string $view, array $params = []): string
 	{

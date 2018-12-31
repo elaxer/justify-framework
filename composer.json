@@ -25,6 +25,15 @@
   },
   "require-dev": {
     "squizlabs/php_codesniffer": "^3.2",
-    "psy/psysh": "^0.8.17"
+    "psy/psysh": "^0.8.17",
+    "filp/whoops": "^2.3",
+    "maximebf/debugbar": "^1.15"
+  },
+  "autoload": {
+    "psr-4": {
+      "App\\": "app",
+      "Core\\": "core"
+    },
+    "files": ["core/Helpers/view.php"]
   }
 }

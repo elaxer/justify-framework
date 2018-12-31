@@ -12,12 +12,6 @@ define('BASE_DIR', dirname(__FILE__));
 // Includes composer
 require_once BASE_DIR . '/vendor/autoload.php';
 
-// Includes Justify class
-require_once BASE_DIR . '/core/Justify.php';
-
-// Includes App class
-require_once BASE_DIR . '/core/bootstrap/App.php';
-
 // Includes settings
 $settings = require_once BASE_DIR . '/config/config.php';
 

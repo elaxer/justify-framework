@@ -2,7 +2,6 @@
 
 namespace Core\System;
 
-use Core\System\Exceptions\UndefinedPropertyException;
 use Core\System\Exceptions\InvalidCallException;
 
 /**
@@ -22,14 +21,7 @@ class BaseObject
      */
     public function __get(string $name)
     {
-        try {
-            throw new UndefinedPropertyException(
-                'Called property ' . self::getClassName() . "::$name  not found"
-            );
-        } catch (UndefinedPropertyException $e) {
-            $e->printError();
-            exit();
-        }
+        throw new UndefinedPropertyException('Called property ' . self::getClassName() . "::$name  not found");
     }
 
     /**
@@ -40,32 +32,19 @@ class BaseObject
      */
     public function __set(string $name, $value)
     {
-        try {
-            throw new UndefinedPropertyException(
-                'Called property ' . self::getClassName() . "::$name  not found"
-            );
-        } catch (UndefinedPropertyException $e) {
-            $e->printError();
-            exit();
-        }
+        throw new UndefinedPropertyException('Called property ' . self::getClassName() . "::$name  not found");
     }
 
     /**
      * Method throws exception when calls undefined method
      *
+     * @throws InvalidCallException
      * @param string $name name of method
      * @param array $arguments arguments for method
      */
     public function __call(string $name, array $arguments)
     {
-        try {
-            throw new InvalidCallException(
-                'Called method ' . self::getClassName() . "::$name()  not found"
-            );
-        } catch (InvalidCallException $e) {
-            $e->printError();
-            exit();
-        }
+        throw new InvalidCallException('Called method ' . self::getClassName() . "::$name()  not found");
     }
 
     /**

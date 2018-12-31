@@ -8,7 +8,7 @@ namespace Core\System\TemplateEngines;
  * @since 2.3.0
  * @package Justify\System\TemplateEngines
  */
-class Twig extends TemplateEngine implements TemplateEngineInterface
+class Twig extends TemplateEngine
 {
 	private $twig;
 
@@ -22,6 +22,14 @@ class Twig extends TemplateEngine implements TemplateEngineInterface
 		$this->twig = new \Twig_Environment($loader, $config);
 	}
 
+    /**
+     * @param string $view
+     * @param array $params
+     * @return string
+     * @throws \Twig_Error_Loader
+     * @throws \Twig_Error_Runtime
+     * @throws \Twig_Error_Syntax
+     */
 	public function render(string $view, array $params = []): string
 	{
 		$view = $this->createViewPath($view);

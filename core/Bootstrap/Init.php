@@ -19,28 +19,14 @@ use Core\System\Exceptions\CauseFromConsoleException;
 class Init extends BaseObject
 {
     /**
-     * Loads helpers from directory vendor/helpers
-     */
-    public function loadHelpers()
-    {
-        $helpers = glob(BASE_DIR . '/core/helpers/*');
-
-        foreach ($helpers as $helper) {
-            require_once $helper;
-        }
-    }
-
-    /**
      * Initials necessary settings
      */
     public function initSettings()
     {
         if (Justify::$debug) {
-            ini_set('display_errors', 'On');
-            error_reporting(E_ALL);
-        } else {
-            ini_set('display_errors', 'Off');
-            error_reporting(0);
+            $whoops = new \Whoops\Run();
+            $whoops->pushHandler(new \Whoops\Handler\PrettyPageHandler());
+            $whoops->register();
         }
 
         date_default_timezone_set(Justify::$settings['timezone']);
@@ -70,6 +56,7 @@ class Init extends BaseObject
      *
      * Loads array of settings to next application work
      *
+     * @throws
      * @param array $settings stores array with settings
      */
     public function __construct(array $settings)
@@ -80,16 +67,8 @@ class Init extends BaseObject
 
         session_start();
 
-        try {
-            $this->isOldVersion(Justify::$minimalPHPVersion);
-            $this->causedFromConsole();
-        } catch (OldPHPVersionException $e) {
-            $e->printError();
-            exit();
-        } catch (CauseFromConsoleException $e) {
-            echo PHP_EOL . $e->getName() . ': ' . $e->getMessage() . PHP_EOL;
-            exit();
-        }
+        $this->isOldVersion(Justify::$minimalPHPVersion);
+        $this->causedFromConsole();
     }
 
     /**

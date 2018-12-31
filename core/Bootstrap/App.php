@@ -72,15 +72,13 @@ class App
      * Loads array of settings to next application work
      * Sets magic functions
      *
+     * @throws
      * @param array $settings stores array with settings
      */
     public function __construct(array $settings)
     {
-        spl_autoload_register(['Core\Justify', 'autoloadFunction']);
-
         $init = new Init($settings);
         $init->initSettings();
-        $init->loadHelpers();
         $init->loadLang();
 
         if (Justify::$settings['CSRFProtection']) {

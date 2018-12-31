@@ -2,8 +2,6 @@
 
 namespace Core;
 
-use Core\Components\Str;
-
 /**
  * Class Justify
  *
@@ -103,28 +101,6 @@ class Justify
      * @var string
      */
     public static $minimalPHPVersion = '7.0.0';
-
-    /**
-     * Autoload method
-     *
-     * @param string $className class name
-     */
-    public static function autoloadFunction(string $className)
-    {
-        $namespaces = explode('\\', $className);
-        $namespaces = array_map(function ($namespace) {
-            return lcfirst($namespace);
-        }, $namespaces);
-
-        $class = array_pop($namespaces);
-        array_push($namespaces, ucfirst($class));
-
-        $path = BASE_DIR . '/' . implode('/', $namespaces) . '.php';
-
-        if (file_exists($path)) {
-            require_once $path;
-        }
-    }
 
     /**
      * Returns current framework version
