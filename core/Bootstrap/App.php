@@ -3,11 +3,11 @@
 namespace Core\Bootstrap;
 
 use Core\Justify;
-use Core\System\ControllerFactory;
-use Core\System\CSRF;
-use Core\System\Exceptions\CSRFProtectionException;
-use Core\System\Request;
-use Core\System\Exceptions\InvalidConfigException;
+use Core\Components\Mvc\ControllerFactory;
+use Core\Components\Http\CSRF;
+use Core\Exceptions\CSRFProtectionException;
+use Core\Components\Http\Request;
+use Core\Exceptions\InvalidConfigException;
 
 /**
  * The Core of framework
@@ -18,7 +18,7 @@ class App
     /**
      * File: config/routes.php
      *
-     * @var \Core\System\Router\Router
+     * @var \Core\Components\Router\Router
      */
     private $router;
 
@@ -83,7 +83,7 @@ class App
     /**
      * Init protection from CSRF attacks
      *
-     * @throws \Core\System\Exceptions\CSRFProtectionException
+     * @throws \Core\Exceptions\CSRFProtectionException
      * @since 2.2.0
      */
     private function CSRFProtection()

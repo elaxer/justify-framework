@@ -3,9 +3,8 @@
 namespace Core\Bootstrap;
 
 use Core\Justify;
-use Core\System\BaseObject;
-use Core\System\Exceptions\OldPHPVersionException;
-use Core\System\Exceptions\CauseFromConsoleException;
+use Core\Exceptions\OldPHPVersionException;
+use Core\Exceptions\CauseFromConsoleException;
 use Core\Components\Lang;
 use Whoops\Run;
 use Whoops\Handler\PrettyPageHandler;
@@ -18,7 +17,7 @@ use Whoops\Handler\PrettyPageHandler;
  * @since 2.0
  * @package Justify\Core
  */
-class Init extends BaseObject
+class Init
 {
     /**
      * Initials necessary settings

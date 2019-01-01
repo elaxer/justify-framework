@@ -35,6 +35,6 @@
       "App\\": "app",
       "Core\\": "core"
     },
-    "files": ["core/helpers.php"]
+    "files": ["core/Components/helpers.php"]
   }
 }
