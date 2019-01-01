@@ -212,8 +212,7 @@ class Str
             'Э' => 'E', 'Ю' => 'Yu', 'Я' => 'Ya',
         ];
 
-        $translated = strtr($string, $converter);
-        return $translated;
+        return strtr($string, $converter);
     }
 
     /**

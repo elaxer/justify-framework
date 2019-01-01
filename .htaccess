@@ -1,8 +1,7 @@
 AddDefaultCharset UTF-8
 
 RewriteEngine On
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-l
+RewriteCond %{REQUEST_URI} !^/?public/
+RewriteCond %{REQUEST_URI} !\.(js|css|html)$
 
-RewriteRule ^(.+)$ index.php
+RewriteRule ^ public/index.php

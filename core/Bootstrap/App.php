@@ -5,6 +5,7 @@ namespace Core\Bootstrap;
 use Core\Justify;
 use Core\System\ControllerFactory;
 use Core\System\CSRF;
+use Core\System\Exceptions\CSRFProtectionException;
 use Core\System\Request;
 use Core\System\Exceptions\InvalidConfigException;
 
@@ -15,54 +16,40 @@ use Core\System\Exceptions\InvalidConfigException;
 class App
 {
     /**
-     * Array of routes
-     *
      * File: config/routes.php
      *
-     * @var array
+     * @var \Core\System\Router\Router
      */
-    private $routes;
+    private $router;
 
     /**
      * Method launches the application
-     *
-     * @throws InvalidConfigException
      */
     public function run()
     {
-        $uri = $this->getURI();
-        $routeExists = false;
+        $route = $this->router->findRoute($this->getHttpMethod(), $this->getURI());
 
-        foreach ($this->routes as $pattern => $controllerAndAction) {
-            $pattern = $this->createPattern($pattern);
+        if (!$route['found']) {
+            echo $this->render404();
 
-            if (!preg_match($pattern, $uri, $matches)) {
-                continue;
-            }
-
-            $routeExists = true;
-
-            $segments = explode('@', $controllerAndAction);
-            list($controller, $action) = $segments;
-
-            $controller = ControllerFactory::create($controller, $matches);
-
-            if (!$this->implementsBaseController($controller)) {
-                throw new InvalidConfigException(
-                    'Controller class must extend from Core\System\Controller'
-                );
-            }
-
-            $response = $controller->$action();
-            $this->displayResponse($response);
-
-            $this->setExecTime();
-
-            break;
+            return;
         }
 
-        if (!$routeExists) {
-            echo $this->render404();
+        if (is_string($route['handler'])) {
+            $segments = explode('@', $route['handler']);
+            list($controller, $action) = $segments;
+
+            $controller = ControllerFactory::create($controller, $route['vars']);
+
+            $response = $controller->$action(...$route['vars']);
+        }
+
+        if (is_callable($route['handler'])) {
+            $response = $route['handler'](...$route['vars']);
+        }
+
+        if (isset($response)) {
+            $this->displayResponse($response);
         }
     }
 
@@ -85,12 +72,18 @@ class App
             $this->CSRFProtection();
         }
 
-        $this->routes = $init->getRoutes();
+        $this->router = $init->getRouter();
+    }
+
+    public function __destruct()
+    {
+        $this->setExecTime();
     }
 
     /**
      * Init protection from CSRF attacks
      *
+     * @throws \Core\System\Exceptions\CSRFProtectionException
      * @since 2.2.0
      */
     private function CSRFProtection()
@@ -107,18 +100,6 @@ class App
     }
 
     /**
-     * Checks class extended by base controller
-     *
-     * @since 2.2.0
-     * @param object $controller
-     * @return bool
-     */
-    private function implementsBaseController(object $controller): bool
-    {
-        return is_subclass_of($controller, 'Core\System\Controller');
-    }
-
-    /**
      * Method return current URI address
      *
      * @return string
@@ -126,6 +107,14 @@ class App
     private function getURI(): string
     {
         return parse_url($_SERVER['REQUEST_URI'])['path'];
+    }
+
+    /**
+     * @return string HTTP method
+     */
+    private function getHttpMethod(): string
+    {
+        return $_SERVER['REQUEST_METHOD'];
     }
 
     /**
@@ -165,17 +154,5 @@ class App
         } else if (is_object($response) || is_array($response)) {
             dump($response);
         }
-    }
-
-    /**
-     * Creates pattern
-     *
-     * @since 2.3.0
-     * @param string $pattern
-     * @return string
-     */
-    private function createPattern(string $pattern): string
-    {
-        return "#^/?$pattern$#iu";
     }
 }

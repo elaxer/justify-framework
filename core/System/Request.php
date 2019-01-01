@@ -33,7 +33,7 @@ class Request
             return $_GET;
         }
 
-        return isset($_GET[$key]) ? $_GET[$key] : $defaultValue;
+        return $_GET[$key] ?? $defaultValue;
     }
 
     /**
@@ -50,7 +50,7 @@ class Request
             return $_POST;
         }
 
-        return isset($_POST[$key]) ? $_POST[$key] : $defaultValue;
+        return $_POST[$key] ?? $defaultValue;
     }
 
     /**
@@ -87,7 +87,7 @@ class Request
             return $_REQUEST;
         }
 
-        return isset($_REQUEST[$key]) ? $_REQUEST[$key] : $defaultValue;
+        return $_REQUEST[$key] ?? $defaultValue;
     }
 
     /**

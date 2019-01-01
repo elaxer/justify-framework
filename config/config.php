@@ -5,7 +5,7 @@ $db = require_once BASE_DIR . '/config/db.php';
 $routes = require_once BASE_DIR . '/config/routes.php';
 
 // Main array with all settings
-$settings = [
+$config = [
     // Choose your timezone, all list of time zones 
     // you can find in http://php.net/manual/en/timezones.php
     'timezone' => 'UTC',
@@ -47,12 +47,12 @@ $settings = [
     'db' => $db,
 
     // Routes of application
-    'routes' => $routes,
+    'router' => $routes,
 
     // Active template engine
     'template_engine' => 'PHP',
 
-    // List of config of template engines 
+    // List of config of template engines
     'template_engines' => [
         'PHP' => [
             'file_extension' => 'php'
@@ -77,4 +77,4 @@ $settings = [
     ]
 ];
 
-return $settings;
+return $config;

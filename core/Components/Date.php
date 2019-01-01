@@ -26,7 +26,7 @@ class Date
             'октября', 'ноября', 'декабря'
         ];
 
-        return array_key_exists($month, $months) ? $months[$month - 1] : false;
+        return $months[$month - 1] ?? false;
     }
 
     /**

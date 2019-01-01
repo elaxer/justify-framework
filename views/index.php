@@ -1,12 +1,18 @@
+<?php
+/**
+ * @var $frameworkName
+ * @var $frameworkVersion
+ */
+?>
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
     <title>Justify framework</title>
 
-    <link rel="stylesheet" href="assets/css/main.css">
-    <link rel="stylesheet" href="assets/css/adaptive.css">
-    <link rel="stylesheet" href="assets/libs/bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="<?= asset() ?>/css/main.css">
+    <link rel="stylesheet" href="<?= asset() ?>/css/adaptive.css">
+    <link rel="stylesheet" href="<?= asset() ?>/css/bootstrap.min.css">
 </head>
 <body>
 <div class="wrapper">
@@ -25,8 +31,7 @@
                 <h1>Welcome!</h1>
                 <p class="lead">
                     You successful installed
-                    <?= $frameworkName ?>
-                    <?= $frameworkVersion ?>!
+                    <?= $frameworkName ?> <?= $frameworkVersion ?>!
                 </p>
             </div>
             <div class="row">

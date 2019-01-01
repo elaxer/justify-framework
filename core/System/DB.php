@@ -2,6 +2,7 @@
 
 namespace Core\System;
 
+use Core\System\DBConnectors\ConnectorFactory;
 use PDO;
 use PDOException;
 use Core\Justify;
@@ -13,7 +14,6 @@ use Core\System\Exceptions\ExtensionNotFoundException;
  * System class DB consists of simple methods for work with DB
  *
  * @since 2.0
- * @deprecated
  * @package Justify\System
  */
 class DB extends Model
@@ -48,9 +48,9 @@ class DB extends Model
 
     /**
      * Starts SQL query
-     * 
+     *
      * Makes SQL query "SELECT * FROM table" and returns object
-     * 
+     *
      * @return object
      */
     public static function find(): object
@@ -63,7 +63,7 @@ class DB extends Model
 
     /**
      * Returns object of one data
-     * 
+     *
      * @param int $identify record identify
      * @param string $identifyName name of identifier
      * @return object
@@ -79,7 +79,7 @@ class DB extends Model
 
     /**
      * Returns total count of all records
-     * 
+     *
      * @return int
      */
     public static function totalCount(): int
@@ -92,7 +92,7 @@ class DB extends Model
 
     /**
      * Returns array of all data
-     * 
+     *
      * @return array
      */
     public static function findAll()
@@ -154,7 +154,7 @@ class DB extends Model
 
     /**
      * Sets SQL query from find() method
-     * 
+     *
      * Sets "SELECT columns"
      *
      * @param string|array $select selects items
@@ -173,7 +173,7 @@ class DB extends Model
 
     /**
      * Sets SQL query from find() method
-     * 
+     *
      * Sets "SELECT COUNT(columns)"
      * Use it to discover to count of rows from SQL query
      *
@@ -193,7 +193,7 @@ class DB extends Model
 
     /**
      * Continues SQL query from find() method
-     * 
+     *
      * Concats "FROM table"
      *
      * @param string $from from table name
@@ -208,7 +208,7 @@ class DB extends Model
 
     /**
      * Continues SQL query from find() method
-     * 
+     *
      * Concats "WHERE condition"
      *
      * @param string $condition condition of where
@@ -225,7 +225,7 @@ class DB extends Model
 
     /**
      * Continues SQL query from find() method
-     * 
+     *
      * Concats "AND WHERE condition"
      *
      * @param string $condition condition of where
@@ -242,7 +242,7 @@ class DB extends Model
 
     /**
      * Continues SQL query from find() method
-     * 
+     *
      * Concats "OR WHERE condition"
      *
      * @param string $condition condition of where
@@ -259,7 +259,7 @@ class DB extends Model
 
     /**
      * Continues SQL query from find() method
-     * 
+     *
      * Concats "ORDER BY column sort_method"
      *
      * @param string $column column name
@@ -275,7 +275,7 @@ class DB extends Model
 
     /**
      * Continues SQL query from find() method
-     * 
+     *
      * Concats "LIMIT number"
      *
      * @param int $limit limit of SQL query
@@ -291,7 +291,7 @@ class DB extends Model
 
     /**
      * Continues SQL query from find() method
-     * 
+     *
      * Concats "OFFSET number"
      *
      * @param int $offset offset of SQL query
@@ -307,7 +307,7 @@ class DB extends Model
 
     /**
      * Continues SQL query from find() method
-     * 
+     *
      * Concats "GROUP BY column"
      *
      * @param string $column column name
@@ -322,7 +322,7 @@ class DB extends Model
 
     /**
      * Continues SQL query from find() method
-     * 
+     *
      * Concats "INNER JOIN table ON condition"
      *
      * @param string $table joins table
@@ -338,7 +338,7 @@ class DB extends Model
 
     /**
      * Continues SQL query from find() method
-     * 
+     *
      * Concats "LEFT JOIN table ON condition"
      *
      * @param string $table joins table
@@ -354,7 +354,7 @@ class DB extends Model
 
     /**
      * Continues SQL query from find() method
-     * 
+     *
      * Concats "RIGHT JOIN table ON condition"
      *
      * @param string $table joins table
@@ -370,7 +370,7 @@ class DB extends Model
 
     /**
      * Execs SQL query from find() method and returns array of data
-     * 
+     *
      * @return array
      */
     public function all()
@@ -383,7 +383,7 @@ class DB extends Model
 
     /**
      * Execs SQL query from find() method and returns object of one data
-     * 
+     *
      * @return object
      */
     public function one(): object
@@ -396,22 +396,22 @@ class DB extends Model
 
     /**
      * Execs SQL query from find() method and returns count of selected rows
-     * 
-     * It's slow method, be careful then using it 
-     * 
+     *
+     * It's slow method, be careful then using it
+     *
      * @return int
      */
     public function count(): int
     {
         $stmt = $this->db->prepare($this->query);
         $stmt->execute($this->params);
-        
+
         return $stmt->rowCount();
     }
 
     /**
      * Sets conntection for MySQL DBMS
-     * 
+     *
      * @since 2.1.0
      * @return \PDO
      */
@@ -429,7 +429,7 @@ class DB extends Model
 
     /**
      * Sets conntection for PostgreSQL DBMS
-     * 
+     *
      * @since 2.1.0
      * @return PDO
      */
@@ -447,7 +447,7 @@ class DB extends Model
 
     /**
      * Sets connection for SQLite DBMS
-     * 
+     *
      * @since 2.1.0
      * @return \PDO
      */
@@ -462,45 +462,22 @@ class DB extends Model
 
     /**
      * Method provides connection this DB
-     *
+     *        $dbSettings = ;
      * Change DB connecting properties in config/db.php
+     *
+     * @throws ExtensionNotFoundException
      */
     public function __construct()
     {
-        $dbSettings = Justify::$settings['db'];
-        $pdoOptions = [
-            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-            PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_OBJ,
-            PDO::ATTR_EMULATE_PREPARES => false
-        ];
+        $dbms = Justify::$settings['db']['dbms'];
 
-        try {
-            if (!extension_loaded('PDO')) {
-                throw new ExtensionNotFoundException('PDO');
-            }
+        $connector = ConnectorFactory::create($dbms);
+        $this->db = $connector->getInstance(
+            Justify::$settings['db'][$dbms],
+            Justify::$settings['db']['pdo_options']
+        );
 
-            if ($dbSettings['dbms'] == 'mysql') {
-                $this->db = $this->connectMysql($dbSettings['mysql'], $pdoOptions);
-            }
-            if ($dbSettings['dbms'] == 'pgsql') {
-                $this->db = $this->connectPgsql($dbSettings['pgsql'], $pdoOptions);
-            }
-            if ($dbSettings['dbms'] == 'sqlite') {
-                $this->db = $this->connectPgsql($dbSettings['sqlite'], $pdoOptions);
-            }
-
-            $this->table = static::tableName();
-            
-        } catch (PDOException $e) {
-            if (Justify::$debug) {
-                echo '<b>PDO Exception: </b>';
-                echo $e->getMessage();
-            }
-            exit();
-        } catch (ExtensionNotFoundException $e) {
-            $e->printError();
-            exit();
-        }
+        $this->table = static::tableName();
     }
 
     /**

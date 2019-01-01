@@ -1,9 +1,7 @@
 <?php ## Routes of application
 
-/**
- * Key - URI pattern
- * Value - controller and action
- */
-return [
-    '/*' => 'IndexController@index'
-];
+$router = new \Core\System\Router\Router();
+
+$router->route('GET', '/', 'IndexController@index');
+
+return $router;

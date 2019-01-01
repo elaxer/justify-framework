@@ -13,10 +13,10 @@ return [
 	    'user' => 'root',
 
 	    // User password
-	    'password' => 'secret',
+	    'password' => '123456',
 
 	    // Data base name
-	    'name' => 'database',
+	    'name' => 'mvc_blog',
 
 	    // Data base charset
 	    'charset' => 'utf8'
@@ -44,5 +44,12 @@ return [
 	'sqlite' => [
 		// Path to sqlite file
 		'path' => BASE_DIR . '/database/yourdb.sqlite'
-	]
+	],
+
+    // PDO options
+    'pdo_options' => [
+        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_OBJ,
+        PDO::ATTR_EMULATE_PREPARES => false
+    ]
 ];

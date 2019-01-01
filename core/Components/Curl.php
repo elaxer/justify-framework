@@ -2,7 +2,7 @@
 
 namespace Core\Components;
 
-use Core\System\ExtensionNotFoundException;
+use Core\System\Exceptions\ExtensionNotFoundException;
 
 /**
  * Class Curl for working with network
@@ -27,17 +27,12 @@ class Curl
      * Puts options in array in pattern:
      * Key - curl option
      * Value - curl option value
-     * 
-     * @example
-     * $this->setOpts([
-     *     CURLOPT_RETURNTRANSFER => true
-     * ]);
+     *
      * @param array $opts array of curl options
      */
-    public function setOpts(array $opts) {
-        foreach ($opts as $param => $value) {
-            curl_setopt($this->ch, $param, $value);
-        }
+    public function setOpts(array $opts)
+    {
+        curl_setopt_array($this->ch, $opts);
     }
 
     /**
@@ -107,20 +102,16 @@ class Curl
      *
      * Init Curl::$ch
      *
+     * @throws ExtensionNotFoundException
      * @param null|string $url connect to url
      */
     public function __construct($url = null)
     {
-        try {
-            if (!extension_loaded('curl_init')) {
-                throw new ExtensionNotFoundException('CURL');
-            }
-
-            $this->ch = curl_init($url);
-        } catch (ExtensionNotFoundException $e) {
-            $e->printError();
-            exit();
+        if (!extension_loaded('curl_init')) {
+            throw new ExtensionNotFoundException('CURL');
         }
+
+        $this->ch = curl_init($url);
     }
 
     /**

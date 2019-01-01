@@ -21,7 +21,8 @@
     "symfony/var-dumper": "^3.4",
     "robmorgan/phinx": "^0.9.2",
     "twig/twig": "^2.5",
-    "smarty/smarty": "^3.1"
+    "smarty/smarty": "^3.1",
+    "monolog/monolog": "^1.24"
   },
   "require-dev": {
     "squizlabs/php_codesniffer": "^3.2",
@@ -34,6 +35,6 @@
       "App\\": "app",
       "Core\\": "core"
     },
-    "files": ["core/Helpers/view.php"]
+    "files": ["core/helpers.php"]
   }
 }

@@ -34,7 +34,7 @@ footer {
 }
 
 .navbar, .navbar-inverse {
-    border-radius: 0;
+    border-radius: 0 !important;
 }
 
 /*Debugging panel*/

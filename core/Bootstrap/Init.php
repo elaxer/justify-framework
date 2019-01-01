@@ -4,9 +4,11 @@ namespace Core\Bootstrap;
 
 use Core\Justify;
 use Core\System\BaseObject;
-use Core\Components\Lang;
 use Core\System\Exceptions\OldPHPVersionException;
 use Core\System\Exceptions\CauseFromConsoleException;
+use Core\Components\Lang;
+use Whoops\Run;
+use Whoops\Handler\PrettyPageHandler;
 
 /**
  * Class Init
@@ -24,8 +26,8 @@ class Init extends BaseObject
     public function initSettings()
     {
         if (Justify::$debug) {
-            $whoops = new \Whoops\Run();
-            $whoops->pushHandler(new \Whoops\Handler\PrettyPageHandler());
+            $whoops = new Run();
+            $whoops->pushHandler(new PrettyPageHandler());
             $whoops->register();
         }
 
@@ -44,11 +46,11 @@ class Init extends BaseObject
     /**
      * Returns array of routes
      *
-     * @return array
+     * @return \Core\System\Router\Router
      */
-    public function getRoutes(): array
+    public function getRouter()
     {
-        return Justify::$settings['routes'];
+        return Justify::$settings['router'];
     }
 
     /**
@@ -56,7 +58,8 @@ class Init extends BaseObject
      *
      * Loads array of settings to next application work
      *
-     * @throws
+     * @throws \Core\System\Exceptions\OldPHPVersionException
+     * @throws \Core\System\Exceptions\CauseFromConsoleException
      * @param array $settings stores array with settings
      */
     public function __construct(array $settings)
