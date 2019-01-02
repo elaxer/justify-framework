@@ -2,7 +2,7 @@
 
 namespace Core\Widgets;
 
-use Core\System\Exceptions\InvalidConfigException;
+use Core\Exceptions\InvalidConfigException;
 
 /**
  * Class Session

@@ -27,7 +27,7 @@ class View
 		return $templateEngineDecorator->render($view, $params);
 	}
 
-	private static function getTemplateEngine(): object
+	private static function getTemplateEngine()
 	{
 		$templateEngine = Justify::$settings['template_engine'];
 

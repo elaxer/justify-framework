@@ -7,7 +7,7 @@
  */
 
 // Absolute path to framework root directory
-define('BASE_DIR', dirname(__FILE__) . '/..');
+define('BASE_DIR', __DIR__ . '/..');
 
 // Includes composer
 require_once BASE_DIR . '/vendor/autoload.php';

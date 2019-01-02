@@ -2,10 +2,12 @@
 
 namespace Core\Components\DB\Connectors;
 
-use Core\System\Exceptions\ExtensionNotFoundException;
+use Core\Exceptions\ExtensionNotFoundException;
 
 class ConnectorFactory
 {
+    const NAMESPACE = 'Core\\System\\DBConnectors\\';
+
     /**
      * @param string $className
      * @return mixed
@@ -17,7 +19,7 @@ class ConnectorFactory
             throw new ExtensionNotFoundException('PDO');
         }
 
-        $connectorName = 'Core\\System\\DBConnectors\\' . ucfirst($className) . 'Connector';
+        $connectorName = self::NAMESPACE . ucfirst($className) . 'Connector';
 
         return new $connectorName();
     }

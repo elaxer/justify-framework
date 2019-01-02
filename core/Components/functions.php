@@ -101,9 +101,19 @@ if (!function_exists('render')) {
     }
 }
 
-if (!function_exists('asset')) {
-    function asset()
+if (!function_exists('assets')) {
+    function assets()
     {
         return '/public/assets';
+    }
+}
+
+if (!function_exists('cache')) {
+    function get_cache()
+    {
+        $cachingConfig = \Core\Justify::$settings['caching'];
+        $driver = $cachingConfig['driver'];
+
+        return \Core\Components\Caching\CachingFactory::create($driver, $cachingConfig[$driver]);
     }
 }

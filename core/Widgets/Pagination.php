@@ -2,7 +2,7 @@
 
 namespace Core\Widgets;
 
-use Core\Components\Pagination as PaginationObject;
+use Core\Components\Pagination\Pagination as PaginationObject;
 
 class Pagination
 {

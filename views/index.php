@@ -10,9 +10,9 @@
     <meta charset="UTF-8">
     <title>Justify framework</title>
 
-    <link rel="stylesheet" href="<?= asset() ?>/css/main.css">
-    <link rel="stylesheet" href="<?= asset() ?>/css/adaptive.css">
-    <link rel="stylesheet" href="<?= asset() ?>/css/bootstrap.min.css">
+    <link rel="stylesheet" href="<?= assets() ?>/css/main.css">
+    <link rel="stylesheet" href="<?= assets() ?>/css/adaptive.css">
+    <link rel="stylesheet" href="<?= assets() ?>/css/bootstrap.min.css">
 </head>
 <body>
 <div class="wrapper">

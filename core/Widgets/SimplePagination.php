@@ -2,7 +2,7 @@
 
 namespace Core\Widgets;
 
-use Core\Components\SimplePagination as SimplePaginationObject;
+use Core\Components\Pagination\SimplePagination as SimplePaginationObject;
 
 class SimplePagination
 {

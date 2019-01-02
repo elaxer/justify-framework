@@ -2,11 +2,13 @@
 
 namespace Core\Widgets;
 
+use Core\Components\Http\CSRF;
+
 class CSRFFiled
 {
     public static function render(): string
     {
-        $csrfToken = \Core\System\CSRF::$token;
+        $csrfToken = CSRF::$token;
 
         ob_start();
 
