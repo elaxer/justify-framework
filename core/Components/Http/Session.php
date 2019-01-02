@@ -12,6 +12,11 @@ namespace Core\Components\Http;
  */
 class Session
 {
+    public function __construct()
+    {
+        session_start();
+    }
+
     /**
      * If $key null then returns $_SESSION array else if exists $_SESSION[$key] then returns $_SESSION[$key]
      * else returns $defaultValue
@@ -26,7 +31,7 @@ class Session
             return $_SESSION;
         }
 
-        return isset($_SESSION[$key]) ? $_SESSION[$key] : $defaultValue;
+        return $_SESSION[$key] ?? $defaultValue;
     }
 
     /**

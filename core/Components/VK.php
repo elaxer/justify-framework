@@ -2,7 +2,7 @@
 
 namespace Core\Components;
 
-use Core\System\Exceptions\ExtensionNotFoundException;
+use Core\Exceptions\ExtensionNotFoundException;
 
 /**
  * Class VK
@@ -52,17 +52,12 @@ class VK
      */
     public function api(string $method, array $params = []): object
     {
-        if (! isset($params['access_token']))
-            $params['access_token'] = $this->accessToken;
+        $this->setOpts($params, [
+            'access_token' => $this->accessToken,
+            'version' => $this->apiVersion
+        ]);
 
-        if ($this->apiVersion)
-            $params['version'] = $this->apiVersion;
-
-        $params = http_build_query($params);
-
-        $file = file_get_contents("https://api.vk.com/method/$method?$params");
-
-        return json_decode($file);
+        return $this->sendRequest($method, $params);
     }
 
     /**
@@ -73,47 +68,16 @@ class VK
      *
      * @param string $file path to photo
      * @param array $params request params
+     * @throws ExtensionNotFoundException
      * @return object|bool
      */
     public function sendPhoto(string $file, array $params)
     {
-        try {
-            if (! function_exists('curl_init')) {
-                throw new ExtensionNotFoundException('CURL');
-            }
+        $photo = $this->uploadPhoto($file);
 
-            $result = $this->api('photos.getMessagesUploadServer');
+        $params['attachment'] = $photo->id;
 
-            $curl = new Curl($result->response->upload_url);
-
-            $file = $curl->createFile($file, mime_content_type($file), pathinfo($file)['basename']);
-
-            $curl->setOpts([
-                CURLOPT_POST => true,
-                CURLOPT_HTTPHEADER => ['Content-type: multipart/form-data;charset=utf8'],
-                CURLOPT_POSTFIELDS => ['file' => $file],
-                CURLOPT_RETURNTRANSFER => true,
-                CURLOPT_TIMEOUT => 10,
-                CURLOPT_FOLLOWLOCATION => true
-            ]);
-
-            $responseImage = json_decode($curl->exec());
-
-            $curl->close();
-
-            $resultImage = $this->api('photos.saveMessagesPhoto', [
-                'server' => $responseImage->server,
-                'photo' => $responseImage->photo,
-                'hash' => $responseImage->hash
-            ]);
-
-            $params['attachment'] = $resultImage->response[0]->id;
-
-            return $this->api('messages.send', $params);
-        } catch (ExtensionNotFoundException $e) {
-            $e->printError();
-            exit();
-        }
+        return $this->api('messages.send', $params);
     }
 
     /**
@@ -124,17 +88,12 @@ class VK
      */
     public function initApp(array $params): string
     {
-        if (! isset($params['scope']))
-            $params['scope'] = implode(',', $this->scopes);
-
-        if (! isset($params['redirect_uri']))
-            $params['redirect_uri'] = 'https://oauth.vk.com/blank.html';
-
-        if (! isset($params['response_type']))
-            $params['response_type'] = 'token';
-
-        if (! isset($params['display']))
-            $params['display'] = 'page';
+        $this->setOpts($params, [
+            'scope' => implode(',', $this->scopes),
+            'redirect_uri' => 'https://oauth.vk.com/blank.html',
+            'response_type' => 'token',
+            'display' => 'page'
+        ]);
 
         return urldecode('https://oauth.vk.com/authorize?' . http_build_query($params));
     }
@@ -145,12 +104,88 @@ class VK
      * @param string $accessToken access token of your VK application
      * @param string $apiVersion VK API version
      */
-    public function __construct(string $accessToken = '', string $apiVersion = '')
+    public function __construct(string $accessToken = '', string $apiVersion)
     {
         $this->accessToken = $accessToken;
+        $this->apiVersion = $apiVersion;
+    }
 
-        if ($apiVersion) {
-            $this->apiVersion = $apiVersion;
+    /**
+     * @param array $params
+     * @param $key
+     * @param $value
+     */
+    private function setOpt(array &$params, $key, $value)
+    {
+        if (!isset($params[$key])) {
+            $params[$key] = $value;
         }
+    }
+
+    /**
+     * @param array $params
+     * @param $data
+     */
+    private function setOpts(array &$params, $data)
+    {
+        foreach ($data as $key => $value) {
+            $this->setOpt($params, $key, $value);
+        }
+    }
+
+    /**
+     * @param $file
+     * @return mixed
+     * @throws ExtensionNotFoundException
+     */
+    private function uploadPhoto($file)
+    {
+        $result = $this->api('photos.getMessagesUploadServer');
+
+        $curl = new Curl($result->response->upload_url);
+
+        $file = $curl->createFile($file, mime_content_type($file), pathinfo($file)['basename']);
+
+        $curl->setOpts([
+            CURLOPT_POST => true,
+            CURLOPT_HTTPHEADER => ['Content-type: multipart/form-data;charset=utf8'],
+            CURLOPT_POSTFIELDS => ['file' => $file],
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_TIMEOUT => 10,
+            CURLOPT_FOLLOWLOCATION => true
+        ]);
+
+        $photo = json_decode($curl->exec());
+
+        $curl->close();
+
+        return $this->savePhoto($photo);
+    }
+
+    /**
+     * @param $photo
+     * @return mixed
+     */
+    private function savePhoto($photo)
+    {
+        return $this->api('photos.saveMessagesPhoto', [
+            'server' => $photo->server,
+            'photo' => $photo->photo,
+            'hash' => $photo->hash
+        ])->response[0];
+    }
+
+    /**
+     * @param $method
+     * @param array $params
+     * @return mixed
+     */
+    private function sendRequest($method, array $params = [])
+    {
+        $params = http_build_query($params);
+
+        $file = file_get_contents("https://api.vk.com/method/$method?$params");
+
+        return json_decode($file);
     }
 }

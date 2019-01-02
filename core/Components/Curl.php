@@ -2,7 +2,7 @@
 
 namespace Core\Components;
 
-use Core\System\Exceptions\ExtensionNotFoundException;
+use Core\Exceptions\ExtensionNotFoundException;
 
 /**
  * Class Curl for working with network

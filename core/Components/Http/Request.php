@@ -13,13 +13,6 @@ namespace Core\Components\Http;
 class Request
 {
     /**
-     * Object of class Session
-     *
-     * @var object
-     */
-    public $session;
-
-    /**
      * If $key null then returns $_GET array else if exists $_GET[$key] then returns $_GET[$key]
      * else returns $defaultValue
      *
@@ -118,15 +111,5 @@ class Request
     public function getURI(): string
     {
         return parse_url($_SERVER['REQUEST_URI'])['path'];
-    }
-
-    /**
-     * Request constructor.
-     *
-     * Sets session value
-     */
-    public function __construct()
-    {
-        $this->session = new Session();
     }
 }

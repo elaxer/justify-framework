@@ -14,7 +14,7 @@ class TemplateEngineFactory
 
 	public static function create(string $templateEngineName, array $params = []): object
 	{
-		$className = self::NAMESPACE . $templateEngineName;
+		$className = self::NAMESPACE . ucfirst($templateEngineName);
 		
 		return new $className(...$params);
 	}

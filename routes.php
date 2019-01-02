@@ -1,7 +1,5 @@
 <?php ## Routes of application
 
-$router = new \Core\Components\Router\Router();
+$router = router();
 
 $router->route('GET', '/', 'IndexController@index');
-
-return $router;

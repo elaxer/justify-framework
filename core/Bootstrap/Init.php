@@ -2,10 +2,16 @@
 
 namespace Core\Bootstrap;
 
+use Core\Components\Caching\CachingFactory;
+use Core\Components\Http\Request;
+use Core\Components\Http\Response;
+use Core\Components\Router\Router;
+use Core\Container;
 use Core\Justify;
 use Core\Exceptions\OldPHPVersionException;
 use Core\Exceptions\CauseFromConsoleException;
 use Core\Components\Lang;
+use Core\Components\Http\Session;
 use Whoops\Run;
 use Whoops\Handler\PrettyPageHandler;
 
@@ -34,6 +40,31 @@ class Init
         setlocale(LC_ALL, Justify::$settings['locale']);
     }
 
+    public function loadComponents()
+    {
+        $config = Justify::$settings;
+
+        Justify::$container = new Container();
+
+        Justify::$container->set(
+            'cache', CachingFactory::create(
+                $config['caching']['driver'],
+                $config['caching'][$config['caching']['driver']]
+            )
+        );
+
+        Justify::$container->set('request', new Request());
+        Justify::$container->set('response', new Response());
+        Justify::$container->set('session', new Session());
+
+        Justify::$container->set('router', new Router());
+    }
+
+    public function loadRoutes()
+    {
+        require_once BASE_DIR . '/routes.php';
+    }
+
     /**
      * Loads languages
      */
@@ -45,7 +76,7 @@ class Init
     /**
      * Returns array of routes
      *
-     * @return \Core\System\Router\Router
+     * @return \Core\Components\Router\Router
      */
     public function getRouter()
     {
@@ -57,8 +88,8 @@ class Init
      *
      * Loads array of settings to next application work
      *
-     * @throws \Core\System\Exceptions\OldPHPVersionException
-     * @throws \Core\System\Exceptions\CauseFromConsoleException
+     * @throws \Core\Exceptions\OldPHPVersionException
+     * @throws \Core\Exceptions\CauseFromConsoleException
      * @param array $settings stores array with settings
      */
     public function __construct(array $settings)
@@ -67,10 +98,8 @@ class Init
         Justify::$settings = $settings;
         Justify::$debug = Justify::$settings['debug'];
 
-        session_start();
-
-        $this->isOldVersion(Justify::$minimalPHPVersion);
         $this->causedFromConsole();
+        $this->isOldVersion(Justify::$minimalPHPVersion);
     }
 
     /**

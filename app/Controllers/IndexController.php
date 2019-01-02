@@ -4,7 +4,7 @@ namespace App\Controllers;
 
 use Core\Justify;
 
-class IndexController extends Controller
+class IndexController
 {
     public function index()
     {

@@ -10,12 +10,6 @@ namespace Core;
 class Justify
 {
     /**
-     * Count of characters after comma in $execTime
-     * @deprecated
-     */
-    const EXEC_TIME_PRECISION = 5;
-
-    /**
      * Property stores array of settings in file config/settings.php
      *
      * @static
@@ -103,12 +97,17 @@ class Justify
     public static $minimalPHPVersion = '7.0.0';
 
     /**
+     * @var \Core\Container
+     */
+    public static $container;
+
+    /**
      * Returns current framework version
      *
      * @return string
      */
     public static function getVersion(): string
     {
-        return '2.4.0';
+        return '2.4.1';
     }
 }

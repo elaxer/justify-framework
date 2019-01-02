@@ -61,17 +61,17 @@ class Str
      * @since 2.2.0
      * @param string $string
      * @param array $disallowed
-     * @param bool $censor
+     * @param string $censor
      * @return null|string|string[]
      */
-    public static function wordCensor(string $string, array $disallowed, bool $censor = false)
+    public static function wordCensor(string $string, array $disallowed, string $censor = '')
     {
         $string = trim($string);
         $disallowed = array_map(function ($pattern) {
             return '~' . $pattern . '~iu';
         }, $disallowed);
 
-        if (! $censor) {
+        if (!$censor) {
             return preg_replace_callback($disallowed, function ($m) {
                 return str_repeat('*', mb_strlen($m[0]));
             }, $string);

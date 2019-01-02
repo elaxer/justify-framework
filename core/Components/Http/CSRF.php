@@ -36,9 +36,7 @@ class CSRF
      */
     public static function setSession()
     {
-        $session = new Session();
-
-        $session->set('_token', self::$token);
+        session()->set('_token', self::$token);
     }
 
     /**
@@ -46,15 +44,13 @@ class CSRF
      *
      * Checks post hash and session hash for equals
      *
-     * @param Session $session
-     * @param Request $request
      * @throws CSRFProtectionException
      */
-    public static function checkHashesEquals(Session $session, Request $request)
+    public static function checkHashesEquals()
     {
-        if (!$request->post('_token', false)
-            || !$session->has('_token')
-            || !hash_equals($session->get('_token'), $request->post('_token'))
+        if (!request()->post('_token', false)
+            || !session()->has('_token')
+            || !hash_equals(session()->get('_token'), request()->post('_token'))
         ) {
             throw new CSRFProtectionException('Sent data without CSRF field or CSRF attack attemp');
         }

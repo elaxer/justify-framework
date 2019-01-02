@@ -27,7 +27,7 @@ class App
      */
     public function run()
     {
-        $route = $this->router->findRoute($this->getHttpMethod(), $this->getURI());
+        $route = router()->findRoute($this->getHttpMethod(), $this->getURI());
 
         if (!$route['found']) {
             echo $this->render404();
@@ -66,6 +66,8 @@ class App
     {
         $init = new Init($settings);
         $init->initSettings();
+        $init->loadComponents();
+        $init->loadRoutes();
         $init->loadLang();
 
         if (Justify::$settings['CSRFProtection']) {
@@ -90,10 +92,8 @@ class App
     {
         CSRF::$token = CSRF::generateToken();
 
-        $request = new Request();
-
-        if ($request->isPost()) {
-            CSRF::checkHashesEquals($request->session, $request);
+        if (request()->isPost()) {
+            CSRF::checkHashesEquals();
         } else {
             CSRF::setSession();
         }

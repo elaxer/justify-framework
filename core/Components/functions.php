@@ -2,6 +2,7 @@
 
 use Core\Components\Dump;
 use Core\Components\Lang;
+use Core\Components\Str;
 
 if (!function_exists('dump')) {
     function dump(...$variables)
@@ -95,6 +96,11 @@ if (!function_exists('generatePassword')) {
 }
 
 if (!function_exists('render')) {
+    /**
+     * @param string $view
+     * @param array $params
+     * @return string
+     */
     function render(string $view, array $params = []): string
     {
         return \Core\Components\Mvc\View::render($view, $params);
@@ -102,6 +108,9 @@ if (!function_exists('render')) {
 }
 
 if (!function_exists('assets')) {
+    /**
+     * @return string
+     */
     function assets()
     {
         return '/public/assets';
@@ -109,11 +118,114 @@ if (!function_exists('assets')) {
 }
 
 if (!function_exists('cache')) {
-    function get_cache()
+    /**
+     * @return \Psr\Cache\CacheItemPoolInterface
+     */
+    function cache()
     {
-        $cachingConfig = \Core\Justify::$settings['caching'];
-        $driver = $cachingConfig['driver'];
+        return \Core\Justify::$container->get('cache');
+    }
+}
 
-        return \Core\Components\Caching\CachingFactory::create($driver, $cachingConfig[$driver]);
+if (!function_exists('request')) {
+    /**
+     * @return \Core\Components\Http\Request
+     */
+    function request()
+    {
+        return \Core\Justify::$container->get('request');
+    }
+}
+
+if (!function_exists('response')) {
+    /**
+     * @return \Core\Components\Http\Response
+     */
+    function response()
+    {
+        return \Core\Justify::$container->get('response');
+    }
+}
+
+if (!function_exists('session')) {
+    /**
+     * @return \Core\Components\Http\Session
+     */
+    function session()
+    {
+        return \Core\Justify::$container->get('session');
+    }
+}
+
+if (!function_exists('router')) {
+    /**
+     * @return \Core\Components\Router\Router
+     */
+    function router()
+    {
+        return \Core\Justify::$container->get('router');
+    }
+}
+
+if (!function_exists('str_random')) {
+    function str_random($length = 16, $chars = 'qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM1234567890')
+    {
+        return Str::random($length, $chars);
+    }
+}
+
+if (!function_exists('str_shorten')) {
+    function str_shorten($text, $limit, $postfix = '...')
+    {
+        return Str::shorten($text, $limit, $postfix);
+    }
+}
+
+if (!function_exists('str_wordCensor')) {
+    function str_wordCensor($string, array $disallowed, $censor = '')
+    {
+        return Str::wordCensor($string, $disallowed, $censor);
+    }
+}
+
+if (!function_exists('str_randomChar')) {
+    function str_randomChar($string = '')
+    {
+        return Str::randomChar($string);
+    }
+}
+
+if (!function_exists('str_randomSubstring')) {
+    function str_randomSubstring($string = '', $length = 0)
+    {
+        return Str::randomSubstring($string, $length);
+    }
+}
+
+if (!function_exists('str_camelToSnake')) {
+    function str_camelToSnake($string)
+    {
+        return Str::camelToSnake($string);
+    }
+}
+
+if (!function_exists('str_snakeToCamel')) {
+    function str_snakeToCamel($string)
+    {
+        return Str::snakeToCamel($string);
+    }
+}
+
+if (!function_exists('srt_ruToEn')) {
+    function str_ruToEn($string)
+    {
+        return Str::ruToEn($string);
+    }
+}
+
+if (!function_exists('str_to1337')) {
+    function str_to1337($string)
+    {
+        return Str::to1337($string);
     }
 }

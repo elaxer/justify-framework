@@ -2,6 +2,8 @@
 
 namespace Core\Components\Http;
 
+use Core\Justify;
+
 /**
  * Class Response
  *
@@ -41,7 +43,7 @@ class Response
      */
     public function goBack()
     {
-        header("Location: {$_SERVER['HTTP_REFERER']}");
+        $this->redirect($_SERVER['HTTP_REFERER']);
     }
 
     /**
@@ -53,6 +55,6 @@ class Response
      */
     public function goHome()
     {
-        header('Location: ' . Justify::$home);
+        $this->redirect(Justify::$home);
     }
 }
