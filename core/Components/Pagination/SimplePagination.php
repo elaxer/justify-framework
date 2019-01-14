@@ -130,7 +130,7 @@ class SimplePagination
      */
     public function createUrl(): string
     {
-        if (! isset(parse_url($_SERVER['REQUEST_URI'])['query'])
+        if (!isset(parse_url($_SERVER['REQUEST_URI'])['query'])
             || (count($_GET) === 1
                 && isset($_GET[$this->getName]))
         ) {
@@ -139,11 +139,9 @@ class SimplePagination
         $url = '?';
 
         foreach ($_GET as $param => $value) {
-            if ($param == $this->getName) {
-                continue;
+            if ($param != $this->getName) {
+                $url .= "$param=$value&";
             }
-
-            $url .= "$param=$value&";
         }
 
         return $url . $this->getName . '=';

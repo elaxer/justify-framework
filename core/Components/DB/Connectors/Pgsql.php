@@ -4,7 +4,7 @@ namespace Core\Components\DB\Connectors;
 
 use PDO;
 
-class MysqlConnector implements ConnectorInterface
+class Pgsql implements ConnectorInterface
 {
     public function getInstance(array $connectionOptions, array $pdoOptions)
     {
@@ -15,7 +15,7 @@ class MysqlConnector implements ConnectorInterface
         $charset = $connectionOptions['charset'];
 
         return new PDO(
-            "mysql:host=$host; dbname=$name; charset=$charset",
+            "pgsql:host=$host; dbname=$name; charset=$charset",
             $user, $password, $pdoOptions
         );
     }

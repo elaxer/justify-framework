@@ -27,9 +27,26 @@ class View
 		return $templateEngineDecorator->render($view, $params);
 	}
 
+	//todo do not forget about this
+	public static function renderWidget($widget, array $params = [])
+    {
+        $widgetsPath = BASE_DIR . '/core/Widgets/templates';
+
+        ob_start();
+        extract($params);
+
+        require_once "$widgetsPath/$widget.php";
+
+        $content = ob_get_contents();
+
+        ob_end_clean();
+
+        return $content;
+    }
+
 	private static function getTemplateEngine()
 	{
-		$templateEngine = Justify::$settings['template_engine'];
+		$templateEngine = Justify::$settings['template_engines']['engine'];
 
 		return TemplateEngineFactory::create($templateEngine);
 	}

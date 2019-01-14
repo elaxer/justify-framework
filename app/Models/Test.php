@@ -2,9 +2,9 @@
 
 namespace App\Models;
 
-use Core\System\DB;
+use Core\Components\Mvc\Model;
 
-class Test extends DB
+class Test extends Model
 {
     public static function tableName(): string
     {

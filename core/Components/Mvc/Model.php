@@ -2,6 +2,7 @@
 
 namespace Core\Components\Mvc;
 
+use Core\Components\DB\ORM;
 use Core\Components\Str;
 
 /**
@@ -9,7 +10,7 @@ use Core\Components\Str;
  *
  * @package Justify\System
  */
-class Model
+class Model extends ORM
 {
     /**
      * Method return encoded variable
@@ -38,6 +39,13 @@ class Model
     public static function decode($var): string
     {
         return htmlspecialchars_decode($var, ENT_QUOTES);
+    }
+
+    public static function getClassName()
+    {
+        $segments = explode('\\', static::class);
+
+        return array_pop($segments);
     }
 
     /**

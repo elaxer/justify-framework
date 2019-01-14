@@ -4,7 +4,7 @@ namespace Core\Components\DB\Connectors;
 
 use PDO;
 
-class SqliteConnector implements ConnectorInterface
+class Sqlite implements ConnectorInterface
 {
     public function getInstance(array $connectionOptions, array $pdoOptions)
     {

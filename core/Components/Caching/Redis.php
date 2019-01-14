@@ -2,20 +2,16 @@
 
 namespace Core\Components\Caching;
 
+use Predis\Client;
 use Psr\Cache\CacheItemInterface;
 use Psr\Cache\CacheItemPoolInterface;
 
-/**
- * Class Memcached
- *
- * @package Core\Components\Caching
- */
-class Memcached implements CacheItemPoolInterface
+class Redis implements CacheItemPoolInterface
 {
     /**
-     * @var \Memcached
+     * @var Client
      */
-    private $memcached;
+    private $redis;
 
     /**
      * @var array
@@ -25,17 +21,17 @@ class Memcached implements CacheItemPoolInterface
     /**
      * Memcached constructor.
      *
-     * @param array $servers
+     * @param array $config
      */
-    public function __construct(array $servers)
+    public function __construct(array $config)
     {
-        $memcached = new \Memcached();
+        $redis = new Client([
+            'scheme' => $config['scheme'],
+            'host' => $config['host'],
+            'port' => $config['port'],
+        ]);
 
-        foreach ($servers as $server) {
-            $memcached->addServer($server['host'], $server['port'], $server['weight'] ?? null);
-        }
-
-        $this->memcached = $memcached;
+        $this->redis = $redis;
     }
 
     /**
@@ -54,14 +50,13 @@ class Memcached implements CacheItemPoolInterface
             return $this->deferred[$key];
         }
 
-        $value = $this->memcached->get($key);
+        $value = $this->redis->get($key);
 
-        if ($this->memcached->getResultCode() === \Memcached::RES_NOTFOUND) {
+        if ($value == null) {
             return new Item($key);
         }
 
         $item = new Item($key);
-
         return $item->set($value);
     }
 
@@ -92,9 +87,7 @@ class Memcached implements CacheItemPoolInterface
             throw new InvalidArgumentException();
         }
 
-        $this->memcached->get($key);
-
-        return $this->memcached->getResultCode() === \Memcached::RES_NOTFOUND;
+        return boolval($this->redis->exists($key));
     }
 
     /**
@@ -102,7 +95,7 @@ class Memcached implements CacheItemPoolInterface
      */
     public function clear()
     {
-        return $this->memcached->flush();
+        return $this->redis->flushdb();
     }
 
     /**
@@ -116,7 +109,7 @@ class Memcached implements CacheItemPoolInterface
             throw new InvalidArgumentException();
         }
 
-        return $this->memcached->delete($key);
+        return $this->redis->del([$key]);
     }
 
     /**
@@ -132,7 +125,7 @@ class Memcached implements CacheItemPoolInterface
             }
         }
 
-        return $this->memcached->deleteMulti($keys);
+        return $this->redis->del($keys);
     }
 
     /**
@@ -141,7 +134,7 @@ class Memcached implements CacheItemPoolInterface
      */
     public function save(CacheItemInterface $item)
     {
-        return $this->memcached->set($item->getKey(), $item->get());
+        return $this->redis->set($item->getKey(), $item->get());
     }
 
     /**
@@ -168,7 +161,7 @@ class Memcached implements CacheItemPoolInterface
             unset($this->deferred[$key]);
         }
 
-        return $this->memcached->setMulti($this->deferred);
+        return $this->redis->setMulti($this->deferred);
     }
 
     /**
@@ -176,6 +169,6 @@ class Memcached implements CacheItemPoolInterface
      */
     public function __destruct()
     {
-        $this->memcached->quit();
+        $this->redis->quit();
     }
 }

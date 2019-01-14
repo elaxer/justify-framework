@@ -2,6 +2,7 @@
 
 namespace Core\Widgets;
 
+use Core\Components\Mvc\View;
 use Core\Components\Pagination\Pagination as PaginationObject;
 
 class Pagination
@@ -15,12 +16,7 @@ class Pagination
      */
     public static function render(PaginationObject $pagination): string
     {
-        ob_start();
-
-        require_once BASE_DIR . '/core/widgets/templates/pagination.php';
-        $content = ob_get_contents();
-
-        ob_end_clean();
-        return $content;
+        //todo: edit
+        return View::renderWidget(lcfirst(__CLASS__));
     }
 }

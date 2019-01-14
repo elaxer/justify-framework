@@ -1,5 +1,6 @@
 <?php
 
+use Core\Justify;
 use Core\Components\Dump;
 use Core\Components\Lang;
 use Core\Components\Str;
@@ -117,13 +118,23 @@ if (!function_exists('assets')) {
     }
 }
 
+if (!function_exists('config')) {
+    /**
+     * @return array
+     */
+    function config()
+    {
+        return Justify::$settings;
+    }
+}
+
 if (!function_exists('cache')) {
     /**
-     * @return \Psr\Cache\CacheItemPoolInterface
+     * @return \Core\Components\Caching\Cache
      */
     function cache()
     {
-        return \Core\Justify::$container->get('cache');
+        return Justify::$container->get('cache');
     }
 }
 
@@ -133,7 +144,7 @@ if (!function_exists('request')) {
      */
     function request()
     {
-        return \Core\Justify::$container->get('request');
+        return Justify::$container->get('request');
     }
 }
 
@@ -143,7 +154,7 @@ if (!function_exists('response')) {
      */
     function response()
     {
-        return \Core\Justify::$container->get('response');
+        return Justify::$container->get('response');
     }
 }
 
@@ -153,7 +164,7 @@ if (!function_exists('session')) {
      */
     function session()
     {
-        return \Core\Justify::$container->get('session');
+        return Justify::$container->get('session');
     }
 }
 
@@ -163,7 +174,7 @@ if (!function_exists('router')) {
      */
     function router()
     {
-        return \Core\Justify::$container->get('router');
+        return Justify::$container->get('router');
     }
 }
 
@@ -227,5 +238,16 @@ if (!function_exists('str_to1337')) {
     function str_to1337($string)
     {
         return Str::to1337($string);
+    }
+}
+
+if (!function_exists('error')) {
+    /**
+     * @param $code
+     * @param array $params
+     */
+    function error($code, array $params = [])
+    {
+        exit(render('errors/' . $code, $params));
     }
 }

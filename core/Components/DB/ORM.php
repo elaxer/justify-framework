@@ -4,7 +4,7 @@ namespace Core\Components\DB;
 
 use PDO;
 use Core\Justify;
-use Core\Components\Mvc\Model;
+use Core\Components\Str;
 use Core\Components\DB\Connectors\ConnectorFactory;
 use Core\Exceptions\ExtensionNotFoundException;
 
@@ -16,7 +16,7 @@ use Core\Exceptions\ExtensionNotFoundException;
  * @since 2.0
  * @package Justify\System
  */
-class DB extends Model
+class ORM
 {
     /**
      * PDO resource
@@ -51,7 +51,7 @@ class DB extends Model
      *
      * Makes SQL query "SELECT * FROM table" and returns object
      *
-     * @return object
+     * @return ORM
      */
     public static function find(): object
     {
@@ -158,7 +158,7 @@ class DB extends Model
      * Sets "SELECT columns"
      *
      * @param string|array $select selects items
-     * @return object
+     * @return ORM
      */
     public function select($select): object
     {
@@ -178,7 +178,7 @@ class DB extends Model
      * Use it to discover to count of rows from SQL query
      *
      * @param string|array $select selects items
-     * @return object
+     * @return ORM
      */
     public function selectCount($select): object
     {
@@ -197,7 +197,7 @@ class DB extends Model
      * Concats "FROM table"
      *
      * @param string $from from table name
-     * @return object
+     * @return ORM
      */
     public function from($from): object
     {
@@ -213,7 +213,7 @@ class DB extends Model
      *
      * @param string $condition condition of where
      * @param array $params array of values
-     * @return object
+     * @return ORM
      */
     public function where($condition, array $params = []): object
     {
@@ -230,7 +230,7 @@ class DB extends Model
      *
      * @param string $condition condition of where
      * @param array $params array of values
-     * @return object
+     * @return ORM
      */
     public function andWhere($condition, array $params = []): object
     {
@@ -247,7 +247,7 @@ class DB extends Model
      *
      * @param string $condition condition of where
      * @param array $params array of values
-     * @return object
+     * @return ORM
      */
     public function orWhere($condition, array $params = []): object
     {
@@ -264,7 +264,7 @@ class DB extends Model
      *
      * @param string $column column name
      * @param string $sort sort method
-     * @return object
+     * @return ORM
      */
     public function orderBy($column, $sort = 'ASC'): object
     {
@@ -279,7 +279,7 @@ class DB extends Model
      * Concats "LIMIT number"
      *
      * @param int $limit limit of SQL query
-     * @return object
+     * @return ORM
      */
     public function limit($limit): object
     {
@@ -295,7 +295,7 @@ class DB extends Model
      * Concats "OFFSET number"
      *
      * @param int $offset offset of SQL query
-     * @return object
+     * @return ORM
      */
     public function offset($offset): object
     {
@@ -311,7 +311,7 @@ class DB extends Model
      * Concats "GROUP BY column"
      *
      * @param string $column column name
-     * @return object
+     * @return ORM
      */
     public function groupBy($column): object
     {
@@ -327,7 +327,7 @@ class DB extends Model
      *
      * @param string $table joins table
      * @param string $on join condition
-     * @return object
+     * @return ORM
      */
     public function join($table, $on): object
     {
@@ -343,7 +343,7 @@ class DB extends Model
      *
      * @param string $table joins table
      * @param string $on join condition
-     * @return object
+     * @return ORM
      */
     public function leftJoin($table, $on): object
     {
@@ -359,7 +359,7 @@ class DB extends Model
      *
      * @param string $table joins table
      * @param string $on join condition
-     * @return object
+     * @return ORM
      */
     public function rightJoin($table, $on): object
     {
@@ -410,57 +410,6 @@ class DB extends Model
     }
 
     /**
-     * Sets conntection for MySQL DBMS
-     *
-     * @since 2.1.0
-     * @return \PDO
-     */
-    private function connectMysql($settings, $pdoOptions): \PDO
-    {
-        return new PDO(
-            "mysql:host={$settings['host']};"
-            . "dbname={$settings['name']};"
-            . "charset={$settings['charset']}",
-            $settings['user'],
-            $settings['password'],
-            $pdoOptions
-        );
-    }
-
-    /**
-     * Sets conntection for PostgreSQL DBMS
-     *
-     * @since 2.1.0
-     * @return PDO
-     */
-    private function connectPgsql($settings, $pdoOptions): \PDO
-    {
-        return new PDO(
-            "pgsql:host={$settings['host']};"
-            . "dbname={$settings['name']};"
-            . "charset={$settings['charset']}",
-            $settings['user'],
-            $settings['password'],
-            $pdoOptions
-        );
-    }
-
-    /**
-     * Sets connection for SQLite DBMS
-     *
-     * @since 2.1.0
-     * @return \PDO
-     */
-    private function connectSqlite($settings, $pdoOptions): \PDO
-    {
-        return new PDO(
-            'sqlite:' . $settings['path'],
-            null, null,
-            $pdoOptions
-        );
-    }
-
-    /**
      * Method provides connection this DB
      *        $dbSettings = ;
      * Change DB connecting properties in config/db.php
@@ -469,13 +418,10 @@ class DB extends Model
      */
     public function __construct()
     {
-        $dbms = Justify::$settings['db']['dbms'];
+        $db = config()['db'];
 
-        $connector = ConnectorFactory::create($dbms);
-        $this->db = $connector->getInstance(
-            Justify::$settings['db'][$dbms],
-            Justify::$settings['db']['pdo_options']
-        );
+        $connector = ConnectorFactory::create($db['dbms']);
+        $this->db = $connector->getInstance($db[$db['dbms']], $db['pdo_options']);
 
         $this->table = static::tableName();
     }

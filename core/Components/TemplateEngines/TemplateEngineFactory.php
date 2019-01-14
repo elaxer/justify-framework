@@ -12,7 +12,12 @@ class TemplateEngineFactory
 {
     const NAMESPACE = '\\Core\\Components\\TemplateEngines\\';
 
-	public static function create(string $templateEngineName, array $params = []): object
+    /**
+     * @param string $templateEngineName
+     * @param array $params
+     * @return TemplateEngine
+     */
+	public static function create(string $templateEngineName, array $params = []): TemplateEngine
 	{
 		$className = self::NAMESPACE . ucfirst($templateEngineName);
 		

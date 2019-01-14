@@ -6,7 +6,7 @@ use Core\Exceptions\ExtensionNotFoundException;
 
 class ConnectorFactory
 {
-    const NAMESPACE = 'Core\\System\\DBConnectors\\';
+    const NAMESPACE = 'Core\\Components\\DB\\Connectors\\';
 
     /**
      * @param string $className
@@ -19,7 +19,7 @@ class ConnectorFactory
             throw new ExtensionNotFoundException('PDO');
         }
 
-        $connectorName = self::NAMESPACE . ucfirst($className) . 'Connector';
+        $connectorName = self::NAMESPACE . ucfirst($className);
 
         return new $connectorName();
     }

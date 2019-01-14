@@ -198,11 +198,9 @@ class Pagination
         $url = '?';
 
         foreach ($_GET as $param => $value) {
-            if ($param == $this->getName) {
-                continue;
+            if ($param != $this->getName) {
+                $url .= "$param=$value&";
             }
-
-            $url .= "$param=$value&";
         }
 
         return $url . $this->getName . '=';

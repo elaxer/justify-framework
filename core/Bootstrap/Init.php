@@ -2,16 +2,17 @@
 
 namespace Core\Bootstrap;
 
-use Core\Components\Caching\CachingFactory;
+use Core\Justify;
+use Core\Container;
+use Core\Components\Lang;
 use Core\Components\Http\Request;
 use Core\Components\Http\Response;
+use Core\Components\Http\Session;
 use Core\Components\Router\Router;
-use Core\Container;
-use Core\Justify;
+use Core\Components\Caching\Cache;
+use Core\Components\Caching\CachingFactory;
 use Core\Exceptions\OldPHPVersionException;
 use Core\Exceptions\CauseFromConsoleException;
-use Core\Components\Lang;
-use Core\Components\Http\Session;
 use Whoops\Run;
 use Whoops\Handler\PrettyPageHandler;
 
@@ -31,9 +32,15 @@ class Init
     public function initSettings()
     {
         if (Justify::$debug) {
+            ini_set('display_errors', true);
+            error_reporting(E_ALL);
+
             $whoops = new Run();
             $whoops->pushHandler(new PrettyPageHandler());
             $whoops->register();
+        } else {
+            ini_set('display_errors', false);
+            error_reporting(0);
         }
 
         date_default_timezone_set(Justify::$settings['timezone']);
@@ -46,17 +53,16 @@ class Init
 
         Justify::$container = new Container();
 
-        Justify::$container->set(
-            'cache', CachingFactory::create(
+        Justify::$container->set('cache_psr6',
+            CachingFactory::create(
                 $config['caching']['driver'],
                 $config['caching'][$config['caching']['driver']]
             )
         );
-
+        Justify::$container->set('cache', new Cache());
         Justify::$container->set('request', new Request());
         Justify::$container->set('response', new Response());
         Justify::$container->set('session', new Session());
-
         Justify::$container->set('router', new Router());
     }
 
@@ -71,16 +77,6 @@ class Init
     public function loadLang()
     {
         Lang::getLanguages();
-    }
-
-    /**
-     * Returns array of routes
-     *
-     * @return \Core\Components\Router\Router
-     */
-    public function getRouter()
-    {
-        return Justify::$settings['router'];
     }
 
     /**

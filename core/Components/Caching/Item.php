@@ -15,7 +15,6 @@ class Item implements CacheItemInterface
     private $value = null;
     private $isHit = false;
     private $expiresAt = 0;
-    private $expiresAfter = 0;
 
     public function __construct($key)
     {
@@ -79,7 +78,7 @@ class Item implements CacheItemInterface
      */
     public function expiresAfter($time)
     {
-        $this->expiresAfter = $time;
+        $this->expiresAt = $time;
 
         return $this;
     }

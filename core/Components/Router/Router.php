@@ -2,6 +2,8 @@
 
 namespace Core\Components\Router;
 
+use Core\Exceptions\RouteNotFoundException;
+
 /**
  * Class Router
  *
@@ -30,7 +32,6 @@ class Router
             'pattern' => $pattern,
             'handler' => $handler,
             'regexp' => '',
-            'found' => false,
             'parsed' => [],
             'vars' => []
         ];
@@ -51,7 +52,6 @@ class Router
             'pattern' => $pattern,
             'handler' => $handler,
             'regexp' => '',
-            'found' => false,
             'parsed' => [],
             'vars' => []
         ];
@@ -66,6 +66,7 @@ class Router
      *
      * @param string $method expected method
      * @param string $uri URI. Pass without query string
+     * @throws RouteNotFoundException
      * @return array found route
      */
     public function findRoute($method, $uri)
@@ -87,13 +88,10 @@ class Router
         }
 
         if (empty($route)) {
-            return ['found' => false];
+            throw new RouteNotFoundException();
         }
 
-        $route['found'] = true;
-
         return [
-            'found' => $route['found'],
             'handler' => $route['handler'],
             'named_vars' => $route['vars'],
             'vars' => array_values($route['vars'])

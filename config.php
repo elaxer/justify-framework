@@ -46,37 +46,19 @@ return [
 
         // Settings for MySQL DBMS
         'mysql' => [
-            // Data base host
             'host' => '127.0.0.1',
-
-            // Data base user name
             'user' => 'root',
-
-            // User password
-            'password' => '123456',
-
-            // Data base name
-            'name' => 'mvc_blog',
-
-            // Data base charset
+            'password' => 'secret',
+            'name' => 'database',
             'charset' => 'utf8'
         ],
 
         // Settings for PostgreSQL DBMS
         'pgsql' => [
-            // Data base host
             'host' => '127.0.0.1',
-
-            // Data base user name
             'user' => 'root',
-
-            // User password
             'password' => 'secret',
-
-            // Data base name
             'name' => 'database',
-
-            // Data base charset
             'charset' => 'utf8'
         ],
 
@@ -94,11 +76,10 @@ return [
         ]
     ],
 
-    // Active template engine
-    'template_engine' => 'PHP',
-
-    // List of config of template engines
     'template_engines' => [
+        // Active template engine
+        'engine' => 'PHP',
+
         'PHP' => [
             'file_extension' => 'php'
         ],
@@ -125,8 +106,16 @@ return [
         'driver' => 'memcached',
 
         'memcached' => [
+            [
+                'host' => '127.0.0.1',
+                'port' => 11211
+            ]
+        ],
+
+        'redis' => [
+            'scheme' => 'tcp',
             'host' => '127.0.0.1',
-            'port' => 11211
+            'port' => 6379
         ]
     ]
 ];

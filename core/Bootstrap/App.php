@@ -2,12 +2,13 @@
 
 namespace Core\Bootstrap;
 
+use Core\Exceptions\CauseFromConsoleException;
+use Core\Exceptions\CSRFProtectionException;
+use Core\Exceptions\OldPHPVersionException;
+use Core\Exceptions\RouteNotFoundException;
 use Core\Justify;
 use Core\Components\Mvc\ControllerFactory;
 use Core\Components\Http\CSRF;
-use Core\Exceptions\CSRFProtectionException;
-use Core\Components\Http\Request;
-use Core\Exceptions\InvalidConfigException;
 
 /**
  * The Core of framework
@@ -24,15 +25,14 @@ class App
 
     /**
      * Method launches the application
+     *
      */
     public function run()
     {
-        $route = router()->findRoute($this->getHttpMethod(), $this->getURI());
-
-        if (!$route['found']) {
-            echo $this->render404();
-
-            return;
+        try {
+            $route = router()->findRoute($this->getHttpMethod(), $this->getURI());
+        } catch (RouteNotFoundException $e) {
+            error(404);
         }
 
         if (is_string($route['handler'])) {
@@ -59,7 +59,9 @@ class App
      * Loads array of settings to next application work
      * Sets magic functions
      *
-     * @throws
+     * @throws CauseFromConsoleException
+     * @throws OldPHPVersionException
+     * @throws CSRFProtectionException
      * @param array $settings stores array with settings
      */
     public function __construct(array $settings)
@@ -74,7 +76,7 @@ class App
             $this->CSRFProtection();
         }
 
-        $this->router = $init->getRouter();
+        $this->router = router();
     }
 
     public function __destruct()
@@ -115,18 +117,6 @@ class App
     private function getHttpMethod(): string
     {
         return $_SERVER['REQUEST_METHOD'];
-    }
-
-    /**
-     * Renders 404 page
-     *
-     * @since 2.3.0
-     * @param string $message
-     * @return string
-     */
-    private function render404(string $message = 'Page not found!'): string
-    {
-        return render('errors/404', ['message' => $message]);
     }
 
     /**

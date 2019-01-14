@@ -1,4 +1,3 @@
-<?php /* @var $message */ ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,7 +10,7 @@
 <body>
     <div class="container">
         <h1 style="color: red;">ERROR 404!</h1>
-        <h3><?= $message ?></h3>
+        <h3>Page not found!</h3>
     </div>
 </body>
 </html>
