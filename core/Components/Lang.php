@@ -34,7 +34,7 @@ class Lang
         }
     }
 
-    public static function get(string $key, $locale = null, string $notFound = 'NOT FOUND'): string
+    public static function get($key, $locale = null, $notFound = 'NOT FOUND')
     {
         if (!$locale) {
             $locale = Justify::$settings['locale'];
@@ -55,12 +55,12 @@ class Lang
         return $notFound;
     }
 
-    public static function setLocale(string $locale)
+    public static function setLocale($locale)
     {
         Justify::$settings['locale'] = $locale;
     }
 
-    public static function setFallbackLocale(string $locale)
+    public static function setFallbackLocale($locale)
     {
         Justify::$settings['fallbackLocale'] = $locale;
     }

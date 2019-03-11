@@ -50,7 +50,7 @@ class VK
      * @param array $params array of params
      * @return object
      */
-    public function api(string $method, array $params = []): object
+    public function api($method, array $params = [])
     {
         $this->setOpts($params, [
             'access_token' => $this->accessToken,
@@ -71,7 +71,7 @@ class VK
      * @throws ExtensionNotFoundException
      * @return object|bool
      */
-    public function sendPhoto(string $file, array $params)
+    public function sendPhoto($file, array $params)
     {
         $photo = $this->uploadPhoto($file);
 
@@ -86,7 +86,7 @@ class VK
      * @param array array of params
      * @return string link
      */
-    public function initApp(array $params): string
+    public function initApp(array $params)
     {
         $this->setOpts($params, [
             'scope' => implode(',', $this->scopes),
@@ -104,7 +104,7 @@ class VK
      * @param string $accessToken access token of your VK application
      * @param string $apiVersion VK API version
      */
-    public function __construct(string $accessToken = '', string $apiVersion)
+    public function __construct($accessToken = '', $apiVersion)
     {
         $this->accessToken = $accessToken;
         $this->apiVersion = $apiVersion;

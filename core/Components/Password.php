@@ -18,7 +18,7 @@ class Password
      * @param string $password
      * @return bool|string
      */
-    public static function getHash(string $password)
+    public static function getHash($password)
     {
         return password_hash($password, PASSWORD_DEFAULT);
     }
@@ -30,7 +30,7 @@ class Password
      * @param string $hash
      * @return bool
      */
-    public static function verify(string $password, string $hash): bool
+    public static function verify($password, $hash)
     {
         return password_verify($password, $hash);
     }
@@ -41,7 +41,7 @@ class Password
      * @param string $hash
      * @return array
      */
-    public static function getInfo(string $hash): array
+    public static function getInfo($hash)
     {
         return password_get_info($hash);
     }
@@ -53,12 +53,12 @@ class Password
      * @param array $rules chars of future password
      * @return string
      */
-    public static function generate(int $length, array $rules = [
+    public static function generate($length, array $rules = [
         'littleLetters' => true,
         'bigLetters' => true,
         'numbers' => true,
         'specialChars' => false
-    ]): string
+    ])
     {
         $chars = [
             'littleLetters' => 'qwertyuiopasdfghjklzxcvbnm',

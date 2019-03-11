@@ -20,7 +20,7 @@ class Response
      * @since 2.3.0
      * @param integer|float $seconds seconds to wait
      */
-    public function refresh(float $seconds = 0)
+    public function refresh($seconds = 0)
     {
         header("Refresh: $seconds");
     }
@@ -31,9 +31,14 @@ class Response
      * @since 2.3.0
      * @param string $to path to redirect address
      */
-    public function redirect(string $to)
+    public function redirect($to)
     {
         header("Location: $to");
+    }
+    
+    public function getReferer()
+    {
+        return $_SERVER['HTTP_REFERER'];
     }
 
     /**
@@ -43,7 +48,7 @@ class Response
      */
     public function goBack()
     {
-        $this->redirect($_SERVER['HTTP_REFERER']);
+        $this->redirect($this->getReferer());
     }
 
     /**

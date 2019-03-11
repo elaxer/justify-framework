@@ -6,7 +6,7 @@ use Core\Components\Http\CSRF;
 
 class CSRFFiled
 {
-    public static function render(): string
+    public static function render()
     {
         $csrfToken = CSRF::$token;
 

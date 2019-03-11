@@ -12,6 +12,7 @@ use Core\Components\Http\CSRF;
 
 /**
  * The Core of framework
+ *
  * Launches the application
  */
 class App
@@ -30,7 +31,7 @@ class App
     public function run()
     {
         try {
-            $route = router()->findRoute($this->getHttpMethod(), $this->getURI());
+            $route = router()->findRoute(request()->getHttpMethod(), request()->getURI());
         } catch (RouteNotFoundException $e) {
             error(404);
         }
@@ -99,24 +100,6 @@ class App
         } else {
             CSRF::setSession();
         }
-    }
-
-    /**
-     * Method return current URI address
-     *
-     * @return string
-     */
-    private function getURI(): string
-    {
-        return parse_url($_SERVER['REQUEST_URI'])['path'];
-    }
-
-    /**
-     * @return string HTTP method
-     */
-    private function getHttpMethod(): string
-    {
-        return $_SERVER['REQUEST_METHOD'];
     }
 
     /**

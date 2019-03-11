@@ -16,7 +16,7 @@ class Router
     /**
      * @var array list of all routes
      */
-    private $routes = [];
+    public $routes = [];
 
     /**
      * Puts in $this->routes list new route

@@ -109,7 +109,7 @@ class Pagination
      * @param int $totalCount count of all articles
      * @param int $countOfPaginationPages length of pagination
      */
-    public function __construct(int $defaultPageSize, int $totalCount, int $countOfPaginationPages = 10)
+    public function __construct($defaultPageSize, $totalCount, $countOfPaginationPages = 10)
     {
         $this->url = $this->createUrl();
         $this->defaultPageSize = $defaultPageSize;
@@ -144,7 +144,7 @@ class Pagination
      *
      * @return float|int
      */
-    public function getStart(): float
+    public function getStart()
     {
         if ($this->currentPage > floor($this->countOfPaginationPages / 2) && $this->countOfPages > $this->countOfPaginationPages) {
             return $this->currentPage - floor($this->countOfPaginationPages / 2);
@@ -158,7 +158,7 @@ class Pagination
      *
      * @return float|int
      */
-    public function getEnd(): float
+    public function getEnd()
     {
         if ($this->totalCount > $this->countOfPaginationPages) {
             return $this->start + $this->countOfPaginationPages - 1;
@@ -173,7 +173,7 @@ class Pagination
      * @param int $countOfPaginationPages
      * @return float
      */
-    public function getCountOfPaginationPages(int $countOfPaginationPages): float
+    public function getCountOfPaginationPages($countOfPaginationPages)
     {
         if ($countOfPaginationPages > $this->countOfPages) {
             return $this->countOfPages;
@@ -187,7 +187,7 @@ class Pagination
      *
      * @return string
      */
-    public function createUrl(): string
+    public function createUrl()
     {
         if (! isset(parse_url($_SERVER['REQUEST_URI'])['query'])
             || (count($_GET) === 1

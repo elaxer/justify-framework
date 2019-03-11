@@ -12,7 +12,7 @@ namespace Core\Widgets;
  */
 class ArrayToOptions
 {
-    public static function render(array $array, int $selected = 1): string
+    public static function render(array $array, $selected = 1)
     {
         ob_start();
 

@@ -26,7 +26,7 @@ if (!function_exists('consoleLog')) {
      * @since 2.2.0
      * @param string $text
      */
-    function consoleLog(string $text)
+    function consoleLog($text)
     {
         echo "<script>console.log('$text')</script>";
     }
@@ -50,28 +50,28 @@ if (!function_exists('consoleLogArray')) {
 }
 
 if (!function_exists('lang')) {
-    function lang(string $key, $locale = null, string $notFound = 'NOT FOUND'): string
+    function lang($key, $locale = null, $notFound = 'NOT FOUND')
     {
         return Lang::get($key, $locale, $notFound);
     }
 }
 
 if (!function_exists('lang_get')) {
-    function lang_get(string $key, $locale = null, string $notFound = 'NOT FOUND')
+    function lang_get($key, $locale = null, $notFound = 'NOT FOUND')
     {
         return Lang::get($key, $locale, $notFound);
     }
 }
 
 if (!function_exists('lang_setLocale')) {
-    function lang_setLocale(string $locale)
+    function lang_setLocale($locale)
     {
         Lang::setLocale($locale);
     }
 }
 
 if (!function_exists('lang_setFallbackLocale')) {
-    function lang_setFallbackLocale(string $locale)
+    function lang_setFallbackLocale($locale)
     {
         Lang::setFallbackLocale($locale);
     }
@@ -85,12 +85,12 @@ if (!function_exists('generatePassword')) {
      * @param array $rules chars of future password
      * @return string
      */
-    function generatePassword(int $length, array $rules = [
+    function generatePassword($length, array $rules = [
         'littleLetters' => true,
         'bigLetters' => true,
         'numbers' => true,
         'specialChars' => false
-    ]): string
+    ])
     {
         return \Core\Components\Password::generate($length, $rules);
     }
@@ -102,7 +102,7 @@ if (!function_exists('render')) {
      * @param array $params
      * @return string
      */
-    function render(string $view, array $params = []): string
+    function render($view, array $params = [])
     {
         return \Core\Components\Mvc\View::render($view, $params);
     }
@@ -249,5 +249,12 @@ if (!function_exists('error')) {
     function error($code, array $params = [])
     {
         exit(render('errors/' . $code, $params));
+    }
+}
+
+if (!function_exists('csrf_token')) {
+    function csrf_token()
+    {
+        return session()->get('_token');
     }
 }

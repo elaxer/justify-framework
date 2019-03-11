@@ -26,7 +26,7 @@ class CSRF
      *
      * @return string
      */
-    public static function generateToken(): string
+    public static function generateToken()
     {
         return bin2hex(openssl_random_pseudo_bytes(32));
     }
@@ -52,7 +52,7 @@ class CSRF
             || !session()->has('_token')
             || !hash_equals(session()->get('_token'), request()->post('_token'))
         ) {
-            throw new CSRFProtectionException('Sent data without CSRF field or CSRF attack attemp');
+            throw new CSRFProtectionException('Sent data without CSRF field or CSRF attack attempt');
         }
     }
 }

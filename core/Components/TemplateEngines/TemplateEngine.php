@@ -21,17 +21,17 @@ abstract class TemplateEngine implements TemplateEngineInterface
 		$this->config = Justify::$settings['template_engines'][$this->activeTemplateEngine];
 	}
 
-	protected function getViewsPath(): string
+	protected function getViewsPath()
 	{
 		return BASE_DIR . '/views/';
 	}
 
-	protected function getExtension(): string
+	protected function getExtension()
 	{
 		return '.' . $this->config['file_extension'];
 	}
 
-	protected function createViewPath(string $view): string
+	protected function createViewPath($view)
 	{
 		return $this->getViewsPath() . $view . $this->getExtension();
 	}

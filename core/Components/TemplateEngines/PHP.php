@@ -10,7 +10,7 @@ namespace Core\Components\TemplateEngines;
  */
 class PHP extends TemplateEngine
 {
-	public function render(string $view, array $params = []): string
+	public function render($view, array $params = [])
 	{
 		extract($params);
 

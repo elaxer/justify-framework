@@ -43,7 +43,7 @@ class Curl
      * @param string $baseName base name of file
      * @return \CURLFile
      */
-    public function createFile($file, $mime, $baseName): \CURLFile
+    public function createFile($file, $mime, $baseName)
     {
         return curl_file_create($file, $mime, $baseName);
     }
@@ -53,7 +53,7 @@ class Curl
      *
      * @return string
      */
-    public function exec(): string
+    public function exec()
     {
         return curl_exec($this->ch);
     }
@@ -63,7 +63,7 @@ class Curl
      *
      * @return string
      */
-    public static function getVersion(): string
+    public static function getVersion()
     {
         return curl_version()['version'];
     }
@@ -73,7 +73,7 @@ class Curl
      *
      * @return string
      */
-    public function getError(): string
+    public function getError()
     {
         return curl_error($this->ch);
     }
@@ -83,7 +83,7 @@ class Curl
      *
      * @return int
      */
-    public function getErrno(): int
+    public function getErrno()
     {
         return curl_errno($this->ch);
     }

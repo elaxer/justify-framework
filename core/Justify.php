@@ -106,7 +106,7 @@ class Justify
      *
      * @return string
      */
-    public static function getVersion(): string
+    public static function getVersion()
     {
         return '2.4.1';
     }

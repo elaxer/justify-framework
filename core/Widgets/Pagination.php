@@ -14,7 +14,7 @@ class Pagination
      * @param PaginationObject $pagination pagination
      * @return string
      */
-    public static function render(PaginationObject $pagination): string
+    public static function render($pagination)
     {
         //todo: edit
         return View::renderWidget(lcfirst(__CLASS__));

@@ -101,7 +101,7 @@ class SimplePagination
      * @param int $defaultPageSize
      * @param int $totalCount
      */
-    public function __construct(int $defaultPageSize, int $totalCount)
+    public function __construct($defaultPageSize, $totalCount)
     {
         $this->url = $this->createUrl();
         $this->defaultPageSize = $defaultPageSize;
@@ -128,7 +128,7 @@ class SimplePagination
      *
      * @return string
      */
-    public function createUrl(): string
+    public function createUrl()
     {
         if (!isset(parse_url($_SERVER['REQUEST_URI'])['query'])
             || (count($_GET) === 1

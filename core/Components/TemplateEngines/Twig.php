@@ -30,7 +30,7 @@ class Twig extends TemplateEngine
      * @throws \Twig_Error_Runtime
      * @throws \Twig_Error_Syntax
      */
-	public function render(string $view, array $params = []): string
+	public function render($view, array $params = [])
 	{
 		$view = $this->createViewPath($view);
 
@@ -39,7 +39,7 @@ class Twig extends TemplateEngine
 		return $template->render($params);
 	}
 
-	protected function createViewPath(string $view): string
+	protected function createViewPath($view)
 	{
 		return $view . $this->getExtension();
 	}

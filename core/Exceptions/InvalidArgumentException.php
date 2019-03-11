@@ -34,5 +34,4 @@ class InvalidArgumentException extends JustifyException
 
         parent::__construct($message);
     }
-
 }

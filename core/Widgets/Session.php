@@ -55,20 +55,16 @@ class Session
      * @param string $message message of flash
      * @param string $type type of flash
      * @param bool $close can close flash
+     * @throws \Core\Exceptions\InvalidConfigException
      */
-    public static function setFlash(string $message, string $type = 'info', bool $close = true)
+    public static function setFlash($message, $type = 'info', $close = true)
     {
         self::$message = $message;
         self::$type = $type;
         self::$close = $close;
 
-        try {
-            if (! in_array($type, self::$types)) {
-                throw new InvalidConfigException('Undefined type ' . $type);
-            }
-        } catch (InvalidConfigException $e) {
-            $e->printError();
-            exit();
+        if (!in_array($type, self::$types)) {
+            throw new InvalidConfigException('Undefined type ' . $type);
         }
     }
 
@@ -77,7 +73,7 @@ class Session
      *
      * @return bool
      */
-    public static function hasFlash(): bool
+    public static function hasFlash()
     {
         return !is_null(self::$message);
     }
@@ -87,7 +83,7 @@ class Session
      *
      * @return string
      */
-    public static function render(): string
+    public static function render()
     {
         ob_start();
 

@@ -106,7 +106,7 @@ class Init
      * @param string $error
      * @throws OldPHPVersionException
      */
-    private function isOldVersion(string $version, string $error = 'PHP version must be bigger than ')
+    private function isOldVersion($version, $error = 'PHP version must be bigger than ')
     {
         if (!version_compare(PHP_VERSION, $version, '>=')) {
             throw new OldPHPVersionException($error . $version);

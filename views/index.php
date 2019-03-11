@@ -17,7 +17,6 @@
 <body>
 <div class="wrapper">
     <div class="content">
-
         <div class="navbar navbar-inverse">
             <div class="container">
                 <div class="navbar-header">

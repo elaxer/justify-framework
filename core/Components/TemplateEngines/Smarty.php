@@ -26,7 +26,14 @@ class Smarty extends TemplateEngine
         }
     }
 
-    public function render(string $view, array $params = []): string
+    /**
+     * @param $view
+     * @param array $params
+     * @return string
+     * @throws \Exception
+     * @throws \SmartyException
+     */
+    public function render($view, array $params = [])
     {
         $view = $this->createViewPath($view);
 
@@ -39,7 +46,7 @@ class Smarty extends TemplateEngine
         return '';
     }
 
-    protected function createViewPath(string $view): string
+    protected function createViewPath($view)
     {
         return $view . $this->getExtension();
     }

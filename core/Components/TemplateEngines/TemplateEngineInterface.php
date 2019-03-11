@@ -10,5 +10,5 @@ namespace Core\Components\TemplateEngines;
  */
 interface TemplateEngineInterface
 {
-	public function render(string $view, array $params = []): string;
+	public function render($view, array $params = []);
 }

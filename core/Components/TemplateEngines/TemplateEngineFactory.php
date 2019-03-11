@@ -17,7 +17,7 @@ class TemplateEngineFactory
      * @param array $params
      * @return TemplateEngine
      */
-	public static function create(string $templateEngineName, array $params = []): TemplateEngine
+	public static function create($templateEngineName, array $params = [])
 	{
 		$className = self::NAMESPACE . ucfirst($templateEngineName);
 		

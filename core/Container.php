@@ -15,16 +15,16 @@ class Container
     private $container = [];
 
     /**
-     * @param $component
+     * @param string $componentName
      * @return bool|mixed
      */
-    public function get($component)
+    public function get($componentName)
     {
-        if (!isset($this->container[$component])) {
+        if (!isset($this->container[$componentName])) {
             return false;
         }
 
-        return $this->container[$component];
+        return $this->container[$componentName];
     }
 
     /**

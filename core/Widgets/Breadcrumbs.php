@@ -18,7 +18,7 @@ class Breadcrumbs
      * @param array $breadcrumbs. Key - item, value - link
      * @return string
      */
-    public static function render(array $breadcrumbs = []): string
+    public static function render(array $breadcrumbs = [])
     {
         ob_start();
 

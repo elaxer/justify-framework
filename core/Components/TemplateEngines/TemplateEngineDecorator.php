@@ -14,7 +14,7 @@ class TemplateEngineDecorator implements TemplateEngineInterface
         $this->templateEngine = $templateEngine;
         $this->debugBar = $debugBar;
     }
-    public function render(string $view, array $params = []): string
+    public function render($view, array $params = [])
     {
         return $this->debugBar->renderHead() .
             $this->templateEngine->render($view, $params) .

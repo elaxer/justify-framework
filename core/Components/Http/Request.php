@@ -46,14 +46,19 @@ class Request
         return $_POST[$key] ?? $defaultValue;
     }
 
+    public function getHttpMethod()
+    {
+        return $_SERVER['REQUEST_METHOD'];
+    }
+
     /**
      * If request method equals "GET" then returns true else false
      *
      * @return bool
      */
-    public function isGet(): bool
+    public function isGet()
     {
-        return $_SERVER['REQUEST_METHOD'] == 'GET';
+        return $this->getHttpMethod() == 'GET';
     }
 
     /**
@@ -61,9 +66,9 @@ class Request
      *
      * @return bool
      */
-    public function isPost(): bool
+    public function isPost()
     {
-        return $_SERVER['REQUEST_METHOD'] == 'POST';
+        return $this->getHttpMethod() == 'POST';
     }
 
     /**
@@ -88,7 +93,7 @@ class Request
      *
      * @return string
      */
-    public function getUserIp(): string
+    public function getUserIp()
     {
         return $_SERVER['REMOTE_ADDR'];
     }
@@ -98,7 +103,7 @@ class Request
      *
      * @return string
      */
-    public function getServerIp(): string
+    public function getServerIp()
     {
         return $_SERVER['SERVER_ADDR'];
     }
@@ -108,7 +113,7 @@ class Request
      *
      * @return string
      */
-    public function getURI(): string
+    public function getURI()
     {
         return parse_url($_SERVER['REQUEST_URI'])['path'];
     }

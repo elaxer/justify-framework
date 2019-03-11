@@ -21,7 +21,7 @@ class Model extends ORM
      * @param mixed $var variable to encode
      * @return string
      */
-    public static function encode($var): string
+    public static function encode($var)
     {
         return htmlspecialchars(trim($var), ENT_QUOTES, 'UTF-8');
     }
@@ -36,7 +36,7 @@ class Model extends ORM
      * @param mixed $var variable to decode
      * @return string
      */
-    public static function decode($var): string
+    public static function decode($var)
     {
         return htmlspecialchars_decode($var, ENT_QUOTES);
     }
@@ -53,7 +53,7 @@ class Model extends ORM
      *
      * @return string
      */
-    public static function tableName(): string
+    public static function tableName()
     {
         return Str::camelToSnake(self::getClassName());
     }

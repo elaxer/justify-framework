@@ -6,7 +6,7 @@ class ControllerFactory
 {
     const NAMESPACE = 'App\\Controllers\\';
 
-    public static function create(string $controller, array $params = [])
+    public static function create($controller, array $params = [])
     {
         $className = self::NAMESPACE . $controller;
 

@@ -21,9 +21,9 @@ class Str
      * @return string
      */
     public static function random(
-        int $length = 16,
-        string $chars = 'qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM1234567890'
-    ): string
+        $length = 16,
+        $chars = 'qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM1234567890'
+    )
     {
         $string = '';
         $lenOfChars = mb_strlen($chars);
@@ -46,10 +46,10 @@ class Str
      * @param string $postfix
      * @return string
      */
-    public static function shorten(string $text, int $limit, string $postfix = '...'): string
+    public static function shorten($text, $limit, $postfix = '...')
     {
         if (mb_strlen($text) > $limit) {
-            return mb_substr($text, 0, $limit)  . $postfix;
+            return mb_substr($text, 0, $limit) . $postfix;
         }
 
         return $text;
@@ -64,7 +64,7 @@ class Str
      * @param string $censor
      * @return null|string|string[]
      */
-    public static function wordCensor(string $string, array $disallowed, string $censor = '')
+    public static function wordCensor($string, array $disallowed, $censor = '')
     {
         $string = trim($string);
         $disallowed = array_map(function ($pattern) {
@@ -87,7 +87,7 @@ class Str
      * @param string $string
      * @return string
      */
-    public static function randomChar(string $string = ''): string
+    public static function randomChar($string = '')
     {
         if ($string == '') {
             $string = 'qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM1234567890';
@@ -104,7 +104,7 @@ class Str
      * @param integer $length length of substring
      * @return string
      */
-    public static function randomSubstring(string $string = '', int $length = 0): string
+    public static function randomSubstring($string = '', $length = 0)
     {
         if ($string == '') {
             $string = 'qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM1234567890';
@@ -122,7 +122,7 @@ class Str
      * @param string $string
      * @return null|string|string[]
      */
-    public static function removeMultiplies(string $string)
+    public static function removeMultiplies($string)
     {
         $pattern = '~(.*?)(\1+)~iu';
 
@@ -136,7 +136,7 @@ class Str
      * @param string $string converts string
      * @return string
      */
-    public static function camelToSnake(string $string): string
+    public static function camelToSnake($string)
     {
         $pattern = '/[A-Z][A-Z0-9]*(?=$|[A-Z][a-z0-9])|[A-Za-z][a-z0-9]+/';
         preg_match_all($pattern, $string, $matches);
@@ -156,7 +156,7 @@ class Str
      * @param bool $studly if studly true then snake case will be converted to StudlyCamelCase
      * @return string
      */
-    public static function snakeToCamel(string $string, bool $studly = false): string
+    public static function snakeToCamel($string, $studly = false)
     {
         $segments = explode('_', $string);
 
@@ -184,7 +184,7 @@ class Str
      * @param string $string string to translate
      * @return string
      */
-    public static function ruToEn(string $string): string
+    public static function ruToEn($string)
     {
         $converter = [
             'а' => 'a', 'б' => 'b', 'в' => 'v',
@@ -221,7 +221,7 @@ class Str
      * @param string $string string to translate to leet language
      * @return string
      */
-    public static function to1337(string $string): string
+    public static function to1337($string)
     {
         $string = mb_strtoupper($string);
 

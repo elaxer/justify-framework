@@ -55,7 +55,7 @@ class Validate
      * @param array $params
      * @return bool
      */
-    public static function validate(array $params): bool
+    public static function validate(array $params)
     {
         foreach ($params as $param => $settings) {
             foreach ($settings as $property => $value) {
@@ -115,7 +115,7 @@ class Validate
      * @param string $ip IP-address
      * @return bool
      */
-    public static function isIp(string $ip): bool
+    public static function isIp($ip)
     {
         return filter_var($ip, FILTER_VALIDATE_IP);
     }
@@ -126,7 +126,7 @@ class Validate
      * @param string $ip IP-address
      * @return bool
      */
-    public static function isIpv4(string $ip): bool
+    public static function isIpv4($ip)
     {
         return filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_IPV4);
     }
@@ -137,7 +137,7 @@ class Validate
      * @param string $ip IP-address
      * @return bool
      */
-    public static function isIpv6(string $ip): bool
+    public static function isIpv6($ip)
     {
         return filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_IPV6);
     }
@@ -148,7 +148,7 @@ class Validate
      * @param string $email E-mail
      * @return bool
      */
-    public static function isEmail(string $email): bool
+    public static function isEmail($email)
     {
         return filter_var($email, FILTER_VALIDATE_EMAIL);
     }
@@ -159,7 +159,7 @@ class Validate
      * @param string $url URL
      * @return bool
      */
-    public static function isUrl(string $url): bool
+    public static function isUrl($url)
     {
         return filter_var($url, FILTER_VALIDATE_URL);
     }

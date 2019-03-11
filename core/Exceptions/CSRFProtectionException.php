@@ -13,8 +13,6 @@ class CSRFProtectionException extends JustifyException
 
     public function __construct($message = '', $responseCode = 500, $code = 0, Throwable $previous = null)
     {
-        dump($_SESSION);
-        dump($_POST);
         parent::__construct($message, $responseCode, $code, $previous);
     }
 }

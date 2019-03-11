@@ -53,7 +53,7 @@ class ORM
      *
      * @return ORM
      */
-    public static function find(): object
+    public static function find()
     {
         $object = new static();
         $object->query = "SELECT * FROM {$object->table}";
@@ -67,6 +67,7 @@ class ORM
      * @param int $identify record identify
      * @param string $identifyName name of identifier
      * @return object
+     * @throws \Core\Exceptions\ExtensionNotFoundException
      */
     public static function findOne(int $identify, string $identifyName = 'id'): object
     {
@@ -81,8 +82,9 @@ class ORM
      * Returns total count of all records
      *
      * @return int
+     * @throws \Core\Exceptions\ExtensionNotFoundException
      */
-    public static function totalCount(): int
+    public static function totalCount()
     {
         $object = new static();
         $stmt = $object->db->query("SELECT COUNT(*) as count FROM {$object->table}");
@@ -94,6 +96,7 @@ class ORM
      * Returns array of all data
      *
      * @return array
+     * @throws \Core\Exceptions\ExtensionNotFoundException
      */
     public static function findAll()
     {
@@ -108,8 +111,9 @@ class ORM
      *
      * @param string $query SQL query
      * @return int
+     * @throws \Core\Exceptions\ExtensionNotFoundException
      */
-    public static function exec($query): int
+    public static function exec($query)
     {
         $object = new static();
 
@@ -120,8 +124,9 @@ class ORM
      * Clears all table data
      *
      * @return int
+     * @throws \Core\Exceptions\ExtensionNotFoundException
      */
-    public static function clearTable(): int
+    public static function clearTable()
     {
         $object = new static();
 
@@ -132,8 +137,9 @@ class ORM
      * Drops table
      *
      * @return int
+     * @throws \Core\Exceptions\ExtensionNotFoundException
      */
-    public static function dropTable(): int
+    public static function dropTable()
     {
         $object = new static();
 
@@ -144,8 +150,9 @@ class ORM
      * Drops data base
      *
      * @return int
+     * @throws \Core\Exceptions\ExtensionNotFoundException
      */
-    public static function dropDB(): int
+    public static function dropDB()
     {
         $object = new static();
 
@@ -160,7 +167,7 @@ class ORM
      * @param string|array $select selects items
      * @return ORM
      */
-    public function select($select): object
+    public function select($select)
     {
         if (is_array($select)) {
             $this->query = "SELECT " . implode(', ', $select);
@@ -180,7 +187,7 @@ class ORM
      * @param string|array $select selects items
      * @return ORM
      */
-    public function selectCount($select): object
+    public function selectCount($select)
     {
         if (is_array($select)) {
             $this->query = "SELECT COUNT(" . implode(', ', $select) . ')';
@@ -194,12 +201,12 @@ class ORM
     /**
      * Continues SQL query from find() method
      *
-     * Concats "FROM table"
+     * Concatenates "FROM table"
      *
      * @param string $from from table name
      * @return ORM
      */
-    public function from($from): object
+    public function from($from)
     {
         $this->query .= " FROM $from";
 
@@ -209,13 +216,13 @@ class ORM
     /**
      * Continues SQL query from find() method
      *
-     * Concats "WHERE condition"
+     * Concatenates "WHERE condition"
      *
      * @param string $condition condition of where
      * @param array $params array of values
      * @return ORM
      */
-    public function where($condition, array $params = []): object
+    public function where($condition, array $params = [])
     {
         $this->query .= " WHERE $condition";
         $this->params = array_merge($this->params, $params);
@@ -226,13 +233,13 @@ class ORM
     /**
      * Continues SQL query from find() method
      *
-     * Concats "AND WHERE condition"
+     * Concatenates "AND WHERE condition"
      *
      * @param string $condition condition of where
      * @param array $params array of values
      * @return ORM
      */
-    public function andWhere($condition, array $params = []): object
+    public function andWhere($condition, array $params = [])
     {
         $this->query .= " AND WHERE $condition";
         $this->params = array_merge($this->params, $params);
@@ -243,13 +250,13 @@ class ORM
     /**
      * Continues SQL query from find() method
      *
-     * Concats "OR WHERE condition"
+     * Concatenates "OR WHERE condition"
      *
      * @param string $condition condition of where
      * @param array $params array of values
      * @return ORM
      */
-    public function orWhere($condition, array $params = []): object
+    public function orWhere($condition, array $params = [])
     {
         $this->query .= " OR WHERE $condition";
         $this->params = array_merge($this->params, $params);
@@ -260,13 +267,13 @@ class ORM
     /**
      * Continues SQL query from find() method
      *
-     * Concats "ORDER BY column sort_method"
+     * Concatenates "ORDER BY column sort_method"
      *
      * @param string $column column name
      * @param string $sort sort method
      * @return ORM
      */
-    public function orderBy($column, $sort = 'ASC'): object
+    public function orderBy($column, $sort = 'ASC')
     {
         $this->query .= " ORDER BY $column $sort";
 
@@ -276,12 +283,12 @@ class ORM
     /**
      * Continues SQL query from find() method
      *
-     * Concats "LIMIT number"
+     * Concatenates "LIMIT number"
      *
      * @param int $limit limit of SQL query
      * @return ORM
      */
-    public function limit($limit): object
+    public function limit($limit)
     {
         $this->query .= " LIMIT ?";
         $this->params = array_merge($this->params, [$limit]);
@@ -292,12 +299,12 @@ class ORM
     /**
      * Continues SQL query from find() method
      *
-     * Concats "OFFSET number"
+     * Concatenates "OFFSET number"
      *
      * @param int $offset offset of SQL query
      * @return ORM
      */
-    public function offset($offset): object
+    public function offset($offset)
     {
         $this->query .= " OFFSET ?";
         $this->params = array_merge($this->params, [$offset]);
@@ -308,12 +315,12 @@ class ORM
     /**
      * Continues SQL query from find() method
      *
-     * Concats "GROUP BY column"
+     * Concatenates "GROUP BY column"
      *
      * @param string $column column name
      * @return ORM
      */
-    public function groupBy($column): object
+    public function groupBy($column)
     {
         $this->query .= " GROUP BY $column";
 
@@ -323,13 +330,13 @@ class ORM
     /**
      * Continues SQL query from find() method
      *
-     * Concats "INNER JOIN table ON condition"
+     * Concatenates "INNER JOIN table ON condition"
      *
      * @param string $table joins table
      * @param string $on join condition
      * @return ORM
      */
-    public function join($table, $on): object
+    public function join($table, $on)
     {
         $this->query .= " INNER JOIN $table ON $on";
 
@@ -339,13 +346,13 @@ class ORM
     /**
      * Continues SQL query from find() method
      *
-     * Concats "LEFT JOIN table ON condition"
+     * Concatenates "LEFT JOIN table ON condition"
      *
      * @param string $table joins table
      * @param string $on join condition
      * @return ORM
      */
-    public function leftJoin($table, $on): object
+    public function leftJoin($table, $on)
     {
         $this->query .= " LEFT JOIN $table ON $on";
 
@@ -355,13 +362,13 @@ class ORM
     /**
      * Continues SQL query from find() method
      *
-     * Concats "RIGHT JOIN table ON condition"
+     * Concatenates "RIGHT JOIN table ON condition"
      *
      * @param string $table joins table
      * @param string $on join condition
      * @return ORM
      */
-    public function rightJoin($table, $on): object
+    public function rightJoin($table, $on)
     {
         $this->query .= " RIGHT JOIN $table ON $on";
 
@@ -386,7 +393,7 @@ class ORM
      *
      * @return object
      */
-    public function one(): object
+    public function one()
     {
         $stmt = $this->db->prepare($this->query);
         $stmt->execute($this->params);
@@ -401,7 +408,7 @@ class ORM
      *
      * @return int
      */
-    public function count(): int
+    public function count()
     {
         $stmt = $this->db->prepare($this->query);
         $stmt->execute($this->params);
@@ -411,7 +418,7 @@ class ORM
 
     /**
      * Method provides connection this DB
-     *        $dbSettings = ;
+     *
      * Change DB connecting properties in config/db.php
      *
      * @throws ExtensionNotFoundException

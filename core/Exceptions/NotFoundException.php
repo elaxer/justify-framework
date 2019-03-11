@@ -2,8 +2,6 @@
 
 namespace Core\Exceptions;
 
-use Core\Justify;
-
 /**
  * Class NotFoundException
  *
@@ -27,11 +25,9 @@ class NotFoundException extends JustifyException
      * @param string $message message about error
      * @access public
      */
-    public function __construct(string $message)
+    public function __construct($message)
     {
         parent::__construct($message, 404);
         http_response_code(404);
-
-
     }
 }

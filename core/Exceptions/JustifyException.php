@@ -34,7 +34,7 @@ class JustifyException extends \Exception
 
     public function __construct($message = '', $responseCode = 500, $code = 0, Throwable $previous = null)
     {
-        if (! Justify::$settings['debug']) {
+        if (!Justify::$settings['debug']) {
             exit();
         }
 

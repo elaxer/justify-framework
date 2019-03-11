@@ -17,7 +17,7 @@ class Date
      * @param integer $month month number
      * @return string|bool
      */
-    public static function russianMonthInGC(int $month)
+    public static function russianMonthInGC($month)
     {
         $months = [
             'января', 'февраля', 'марта',
@@ -38,7 +38,7 @@ class Date
      * @param int $year checks year
      * @return bool
      */
-    public static function isLeapYear(int $year): bool
+    public static function isLeapYear($year)
     {
         return ($year % 4 == 0) && (($year % 100 != 0) || ($year % 400 == 0));
     }
