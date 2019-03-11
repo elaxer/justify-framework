@@ -108,6 +108,6 @@ class Justify
      */
     public static function getVersion()
     {
-        return '2.4.1';
+        return '2.4.2';
     }
 }
