@@ -24,10 +24,11 @@ class Router
      * @param string $method method of route
      * @param string $pattern route pattern string
      * @param mixed $handler what to use when this route is found
+     * @return array created route
      */
     public function route($method, $pattern, $handler)
     {
-        $this->routes[] = [
+        $route = $this->routes[] = [
             'method' => $method,
             'pattern' => $pattern,
             'handler' => $handler,
@@ -35,6 +36,8 @@ class Router
             'parsed' => [],
             'vars' => []
         ];
+
+        return $route;
     }
 
     /**
@@ -44,10 +47,11 @@ class Router
      *
      * @param string $pattern route pattern string
      * @param string $handler what to use when this route is found
+     * @return array created route
      */
     public function any($pattern, $handler)
     {
-        $this->routes[] = [
+        $route = $this->routes[] = [
             'method' => '',
             'pattern' => $pattern,
             'handler' => $handler,
@@ -55,6 +59,8 @@ class Router
             'parsed' => [],
             'vars' => []
         ];
+
+        return $route;
     }
 
     /**

@@ -3,6 +3,7 @@
 namespace Core\Components\Http;
 
 use Core\Justify;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 
 /**
  * Class Response
@@ -12,7 +13,7 @@ use Core\Justify;
  * @since 2.3.0
  * @package Core\System
  */
-class Response
+class Response extends \Symfony\Component\HttpFoundation\Response
 {
     /**
      * Refresh current page
@@ -22,7 +23,8 @@ class Response
      */
     public function refresh($seconds = 0)
     {
-        header("Refresh: $seconds");
+        $this->headers->set('refresh', $seconds);
+        $this->send();
     }
 
     /**
@@ -33,12 +35,8 @@ class Response
      */
     public function redirect($to)
     {
-        header("Location: $to");
-    }
-    
-    public function getReferer()
-    {
-        return $_SERVER['HTTP_REFERER'];
+        $response = new RedirectResponse($to);
+        $response->send();
     }
 
     /**
@@ -48,7 +46,9 @@ class Response
      */
     public function goBack()
     {
-        $this->redirect($this->getReferer());
+        if (request()->server->get('HTTP_REFERER') != '') {
+            $this->redirect(request()->server->get('HTTP_REFERER'));
+        }
     }
 
     /**
@@ -60,6 +60,6 @@ class Response
      */
     public function goHome()
     {
-        $this->redirect(Justify::$home);
+        $this->redirect(config('home'));
     }
 }

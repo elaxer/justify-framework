@@ -10,5 +10,12 @@ namespace Core\Components\TemplateEngines;
  */
 interface TemplateEngineInterface
 {
+    /**
+     * Renders view
+     *
+     * @param string $view view file
+     * @param array $params reducible params for view
+     * @return string rendered view
+     */
 	public function render($view, array $params = []);
 }

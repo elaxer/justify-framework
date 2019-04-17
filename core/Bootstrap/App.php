@@ -2,13 +2,14 @@
 
 namespace Core\Bootstrap;
 
+use Core\Components\Mvc\ControllerFactory;
+use Core\Components\Http\CSRF;
 use Core\Exceptions\CauseFromConsoleException;
 use Core\Exceptions\CSRFProtectionException;
+use Core\Exceptions\NotFoundException;
 use Core\Exceptions\OldPHPVersionException;
 use Core\Exceptions\RouteNotFoundException;
 use Core\Justify;
-use Core\Components\Mvc\ControllerFactory;
-use Core\Components\Http\CSRF;
 
 /**
  * The Core of framework
@@ -17,28 +18,65 @@ use Core\Components\Http\CSRF;
  */
 class App
 {
+    private $startTime;
+    public $execTime;
+    public $controller;
+    public $action;
+
     /**
-     * File: config/routes.php
-     *
-     * @var \Core\Components\Router\Router
+     * @var \Core\Container
      */
-    private $router;
+    public $container;
+
+    /**
+     * Application constructor.
+     *
+     * Loads array of settings to next application work
+     * Sets magic functions
+     *
+     * @param array $settings stores array with settings
+     * @throws CauseFromConsoleException
+     * @throws OldPHPVersionException
+     * @throws CSRFProtectionException
+     */
+    public function __construct(array $settings)
+    {
+        $this->startTime = microtime(true);
+        Justify::$app = $this;
+
+        $init = new Init($settings);
+        $init->loadComponents();
+        $init->initSettings();
+        $init->loadRoutes();
+        $init->loadLang();
+
+        if (config('CSRFProtection')) {
+            $this->CSRFProtection();
+        }
+    }
 
     /**
      * Method launches the application
      *
+     * @throws \Core\Exceptions\NotFoundException if route not found
      */
     public function run()
     {
         try {
-            $route = router()->findRoute(request()->getHttpMethod(), request()->getURI());
+            $method = request()->getMethod();
+            $path = request()->getBasePath();
+
+            $route = router()->findRoute($method, $path);
         } catch (RouteNotFoundException $e) {
-            error(404);
+            throw new NotFoundException();
         }
 
         if (is_string($route['handler'])) {
             $segments = explode('@', $route['handler']);
             list($controller, $action) = $segments;
+
+            $this->controller = $controller;
+            $this->action = $action;
 
             $controller = ControllerFactory::create($controller, $route['vars']);
 
@@ -52,32 +90,6 @@ class App
         if (isset($response)) {
             $this->displayResponse($response);
         }
-    }
-
-    /**
-     * Application constructor.
-     *
-     * Loads array of settings to next application work
-     * Sets magic functions
-     *
-     * @throws CauseFromConsoleException
-     * @throws OldPHPVersionException
-     * @throws CSRFProtectionException
-     * @param array $settings stores array with settings
-     */
-    public function __construct(array $settings)
-    {
-        $init = new Init($settings);
-        $init->initSettings();
-        $init->loadComponents();
-        $init->loadRoutes();
-        $init->loadLang();
-
-        if (Justify::$settings['CSRFProtection']) {
-            $this->CSRFProtection();
-        }
-
-        $this->router = router();
     }
 
     public function __destruct()
@@ -95,7 +107,7 @@ class App
     {
         CSRF::$token = CSRF::generateToken();
 
-        if (request()->isPost()) {
+        if (request()->isMethod('POST')) {
             CSRF::checkHashesEquals();
         } else {
             CSRF::setSession();
@@ -109,9 +121,7 @@ class App
      */
     private function setExecTime()
     {
-        if (!Justify::$execTime) {
-            Justify::$execTime = microtime(true) - Justify::$startTime;
-        }
+        $this->execTime = microtime(true) - $this->startTime;
     }
 
     /**
@@ -120,7 +130,7 @@ class App
      * @since 2.3.0
      * @param string $response
      */
-    private function displayResponse(string $response)
+    private function displayResponse($response)
     {
         if (is_string($response) || is_numeric($response)) {
             echo $response;

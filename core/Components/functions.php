@@ -49,15 +49,8 @@ if (!function_exists('consoleLogArray')) {
     }
 }
 
-if (!function_exists('lang')) {
-    function lang($key, $locale = null, $notFound = 'NOT FOUND')
-    {
-        return Lang::get($key, $locale, $notFound);
-    }
-}
-
-if (!function_exists('lang_get')) {
-    function lang_get($key, $locale = null, $notFound = 'NOT FOUND')
+if (!function_exists('_')) {
+    function _($key, $locale = null, $notFound = 'NOT FOUND')
     {
         return Lang::get($key, $locale, $notFound);
     }
@@ -86,9 +79,9 @@ if (!function_exists('generatePassword')) {
      * @return string
      */
     function generatePassword($length, array $rules = [
-        'littleLetters' => true,
-        'bigLetters' => true,
-        'numbers' => true,
+        'lowerCase' => true,
+        'upperCase' => true,
+        'digits' => true,
         'specialChars' => false
     ])
     {
@@ -120,11 +113,17 @@ if (!function_exists('assets')) {
 
 if (!function_exists('config')) {
     /**
-     * @return array
+     * @param string $option option of config
+     *
+     * @return \Core\Components\Config
      */
-    function config()
+    function config($option = '')
     {
-        return Justify::$settings;
+        if ($option) {
+            return Justify::$app->container->get('config')->get($option);
+        }
+
+        return Justify::$app->container->get('config');
     }
 }
 
@@ -134,7 +133,7 @@ if (!function_exists('cache')) {
      */
     function cache()
     {
-        return Justify::$container->get('cache');
+        return Justify::$app->container->get('cache');
     }
 }
 
@@ -144,7 +143,7 @@ if (!function_exists('request')) {
      */
     function request()
     {
-        return Justify::$container->get('request');
+        return Justify::$app->container->get('request');
     }
 }
 
@@ -154,7 +153,7 @@ if (!function_exists('response')) {
      */
     function response()
     {
-        return Justify::$container->get('response');
+        return Justify::$app->container->get('response');
     }
 }
 
@@ -164,7 +163,7 @@ if (!function_exists('session')) {
      */
     function session()
     {
-        return Justify::$container->get('session');
+        return Justify::$app->container->get('session');
     }
 }
 
@@ -174,7 +173,7 @@ if (!function_exists('router')) {
      */
     function router()
     {
-        return Justify::$container->get('router');
+        return Justify::$app->container->get('router');
     }
 }
 
@@ -248,6 +247,7 @@ if (!function_exists('error')) {
      */
     function error($code, array $params = [])
     {
+        http_response_code(404);
         exit(render('errors/' . $code, $params));
     }
 }

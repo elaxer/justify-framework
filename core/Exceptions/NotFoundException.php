@@ -5,12 +5,13 @@ namespace Core\Exceptions;
 /**
  * Class NotFoundException
  *
- * Throw this exception then page not found
+ * Throw this exception when page not found
  *
  * @package Justify\Exceptions
  */
 class NotFoundException extends JustifyException
 {
+    const HTTP_NOT_FOUND = 404;
     /**
      * @inheritdoc
      */
@@ -20,14 +21,13 @@ class NotFoundException extends JustifyException
     }
 
     /**
-     * Constructor of class PageNotFoundException
-     *
      * @param string $message message about error
+     * @param array $params params to view
      * @access public
      */
-    public function __construct($message)
+    public function __construct($message = '', array $params = [])
     {
-        parent::__construct($message, 404);
-        http_response_code(404);
+        error(self::HTTP_NOT_FOUND, $params);
+        parent::__construct($message);
     }
 }

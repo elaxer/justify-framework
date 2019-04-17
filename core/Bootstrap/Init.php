@@ -4,6 +4,7 @@ namespace Core\Bootstrap;
 
 use Core\Justify;
 use Core\Container;
+use Core\Components\Config;
 use Core\Components\Lang;
 use Core\Components\Http\Request;
 use Core\Components\Http\Response;
@@ -27,11 +28,33 @@ use Whoops\Handler\PrettyPageHandler;
 class Init
 {
     /**
+     * @var array config
+     */
+    private $config = [];
+
+    /**
+     * Application constructor.
+     *
+     * Loads array of settings to next application work
+     *
+     * @throws \Core\Exceptions\OldPHPVersionException
+     * @throws \Core\Exceptions\CauseFromConsoleException
+     * @param array $config stores array with settings
+     */
+    public function __construct(array $config)
+    {
+        $this->config = $config;
+
+        $this->isCausedFromConsole();
+        $this->isOldVersion(Justify::$minimalPHPVersion);
+    }
+
+    /**
      * Initials necessary settings
      */
     public function initSettings()
     {
-        if (Justify::$debug) {
+        if (config('debug')) {
             ini_set('display_errors', true);
             error_reporting(E_ALL);
 
@@ -43,27 +66,28 @@ class Init
             error_reporting(0);
         }
 
-        date_default_timezone_set(Justify::$settings['timezone']);
-        setlocale(LC_ALL, Justify::$settings['locale']);
+        date_default_timezone_set(config('timezone'));
+        setlocale(LC_ALL, config('locale'));
     }
 
     public function loadComponents()
     {
-        $config = Justify::$settings;
+        Justify::$app->container = new Container();
 
-        Justify::$container = new Container();
+        $config = new Config($this->config);
 
-        Justify::$container->set('cache_psr6',
-            CachingFactory::create(
-                $config['caching']['driver'],
-                $config['caching'][$config['caching']['driver']]
-            )
-        );
-        Justify::$container->set('cache', new Cache());
-        Justify::$container->set('request', new Request());
-        Justify::$container->set('response', new Response());
-        Justify::$container->set('session', new Session());
-        Justify::$container->set('router', new Router());
+        Justify::$app->container->multiSet([
+            'config' => $config,
+            'cache_psr6' => CachingFactory::create(
+                $config->get('caching')['driver'],
+                $config->get('caching')[$config->get('caching')['driver']]
+            ),
+            'request' => Request::createFromGlobals(),
+            'response' => new Response(),
+            'cache' => new Cache(),
+            'session' => new Session(),
+            'router' => new Router()
+        ]);
     }
 
     public function loadRoutes()
@@ -80,36 +104,16 @@ class Init
     }
 
     /**
-     * Application constructor.
-     *
-     * Loads array of settings to next application work
-     *
-     * @throws \Core\Exceptions\OldPHPVersionException
-     * @throws \Core\Exceptions\CauseFromConsoleException
-     * @param array $settings stores array with settings
-     */
-    public function __construct(array $settings)
-    {
-        Justify::$startTime = microtime(true);
-        Justify::$settings = $settings;
-        Justify::$debug = Justify::$settings['debug'];
-
-        $this->causedFromConsole();
-        $this->isOldVersion(Justify::$minimalPHPVersion);
-    }
-
-    /**
      * Checks is old version
      *
      * @since 2.2.0
      * @param $version
-     * @param string $error
      * @throws OldPHPVersionException
      */
-    private function isOldVersion($version, $error = 'PHP version must be bigger than ')
+    private function isOldVersion($version)
     {
         if (!version_compare(PHP_VERSION, $version, '>=')) {
-            throw new OldPHPVersionException($error . $version);
+            throw new OldPHPVersionException("PHP version must be bigger than $version");
         }
     }
 
@@ -117,13 +121,12 @@ class Init
      * Checks app caused from console
      *
      * @since 2.2.0
-     * @param string $error
      * @throws CauseFromConsoleException
      */
-    private function causedFromConsole($error = 'Web application caused from console')
+    private function isCausedFromConsole()
     {
         if (php_sapi_name() == 'cli') {
-            throw new CauseFromConsoleException($error);
+            throw new CauseFromConsoleException('Web application caused from console');
         }
     }
 }

@@ -46,7 +46,7 @@ class View
 
 	private static function getTemplateEngine()
 	{
-		$templateEngine = Justify::$settings['template_engines']['engine'];
+		$templateEngine = config('template_engines')['engine'];
 
 		return TemplateEngineFactory::create($templateEngine);
 	}

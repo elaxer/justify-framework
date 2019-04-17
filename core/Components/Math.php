@@ -166,25 +166,6 @@ class Math
     }
 
     /**
-     * Returns sum of numbers
-     *
-     * @since 1.6.3
-     * @deprecated
-     * @param array $numbers array of numbers
-     * @return float
-     */
-    public static function sum(array $numbers)
-    {
-        $sumOfNumbers = 0;
-
-        foreach ($numbers as $number) {
-            $sumOfNumbers += $number;
-        }
-
-        return $sumOfNumbers;
-    }
-
-    /**
      * Increments and returns number
      *
      * @since 2.2.0

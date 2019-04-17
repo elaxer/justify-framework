@@ -33,7 +33,6 @@ class Twig extends TemplateEngine
 	public function render($view, array $params = [])
 	{
 		$view = $this->createViewPath($view);
-
 		$template = $this->twig->load($view);
 
 		return $template->render($params);

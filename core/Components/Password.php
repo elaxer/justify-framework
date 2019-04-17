@@ -12,6 +12,11 @@ namespace Core\Components;
  */
 class Password
 {
+    const LOWER_CASE = 'qwertyuiopasdfghjklzxcvbnm';
+    const UPPER_CASE = 'QWERTYUIOPASDFGHJKLZXCVBNM';
+    const DIGITS = '0123456789';
+    const SPECIAL_CHARS = '!@#$%^&*()_+-=`~/*\\"[]{}?\'';
+
     /**
      * Returns hashed password
      *
@@ -54,34 +59,25 @@ class Password
      * @return string
      */
     public static function generate($length, array $rules = [
-        'littleLetters' => true,
-        'bigLetters' => true,
-        'numbers' => true,
+        'lowerCase' => true,
+        'upperCase' => true,
+        'digits' => true,
         'specialChars' => false
     ])
     {
         $chars = [
-            'littleLetters' => 'qwertyuiopasdfghjklzxcvbnm',
-            'bigLetters' => 'QWERTYUIOPASDFGHJKLZXCVBNM',
-            'numbers' => '1234567890',
-            'specialChars' => "!@#$%^&*()_+-=`~/*\\\"[]{}?'"
+            'lowerCase' => self::LOWER_CASE,
+            'upperCase' => self::UPPER_CASE,
+            'digits' => self::DIGITS,
+            'specialChars' => self::SPECIAL_CHARS
         ];
+
         $charsOfFuturePassword = '';
 
-        if (isset($rules['littleLetters']) && $rules['littleLetters']) {
-            $charsOfFuturePassword .= $chars['littleLetters'];
-        }
-
-        if (isset($rules['bigLetters']) && $rules['bigLetters']) {
-            $charsOfFuturePassword .= $chars['bigLetters'];
-        }
-
-        if (isset($rules['numbers']) && $rules['numbers']) {
-            $charsOfFuturePassword .= $chars['numbers'];
-        }
-
-        if (isset($rules['specialChars']) && $rules['specialChars']) {
-            $charsOfFuturePassword .= $chars['specialChars'];
+        foreach ($rules as $rule => $value) {
+            if (isset($chars[$rule]) && $value) {
+                $charsOfFuturePassword .= $chars[$rule];
+            }
         }
 
         if (!$charsOfFuturePassword) {

@@ -10,88 +10,14 @@ namespace Core\Components\Pagination;
  * @since 1.6
  * @package Justify\Components
  */
-class Pagination
+class Pagination extends AbstractPagination
 {
-    /**
-     * Next url page
-     *
-     * @var string
-     */
-    public $url;
-
-    /**
-     * Count of articles in one page
-     *
-     * @var string
-     */
-    public $defaultPageSize;
-
-    /**
-     * Count of all articles
-     *
-     * @var int
-     */
-    public $totalCount;
-
-    /**
-     * Stores current page
-     *
-     * @var int
-     */
-    public $currentPage = 1;
-
-    /**
-     * Stores length of pagination
-     *
-     * @var int
-     */
-    public $countOfPaginationPages;
-
-    /**
-     * Stores total count of pages
-     *
-     * @var int
-     */
-    public $countOfPages;
-
-    /**
-     * GET param name
-     *
-     * @var string
-     */
-    public $getName = 'page';
-
-    /**
-     * SQL offset
-     *
-     * Use this property in SQL query
-     *
-     * @var int
-     */
-    public $offset;
-
-    /**
-     * SQL limit
-     *
-     * Use this property in SQL query
-     *
-     * @var int
-     */
-    public $limit;
-
     /**
      * Pagination first page
      *
      * @var int
      */
     public $start;
-
-    /**
-     * Last page number
-     *
-     * @var int
-     */
-    public $lastPage;
 
     /**
      * Pagination final page
@@ -111,25 +37,9 @@ class Pagination
      */
     public function __construct($defaultPageSize, $totalCount, $countOfPaginationPages = 10)
     {
-        $this->url = $this->createUrl();
-        $this->defaultPageSize = $defaultPageSize;
-        $this->totalCount = $totalCount;
-        $this->limit = $defaultPageSize;
-        $this->countOfPages = ceil($this->totalCount / $this->defaultPageSize);
-        $this->lastPage = $this->countOfPages;
+        parent::__construct($defaultPageSize, $totalCount);
+
         $this->countOfPaginationPages = $this->getCountOfPaginationPages($countOfPaginationPages);
-
-        if (isset($_GET[$this->getName])) {
-            $this->currentPage = intval($_GET[$this->getName]);
-        }
-        if ($this->currentPage > $this->countOfPages) {
-            $this->currentPage = $this->countOfPages;
-        }
-        if ($this->currentPage < 1) {
-            $this->currentPage = 1;
-        }
-
-        $this->offset = ($this->currentPage - 1) * $this->limit;
         $this->start = $this->getStart();
         $this->end = $this->getEnd();
 
@@ -146,8 +56,10 @@ class Pagination
      */
     public function getStart()
     {
-        if ($this->currentPage > floor($this->countOfPaginationPages / 2) && $this->countOfPages > $this->countOfPaginationPages) {
-            return $this->currentPage - floor($this->countOfPaginationPages / 2);
+        $middle = floor($this->countOfPaginationPages / 2);
+
+        if ($this->currentPage > $middle && $this->countOfPages > $this->countOfPaginationPages) {
+            return $this->currentPage - $middle;
         }
 
         return 1;
@@ -180,29 +92,5 @@ class Pagination
         }
 
         return $countOfPaginationPages;
-    }
-
-    /**
-     * Creates next page's url
-     *
-     * @return string
-     */
-    public function createUrl()
-    {
-        if (! isset(parse_url($_SERVER['REQUEST_URI'])['query'])
-            || (count($_GET) === 1
-            && isset($_GET[$this->getName]))
-        ) {
-            return '?' . $this->getName . '=';
-        }
-        $url = '?';
-
-        foreach ($_GET as $param => $value) {
-            if ($param != $this->getName) {
-                $url .= "$param=$value&";
-            }
-        }
-
-        return $url . $this->getName . '=';
     }
 }

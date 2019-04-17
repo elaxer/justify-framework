@@ -15,14 +15,6 @@ use Throwable;
 class JustifyException extends \Exception
 {
     /**
-     * Prints error if threw exception
-     */
-    public function printError()
-    {
-        require_once BASE_DIR . '/core/system/templates/exception.php';
-    }
-
-    /**
      * Returns name of exception
      *
      * @return string
@@ -32,13 +24,12 @@ class JustifyException extends \Exception
         return 'Justify Exception';
     }
 
-    public function __construct($message = '', $responseCode = 500, $code = 0, Throwable $previous = null)
+    public function __construct($message = '', $code = 0, Throwable $previous = null)
     {
-        if (!Justify::$settings['debug']) {
+        if (config('debug')) {
             exit();
         }
 
         parent::__construct($message, $code, $previous);
-        http_response_code($responseCode);
     }
 }

@@ -17,8 +17,8 @@ abstract class TemplateEngine implements TemplateEngineInterface
 
 	public function __construct()
 	{
-		$this->activeTemplateEngine = Justify::$settings['template_engines']['engine'];
-		$this->config = Justify::$settings['template_engines'][$this->activeTemplateEngine];
+		$this->activeTemplateEngine = config('template_engines')['engine'];
+		$this->config = config('template_engines')[$this->activeTemplateEngine];
 	}
 
 	protected function getViewsPath()

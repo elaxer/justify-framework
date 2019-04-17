@@ -48,10 +48,11 @@ class CSRF
      */
     public static function checkHashesEquals()
     {
-        if (!request()->post('_token', false)
-            || !session()->has('_token')
-            || !hash_equals(session()->get('_token'), request()->post('_token'))
-        ) {
+        $hasRequestToken = request()->request->get('_token');
+        $hasSessionToken = session()->has('_token');
+        $tokensIsMatches = hash_equals(session()->get('_token'), request()->request->get('_token'));
+
+        if (!$hasRequestToken || !$hasSessionToken || !$tokensIsMatches) {
             throw new CSRFProtectionException('Sent data without CSRF field or CSRF attack attempt');
         }
     }
